@@ -23,7 +23,7 @@ public interface GameScreen
     /**
      * Handle polling input
      */
-    public void handleInput();
+    public void pollInput();
 
     /**
      * Update the game screens

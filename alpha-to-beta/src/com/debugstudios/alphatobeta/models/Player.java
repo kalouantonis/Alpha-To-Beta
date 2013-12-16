@@ -21,10 +21,12 @@ public class Player extends DynamicEntity
     public static final float GRAVITY = -9.8f;
     public static final float MASS = 20;
     public static Vector2 MAX_VELOCITY = new Vector2(2.2f * 60, 400);
+    public static float MOVE_VELOCITY = 100;
     public static float JUMP_VELOCITY = 150;
     private static final short MAX_JUMPS = 2;
     //////////////////////////////////////////////////////////////////////////////////////
 
+    /** Track state time, for animation and timed acceleration */
     private float stateTime = 0.f;
     private short numJumps = 0;
 

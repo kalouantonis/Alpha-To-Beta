@@ -13,6 +13,9 @@ import com.debugstudios.alphatobeta.models.Player;
  */
 public class World
 {
+    public static final float WORLD_WIDTH = 480;
+    public static final float WORLD_HEIGHT = 360;
+
     public TileMap tileMap;
     public CollisionLayer collisionLayer;
 

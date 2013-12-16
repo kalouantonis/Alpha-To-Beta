@@ -60,7 +60,7 @@ public class PlayScreen implements GameScreen
     }
 
     @Override
-    public void handleInput()
+    public void pollInput()
     {
         world.handleInput();
 

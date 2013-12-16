@@ -46,7 +46,7 @@ public class Assets
 
         runLeftAnimation = createLoopAnimation(PLAYER_ANIMATION_SPEED, humanPlayer, "left1", "left2", "left3");
 
-        idleAnimation = createLoopAnimation(PLAYER_ANIMATION_SPEED, humanPlayer, "still1", "still2");
+        idleAnimation = createLoopAnimation(PLAYER_ANIMATION_SPEED + 0.1f, humanPlayer, "still1", "still2");
 
         loadMap("maps/map.tmx");
     }

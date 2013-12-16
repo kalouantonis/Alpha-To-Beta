@@ -1,12 +1,15 @@
 package com.debugstudios.alphatobeta;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.debugstudios.alphatobeta.framework.graphics.Camera;
 import com.debugstudios.alphatobeta.models.Player;
 
 /**
  * Created by Slacker on 16/12/13.
  */
+// TODO: Have these in multiplexer so that we have seperate implementations for Android and Desktop
 public class PlayerInputHandler implements InputProcessor
 {
     Player player;
@@ -20,9 +23,9 @@ public class PlayerInputHandler implements InputProcessor
     public boolean keyDown(int keycode)
     {
         if(keycode == Input.Keys.D)
-            player.velocity.x = 100;
+            player.velocity.x = Player.MOVE_VELOCITY;
         else if(keycode == Input.Keys.A)
-            player.velocity.x = -100;
+            player.velocity.x = -Player.MOVE_VELOCITY;
 
         if(keycode == Input.Keys.SPACE)
             player.jump();
@@ -48,19 +51,31 @@ public class PlayerInputHandler implements InputProcessor
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
-        return false;
+        float halfWidth = Gdx.graphics.getWidth() / 2;
+
+        if(screenX > halfWidth)
+            player.velocity.x = Player.MOVE_VELOCITY;
+        else if(screenX < halfWidth)
+            player.velocity.x = -Player.MOVE_VELOCITY;
+
+        return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button)
     {
+        player.velocity.x = 0;
+
         return false;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer)
     {
-        return false;
+        if(screenY < Gdx.graphics.getHeight() / 2)
+            player.jump();
+
+        return true;
     }
 
     @Override
@@ -72,6 +87,8 @@ public class PlayerInputHandler implements InputProcessor
     @Override
     public boolean scrolled(int amount)
     {
+        // Allow zooming out
+
         return false;
     }
 }

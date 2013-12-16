@@ -72,7 +72,7 @@ public abstract class Game implements ApplicationListener
         if(timeSinceLastFrame >= FRAME_TIME)
         {
             // Handle input
-            screen.handleInput();
+            screen.pollInput();
 
             // Update screen
             screen.update(FRAME_TIME);
@@ -80,7 +80,7 @@ public abstract class Game implements ApplicationListener
             timeSinceLastFrame -= FRAME_TIME;
         }*/
 
-        screen.handleInput();
+        screen.pollInput();
 
         float deltaTime = Gdx.graphics.getDeltaTime();
 
