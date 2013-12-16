@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="alpha-to-beta-desktop:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/alpha_to_beta_desktop_jar</output-path>
+    <root id="archive" name="alpha-to-beta-desktop.jar">
+      <element id="module-output" name="alpha-to-beta-desktop" />
+      <element id="module-output" name="alpha-to-beta" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/alpha-to-beta/libs/gdx.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/alpha-to-beta-desktop/libs/gdx-natives.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/alpha-to-beta-desktop/libs/gdx-backend-lwjgl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/alpha-to-beta-desktop/libs/gdx-backend-lwjgl-natives.jar" path-in-jar="/" />
+      <element id="dir-copy" path="$PROJECT_DIR$/alpha-to-beta-android/assets" />
+    </root>
+  </artifact>
+</component>
