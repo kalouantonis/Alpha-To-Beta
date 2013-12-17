@@ -1,33 +1,36 @@
-package com.debugstudios.alphatobeta;
+package com.debugstudios.alphatobeta.input;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.debugstudios.alphatobeta.framework.graphics.Camera;
-import com.debugstudios.alphatobeta.models.Player;
+import com.debugstudios.framework.graphics.Camera;
+import com.debugstudios.alphatobeta.players.Player;
 
 /**
  * Created by Slacker on 16/12/13.
  */
-// TODO: Have these in multiplexer so that we have seperate implementations for Android and Desktop
+// TODO: Have these in multiplexer so that we have separate implementations for Android and Desktop
+// TODO: Also, use GestureListener for android impl
 public class PlayerInputHandler implements InputProcessor
 {
     Player player;
+    Camera camera;
 
-    public PlayerInputHandler(Player player)
+    public PlayerInputHandler(Camera camera, Player player)
     {
-       this.player = player;
+        this.player = player;
+        this.camera = camera;
     }
 
     @Override
     public boolean keyDown(int keycode)
     {
-        if(keycode == Input.Keys.D)
-            player.velocity.x = Player.MOVE_VELOCITY;
-        else if(keycode == Input.Keys.A)
-            player.velocity.x = -Player.MOVE_VELOCITY;
+        if(keycode == Input.Keys.D || keycode == Input.Keys.RIGHT)
+            player.velocity.x = player.MOVE_VELOCITY;
+        else if(keycode == Input.Keys.A || keycode == Input.Keys.LEFT)
+            player.velocity.x = -player.MOVE_VELOCITY;
 
-        if(keycode == Input.Keys.SPACE)
+        if(keycode == Input.Keys.SPACE
+                || keycode == Input.Keys.UP || keycode == Input.Keys.W)
             player.jump();
 
         return true;
@@ -36,7 +39,8 @@ public class PlayerInputHandler implements InputProcessor
     @Override
     public boolean keyUp(int keycode)
     {
-        if(keycode == Input.Keys.A || keycode == Input.Keys.D)
+        if(keycode == Input.Keys.A || keycode == Input.Keys.D ||
+                 keycode == Input.Keys.LEFT || keycode == Input.Keys.RIGHT)
             player.velocity.x = 0;
 
         return true;
@@ -51,14 +55,7 @@ public class PlayerInputHandler implements InputProcessor
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
-        float halfWidth = Gdx.graphics.getWidth() / 2;
-
-        if(screenX > halfWidth)
-            player.velocity.x = Player.MOVE_VELOCITY;
-        else if(screenX < halfWidth)
-            player.velocity.x = -Player.MOVE_VELOCITY;
-
-        return true;
+        return false;
     }
 
     @Override
@@ -72,10 +69,7 @@ public class PlayerInputHandler implements InputProcessor
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer)
     {
-        if(screenY < Gdx.graphics.getHeight() / 2)
-            player.jump();
-
-        return true;
+        return false;
     }
 
     @Override
@@ -87,8 +81,6 @@ public class PlayerInputHandler implements InputProcessor
     @Override
     public boolean scrolled(int amount)
     {
-        // Allow zooming out
-
         return false;
     }
 }

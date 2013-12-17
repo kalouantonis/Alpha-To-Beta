@@ -15,14 +15,14 @@
  * along with LibGDXTest.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.debugstudios.alphatobeta.framework.graphics;
+package com.debugstudios.framework.graphics;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 
 import com.badlogic.gdx.math.Vector2;
-import com.debugstudios.alphatobeta.framework.gameobjects.Entity;
+import com.debugstudios.framework.gameobjects.Entity;
 
 public class Camera extends OrthographicCamera
 {

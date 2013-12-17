@@ -1,4 +1,4 @@
-package com.debugstudios.alphatobeta.framework.tilemap;
+package com.debugstudios.framework.tilemap;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 

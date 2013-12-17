@@ -15,11 +15,11 @@
  * along with LibGDXTest.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.debugstudios.alphatobeta.framework;
+package com.debugstudios.framework;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.AssetManager;
-import com.debugstudios.alphatobeta.framework.screens.GameScreen;
+import com.debugstudios.framework.screens.GameScreen;
 
 public abstract class Game implements ApplicationListener
 {

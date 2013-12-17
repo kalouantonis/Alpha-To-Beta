@@ -2,17 +2,21 @@ package com.debugstudios.alphatobeta;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.debugstudios.alphatobeta.framework.tilemap.CollisionLayer;
-import com.debugstudios.alphatobeta.framework.tilemap.TileMap;
-import com.debugstudios.alphatobeta.models.Player;
+import com.debugstudios.alphatobeta.players.HumanPlayer;
+import com.debugstudios.framework.tilemap.CollisionLayer;
+import com.debugstudios.framework.tilemap.TileMap;
+import com.debugstudios.alphatobeta.players.Player;
+
+import java.util.ArrayList;
 
 /**
  * Created by slacker on 12/9/13.
  */
 public class World
 {
+    private final int NUM_PLAYERS = 5;
+
     public static final float WORLD_WIDTH = 480;
     public static final float WORLD_HEIGHT = 360;
 
@@ -20,8 +24,7 @@ public class World
     public CollisionLayer collisionLayer;
 
     public Player player = null;
-
-    boolean jumpKeyPressed = false;
+    public ArrayList<Player> players;
 
     public World(TileMap tileMap)
     {
@@ -29,13 +32,20 @@ public class World
 
         collisionLayer = new CollisionLayer(tileMap.getTileLayer(1));
 
+        players = new ArrayList<Player>(NUM_PLAYERS);
+
         reloadScene();
     }
 
-    public void handleInput()
+    public void pollInput()
     {
         if(Gdx.input.isKeyPressed(Input.Keys.R))
             reloadScene();
+
+        if(Gdx.input.isKeyPressed(Input.Keys.PLUS))
+            player.MOVE_VELOCITY += 10;
+        else if(Gdx.input.isKeyPressed(Input.Keys.MINUS))
+            player.MOVE_VELOCITY -= 10;
     }
 
     private void reloadScene()
@@ -45,13 +55,10 @@ public class World
         RectangleMapObject spawnPos = (RectangleMapObject) tileMap.getLayer("objects").getObjects().get("SpawnPosition");
         if(player == null)
         {
-            TextureRegion playerTexture = Assets.runRightAnimation.getKeyFrame(0);
-
-            player = new Player(spawnPos.getRectangle().x, spawnPos.getRectangle().y,
-                    playerTexture.getRegionWidth(), playerTexture.getRegionHeight());
+            player = new HumanPlayer(spawnPos.getRectangle().x, spawnPos.getRectangle().y);
             player.setCollisionLayer(collisionLayer);
-
-            Gdx.input.setInputProcessor(new PlayerInputHandler(player));
+            // Add to array, keep reference for direct access
+            players.add(player);
         }
         else
         {
@@ -63,7 +70,6 @@ public class World
     public void update(float deltaTime)
     {
         updateCharacters(deltaTime);
-        checkCharacterCollisions();
     }
 
     private void checkCharacterCollisions()
@@ -72,6 +78,9 @@ public class World
 
     private void updateCharacters(float deltaTime)
     {
-        player.update(deltaTime);
+        for(Player character : players)
+        {
+            character.update(deltaTime);
+        }
     }
 }

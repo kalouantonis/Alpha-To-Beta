@@ -1,12 +1,11 @@
-package com.debugstudios.alphatobeta.models;
+package com.debugstudios.alphatobeta.players;
 
-import android.graphics.drawable.ShapeDrawable;
-import com.badlogic.gdx.graphics.g3d.Shader;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.debugstudios.alphatobeta.framework.gameobjects.DynamicEntity;
-import com.debugstudios.alphatobeta.framework.tilemap.CollisionLayer;
+import com.debugstudios.framework.gameobjects.DynamicEntity;
+import com.debugstudios.framework.tilemap.CollisionLayer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,8 +19,8 @@ public class Player extends DynamicEntity
     // CONSTANTS /////////////////////////////////////////////////////////////////////////
     public static final float GRAVITY = -9.8f;
     public static final float MASS = 20;
-    public static Vector2 MAX_VELOCITY = new Vector2(2.2f * 60, 400);
-    public static float MOVE_VELOCITY = 100;
+    public static Vector2 MAX_VELOCITY = new Vector2(200, 400);
+    public float MOVE_VELOCITY = 100;
     public static float JUMP_VELOCITY = 150;
     private static final short MAX_JUMPS = 2;
     //////////////////////////////////////////////////////////////////////////////////////
@@ -33,6 +32,9 @@ public class Player extends DynamicEntity
     private CollisionLayer collisionLayer;
     private boolean xCollision, yCollision;
 
+    public Animation runLeftAnimation = null;
+    public Animation runRightAnimation = null;
+    public Animation idleAnimation = null;
 
     public Player(float x, float y, float width, float height)
     {
@@ -112,5 +114,20 @@ public class Player extends DynamicEntity
     public float getStateTime()
     {
         return stateTime;
+    }
+
+    public void resetStateTime()
+    {
+        stateTime = 0.f;
+    }
+
+    /**
+     * Will return the texture region of selected animation according to state time
+     * @param animation
+     * @return
+     */
+    public TextureRegion getAnimationFrame(Animation animation)
+    {
+       return animation.getKeyFrame(stateTime);
     }
 }

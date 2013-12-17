@@ -15,12 +15,8 @@
  * along with LibGDXTest.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.debugstudios.alphatobeta.framework.gameobjects;
+package com.debugstudios.framework.gameobjects;
 
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 /**

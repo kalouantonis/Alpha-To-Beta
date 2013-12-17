@@ -15,7 +15,7 @@
  * along with LibGDXTest.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.debugstudios.alphatobeta.framework.screens;
+package com.debugstudios.framework.screens;
 
 
 public interface GameScreen

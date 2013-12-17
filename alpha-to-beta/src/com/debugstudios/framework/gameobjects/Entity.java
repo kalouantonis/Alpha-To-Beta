@@ -1,6 +1,5 @@
-package com.debugstudios.alphatobeta.framework.gameobjects;
+package com.debugstudios.framework.gameobjects;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 

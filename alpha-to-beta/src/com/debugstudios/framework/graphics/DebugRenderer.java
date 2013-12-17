@@ -1,12 +1,12 @@
-package com.debugstudios.alphatobeta.framework.graphics;
+package com.debugstudios.framework.graphics;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.debugstudios.alphatobeta.framework.gameobjects.DynamicEntity;
-import com.debugstudios.alphatobeta.framework.gameobjects.Entity;
+import com.debugstudios.framework.gameobjects.DynamicEntity;
+import com.debugstudios.framework.gameobjects.Entity;
 
 /**
  * Created by slacker on 14/12/13.

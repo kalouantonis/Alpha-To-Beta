@@ -1,7 +1,6 @@
-package com.debugstudios.alphatobeta.framework.tilemap;
+package com.debugstudios.framework.tilemap;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.debugstudios.alphatobeta.framework.tilemap.AbstractLayer;
 
 /**
  * Layer to interact with animated tiles

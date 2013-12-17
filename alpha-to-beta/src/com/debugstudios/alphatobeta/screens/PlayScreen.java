@@ -1,0 +1,133 @@
+package com.debugstudios.alphatobeta.screens;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import com.debugstudios.alphatobeta.input.PlayerInputHandler;
+import com.debugstudios.alphatobeta.World;
+import com.debugstudios.alphatobeta.Assets;
+import com.debugstudios.framework.Game;
+import com.debugstudios.framework.graphics.Camera;
+import com.debugstudios.framework.screens.GameScreen;
+import com.debugstudios.framework.tilemap.TileMap;
+import com.debugstudios.alphatobeta.input.PlayerTouchHandler;
+import com.debugstudios.alphatobeta.players.Player;
+import com.debugstudios.alphatobeta.views.WorldDebugRenderer;
+import com.debugstudios.alphatobeta.views.WorldRenderer;
+
+/**
+ * Created by slacker on 12/7/13.
+ */
+public class PlayScreen implements GameScreen
+{
+    private TileMap tileMap;
+    private Camera camera;
+
+    private Player player;
+    private SpriteBatch spriteBatch;
+    private WorldRenderer worldRenderer;
+    private WorldDebugRenderer debugRenderer;
+
+    //private DebugRenderer debugRenderer;
+
+    private int[] backgroundLayers;
+    private int[] foregroundLayers;
+
+    private final float WORLD_WIDTH = 480;
+    private final float WORLD_HEIGHT = 360;
+
+    World world;
+
+    public PlayScreen(Game game)
+    {
+        Assets.load();
+
+        camera = new Camera(WORLD_WIDTH, WORLD_HEIGHT);
+
+
+        tileMap = new TileMap(Assets.map);
+        tileMap.setCamera(camera);
+
+        spriteBatch = tileMap.getSpriteBatch();
+
+
+        world = new World(tileMap);
+
+        player = world.player;
+
+        worldRenderer = new WorldRenderer(camera, spriteBatch, world);
+        debugRenderer = new WorldDebugRenderer(camera, spriteBatch, world);
+
+        switch (Gdx.app.getType())
+        {
+            case Android:
+                Gdx.input.setInputProcessor(new PlayerTouchHandler(camera, player));
+                break;
+            case Desktop:
+                Gdx.input.setInputProcessor(new PlayerInputHandler(camera, player));
+                break;
+            default:
+                throw new RuntimeException("Unsupported platform!");
+        }
+
+        camera.setTarget(player);
+
+        Gdx.gl.glClearColor(135.f / 255.f, 206.f / 255.f, 235.f / 255.f, 1);
+    }
+
+    @Override
+    public void pollInput()
+    {
+        world.pollInput();
+
+        if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT))
+            camera.addZoom(0.1f);
+        else if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
+            camera.addZoom(-0.1f);
+    }
+
+    @Override
+    public void update(float delta)
+    {
+        world.update(delta);
+    }
+
+    @Override
+    public void draw()
+    {
+        //Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+
+        // Update orthos and whatnot
+        //camera.update();
+
+        //tileMap.draw();
+
+        worldRenderer.render();
+        debugRenderer.render();
+    }
+
+    @Override
+    public void pause()
+    {
+    }
+
+    @Override
+    public void resume()
+    {
+        Gdx.gl.glClearColor(135.f/255.f, 206.f/255.f, 235.f/255.f, 1);
+    }
+
+    @Override
+    public void dispose()
+    {
+        tileMap.dispose();
+        Assets.unload();
+        debugRenderer.dispose();
+    }
+
+    @Override
+    public void resize(int width, int height)
+    {
+    }
+}

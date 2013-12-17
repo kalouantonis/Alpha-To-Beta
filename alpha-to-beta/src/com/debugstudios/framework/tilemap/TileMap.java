@@ -1,4 +1,4 @@
-package com.debugstudios.alphatobeta.framework.tilemap;
+package com.debugstudios.framework.tilemap;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;

@@ -7,23 +7,18 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Array;
 
-import java.util.ArrayList;
-
 /**
  * Created by slacker on 12/9/13.
+ *
+ * @author Slacker
  */
 public class Assets
 {
     public static TiledMap map = null;
 
-    public static TextureAtlas humanPlayer = null;
-    public static Animation runRightAnimation = null;
-    public static Animation runLeftAnimation = null;
-    public static Animation idleAnimation = null;
+    public static TextureAtlas humanPlayerSheet = null;
 
-    public static float PLAYER_ANIMATION_SPEED = 0.1f;
-
-    private static Animation createLoopAnimation(float animSpeed, TextureAtlas atlas, String ... regionNames)
+    public static Animation createLoopAnimation(float animSpeed, TextureAtlas atlas, String ... regionNames)
     {
         Array<TextureRegion> textureRegions = new Array<TextureRegion>(regionNames.length);
 
@@ -39,16 +34,18 @@ public class Assets
     }
 
     // TODO: Thread this and check if loaded while loading
+    public static void loadTextures()
+    {
+        humanPlayerSheet = new TextureAtlas("img/player.txt");
+
+    }
+
     public static void load()
     {
-        humanPlayer = new TextureAtlas("img/player.txt");
-        runRightAnimation = createLoopAnimation(PLAYER_ANIMATION_SPEED, humanPlayer, "right1", "right2", "right3");
-
-        runLeftAnimation = createLoopAnimation(PLAYER_ANIMATION_SPEED, humanPlayer, "left1", "left2", "left3");
-
-        idleAnimation = createLoopAnimation(PLAYER_ANIMATION_SPEED + 0.1f, humanPlayer, "still1", "still2");
-
+        loadTextures();
         loadMap("maps/map.tmx");
+
+        Assets.HumanPlayer.load();
     }
 
     public static void loadMap(String internalFile)
@@ -62,9 +59,57 @@ public class Assets
 
     public static void unload()
     {
-        humanPlayer.dispose();
+        humanPlayerSheet.dispose();
 
         if(map != null)
             map.dispose();
+    }
+
+    /**
+     * Created by Slacker on 17/12/13.
+     */
+    public static class HumanPlayer extends Player
+    {
+        public static void load()
+        {
+            ANIMATION_SPEED = 0.1f;
+
+            // TODO: Load from HumanPlayer.xml
+           runLeftAnimation = createLoopAnimation(ANIMATION_SPEED, humanPlayerSheet,
+                   "left1", "left2", "left3");
+           runRightAnimation = createLoopAnimation(ANIMATION_SPEED, humanPlayerSheet,
+                    "right1", "right2", "right3");
+           idleAnimation = createLoopAnimation(ANIMATION_SPEED, humanPlayerSheet,
+                    "still1", "still2");
+
+            // Grab from random texture region, they're all the same.
+            // TODO: Load from HumanPlayer.xml
+            textureWidth = idleAnimation.getKeyFrame(0).getRegionWidth();
+            textureHeight = idleAnimation.getKeyFrame(0).getRegionHeight();
+        }
+    }
+
+    /**
+     * Created by Slacker on 17/12/13.
+     */
+    public abstract static class Player
+    {
+        public static float ANIMATION_SPEED = 0.2f;
+
+        public static Animation runRightAnimation;
+        // TODO: Redundant Left & Idle
+        public static Animation runLeftAnimation;
+        public static Animation idleAnimation;
+
+        public static float textureWidth = 1;
+        public static float textureHeight = 1;
+
+        /**
+         * Load all assets for view
+         */
+        public static void load()
+        {
+
+        }
     }
 }

@@ -1,7 +1,7 @@
-package com.debugstudios.alphatobeta.framework.tilemap;
+package com.debugstudios.framework.tilemap;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.debugstudios.alphatobeta.framework.gameobjects.Entity;
+import com.debugstudios.framework.gameobjects.Entity;
 
 /**
  * TileMapLayer with support for collision detection
