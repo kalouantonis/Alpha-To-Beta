@@ -17,7 +17,8 @@
 
 package com.debugstudios.framework;
 
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.debugstudios.framework.screens.GameScreen;
 

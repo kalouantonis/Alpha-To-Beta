@@ -2,8 +2,8 @@ package com.debugstudios.alphatobeta.input;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.debugstudios.framework.graphics.Camera;
 import com.debugstudios.alphatobeta.players.Player;
+import com.debugstudios.framework.graphics.Camera;
 
 /**
  * Created by Slacker on 16/12/13.

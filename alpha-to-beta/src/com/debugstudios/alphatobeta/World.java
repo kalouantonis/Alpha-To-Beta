@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.debugstudios.alphatobeta.players.HumanPlayer;
+import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.framework.tilemap.CollisionLayer;
 import com.debugstudios.framework.tilemap.TileMap;
-import com.debugstudios.alphatobeta.players.Player;
 
 import java.util.ArrayList;
 

@@ -3,18 +3,17 @@ package com.debugstudios.alphatobeta.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-import com.debugstudios.alphatobeta.input.PlayerInputHandler;
-import com.debugstudios.alphatobeta.World;
 import com.debugstudios.alphatobeta.Assets;
-import com.debugstudios.framework.Game;
-import com.debugstudios.framework.graphics.Camera;
-import com.debugstudios.framework.screens.GameScreen;
-import com.debugstudios.framework.tilemap.TileMap;
+import com.debugstudios.alphatobeta.World;
+import com.debugstudios.alphatobeta.input.PlayerInputHandler;
 import com.debugstudios.alphatobeta.input.PlayerTouchHandler;
 import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.alphatobeta.views.WorldDebugRenderer;
 import com.debugstudios.alphatobeta.views.WorldRenderer;
+import com.debugstudios.framework.Game;
+import com.debugstudios.framework.graphics.Camera;
+import com.debugstudios.framework.screens.GameScreen;
+import com.debugstudios.framework.tilemap.TileMap;
 
 /**
  * Created by slacker on 12/7/13.

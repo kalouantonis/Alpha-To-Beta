@@ -3,9 +3,9 @@ package com.debugstudios.alphatobeta.views;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.debugstudios.alphatobeta.World;
+import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.framework.graphics.Camera;
 import com.debugstudios.framework.graphics.DebugRenderer;
-import com.debugstudios.alphatobeta.players.Player;
 
 /**
  * Created by Slacker on 17/12/13.

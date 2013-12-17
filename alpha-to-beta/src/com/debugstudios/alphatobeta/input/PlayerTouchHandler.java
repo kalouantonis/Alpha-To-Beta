@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
-import com.debugstudios.framework.graphics.Camera;
 import com.debugstudios.alphatobeta.players.Player;
+import com.debugstudios.framework.graphics.Camera;
 
 /**
  * Created by Slacker on 17/12/13.
