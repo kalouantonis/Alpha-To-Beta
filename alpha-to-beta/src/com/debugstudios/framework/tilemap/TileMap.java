@@ -16,23 +16,22 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
  */
 public class TileMap
 {
+    /** Layer data and stuff */
     private TiledMap internalTileMap;
+    /** Renderer of our tile layer */
     private OrthogonalTiledMapRenderer tileRenderer;
+    /** Camera for rendering */
+    // TODO: Use my camera, allow getting and setting of camera
     private OrthographicCamera camera = null;
-
-    // Used for reloading
-    private String prevMapFile = null;
 
     /**
      * Load Tile Map using internal assets file
      *
-     * @param internalFile assets file stored internaly
+     * @param internalFile assets file stored internally
      */
     public TileMap(String internalFile)
     {
         this(new TmxMapLoader().load(internalFile));
-
-        prevMapFile = internalFile;
     }
     // TODO: support asset manager
 
@@ -68,6 +67,11 @@ public class TileMap
         tileRenderer.render();
     }
 
+    /**
+     * Reload tile map
+     *
+     * @param filename Filename of TMX tilemap
+     */
     public void reload(String filename)
     {
         // Delete old tile map
@@ -80,14 +84,11 @@ public class TileMap
         tileRenderer.setMap(internalTileMap);
     }
 
-    public void reload()
-    {
-        if(prevMapFile == null)
-            throw new RuntimeException("No previous tile map to load");
-
-        reload(prevMapFile);
-    }
-
+    /**
+     * Delegate method. Draw tile layer
+     *
+     * @param layer Layer to draw
+     */
     public void drawLayer(TiledMapTileLayer layer)
     {
         updateCameraView();
@@ -95,6 +96,11 @@ public class TileMap
         tileRenderer.renderTileLayer(layer);
     }
 
+    /**
+     * Draw multiple layers, using indexes
+     *
+     * @param layers Layers to draw
+     */
     public void drawLayers(int[] layers)
     {
         updateCameraView();
@@ -102,12 +108,20 @@ public class TileMap
         tileRenderer.render(layers);
     }
 
+    /**
+     * Update camera
+     *
+     * @deprecated TODO: Make this automagic, so use my own camera class
+     */
     private void updateCameraView()
     {
         if(camera != null)
             tileRenderer.setView(camera);
     }
 
+    /**
+     * Dispose of internal objects
+     */
     public void dispose()
     {
         internalTileMap.dispose();

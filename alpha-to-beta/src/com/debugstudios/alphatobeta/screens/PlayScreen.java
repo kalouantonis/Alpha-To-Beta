@@ -3,6 +3,7 @@ package com.debugstudios.alphatobeta.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import com.debugstudios.alphatobeta.Assets;
 import com.debugstudios.alphatobeta.World;
 import com.debugstudios.alphatobeta.input.PlayerInputHandler;
@@ -23,15 +24,13 @@ public class PlayScreen implements GameScreen
     private TileMap tileMap;
     private Camera camera;
 
-    private Player player;
-    private SpriteBatch spriteBatch;
     private WorldRenderer worldRenderer;
     private WorldDebugRenderer debugRenderer;
 
     //private DebugRenderer debugRenderer;
 
-    private int[] backgroundLayers;
-    private int[] foregroundLayers;
+//    private int[] backgroundLayers;
+//    private int[] foregroundLayers;
 
     private final float WORLD_WIDTH = 480;
     private final float WORLD_HEIGHT = 360;
@@ -48,13 +47,12 @@ public class PlayScreen implements GameScreen
         tileMap = new TileMap(Assets.map);
         tileMap.setCamera(camera);
 
-        spriteBatch = tileMap.getSpriteBatch();
-
 
         world = new World(tileMap);
 
-        player = world.player;
+        Player player = world.player;
 
+        SpriteBatch spriteBatch = tileMap.getSpriteBatch();
         worldRenderer = new WorldRenderer(camera, spriteBatch, world);
         debugRenderer = new WorldDebugRenderer(camera, spriteBatch, world);
 

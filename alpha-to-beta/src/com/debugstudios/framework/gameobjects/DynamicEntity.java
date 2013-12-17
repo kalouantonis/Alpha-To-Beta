@@ -26,7 +26,9 @@ import com.badlogic.gdx.math.Vector2;
  */
 public abstract class DynamicEntity extends Entity
 {
+    /** Entity X and Y velocity */
     public final Vector2 velocity;
+    /** Entity X and Y acceleration */
     public final Vector2 accel;
 
     public DynamicEntity(float x, float y, float width, float height)
@@ -37,5 +39,11 @@ public abstract class DynamicEntity extends Entity
         accel = new Vector2(0, 0);
     }
 
+    /**
+     * Update entity according to delta time.
+     * All dynamic entities will need to perform this/
+     *
+     * @param deltaTime Tile elapsed since last update call
+     */
     public abstract void update(float deltaTime);
 }

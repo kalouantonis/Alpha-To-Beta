@@ -144,6 +144,11 @@ public class Camera extends OrthographicCamera
         super.update();
     }
 
+    /**
+     * Transform touch co-ordinates on screen to camera world co-ordinates
+     *
+     * @param touch Touch position, screen position
+     */
     public void touchToWorld(Vector2 touch)
     {
         touch.x = (touch.x / (float) Gdx.graphics.getWidth()) * viewportWidth * zoom;

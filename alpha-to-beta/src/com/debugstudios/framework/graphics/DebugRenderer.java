@@ -13,10 +13,18 @@ import com.debugstudios.framework.gameobjects.Entity;
  */
 public class DebugRenderer
 {
+    /** Renderer used for bounding boxes, etc. */
     private ShapeRenderer shapeRenderer;
+    /** Font renderer for debug information */
     private BitmapFont debugFont = null;
+    /** Camera, used for rendering fonts */
     private Camera camera;
 
+    /**
+     * Create new debug renderer, load internal renderers
+     *
+     * @param camera Camera instance
+     */
     public DebugRenderer(Camera camera)
     {
         shapeRenderer = new ShapeRenderer();
@@ -25,12 +33,22 @@ public class DebugRenderer
     }
 
     // TODO: Allow loading using AssetManager
+
+    /**
+     * Load bitmap font
+     *
+     * @param internalFont Internal font file, contains font information
+     * @param internalImage Bitmap image of font
+     */
     public void loadFont(String internalFont, String internalImage)
     {
         debugFont = new BitmapFont(Gdx.files.internal(internalFont),
                 Gdx.files.internal(internalImage), false);
     }
 
+    /**
+     * Begin renderer, call before drawing entities
+     */
     public void begin()
     {
         shapeRenderer.setProjectionMatrix(camera.combined);
@@ -38,12 +56,25 @@ public class DebugRenderer
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
     }
 
+    /**
+     * Draw entity debug info --> bounding box
+     *
+     * @param entity Entity to render info for
+     * @param color Color of bounding rect
+     */
     public void draw(Entity entity, Color color)
     {
         shapeRenderer.rect(entity.position.x, entity.position.y, entity.width, entity.height,
                 color, color, color, color);
     }
 
+    /**
+     * Draw dynamic entity --> bounding box && velocity vector
+     *
+     * @param entity Dynamic entity to render info for
+     * @param rectColor Color of bounding rect
+     * @param lineColor Color of velocity lines
+     */
     public void draw(DynamicEntity entity, Color rectColor, Color lineColor)
     {
         shapeRenderer.rect(entity.position.x, entity.position.y, entity.width, entity.height,
@@ -76,16 +107,27 @@ public class DebugRenderer
         }
     }
 
+    /**
+     * Delegate method, get the height of the preloaded font
+     *
+     * @return Height of font characters
+     */
     public float getFontHeight()
     {
         return debugFont.getLineHeight();
     }
 
+    /**
+     * End renderer, call after drawing entities
+     */
     public void end()
     {
         shapeRenderer.end();
     }
 
+    /**
+     * Dispose of internal files
+     */
     public void dispose()
     {
         shapeRenderer.dispose();

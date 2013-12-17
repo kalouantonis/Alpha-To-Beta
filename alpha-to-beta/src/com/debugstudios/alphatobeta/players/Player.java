@@ -17,21 +17,32 @@ import com.debugstudios.framework.tilemap.CollisionLayer;
 public class Player extends DynamicEntity
 {
     // CONSTANTS /////////////////////////////////////////////////////////////////////////
+    /** Should remain the same, TODO: Move to physics.Constants */
     public static final float GRAVITY = -9.8f;
+    /** Mass for F=ma calculations */
     public static final float MASS = 20;
+    /** Different for every player, dictates strength. Eventually allow upgrades on this */
     public static Vector2 MAX_VELOCITY = new Vector2(200, 400);
+    /** Player X movement velocity */
     public float MOVE_VELOCITY = 100;
+    /** Player Y impulse velocity */
     public static float JUMP_VELOCITY = 150;
+    /** Maximum allowed jumps. TODO: 1 for fatty :P */
     private static final short MAX_JUMPS = 2;
     //////////////////////////////////////////////////////////////////////////////////////
 
     /** Track state time, for animation and timed acceleration */
     private float stateTime = 0.f;
+    /** Current number of jumps performed */
     private short numJumps = 0;
 
+    /** Bottom collision layer, excludes objects */
     private CollisionLayer collisionLayer;
+    /** Checks if x or y collision has occured */
     private boolean xCollision, yCollision;
 
+    /** Animation data structures. */
+    // TODO: Run left, idle is redundant
     public Animation runLeftAnimation = null;
     public Animation runRightAnimation = null;
     public Animation idleAnimation = null;
@@ -93,6 +104,9 @@ public class Player extends DynamicEntity
     }
 
 
+    /**
+     * Perform jump according to JUMP_VELOCITY
+     */
     public void jump()
     {
         if(numJumps++ < MAX_JUMPS)
@@ -101,21 +115,29 @@ public class Player extends DynamicEntity
         }
     }
 
-    public CollisionLayer getCollisionLayer()
-    {
-        return collisionLayer;
-    }
-
+    /**
+     * Set bottom collision layer
+     *
+     * @param collisionLayer Collision layer for tile map
+     */
     public void setCollisionLayer(CollisionLayer collisionLayer)
     {
         this.collisionLayer = collisionLayer;
     }
 
+    /**
+     * Get current state time
+     *
+     * @return the time the object has been in a state
+     */
     public float getStateTime()
     {
         return stateTime;
     }
 
+    /**
+     * Reset state time back to 0
+     */
     public void resetStateTime()
     {
         stateTime = 0.f;
@@ -123,8 +145,8 @@ public class Player extends DynamicEntity
 
     /**
      * Will return the texture region of selected animation according to state time
-     * @param animation
-     * @return
+     * @param animation Animation class used
+     * @return Texture region used in current state time
      */
     public TextureRegion getAnimationFrame(Animation animation)
     {

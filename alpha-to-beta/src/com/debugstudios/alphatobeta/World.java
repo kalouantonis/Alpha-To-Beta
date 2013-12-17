@@ -24,6 +24,7 @@ public class World
     public CollisionLayer collisionLayer;
 
     public Player player = null;
+    // NOTE: If using threads, use Vector --> Is the very bestest best when thread run...
     public ArrayList<Player> players;
 
     public World(TileMap tileMap)

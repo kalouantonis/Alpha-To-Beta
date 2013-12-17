@@ -31,7 +31,7 @@ public abstract class Game implements ApplicationListener
 
     private static int FPS = 60;
     // Time for each frame
-    private static float FRAME_TIME = 1.f / (float)FPS;
+//    private static float FRAME_TIME = 1.f / (float)FPS;
 
     public Game()
     {
