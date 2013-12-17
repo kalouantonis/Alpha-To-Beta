@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) Debug Studios, Inc - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Antonis Kalou <kalouantonis@gmail.com>, 12 2013
+ */
+
 package com.debugstudios.alphatobeta;
 
 import com.badlogic.gdx.Gdx;
@@ -11,7 +18,7 @@ import com.debugstudios.framework.tilemap.TileMap;
 import java.util.ArrayList;
 
 /**
- * Created by slacker on 12/9/13.
+ * Created by Antonis Kalou on 12/9/13.
  */
 public class World
 {

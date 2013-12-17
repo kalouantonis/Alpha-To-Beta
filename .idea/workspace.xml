@@ -27,14 +27,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92ebc313-3081-4d16-bdbc-86854757c594" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/Alpha_To_Beta.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/Framework.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/MIT.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/Proprietary.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AbstractLayer.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AbstractLayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AnimatedLayer.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AnimatedLayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/Camera.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/Camera.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/CollisionLayer.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/CollisionLayer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/DebugRenderer.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/DebugRenderer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/gameobjects/DynamicEntity.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/gameobjects/DynamicEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/gameobjects/Entity.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/gameobjects/Entity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/screens/GameScreen.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/screens/GameScreen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/HumanPlayer.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/HumanPlayer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/input/PlayerInputHandler.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/input/PlayerInputHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/input/PlayerTouchHandler.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/input/PlayerTouchHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldDebugRenderer.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldDebugRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldRenderer.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="alpha-to-beta.iws" />
@@ -100,12 +117,107 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="World.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java">
+      <file leaf-file-name="Game.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="71" selection-start="782" selection-end="782" vertical-scroll-proportion="0.42570952" vertical-offset="187" max-vertical-offset="1581">
+            <state line="24" column="0" selection-start="1176" selection-end="1176" vertical-scroll-proportion="0.7058824" vertical-offset="0" max-vertical-offset="2278">
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#0#3399#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DynamicEntity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/gameobjects/DynamicEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="0" selection-start="1176" selection-end="1176" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
+              <folding>
+                <element signature="e#0#1955#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Entity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/gameobjects/Entity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
+              <folding>
+                <element signature="e#0#1693#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Camera.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/Camera.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2737">
+              <folding>
+                <element signature="e#0#4740#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DebugRenderer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/DebugRenderer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="1" selection-start="29" selection-end="29" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2720">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameScreen.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/screens/GameScreen.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1292">
+              <folding>
+                <element signature="e#0#1972#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractLayer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AbstractLayer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2159">
+              <folding>
+                <element signature="e#0#3518#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnimatedLayer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AnimatedLayer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="1" selection-start="1" selection-end="1" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CollisionLayer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/CollisionLayer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2703">
+              <folding>
+                <element signature="e#0#4744#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TileMap.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4403">
+              <folding>
+                <element signature="e#0#7124#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -124,11 +236,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/framework/tilemap/AbstractLayer.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/framework/tilemap/AnimatedLayer.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/GameScreen.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta-desktop/src/com/debugstudios/alphatobeta/Main.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/Assets.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/framework/gameobjects/Entity.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Character.java" />
@@ -142,7 +249,6 @@
         <option value="$PROJECT_DIR$/alpha-to-beta-android/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/framework/graphics/Camera.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/framework/screens/GameScreen.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldDebugRenderer.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/maps/map.tmx" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/PlayerInputHandler.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/PlayScreen.java" />
@@ -159,19 +265,28 @@
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/Assets.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/models/HumanPlayer.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/models/Player.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldRenderer.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/HumanPlayer.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/HumanPlayer.xml" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/HumanPlayer.xml.xhtml" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldDebugRenderer.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldRenderer.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/HumanPlayer.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/input/PlayerInputHandler.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/input/PlayerTouchHandler.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/gameobjects/DynamicEntity.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/gameobjects/Entity.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/Camera.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/DebugRenderer.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/screens/GameScreen.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AbstractLayer.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AnimatedLayer.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/CollisionLayer.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java" />
       </list>
     </option>
   </component>
@@ -240,30 +355,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="alpha-to-beta-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="alpha-to-beta" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="alpha-to-beta-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="alpha-to-beta" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="alpha-to-beta" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -299,6 +390,10 @@
               <option name="myItemId" value="debugstudios" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="framework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -318,7 +413,107 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="alphatobeta" />
+              <option name="myItemId" value="framework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tilemap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alpha-to-beta" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alpha-to-beta" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="debugstudios" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="framework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="screens" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alpha-to-beta" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alpha-to-beta" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="debugstudios" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="framework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="graphics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alpha-to-beta" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alpha-to-beta" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="debugstudios" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="framework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gameobjects" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alpha-to-beta" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alpha-to-beta" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="debugstudios" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -346,7 +541,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="FullScreen" value="false" />
     <property name="SearchEverywhereHistory" value="" />
-    <property name="options.lastSelected" value="preferences.pluginManager" />
+    <property name="options.lastSelected" value="copyright" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -568,7 +763,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -578,7 +773,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2624" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31944445" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3184" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18504532" sideWeight="0.5008" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18504532" sideWeight="0.5008" order="2" side_tool="true" content_ui="tabs" />
@@ -589,8 +784,11 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18504532" sideWeight="0.4992" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18504532" sideWeight="0.4992" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4352" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -664,6 +862,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="43" column="71" selection-start="1447" selection-end="1447" vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="2304">
           <folding>
+            <element signature="e#0#3465#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
@@ -683,10 +882,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="78" column="0" selection-start="2054" selection-end="2054" vertical-scroll-proportion="0.0" vertical-offset="1404" max-vertical-offset="2466">
           <folding>
-            <element signature="e#3673#3674#0" expanded="true" />
-            <element signature="e#3725#3726#0" expanded="true" />
-            <element signature="e#3872#3873#0" expanded="true" />
-            <element signature="e#3904#3905#0" expanded="true" />
+            <element signature="e#0#4592#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -807,85 +1003,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="21" selection-start="2941" selection-end="2941" vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1972">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="203" selection-end="203" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldDebugRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="340" selection-end="340" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="22" selection-start="415" selection-end="415" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="1343">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="8" selection-start="2947" selection-end="2947" vertical-scroll-proportion="0.0" vertical-offset="1713" max-vertical-offset="2312">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/HumanPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="39" selection-start="216" selection-end="216" vertical-scroll-proportion="0.25542572" vertical-offset="0" max-vertical-offset="599">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/input/PlayerInputHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="12" selection-start="673" selection-end="673" vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="1513">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/input/PlayerTouchHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="13" selection-start="359" selection-end="359" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2210">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/gameobjects/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="23" selection-start="270" selection-end="270" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="10" selection-start="2842" selection-end="2842" vertical-scroll-proportion="0.77295494" vertical-offset="1356" max-vertical-offset="1955">
-          <folding>
-            <element signature="e#2430#2431#0" expanded="true" />
-            <element signature="e#2465#2466#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-18/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="43" column="13" selection-start="1886" selection-end="1886" vertical-scroll-proportion="0.624374" vertical-offset="0" max-vertical-offset="11033">
@@ -893,79 +1010,181 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="17" selection-start="154" selection-end="154" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1700">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+          <folding>
+            <element signature="e#0#570#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldDebugRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1173">
+          <folding>
+            <element signature="e#0#1818#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="22" selection-start="651" selection-end="651" vertical-scroll-proportion="0.22704507" vertical-offset="238" max-vertical-offset="1462">
+          <folding>
+            <element signature="e#0#2095#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="121" column="8" selection-start="3183" selection-end="3183" vertical-scroll-proportion="0.37562606" vertical-offset="1832" max-vertical-offset="2431">
+          <folding>
+            <element signature="e#0#3465#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/HumanPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="39" selection-start="452" selection-end="452" vertical-scroll-proportion="0.45409015" vertical-offset="0" max-vertical-offset="599">
+          <folding>
+            <element signature="e#0#783#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="153" column="4" selection-start="4352" selection-end="4352" vertical-scroll-proportion="0.0" vertical-offset="1955" max-vertical-offset="2652">
+        <state line="160" column="4" selection-start="4588" selection-end="4588" vertical-scroll-proportion="0.0" vertical-offset="1972" max-vertical-offset="2669">
           <folding>
-            <element signature="e#3673#3674#0" expanded="true" />
-            <element signature="e#3725#3726#0" expanded="true" />
-            <element signature="e#3872#3873#0" expanded="true" />
-            <element signature="e#3904#3905#0" expanded="true" />
+            <element signature="e#0#4592#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/input/PlayerInputHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="12" selection-start="909" selection-end="909" vertical-scroll-proportion="0.028380634" vertical-offset="459" max-vertical-offset="1632">
+          <folding>
+            <element signature="e#0#2317#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/input/PlayerTouchHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="13" selection-start="595" selection-end="595" vertical-scroll-proportion="0.028380634" vertical-offset="306" max-vertical-offset="2329">
+          <folding>
+            <element signature="e#0#2752#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="13" selection-start="635" selection-end="635" vertical-scroll-proportion="0.47058824" vertical-offset="0" max-vertical-offset="2091">
+          <folding>
+            <element signature="e#0#3327#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/gameobjects/DynamicEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="6" selection-start="1412" selection-end="1412" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="680">
-          <folding />
+        <state line="24" column="0" selection-start="1176" selection-end="1176" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
+          <folding>
+            <element signature="e#0#1955#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/gameobjects/Entity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
+          <folding>
+            <element signature="e#0#1693#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/Camera.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="150" column="6" selection-start="3914" selection-end="3914" vertical-scroll-proportion="0.0" vertical-offset="1679" max-vertical-offset="2363">
-          <folding />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2737">
+          <folding>
+            <element signature="e#0#4740#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/DebugRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="31" selection-start="3840" selection-end="3840" vertical-scroll-proportion="0.0" vertical-offset="1615" max-vertical-offset="2312">
+        <state line="2" column="1" selection-start="29" selection-end="29" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2720">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/screens/GameScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="6" selection-start="1250" selection-end="1250" vertical-scroll-proportion="0.0" vertical-offset="296" max-vertical-offset="918">
-          <folding />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1292">
+          <folding>
+            <element signature="e#0#1972#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AbstractLayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="22" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="1751">
-          <folding />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2159">
+          <folding>
+            <element signature="e#0#3518#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AnimatedLayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="1" selection-start="227" selection-end="227" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="247" column="0" selection-start="5946" selection-end="5946" vertical-scroll-proportion="0.9705882" vertical-offset="3315" max-vertical-offset="3995">
+        <state line="0" column="1" selection-start="1" selection-end="1" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/CollisionLayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="520" selection-end="520" vertical-scroll-proportion="0.39732888" vertical-offset="85" max-vertical-offset="2295">
-          <folding />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2703">
+          <folding>
+            <element signature="e#0#4744#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java">
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="71" selection-start="782" selection-end="782" vertical-scroll-proportion="0.42570952" vertical-offset="187" max-vertical-offset="1581">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4403">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#7124#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="0" selection-start="1176" selection-end="1176" vertical-scroll-proportion="0.7058824" vertical-offset="0" max-vertical-offset="2278">
+          <folding>
+            <element signature="e#0#3399#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -982,6 +1201,18 @@
               <list>
                 <option value="0.2" />
                 <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="Copyright.UI">
+        <settings>
+          <last-edited>MIT</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>
@@ -1055,6 +1286,22 @@
               </list>
             </option>
           </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <last-edited>Alpha To Beta</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+          <order>
+            <scope name="Alpha To Beta" />
+            <scope name="Framework" />
+          </order>
         </settings>
       </state>
     </states>

@@ -1,5 +1,8 @@
 <component name="CopyrightManager">
-  <settings default="">
-    <module2copyright />
+  <settings default="Proprietary">
+    <module2copyright>
+      <element module="Alpha To Beta" copyright="Proprietary" />
+      <element module="Framework" copyright="MIT" />
+    </module2copyright>
   </settings>
 </component>
