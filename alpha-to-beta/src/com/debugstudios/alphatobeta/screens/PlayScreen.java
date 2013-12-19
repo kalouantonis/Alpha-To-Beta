@@ -29,7 +29,6 @@ import com.debugstudios.framework.tilemap.TileMap;
  */
 public class PlayScreen implements GameScreen
 {
-    private TileMap tileMap;
     private Camera camera;
 
     private WorldRenderer worldRenderer;
@@ -50,7 +49,7 @@ public class PlayScreen implements GameScreen
         camera = new Camera(WORLD_WIDTH, WORLD_HEIGHT);
 
 
-        tileMap = Assets.map;
+        TileMap tileMap = Assets.map;
         tileMap.setCamera(camera);
 
 

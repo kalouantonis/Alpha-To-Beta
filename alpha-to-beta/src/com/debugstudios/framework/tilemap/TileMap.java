@@ -277,5 +277,10 @@ public class TileMap
         return (TiledMapTileLayer) internalTileMap.getLayers().get(layerIndex);
     }
 
+    public String getFileName()
+    {
+        return prevFile;
+    }
+
     /////////////////////////////////////////////////////////////////////////////////////
 }

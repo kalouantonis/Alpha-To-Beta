@@ -14,9 +14,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.debugstudios.framework.gameobjects.DynamicEntity;
 import com.debugstudios.framework.tilemap.CollisionLayer;
 
-import java.sql.Date;
-import java.text.ParseException;
-
 /**
  *
  * @author Antonis Kalou
@@ -27,7 +24,7 @@ public class Player extends DynamicEntity
     /** Should remain the same, TODO: Move to physics.Constants */
     public static final float GRAVITY = -9.8f;
     /** Mass for F=ma calculations */
-    public static final float MASS = 20;
+    private float mass;
     /** Different for every player, dictates strength. Eventually allow upgrades on this */
     public static Vector2 MAX_VELOCITY = new Vector2(200, 400);
     /** Player X movement velocity */
@@ -58,7 +55,7 @@ public class Player extends DynamicEntity
     {
         super(x, y, width, height);
 
-        accel.y = GRAVITY * MASS;
+        setMass(20);
     }
 
     @Override
@@ -157,5 +154,22 @@ public class Player extends DynamicEntity
     public TextureRegion getAnimationFrame(Animation animation)
     {
        return animation.getKeyFrame(stateTime);
+    }
+
+    /**
+     * Set the mass of the player. Will also update accelY
+     *
+     * @param mass Mass of player
+     */
+    public void setMass(float mass)
+    {
+        this.mass = mass;
+
+        accel.y = GRAVITY * mass;
+    }
+
+    public float getMass()
+    {
+       return mass;
     }
 }

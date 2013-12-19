@@ -63,8 +63,16 @@ public class World
         RectangleMapObject spawnPos = (RectangleMapObject) tileMap.getLayer("objects").getObjects().get("SpawnPosition");
         if(player == null)
         {
-            player = new HumanPlayer(spawnPos.getRectangle().x, spawnPos.getRectangle().y);
-            player.setCollisionLayer(collisionLayer);
+            try
+            {
+                player = new HumanPlayer(spawnPos.getRectangle().x, spawnPos.getRectangle().y);
+                player.setCollisionLayer(collisionLayer);
+            }
+            catch (NullPointerException e)
+            {
+                throw new RuntimeException("No spawn point implemented! Add a SpawnPoint object to the map" +
+                                            tileMap.getFileName() != null ? ": " + tileMap.getFileName() : "");
+            }
             // Add to array, keep reference for direct access
             players.add(player);
         }
