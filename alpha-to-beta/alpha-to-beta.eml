@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component inheritJdk="true">
-	<exclude-output/>
-	<contentEntry url="file://$MODULE_DIR$"/>
+	<output-test url="file://$MODULE_DIR$/target/test-classes"/>
+	<contentEntry url="file://$MODULE_DIR$">
+		<excludeFolder url="file://$MODULE_DIR$/target"/>
+	</contentEntry>
 	<lib name="gdx.jar" scope="COMPILE">
 		<srcroot url="jar://$MODULE_DIR$/libs/gdx-sources.jar!/"/>
 		<relative-module-src project-related="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/"/>

@@ -14,12 +14,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.debugstudios.framework.gameobjects.DynamicEntity;
 import com.debugstudios.framework.tilemap.CollisionLayer;
 
+import java.sql.Date;
+import java.text.ParseException;
+
 /**
- * Created with IntelliJ IDEA.
- * User: slacker
- * Date: 11/30/13
- * Time: 4:50 PM
- * To change this template use File | Settings | File Templates.
+ *
+ * @author Antonis Kalou
  */
 public class Player extends DynamicEntity
 {
@@ -99,7 +99,6 @@ public class Player extends DynamicEntity
             if(yCollision)
                 numJumps = 0;
         }
-
 
         if(yCollision)
         {

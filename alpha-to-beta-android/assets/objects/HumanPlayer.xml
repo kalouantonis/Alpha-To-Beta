@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<!--
+  ~ Copyright (C) Debug Studios, Inc - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Antonis Kalou <kalouantonis@gmail.com>, 12 2013
+  -->
+
+<Player xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../schemas/PlayerSchema.xml">
+    <Animation speed="0.1">
+        <left regionName="left1" />
+        <left regionName="left2" />
+        <left regionName="left3" />
+
+        <right regionName="right1" />
+        <right regionName="right2" />
+        <right regionName="right3" />
+
+        <idle regionName="still1" />
+        <idle regionName="still2" />
+    </Animation>
+    <Texture atlas="humanPlayerSheet" width="20" height="20" />
+    
+    <Physics>
+        <mass>20</mass>
+        <jump_speed>150</jump_speed>
+        <move_speed>100</move_speed>
+    </Physics>
+</Player>

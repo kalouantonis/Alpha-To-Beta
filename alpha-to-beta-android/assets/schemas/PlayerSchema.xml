@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<!--
+  ~ Copyright (C) Debug Studios, Inc - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Antonis Kalou <kalouantonis@gmail.com>, 12 2013
+  -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!-- definition of simple elements -->
+<xs:element name="mass" />
+<xs:element name="jump_speed" />
+<xs:element name="move_speed" />
+
+<!-- definition of attributes -->
+
+<xs:attribute name="speed" type="xs:float" />
+
+<xs:attribute name="regionName" type="xs:string" />
+
+<xs:attribute name="atlas" type="xs:string" />
+<xs:attribute name="width" type="xs:float" />
+<xs:attribute name="height" type="xs:float" />
+
+    
+<!-- Definition of complex elements -->
+    <!-- Animation Directions-->
+    <!-- TODO: Use Run, Jump and Fall -->
+    <xs:element name="left">
+        <xs:complexType>
+            <xs:attribute ref="regionName" use="required" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="right">
+        <xs:complexType>
+            <xs:attribute ref="regionName" use="required" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="idle">
+        <xs:complexType>
+            <xs:attribute ref="regionName" use="required" />
+        </xs:complexType>
+    </xs:element>
+
+<xs:element name="Animation">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element ref="left" maxOccurs="unbounded" />
+            <xs:element ref="right" maxOccurs="unbounded" />
+            <xs:element ref="idle" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute ref="speed" />
+    </xs:complexType>
+</xs:element>
+<xs:element name="Texture">
+    <xs:complexType>
+        <xs:attribute ref="atlas" />
+        <xs:attribute ref="width" use="required" />
+        <xs:attribute ref="height" use="required" />
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="Physics">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element ref="mass" />
+            <xs:element ref="jump_speed" />
+            <xs:element ref="move_speed" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="Player">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element ref="Animation" />
+            <xs:element ref="Texture" />
+            <xs:element ref="Physics" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+</xs:schema>

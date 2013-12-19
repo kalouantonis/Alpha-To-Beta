@@ -23,6 +23,7 @@ import com.debugstudios.framework.graphics.Camera;
 import com.debugstudios.framework.screens.GameScreen;
 import com.debugstudios.framework.tilemap.TileMap;
 
+
 /**
  * Created by slacker on 12/7/13.
  */
@@ -33,8 +34,6 @@ public class PlayScreen implements GameScreen
 
     private WorldRenderer worldRenderer;
     private WorldDebugRenderer debugRenderer;
-
-    //private DebugRenderer debugRenderer;
 
 //    private int[] backgroundLayers;
 //    private int[] foregroundLayers;

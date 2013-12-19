@@ -14,6 +14,8 @@ import com.debugstudios.framework.graphics.Camera;
 
 /**
  * Created by Slacker on 16/12/13.
+ *
+ * @author Antonis Kalou
  */
 // TODO: Have these in multiplexer so that we have separate implementations for Android and Desktop
 // TODO: Also, use GestureListener for android impl
