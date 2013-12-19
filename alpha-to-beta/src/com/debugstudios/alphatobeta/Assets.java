@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Array;
+import com.debugstudios.framework.tilemap.TileMap;
 
 /**
  * Created by slacker on 12/9/13.
@@ -21,7 +22,7 @@ import com.badlogic.gdx.utils.Array;
  */
 public class Assets
 {
-    public static TiledMap map = null;
+    public static TileMap map = null;
 
     public static TextureAtlas humanPlayerSheet = null;
 
@@ -47,10 +48,10 @@ public class Assets
 
     }
 
-    public static void load()
+    public static void loadAll(String tileMapFile)
     {
         loadTextures();
-        loadMap("maps/map.tmx");
+        loadMap(tileMapFile);
 
         Assets.HumanPlayer.load();
     }
@@ -61,7 +62,8 @@ public class Assets
             // Clear previous map
             map.dispose();
 
-        map = new TmxMapLoader().load(internalFile);
+        //map = new TmxMapLoader().load(internalFile);
+        map = new TileMap(internalFile);
     }
 
     public static void unload()

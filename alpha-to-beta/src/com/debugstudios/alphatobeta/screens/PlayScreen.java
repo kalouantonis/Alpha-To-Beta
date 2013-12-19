@@ -45,12 +45,12 @@ public class PlayScreen implements GameScreen
 
     public PlayScreen(Game game)
     {
-        Assets.load();
+        Assets.loadAll("maps/map.tmx");
 
         camera = new Camera(WORLD_WIDTH, WORLD_HEIGHT);
 
 
-        tileMap = new TileMap(Assets.map);
+        tileMap = Assets.map;
         tileMap.setCamera(camera);
 
 

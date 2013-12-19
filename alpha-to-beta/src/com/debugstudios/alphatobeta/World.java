@@ -58,7 +58,7 @@ public class World
 
     private void reloadScene()
     {
-        tileMap.reload("maps/map.tmx");
+        tileMap.reload();
 
         RectangleMapObject spawnPos = (RectangleMapObject) tileMap.getLayer("objects").getObjects().get("SpawnPosition");
         if(player == null)

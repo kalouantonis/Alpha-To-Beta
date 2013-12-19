@@ -48,6 +48,8 @@ public class TileMap
     // TODO: Use my camera, allow getting and setting of camera
     private OrthographicCamera camera = null;
 
+    private String prevFile = null;
+
     /**
      * Load Tile Map using internal assets file
      *
@@ -56,6 +58,8 @@ public class TileMap
     public TileMap(String internalFile)
     {
         this(new TmxMapLoader().load(internalFile));
+
+        prevFile = internalFile;
     }
     // TODO: support asset manager
 
@@ -106,6 +110,11 @@ public class TileMap
 
         // Set new map to renderer
         tileRenderer.setMap(internalTileMap);
+    }
+
+    public void reload()
+    {
+        reload(prevFile);
     }
 
     /**
