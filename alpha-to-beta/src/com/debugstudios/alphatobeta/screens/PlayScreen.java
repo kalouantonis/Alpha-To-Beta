@@ -124,7 +124,6 @@ public class PlayScreen implements GameScreen
     @Override
     public void dispose()
     {
-        tileMap.dispose();
         Assets.unload();
         debugRenderer.dispose();
     }
