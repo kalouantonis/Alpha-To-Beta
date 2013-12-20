@@ -27,17 +27,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92ebc313-3081-4d16-bdbc-86854757c594" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/parsers/SchemaValidator.java" />
-      <change type="DELETED" beforePath="C:\Users\Slacker\Programming\alpha-to-beta\alpha-to-beta-android\assets\maps\tiles.plist" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/HumanPlayer.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/HumanPlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/HumanPlayer.xml" afterPath="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/HumanPlayer.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/parsers/SAXFactory.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/parsers/SAXFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta-android/assets/maps/map.tmx" afterPath="$PROJECT_DIR$/alpha-to-beta-android/assets/maps/map.tmx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="alpha-to-beta.iws" />
@@ -164,30 +154,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Assets.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Assets.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="0" selection-start="904" selection-end="904" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="1802">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerLoader.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="76" selection-start="2679" selection-end="2679" vertical-scroll-proportion="0.0" vertical-offset="1139" max-vertical-offset="3995">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlphaToBeta.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="48" selection-start="639" selection-end="639" vertical-scroll-proportion="0.44523808" vertical-offset="0" max-vertical-offset="420">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
               <folding />
             </state>
           </provider>
@@ -300,10 +270,10 @@
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/parsers/SchemaValidationException.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/parsers/SAXFactory.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/parsers/SchemaValidator.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/HumanPlayer.xml" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
       </list>
     </option>
   </component>
@@ -1351,13 +1321,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="904" selection-end="904" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="1802">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta-android/assets/objects/HumanPlayer.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="0" selection-start="986" selection-end="986" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="714">
@@ -1388,18 +1351,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="26" selection-start="617" selection-end="617" vertical-scroll-proportion="0.44523808" vertical-offset="0" max-vertical-offset="420">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="76" selection-start="2679" selection-end="2679" vertical-scroll-proportion="0.0" vertical-offset="1139" max-vertical-offset="3995">
+        <state line="88" column="76" selection-start="2679" selection-end="2679" vertical-scroll-proportion="0.64761907" vertical-offset="1139" max-vertical-offset="3995">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java">
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="48" selection-start="639" selection-end="639" vertical-scroll-proportion="0.44523808" vertical-offset="0" max-vertical-offset="420">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
           <folding />
         </state>
       </provider>

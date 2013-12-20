@@ -40,8 +40,6 @@ public class Assets
     {
         loadTextures();
         loadMap(tileMapFile);
-
-        Assets.HumanPlayer.load();
     }
 
     public static void loadMap(String internalFile)
@@ -50,7 +48,6 @@ public class Assets
             // Clear previous map
             map.dispose();
 
-        //map = new TmxMapLoader().load(internalFile);
         map = new TileMap(internalFile);
     }
 
@@ -60,54 +57,5 @@ public class Assets
 
         if(map != null)
             map.dispose();
-    }
-
-    /**
-     * Created by Slacker on 17/12/13.
-     */
-    public static class HumanPlayer extends Player
-    {
-        public static void load()
-        {
-            ANIMATION_SPEED = 0.1f;
-
-            // TODO: Load from HumanPlayer.xml
-           runLeftAnimation = AnimUtils.createLoopAnimation(ANIMATION_SPEED, humanPlayerSheet,
-                   "left1", "left2", "left3");
-           runRightAnimation = AnimUtils.createLoopAnimation(ANIMATION_SPEED, humanPlayerSheet,
-                    "right1", "right2", "right3");
-           idleAnimation = AnimUtils.createLoopAnimation(ANIMATION_SPEED + 0.15f, humanPlayerSheet,
-                    "still1", "still2");
-
-            // Grab from random texture region, they're all the same.
-            // TODO: Load from HumanPlayer.xml
-            textureWidth = idleAnimation.getKeyFrame(0).getRegionWidth();
-            textureHeight = idleAnimation.getKeyFrame(0).getRegionHeight();
-        }
-
-    }
-
-    /**
-     * Created by Slacker on 17/12/13.
-     */
-    public abstract static class Player
-    {
-        public static float ANIMATION_SPEED = 0.2f;
-
-        public static Animation runRightAnimation;
-        // TODO: Redundant Left & Idle
-        public static Animation runLeftAnimation;
-        public static Animation idleAnimation;
-
-        public static float textureWidth = 1;
-        public static float textureHeight = 1;
-
-        /**
-         * Load all assets for view
-         */
-        public static void load()
-        {
-
-        }
     }
 }
