@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Array;
+import com.debugstudios.framework.graphics.AnimUtils;
 import com.debugstudios.framework.tilemap.TileMap;
 
 /**
@@ -26,20 +27,6 @@ public class Assets
 
     public static TextureAtlas humanPlayerSheet = null;
 
-    public static Animation createLoopAnimation(float animSpeed, TextureAtlas atlas, String ... regionNames)
-    {
-        Array<TextureRegion> textureRegions = new Array<TextureRegion>(regionNames.length);
-
-       for(String region : regionNames)
-       {
-            textureRegions.add(atlas.findRegion(region));
-       }
-
-        Animation anim = new Animation(animSpeed, textureRegions);
-        anim.setPlayMode(Animation.LOOP);
-
-        return anim;
-    }
 
     // TODO: Thread this and check if loaded while loading
     public static void loadTextures()
@@ -84,11 +71,11 @@ public class Assets
             ANIMATION_SPEED = 0.1f;
 
             // TODO: Load from HumanPlayer.xml
-           runLeftAnimation = createLoopAnimation(ANIMATION_SPEED, humanPlayerSheet,
+           runLeftAnimation = AnimUtils.createLoopAnimation(ANIMATION_SPEED, humanPlayerSheet,
                    "left1", "left2", "left3");
-           runRightAnimation = createLoopAnimation(ANIMATION_SPEED, humanPlayerSheet,
+           runRightAnimation = AnimUtils.createLoopAnimation(ANIMATION_SPEED, humanPlayerSheet,
                     "right1", "right2", "right3");
-           idleAnimation = createLoopAnimation(ANIMATION_SPEED + 0.15f, humanPlayerSheet,
+           idleAnimation = AnimUtils.createLoopAnimation(ANIMATION_SPEED + 0.15f, humanPlayerSheet,
                     "still1", "still2");
 
             // Grab from random texture region, they're all the same.

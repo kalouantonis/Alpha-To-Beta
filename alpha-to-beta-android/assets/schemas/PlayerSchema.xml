@@ -13,11 +13,11 @@
 <xs:element name="jump_speed" />
 <xs:element name="move_speed" />
 
+<xs:element name="regionName" type="xs:string" />
+
 <!-- definition of attributes -->
 
 <xs:attribute name="speed" type="xs:float" />
-
-<xs:attribute name="regionName" type="xs:string" />
 
 <xs:attribute name="atlas" type="xs:string" />
 <xs:attribute name="width" type="xs:float" />
@@ -29,34 +29,43 @@
     <!-- TODO: Use Run, Jump and Fall -->
     <xs:element name="left">
         <xs:complexType>
-            <xs:attribute ref="regionName" use="required" />
+            <xs:sequence>
+                <xs:element ref="regionName" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute ref="speed" use="required" />
         </xs:complexType>
     </xs:element>
 
     <xs:element name="right">
         <xs:complexType>
-            <xs:attribute ref="regionName" use="required" />
+            <xs:sequence>
+                <xs:element ref="regionName" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute ref="speed" use="required" />
         </xs:complexType>
     </xs:element>
 
     <xs:element name="idle">
         <xs:complexType>
-            <xs:attribute ref="regionName" use="required" />
+            <xs:sequence>
+                <xs:element ref="regionName" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute ref="speed" use="required" />
         </xs:complexType>
     </xs:element>
 
 <xs:element name="Animation">
     <xs:complexType>
         <xs:sequence>
-            <xs:element ref="left" maxOccurs="unbounded" />
-            <xs:element ref="right" maxOccurs="unbounded" />
+            <xs:element ref="left"  />
+            <xs:element ref="right"  />
             <xs:element ref="idle" maxOccurs="unbounded" />
         </xs:sequence>
-        <xs:attribute ref="speed" use="required" />
     </xs:complexType>
 </xs:element>
 <xs:element name="Texture">
     <xs:complexType>
+        <xs:attribute ref="atlas" />
         <xs:attribute ref="width" use="required" />
         <xs:attribute ref="height" use="required" />
     </xs:complexType>

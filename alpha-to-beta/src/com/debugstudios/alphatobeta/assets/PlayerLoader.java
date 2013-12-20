@@ -8,11 +8,10 @@
 package com.debugstudios.alphatobeta.assets;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
+import com.debugstudios.alphatobeta.utils.SpeedRegionPair;
 import com.debugstudios.alphatobeta.players.Player;
+import com.debugstudios.framework.graphics.AnimUtils;
 import com.debugstudios.framework.parsers.SAXFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -35,12 +34,18 @@ public class PlayerLoader extends DefaultHandler
     private float animationSpeed = 0.f;
 
     private TextureAtlas playerAtlas = null;
-    private Array<TextureRegion> runLeftRegions;
-    private Array<TextureRegion> runRightRegions;
-    private Array<TextureRegion> idleRegions;
+
+    private SpeedRegionPair runRightPair;
+    private SpeedRegionPair runLeftPair;
+    private SpeedRegionPair idlePair;
 
     // In animation element
     private boolean inAnim = false;
+    private boolean inRightAnim = false;
+    private boolean inLeftAnim = false;
+    private boolean inIdleAnim = false;
+
+    private boolean inRegionName = false;
 
     // Physics element
     private boolean inPhysics = false;
@@ -52,14 +57,15 @@ public class PlayerLoader extends DefaultHandler
 
     public PlayerLoader()
     {
-        runLeftRegions = new Array<TextureRegion>();
-        runRightRegions = new Array<TextureRegion>();
-        idleRegions = new Array<TextureRegion>();
+        runLeftPair = new SpeedRegionPair();
+        runRightPair = new SpeedRegionPair();
+        idlePair = new SpeedRegionPair();
     }
 
     // Load from XML, set textures, and bounds and physics
     public void load(String internalFile, Player player, TextureAtlas playerAtlas)
     {
+        // Store previous file, for use when reloading
         prevFile = internalFile;
 
         this.player = player;
@@ -99,20 +105,33 @@ public class PlayerLoader extends DefaultHandler
     {
         if(qName.equalsIgnoreCase("Animation"))
         {
-            // Grab animation speed
-            animationSpeed = Float.parseFloat(attributes.getValue("speed"));
-
             inAnim = true;
         }
         else if(inAnim)
         {
             // Add to regions according to XML defs
             if(qName.equalsIgnoreCase("left"))
-                runLeftRegions.add(playerAtlas.findRegion(attributes.getValue("regionName")));
+            {
+                runLeftPair.setSpeed(Float.parseFloat(attributes.getValue("speed")));
+
+                inLeftAnim = true;
+            }
             else if(qName.equalsIgnoreCase("right"))
-                runRightRegions.add(playerAtlas.findRegion(attributes.getValue("regionName")));
+            {
+                runRightPair.setSpeed(Float.parseFloat(attributes.getValue("speed")));
+
+                inRightAnim = true;
+            }
             else if(qName.equalsIgnoreCase("idle"))
-                idleRegions.add(playerAtlas.findRegion(attributes.getValue("regionName")));
+            {
+                idlePair.setSpeed(Float.parseFloat(attributes.getValue("speed")));
+
+                inIdleAnim = true;
+            }
+            else if(qName.equalsIgnoreCase("regionName"))
+            {
+                inRegionName = true;
+            }
         }
         else if(qName.equalsIgnoreCase("Physics"))
         {
@@ -138,14 +157,38 @@ public class PlayerLoader extends DefaultHandler
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException
     {
+
         if(qName.equalsIgnoreCase("Animation"))
         {
-            // Set animations in to player
-            player.runLeftAnimation = new Animation(animationSpeed, runLeftRegions);
-            player.runRightAnimation = new Animation(animationSpeed, runRightRegions);
-            player.idleAnimation = new Animation(animationSpeed, idleRegions);
-
             inAnim = false;
+        }
+        else if(inAnim)
+        {
+            if(qName.equalsIgnoreCase("left"))
+            {
+                player.runLeftAnimation = AnimUtils.createLoopAnimation(runLeftPair.getSpeed(), playerAtlas,
+                        runLeftPair.getRegions());
+
+                inLeftAnim = false;
+            }
+            else if(qName.equalsIgnoreCase("right"))
+            {
+                player.runRightAnimation = AnimUtils.createLoopAnimation(runRightPair.getSpeed(), playerAtlas,
+                        runRightPair.getRegions());
+
+                inRightAnim = false;
+            }
+            else if(qName.equalsIgnoreCase("idle"))
+            {
+                player.idleAnimation = AnimUtils.createLoopAnimation(idlePair.getSpeed(), playerAtlas,
+                        idlePair.getRegions());
+
+                inIdleAnim = false;
+            }
+            else if(qName.equalsIgnoreCase("regionName"))
+            {
+                inRegionName = false;
+            }
         }
         else if(qName.equalsIgnoreCase("Physics"))
         {
@@ -156,6 +199,25 @@ public class PlayerLoader extends DefaultHandler
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException
     {
+        if(inAnim)
+        {
+            if(inRegionName)
+            {
+                if(inRightAnim)
+                {
+                    runRightPair.addRegion(new String(ch, start, length));
+                }
+                else if(inLeftAnim)
+                {
+                    runLeftPair.addRegion(new String(ch, start, length));
+                }
+                else if(inIdleAnim)
+                {
+                    idlePair.addRegion(new String(ch, start, length));
+                }
+            }
+        }
+
         if(inPhysics)
         {
             if(inMass)
@@ -166,10 +228,12 @@ public class PlayerLoader extends DefaultHandler
             else if(inJumpSpeed)
             {
                 player.JUMP_VELOCITY = Float.parseFloat(new String(ch, start, length));
+                inJumpSpeed = false;
             }
             else if(inMoveSpeed)
             {
                 player.MOVE_VELOCITY = Float.parseFloat(new String(ch, start, length));
+                inMoveSpeed = false;
             }
         }
     }

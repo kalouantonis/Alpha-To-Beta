@@ -10,6 +10,7 @@ package com.debugstudios.alphatobeta;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.debugstudios.alphatobeta.assets.PlayerLoader;
 import com.debugstudios.alphatobeta.players.HumanPlayer;
 import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.framework.tilemap.CollisionLayer;
@@ -66,6 +67,8 @@ public class World
             try
             {
                 player = new HumanPlayer(spawnPos.getRectangle().x, spawnPos.getRectangle().y);
+
+
                 player.setCollisionLayer(collisionLayer);
             }
             catch (NullPointerException e)
@@ -81,6 +84,9 @@ public class World
             player.position.x = spawnPos.getRectangle().x;
             player.position.y = spawnPos.getRectangle().y;
         }
+
+        PlayerLoader loader = new PlayerLoader();
+        loader.load("objects/HumanPlayer.xml", player, Assets.humanPlayerSheet);
     }
 
     public void update(float deltaTime)
