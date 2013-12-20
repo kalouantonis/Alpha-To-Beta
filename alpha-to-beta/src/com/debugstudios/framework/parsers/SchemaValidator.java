@@ -26,34 +26,52 @@ package com.debugstudios.framework.parsers;
 
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
+import javax.xml.XMLConstants;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
+import java.io.File;
+import java.io.IOException;
 
 /**
- * Created by Antonis Kalou on 19/12/13.
+ * Created by Antonis Kalou on 20/12/13.
  */
-public class SAXFactory
+public class SchemaValidator
 {
-    private SAXParserFactory parserFactory;
     private SchemaFactory schemaFactory;
+    private Schema schema;
 
-    private static SAXFactory ourInstance = new SAXFactory();
-
-    public static SAXFactory getInstance()
+    public SchemaValidator(String language)
     {
-        return ourInstance;
+        schemaFactory = SchemaFactory.newInstance(language);
     }
 
-    private SAXFactory()
+    public SchemaValidator(String language, String schemaPath) throws SAXException
     {
-        parserFactory = SAXParserFactory.newInstance();
+        this(language);
+
+        loadSchema(schemaPath);
     }
 
-    public SAXParser createParser() throws SAXException, ParserConfigurationException
+    public void loadSchema(String schemaPath) throws SAXException
     {
-        return parserFactory.newSAXParser();
+        schema = schemaFactory.newSchema(new StreamSource(new File(schemaPath)));
+    }
+
+    public void validate(String xmlSource) throws SAXException
+    {
+        Source sourceFile = new StreamSource(new File(xmlSource));
+
+        Validator validator = schema.newValidator();
+
+        try
+        {
+            validator.validate(sourceFile);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

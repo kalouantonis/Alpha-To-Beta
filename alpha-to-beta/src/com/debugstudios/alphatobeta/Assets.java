@@ -14,6 +14,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Array;
 import com.debugstudios.framework.graphics.AnimUtils;
+import com.debugstudios.framework.parsers.SchemaValidator;
 import com.debugstudios.framework.tilemap.TileMap;
 
 /**

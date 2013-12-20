@@ -92,10 +92,9 @@ public class World
     public void update(float deltaTime)
     {
         updateCharacters(deltaTime);
-    }
 
-    private void checkCharacterCollisions()
-    {
+        if(player.position.y < 0)
+            reloadScene();
     }
 
     private void updateCharacters(float deltaTime)

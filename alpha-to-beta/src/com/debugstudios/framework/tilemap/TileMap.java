@@ -282,5 +282,45 @@ public class TileMap
         return prevFile;
     }
 
+    /**
+     * Get width from tile layer index 0
+     *
+     * @return Width of map
+     */
+    public float getWidth()
+    {
+        return getTileLayer(0).getWidth();
+    }
+
+    /**
+     * Get height from tile layer index 0
+     *
+     * @return Height of map
+     */
+    public float getHeight()
+    {
+        return getTileLayer(0).getHeight();
+    }
+
+    /**
+     * Get tile width
+     *
+     * @return Tile width
+     */
+    public float getTileWidth()
+    {
+        return getTileLayer(0).getTileWidth();
+    }
+
+    /**
+     * Get tile height
+     *
+     * @return Tile height
+     */
+    public float getTileHeight()
+    {
+        return getTileLayer(0).getTileHeight();
+    }
+
     /////////////////////////////////////////////////////////////////////////////////////
 }

@@ -13,10 +13,12 @@ import com.debugstudios.alphatobeta.utils.SpeedRegionPair;
 import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.framework.graphics.AnimUtils;
 import com.debugstudios.framework.parsers.SAXFactory;
+import com.debugstudios.framework.parsers.SchemaValidator;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import java.io.File;
@@ -29,6 +31,9 @@ public class PlayerLoader extends DefaultHandler
 {
     private static final String TAG = PlayerLoader.class.getSimpleName();
     private String prevFile = null;
+
+    private SchemaValidator schemaValidator;
+    private static final String SCHEMA_FILE = "schemas/PlayerSchema.xml";
 
     private Player player = null;
 
@@ -55,6 +60,14 @@ public class PlayerLoader extends DefaultHandler
     public PlayerLoader()
     {
         speedRegionPair = new SpeedRegionPair();
+
+        try
+        {
+            schemaValidator = new SchemaValidator(XMLConstants.W3C_XML_SCHEMA_NS_URI, SCHEMA_FILE);
+        } catch (SAXException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     // Load from XML, set textures, and bounds and physics
@@ -71,7 +84,11 @@ public class PlayerLoader extends DefaultHandler
             // Create SAXParser object
             SAXParser parser = SAXFactory.getInstance().createParser();
 
-            parser.parse(new File(internalFile), this);
+            schemaValidator.validate(internalFile);
+
+            Gdx.app.debug(TAG, "XML File loading successful: " + internalFile);
+
+            parser.parse(internalFile, this);
         }
         catch (SAXException e)
         {

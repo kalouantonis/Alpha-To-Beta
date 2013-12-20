@@ -27,7 +27,7 @@
         </idle>
     </Animation>
     <Texture atlas="humanPlayerSheet" width="16" height="20" />
-    
+
     <Physics>
         <mass>20</mass>
         <jump_speed>150</jump_speed>

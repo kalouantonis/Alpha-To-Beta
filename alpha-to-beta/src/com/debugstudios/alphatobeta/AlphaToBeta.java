@@ -7,6 +7,8 @@
 
 package com.debugstudios.alphatobeta;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.debugstudios.alphatobeta.screens.PlayScreen;
 import com.debugstudios.framework.Game;
 import com.debugstudios.framework.screens.GameScreen;
@@ -16,6 +18,8 @@ public class AlphaToBeta extends Game
     @Override
     public GameScreen getStartScreen()
     {
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
+
         return new PlayScreen(this);
     }
 }
