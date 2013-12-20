@@ -30,9 +30,9 @@ public class Player extends DynamicEntity
     /** Player X movement velocity */
     public float MOVE_VELOCITY = 100;
     /** Player Y impulse velocity */
-    public static float JUMP_VELOCITY = 150;
+    public float JUMP_VELOCITY = 150;
     /** Maximum allowed jumps. TODO: 1 for fatty :P */
-    private static final short MAX_JUMPS = 2;
+    private final short MAX_JUMPS = 2;
     //////////////////////////////////////////////////////////////////////////////////////
 
     /** Track state time, for animation and timed acceleration */

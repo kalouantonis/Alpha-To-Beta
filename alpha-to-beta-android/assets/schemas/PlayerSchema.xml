@@ -52,12 +52,11 @@
             <xs:element ref="right" maxOccurs="unbounded" />
             <xs:element ref="idle" maxOccurs="unbounded" />
         </xs:sequence>
-        <xs:attribute ref="speed" />
+        <xs:attribute ref="speed" use="required" />
     </xs:complexType>
 </xs:element>
 <xs:element name="Texture">
     <xs:complexType>
-        <xs:attribute ref="atlas" />
         <xs:attribute ref="width" use="required" />
         <xs:attribute ref="height" use="required" />
     </xs:complexType>

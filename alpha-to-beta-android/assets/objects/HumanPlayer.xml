@@ -20,7 +20,7 @@
         <idle regionName="still1" />
         <idle regionName="still2" />
     </Animation>
-    <Texture atlas="humanPlayerSheet" width="20" height="20" />
+    <Texture width="20" height="20" />
     
     <Physics>
         <mass>20</mass>

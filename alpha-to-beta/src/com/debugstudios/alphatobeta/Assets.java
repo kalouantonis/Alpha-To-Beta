@@ -96,6 +96,7 @@ public class Assets
             textureWidth = idleAnimation.getKeyFrame(0).getRegionWidth();
             textureHeight = idleAnimation.getKeyFrame(0).getRegionHeight();
         }
+
     }
 
     /**
