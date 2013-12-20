@@ -9,19 +9,19 @@
 <Player xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../schemas/PlayerSchema.xml">
     <Animation>
-        <left speed="0.1">
+        <left interval="0.1">
             <regionName>left1</regionName>
             <regionName>left2</regionName>
             <regionName>left3</regionName>
         </left>
 
-        <right speed="0.1">
+        <right interval="0.1">
             <regionName>right1</regionName>
             <regionName>right2</regionName>
             <regionName>right3</regionName>
         </right>
 
-        <idle speed="0.5">
+        <idle interval="0.5">
             <regionName>still1</regionName>
             <regionName>still2</regionName>
         </idle>
@@ -31,6 +31,6 @@
     <Physics>
         <mass>20</mass>
         <jump_speed>150</jump_speed>
-        <move_speed>100</move_speed>
+        <move_speed>200</move_speed>
     </Physics>
 </Player>

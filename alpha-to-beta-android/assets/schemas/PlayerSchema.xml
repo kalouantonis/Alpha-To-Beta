@@ -17,7 +17,7 @@
 
 <!-- definition of attributes -->
 
-<xs:attribute name="speed" type="xs:float" />
+<xs:attribute name="interval" type="xs:float" />
 
 <xs:attribute name="atlas" type="xs:string" />
 <xs:attribute name="width" type="xs:float" />
@@ -32,7 +32,7 @@
             <xs:sequence>
                 <xs:element ref="regionName" maxOccurs="unbounded" />
             </xs:sequence>
-            <xs:attribute ref="speed" use="required" />
+            <xs:attribute ref="interval" use="required" />
         </xs:complexType>
     </xs:element>
 
@@ -41,7 +41,7 @@
             <xs:sequence>
                 <xs:element ref="regionName" maxOccurs="unbounded" />
             </xs:sequence>
-            <xs:attribute ref="speed" use="required" />
+            <xs:attribute ref="interval" use="required" />
         </xs:complexType>
     </xs:element>
 
@@ -50,7 +50,7 @@
             <xs:sequence>
                 <xs:element ref="regionName" maxOccurs="unbounded" />
             </xs:sequence>
-            <xs:attribute ref="speed" use="required" />
+            <xs:attribute ref="interval" use="required" />
         </xs:complexType>
     </xs:element>
 

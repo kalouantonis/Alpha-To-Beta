@@ -31,13 +31,10 @@ public class PlayerLoader extends DefaultHandler
     private String prevFile = null;
 
     private Player player = null;
-    private float animationSpeed = 0.f;
 
     private TextureAtlas playerAtlas = null;
 
-    private SpeedRegionPair runRightPair;
-    private SpeedRegionPair runLeftPair;
-    private SpeedRegionPair idlePair;
+    private SpeedRegionPair speedRegionPair;
 
     // In animation element
     private boolean inAnim = false;
@@ -57,9 +54,7 @@ public class PlayerLoader extends DefaultHandler
 
     public PlayerLoader()
     {
-        runLeftPair = new SpeedRegionPair();
-        runRightPair = new SpeedRegionPair();
-        idlePair = new SpeedRegionPair();
+        speedRegionPair = new SpeedRegionPair();
     }
 
     // Load from XML, set textures, and bounds and physics
@@ -111,27 +106,17 @@ public class PlayerLoader extends DefaultHandler
         {
             // Add to regions according to XML defs
             if(qName.equalsIgnoreCase("left"))
-            {
-                runLeftPair.setSpeed(Float.parseFloat(attributes.getValue("speed")));
-
                 inLeftAnim = true;
-            }
             else if(qName.equalsIgnoreCase("right"))
-            {
-                runRightPair.setSpeed(Float.parseFloat(attributes.getValue("speed")));
-
                 inRightAnim = true;
-            }
             else if(qName.equalsIgnoreCase("idle"))
-            {
-                idlePair.setSpeed(Float.parseFloat(attributes.getValue("speed")));
-
                 inIdleAnim = true;
-            }
             else if(qName.equalsIgnoreCase("regionName"))
-            {
                 inRegionName = true;
-            }
+
+            if((!inRegionName) && (inLeftAnim || inRightAnim || inIdleAnim))
+                speedRegionPair.setSpeed(Float.parseFloat(attributes.getValue("interval")));
+
         }
         else if(qName.equalsIgnoreCase("Physics"))
         {
@@ -166,23 +151,26 @@ public class PlayerLoader extends DefaultHandler
         {
             if(qName.equalsIgnoreCase("left"))
             {
-                player.runLeftAnimation = AnimUtils.createLoopAnimation(runLeftPair.getSpeed(), playerAtlas,
-                        runLeftPair.getRegions());
+                player.runLeftAnimation = AnimUtils.createLoopAnimation(speedRegionPair.getSpeed(), playerAtlas,
+                        speedRegionPair.getRegions());
+                speedRegionPair.clear();
 
                 inLeftAnim = false;
             }
             else if(qName.equalsIgnoreCase("right"))
             {
-                player.runRightAnimation = AnimUtils.createLoopAnimation(runRightPair.getSpeed(), playerAtlas,
-                        runRightPair.getRegions());
+                player.runRightAnimation = AnimUtils.createLoopAnimation(speedRegionPair.getSpeed(), playerAtlas,
+                        speedRegionPair.getRegions());
 
+                speedRegionPair.clear();
                 inRightAnim = false;
             }
             else if(qName.equalsIgnoreCase("idle"))
             {
-                player.idleAnimation = AnimUtils.createLoopAnimation(idlePair.getSpeed(), playerAtlas,
-                        idlePair.getRegions());
+                player.idleAnimation = AnimUtils.createLoopAnimation(speedRegionPair.getSpeed(), playerAtlas,
+                        speedRegionPair.getRegions());
 
+                speedRegionPair.clear();
                 inIdleAnim = false;
             }
             else if(qName.equalsIgnoreCase("regionName"))
@@ -201,20 +189,9 @@ public class PlayerLoader extends DefaultHandler
     {
         if(inAnim)
         {
-            if(inRegionName)
+            if(inRegionName && (inLeftAnim || inRightAnim || inIdleAnim))
             {
-                if(inRightAnim)
-                {
-                    runRightPair.addRegion(new String(ch, start, length));
-                }
-                else if(inLeftAnim)
-                {
-                    runLeftPair.addRegion(new String(ch, start, length));
-                }
-                else if(inIdleAnim)
-                {
-                    idlePair.addRegion(new String(ch, start, length));
-                }
+                speedRegionPair.addRegion(new String(ch, start, length));
             }
         }
 
