@@ -26,11 +26,11 @@
             <regionName>still2</regionName>
         </idle>
     </Animation>
-    <Texture atlas="humanPlayerSheet" width="16" height="20" />
+    <Texture atlas="humanPlayerSheet" width="14" height="18" />
 
     <Physics>
-        <mass>20</mass>
-        <jump_speed>150</jump_speed>
-        <move_speed>200</move_speed>
+        <mass>30</mass>
+        <jump_speed>200</jump_speed>
+        <move_speed>150</move_speed>
     </Physics>
 </Player>

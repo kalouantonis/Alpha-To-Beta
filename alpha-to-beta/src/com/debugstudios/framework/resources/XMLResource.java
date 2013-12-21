@@ -24,7 +24,6 @@
 
 package com.debugstudios.framework.resources;
 
-import com.badlogic.gdx.utils.XmlReader;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**

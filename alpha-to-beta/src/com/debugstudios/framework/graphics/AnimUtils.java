@@ -34,7 +34,7 @@ import com.badlogic.gdx.utils.Array;
  */
 public class AnimUtils
 {
-    public static Animation createLoopAnimation(float animSpeed, TextureAtlas atlas, String ... regionNames)
+    private static Animation createAnimation(float animSpeed, int animType, TextureAtlas atlas, String ... regionNames)
     {
         Array<TextureRegion> textureRegions = new Array<TextureRegion>(regionNames.length);
 
@@ -44,12 +44,12 @@ public class AnimUtils
        }
 
         Animation anim = new Animation(animSpeed, textureRegions);
-        anim.setPlayMode(Animation.LOOP);
+        anim.setPlayMode(animType);
 
         return anim;
     }
 
-    public static Animation createLoopAnimation(float animSpeed, TextureAtlas atlas, Array<String> regionNames)
+    private static Animation createAnimation(float animSpeed, int animType, TextureAtlas atlas, Array<String> regionNames)
     {
         Array<TextureRegion> textureRegions = new Array<TextureRegion>(regionNames.size);
 
@@ -59,8 +59,28 @@ public class AnimUtils
         }
 
         Animation anim = new Animation(animSpeed, textureRegions);
-        anim.setPlayMode(Animation.LOOP);
+        anim.setPlayMode(animType);
 
         return anim;
+    }
+
+    public static Animation createLoopAnimation(float animSpeed, TextureAtlas atlas, String ... regionNames)
+    {
+        return createAnimation(animSpeed, Animation.LOOP, atlas, regionNames);
+    }
+
+    public static Animation createLoopAnimation(float animSpeed, TextureAtlas atlas, Array<String> regionNames)
+    {
+        return createAnimation(animSpeed, Animation.LOOP, atlas, regionNames);
+    }
+
+    public static Animation createNormalAnimation(float animSpeed, TextureAtlas atlas, String ... regionNames)
+    {
+        return createAnimation(animSpeed, Animation.NORMAL, atlas, regionNames);
+    }
+
+    public static Animation createNormalAnimation(float animSpeed, TextureAtlas atlas, Array<String> regionNames)
+    {
+        return createAnimation(animSpeed, Animation.NORMAL, atlas, regionNames);
     }
 }

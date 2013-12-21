@@ -18,7 +18,7 @@ public class HumanPlayer extends Player
 {
     public HumanPlayer(float x, float y)
     {
-        super(x, y, Assets.map.getTileWidth(), Assets.map.getTileHeight());
+        super(x, y, 16, 16);
 
         // Will assume already loaded
         /*runLeftAnimation = Assets.HumanPlayer.runLeftAnimation;

@@ -10,7 +10,6 @@ package com.debugstudios.alphatobeta.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import com.debugstudios.alphatobeta.Assets;
 import com.debugstudios.alphatobeta.World;
 import com.debugstudios.alphatobeta.input.PlayerInputHandler;

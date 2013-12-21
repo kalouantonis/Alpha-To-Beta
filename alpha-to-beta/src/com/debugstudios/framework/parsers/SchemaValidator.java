@@ -26,7 +26,6 @@ package com.debugstudios.framework.parsers;
 
 import org.xml.sax.SAXException;
 
-import javax.xml.XMLConstants;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
@@ -40,14 +39,28 @@ import java.io.IOException;
  */
 public class SchemaValidator
 {
+    /** Factory to create schemas with */
     private SchemaFactory schemaFactory;
+    /** Schema to validate */
     private Schema schema;
 
+    /**
+     * Create a new schema validator.
+     *
+     * @param language XML language to use
+     */
     public SchemaValidator(String language)
     {
         schemaFactory = SchemaFactory.newInstance(language);
     }
 
+    /**
+     * Create new schema validator.
+     *
+     * @param language XML language to use
+     * @param schemaPath Path of schema file
+     * @throws SAXException
+     */
     public SchemaValidator(String language, String schemaPath) throws SAXException
     {
         this(language);
@@ -55,11 +68,23 @@ public class SchemaValidator
         loadSchema(schemaPath);
     }
 
+    /**
+     * Load schema file instance
+     *
+     * @param schemaPath Path of schema file
+     * @throws SAXException
+     */
     public void loadSchema(String schemaPath) throws SAXException
     {
         schema = schemaFactory.newSchema(new StreamSource(new File(schemaPath)));
     }
 
+    /**
+     * Perform validation upon an XML file.
+     *
+     * @param xmlSource XML File to validate
+     * @throws SAXException
+     */
     public void validate(String xmlSource) throws SAXException
     {
         Source sourceFile = new StreamSource(new File(xmlSource));

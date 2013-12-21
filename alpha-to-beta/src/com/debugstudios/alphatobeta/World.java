@@ -85,8 +85,8 @@ public class World
             player.position.y = spawnPos.getRectangle().y;
         }
 
-        PlayerLoader loader = new PlayerLoader();
-        loader.load("objects/HumanPlayer.xml", player, Assets.humanPlayerSheet);
+        // Load rest of attributes from loaders
+        Assets.playerLoader.load("objects/HumanPlayer.xml", player, Assets.humanPlayerSheet);
     }
 
     public void update(float deltaTime)

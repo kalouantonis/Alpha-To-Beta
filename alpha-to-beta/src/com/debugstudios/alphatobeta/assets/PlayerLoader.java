@@ -9,8 +9,8 @@ package com.debugstudios.alphatobeta.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.debugstudios.alphatobeta.utils.SpeedRegionPair;
 import com.debugstudios.alphatobeta.players.Player;
+import com.debugstudios.alphatobeta.utils.SpeedRegionPair;
 import com.debugstudios.framework.graphics.AnimUtils;
 import com.debugstudios.framework.parsers.SAXFactory;
 import com.debugstudios.framework.parsers.SchemaValidator;
@@ -21,7 +21,6 @@ import org.xml.sax.helpers.DefaultHandler;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -29,16 +28,24 @@ import java.io.IOException;
  */
 public class PlayerLoader extends DefaultHandler
 {
+    /** Tag to use for logging */
     private static final String TAG = PlayerLoader.class.getSimpleName();
+
+    /** Store previous file for reloading */
     private String prevFile = null;
 
+    /** Used to validate XML file */
     private SchemaValidator schemaValidator;
+    /** Default schema file */
     private static final String SCHEMA_FILE = "schemas/PlayerSchema.xml";
 
+    /** Player to load */
     private Player player = null;
 
+    /** Atlas to get texture regions from */
     private TextureAtlas playerAtlas = null;
 
+    /** Pair of regions and speeds */
     private SpeedRegionPair speedRegionPair;
 
     // In animation element
@@ -57,6 +64,9 @@ public class PlayerLoader extends DefaultHandler
     private boolean inMoveSpeed = false;
 
 
+    /**
+     * Create new loader instance
+     */
     public PlayerLoader()
     {
         speedRegionPair = new SpeedRegionPair();
@@ -70,7 +80,13 @@ public class PlayerLoader extends DefaultHandler
         }
     }
 
-    // Load from XML, set textures, and bounds and physics
+    /**
+     * Load player attributes from XML File
+     *
+     * @param internalFile XML File to load from
+     * @param player       Player reference to load in to
+     * @param playerAtlas  Texture atlas to get regions from
+     */
     public void load(String internalFile, Player player, TextureAtlas playerAtlas)
     {
         // Store previous file, for use when reloading
@@ -92,7 +108,7 @@ public class PlayerLoader extends DefaultHandler
         }
         catch (SAXException e)
         {
-            Gdx.app.error(TAG, "Parser failed to be created:\n" + e.getMessage());
+            Gdx.app.error(TAG, "Parser failed to be created:\n" + e.getLocalizedMessage());
         }
         catch (ParserConfigurationException e)
         {
@@ -104,6 +120,12 @@ public class PlayerLoader extends DefaultHandler
         }
     }
 
+    /**
+     * Reload player data, using previously loaded data.
+     * This includes the texture atlas and xml source.
+     *
+     * @param player Player reference to load in to
+     */
     public void reload(Player player)
     {
         if(this.prevFile == null || this.playerAtlas == null)

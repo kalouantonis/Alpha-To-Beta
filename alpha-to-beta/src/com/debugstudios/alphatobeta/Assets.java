@@ -7,14 +7,8 @@
 
 package com.debugstudios.alphatobeta;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.utils.Array;
-import com.debugstudios.framework.graphics.AnimUtils;
-import com.debugstudios.framework.parsers.SchemaValidator;
+import com.debugstudios.alphatobeta.assets.PlayerLoader;
 import com.debugstudios.framework.tilemap.TileMap;
 
 /**
@@ -25,8 +19,8 @@ import com.debugstudios.framework.tilemap.TileMap;
 public class Assets
 {
     public static TileMap map = null;
-
     public static TextureAtlas humanPlayerSheet = null;
+    public static PlayerLoader playerLoader = null;
 
 
     // TODO: Thread this and check if loaded while loading
@@ -40,6 +34,8 @@ public class Assets
     {
         loadTextures();
         loadMap(tileMapFile);
+
+        playerLoader = new PlayerLoader();
     }
 
     public static void loadMap(String internalFile)
