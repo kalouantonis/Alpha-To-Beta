@@ -27,10 +27,13 @@ package com.debugstudios.framework;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.debugstudios.framework.utils.Cleanup;
 import com.debugstudios.framework.screens.GameScreen;
 
 public abstract class Game implements ApplicationListener
 {
+    private static final String TAG = Game.class.getSimpleName();
+
     GameScreen screen;
 
     // Screen assets can be loaded here
@@ -62,6 +65,9 @@ public abstract class Game implements ApplicationListener
     public void pause()
     {
         screen.pause();
+
+        // Clean up heap when game is inactive
+        Cleanup.requestGC(TAG);
     }
 
     @Override
@@ -73,21 +79,6 @@ public abstract class Game implements ApplicationListener
     @Override
     public void render()
     {
-        /*timeSinceLastFrame += Gdx.graphics.getDeltaTime();
-
-        FRAME_TIME = 1.f / (int)Gdx.graphics.getFramesPerSecond();
-
-        if(timeSinceLastFrame >= FRAME_TIME)
-        {
-            // Handle input
-            screen.pollInput();
-
-            // Update screen
-            screen.update(FRAME_TIME);
-
-            timeSinceLastFrame -= FRAME_TIME;
-        }*/
-
         screen.pollInput();
 
         float deltaTime = Gdx.graphics.getDeltaTime();

@@ -10,10 +10,10 @@ package com.debugstudios.alphatobeta;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.debugstudios.alphatobeta.assets.PlayerLoader;
 import com.debugstudios.alphatobeta.players.HumanPlayer;
 import com.debugstudios.alphatobeta.players.Player;
-import com.debugstudios.alphatobeta.utils.Debug;
+import com.debugstudios.framework.utils.Cleanup;
+import com.debugstudios.framework.utils.Debug;
 import com.debugstudios.framework.tilemap.CollisionLayer;
 import com.debugstudios.framework.tilemap.TileMap;
 
@@ -100,12 +100,7 @@ public class World
 
         Gdx.app.debug(TAG, "Player loaded.");
 
-        Gdx.app.debug(TAG, "Calling GC...");
-        Debug.dumpHeap(TAG);
-        // Hint for GC to start collecting
-        System.gc();
-        Gdx.app.debug(TAG, "GC Called.");
-        Debug.dumpHeap(TAG);
+        Cleanup.requestGC(TAG);
 
         Gdx.app.debug(TAG, "Scene reloaded successfully!");
     }

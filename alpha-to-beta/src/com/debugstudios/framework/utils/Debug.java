@@ -5,7 +5,7 @@
  * Written by Antonis Kalou <kalouantonis@gmail.com>, 12 2013
  */
 
-package com.debugstudios.alphatobeta.utils;
+package com.debugstudios.framework.utils;
 
 import com.badlogic.gdx.Gdx;
 
