@@ -26,7 +26,7 @@ public class Player extends DynamicEntity
     /** Mass for F=ma calculations */
     private float mass;
     /** Different for every player, dictates strength. Eventually allow upgrades on this */
-    public static Vector2 MAX_VELOCITY = new Vector2(200, 400);
+    public Vector2 MAX_VELOCITY = new Vector2(200, 400);
     /** Player X movement velocity */
     public float MOVE_VELOCITY = 100;
     /** Player Y impulse velocity */

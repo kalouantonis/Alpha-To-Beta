@@ -17,10 +17,14 @@
 
 <!-- definition of attributes -->
 <xs:attribute name="interval" type="xs:float" />
+<xs:attribute name="looping" type="xs:boolean" />
 
 <xs:attribute name="atlas" type="xs:string" />
 <xs:attribute name="width" type="xs:float" />
 <xs:attribute name="height" type="xs:float" />
+
+<xs:attribute name="x" type="xs:float" />
+<xs:attribute name="y" type="xs:float" />
 
     
 <!-- Definition of complex elements -->
@@ -32,6 +36,7 @@
                 <xs:element ref="regionName" maxOccurs="unbounded" />
             </xs:sequence>
             <xs:attribute ref="interval" use="required" />
+            <xs:attribute ref="looping" use="required" />
         </xs:complexType>
     </xs:element>
 
@@ -41,6 +46,7 @@
                 <xs:element ref="regionName" maxOccurs="unbounded" />
             </xs:sequence>
             <xs:attribute ref="interval" use="required" />
+            <xs:attribute ref="looping" use="required" />
         </xs:complexType>
     </xs:element>
 
@@ -50,6 +56,7 @@
                 <xs:element ref="regionName" maxOccurs="unbounded" />
             </xs:sequence>
             <xs:attribute ref="interval" use="required" />
+            <xs:attribute ref="looping" use="required" />
         </xs:complexType>
     </xs:element>
 
@@ -70,12 +77,21 @@
     </xs:complexType>
 </xs:element>
 
+
+<xs:element name="max_velocity">
+    <xs:complexType>
+        <xs:attribute ref="x" use="required" />
+        <xs:attribute ref="y" use="required" />
+    </xs:complexType>
+</xs:element>
+
 <xs:element name="Physics">
     <xs:complexType>
         <xs:sequence>
             <xs:element ref="mass" />
             <xs:element ref="jump_speed" />
             <xs:element ref="move_speed" />
+            <xs:element ref="max_velocity" />
         </xs:sequence>
     </xs:complexType>
 </xs:element>

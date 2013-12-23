@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="500" height="100" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16" spacing="1" margin="1">
+  <image source="tiles.png" width="512" height="512"/>
+ </tileset>
+ <layer name="background" width="500" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1bEJA0EAA8EHF+L+u/zcmUGgOzQD24L0PAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACc6vMTAHAffw4A9/PnAHA/fw4A9/PnAAAA//tKxQDIaO+5tgMgo73n2g6AjPaeazsAMtp7ru0AyGjvubYDIKO959oOgIz2nms7ADLae67tAMho77m2AyCjvefaDoCM9p5rOwAy2nuu7QDIaO+5tgMgo73n2g6AjPaeazsAMtp7ru0AyGjvubYDIKO959oOgIz2nms7ADLae67tAMho77m2AyCjvefaDoCM9p5rOwAy2nuu7QDIaO+5tgMgo73n2g6AjPaeazsAMtp7ru0AyGjvubYDIKO959oOgIz2nms7ADLae67tAMho77m2A4A17e/15wBwNn8OAPfz5QBwP38OAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnOYFXIKkLg==
+  </data>
+ </layer>
+ <layer name="collision" width="500" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt2kEKgCAQQNGg+5+uC7Vsk1KZOWPvwWxlXH0QlwUAAAAAAAAAAAAAAAAAAACY0VoYACAPPQcAAAAAIDpv1wCQn54DQH6z99xfOgD+YPa+6TkAvURqype7RLo3ALSK1DU9B4BnInVNz+u81wNQEqkJel53tm+2OwBweLNFPbt292w9r9NzgLnoeTs9B2A0PW+n5wCMpuft9ByAqzZjBg4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGSyAyWYhTE=
+  </data>
+ </layer>
+ <objectgroup name="objects" width="500" height="100">
+  <object name="SpawnPosition" x="100" y="367"/>
+ </objectgroup>
+</map>

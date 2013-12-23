@@ -23,6 +23,8 @@ import java.util.ArrayList;
  */
 public class World
 {
+    private static final String TAG = World.class.getSimpleName();
+
     private final int NUM_PLAYERS = 5;
 
     public static final float WORLD_WIDTH = 480;
@@ -39,7 +41,6 @@ public class World
     {
         this.tileMap = tileMap;
 
-        collisionLayer = new CollisionLayer(tileMap.getTileLayer(1));
 
         players = new ArrayList<Player>(NUM_PLAYERS);
 
@@ -59,7 +60,15 @@ public class World
 
     private void reloadScene()
     {
+        Gdx.app.debug(TAG, "Reloading scene...");
+
         tileMap.reload();
+        tileMap.getCamera().zoom = 1.f;
+        Gdx.app.debug(TAG, "Reloaded tile map.");
+
+        // Reset collision layer
+
+        Gdx.app.debug(TAG, "Reloaded collision layer.");
 
         RectangleMapObject spawnPos = (RectangleMapObject) tileMap.getLayer("objects").getObjects().get("SpawnPosition");
         if(player == null)
@@ -67,9 +76,6 @@ public class World
             try
             {
                 player = new HumanPlayer(spawnPos.getRectangle().x, spawnPos.getRectangle().y);
-
-
-                player.setCollisionLayer(collisionLayer);
             }
             catch (NullPointerException e)
             {
@@ -85,8 +91,14 @@ public class World
             player.position.y = spawnPos.getRectangle().y;
         }
 
+        player.setCollisionLayer(new CollisionLayer(tileMap.getTileLayer(1)));
+
         // Load rest of attributes from loaders
         Assets.playerLoader.load("objects/HumanPlayer.xml", player, Assets.humanPlayerSheet);
+
+        Gdx.app.debug(TAG, "Player loaded.");
+
+        Gdx.app.debug(TAG, "Scene reloaded successfully!");
     }
 
     public void update(float deltaTime)

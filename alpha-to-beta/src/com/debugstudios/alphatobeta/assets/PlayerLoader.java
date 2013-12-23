@@ -8,12 +8,15 @@
 package com.debugstudios.alphatobeta.assets;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.alphatobeta.utils.SpeedRegionPair;
 import com.debugstudios.framework.graphics.AnimUtils;
 import com.debugstudios.framework.parsers.SAXFactory;
 import com.debugstudios.framework.parsers.SchemaValidator;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -47,12 +50,14 @@ public class PlayerLoader extends DefaultHandler
 
     /** Pair of regions and speeds */
     private SpeedRegionPair speedRegionPair;
+//    private Animation currAnimation = null;
 
     // In animation element
     private boolean inAnim = false;
     private boolean inRightAnim = false;
     private boolean inLeftAnim = false;
     private boolean inIdleAnim = false;
+    private int currAnimLoop = Animation.NORMAL;
 
     private boolean inRegionName = false;
 
@@ -74,7 +79,8 @@ public class PlayerLoader extends DefaultHandler
         try
         {
             schemaValidator = new SchemaValidator(XMLConstants.W3C_XML_SCHEMA_NS_URI, SCHEMA_FILE);
-        } catch (SAXException e)
+        }
+        catch (SAXException e)
         {
             e.printStackTrace();
         }
@@ -108,7 +114,7 @@ public class PlayerLoader extends DefaultHandler
         }
         catch (SAXException e)
         {
-            Gdx.app.error(TAG, "Parser failed to be created:\n" + e.getLocalizedMessage());
+            Gdx.app.error(TAG, "Parser failed to be created:\n\t" + e.getLocalizedMessage());
         }
         catch (ParserConfigurationException e)
         {
@@ -145,11 +151,32 @@ public class PlayerLoader extends DefaultHandler
         {
             // Add to regions according to XML defs
             if(qName.equalsIgnoreCase("left"))
+            {
+//                currAnimation = player.runLeftAnimation;
                 inLeftAnim = true;
+
+                currAnimLoop = Boolean.parseBoolean(attributes.getValue("looping"))
+                                ? Animation.LOOP
+                                : Animation.NORMAL;
+            }
             else if(qName.equalsIgnoreCase("right"))
+            {
+//                currAnimation = player.runRightAnimation;
                 inRightAnim = true;
+
+                currAnimLoop = Boolean.parseBoolean(attributes.getValue("looping"))
+                        ? Animation.LOOP
+                        : Animation.NORMAL;
+            }
             else if(qName.equalsIgnoreCase("idle"))
+            {
+//                currAnimation = player.idleAnimation;
                 inIdleAnim = true;
+
+                currAnimLoop = Boolean.parseBoolean(attributes.getValue("looping"))
+                        ? Animation.LOOP
+                        : Animation.NORMAL;
+            }
             else if(qName.equalsIgnoreCase("regionName"))
                 inRegionName = true;
 
@@ -169,6 +196,11 @@ public class PlayerLoader extends DefaultHandler
                 inJumpSpeed = true;
             else if(qName.equalsIgnoreCase("move_speed"))
                 inMoveSpeed = true;
+            else if(qName.equalsIgnoreCase("max_velocity"))
+            {
+                player.MAX_VELOCITY.x = Float.parseFloat(attributes.getValue("x"));
+                player.MAX_VELOCITY.y = Float.parseFloat(attributes.getValue("y"));
+            }
         }
         else if(qName.equalsIgnoreCase("Texture"))
         {
@@ -190,26 +222,26 @@ public class PlayerLoader extends DefaultHandler
         {
             if(qName.equalsIgnoreCase("left"))
             {
-                player.runLeftAnimation = AnimUtils.createLoopAnimation(speedRegionPair.getSpeed(), playerAtlas,
-                        speedRegionPair.getRegions());
+                player.runLeftAnimation = AnimUtils.createAnimation(speedRegionPair.getSpeed(), currAnimLoop,
+                        playerAtlas, speedRegionPair.getRegions());
                 speedRegionPair.clear();
 
                 inLeftAnim = false;
             }
             else if(qName.equalsIgnoreCase("right"))
             {
-                player.runRightAnimation = AnimUtils.createLoopAnimation(speedRegionPair.getSpeed(), playerAtlas,
-                        speedRegionPair.getRegions());
-
+                player.runRightAnimation = AnimUtils.createAnimation(speedRegionPair.getSpeed(), currAnimLoop,
+                        playerAtlas, speedRegionPair.getRegions());
                 speedRegionPair.clear();
+
                 inRightAnim = false;
             }
             else if(qName.equalsIgnoreCase("idle"))
             {
-                player.idleAnimation = AnimUtils.createLoopAnimation(speedRegionPair.getSpeed(), playerAtlas,
-                        speedRegionPair.getRegions());
-
+                player.idleAnimation = AnimUtils.createAnimation(speedRegionPair.getSpeed(), currAnimLoop,
+                        playerAtlas, speedRegionPair.getRegions());
                 speedRegionPair.clear();
+
                 inIdleAnim = false;
             }
             else if(qName.equalsIgnoreCase("regionName"))

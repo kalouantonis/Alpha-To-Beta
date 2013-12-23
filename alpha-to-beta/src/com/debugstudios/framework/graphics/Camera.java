@@ -33,7 +33,7 @@ import com.debugstudios.framework.gameobjects.Entity;
 public class Camera extends OrthographicCamera
 {
     /** Used for logging */
-    private final String LOG_TAG = Camera.class.getName();
+    private final String LOG_TAG = Camera.class.getSimpleName();
 
     // Default values ==============================
     /** Maximum amount of zoom in allowed */

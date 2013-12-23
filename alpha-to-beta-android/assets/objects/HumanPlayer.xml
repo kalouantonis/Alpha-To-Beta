@@ -9,19 +9,19 @@
 <Player xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../schemas/PlayerSchema.xml">
     <Animation>
-        <left interval="0.1">
+        <left interval="0.1" looping="true">
             <regionName>left1</regionName>
             <regionName>left2</regionName>
             <regionName>left3</regionName>
         </left>
 
-        <right interval="0.1">
+        <right interval="0.1" looping="true">
             <regionName>right1</regionName>
             <regionName>right2</regionName>
             <regionName>right3</regionName>
         </right>
 
-        <idle interval="0.5">
+        <idle interval="0.5" looping="true">
             <regionName>still1</regionName>
             <regionName>still2</regionName>
         </idle>
@@ -29,8 +29,10 @@
     <Texture atlas="humanPlayerSheet" width="14" height="18" />
 
     <Physics>
-        <mass>30</mass>
-        <jump_speed>200</jump_speed>
+        <mass>32</mass>
+        <jump_speed>220</jump_speed>
         <move_speed>150</move_speed>
+
+        <max_velocity x="200" y="400" />
     </Physics>
 </Player>

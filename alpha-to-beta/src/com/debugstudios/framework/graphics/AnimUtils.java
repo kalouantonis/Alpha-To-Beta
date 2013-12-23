@@ -34,7 +34,7 @@ import com.badlogic.gdx.utils.Array;
  */
 public class AnimUtils
 {
-    private static Animation createAnimation(float animSpeed, int animType, TextureAtlas atlas, String ... regionNames)
+    public static Animation createAnimation(float animSpeed, int animType, TextureAtlas atlas, String ... regionNames)
     {
         Array<TextureRegion> textureRegions = new Array<TextureRegion>(regionNames.length);
 
@@ -49,7 +49,7 @@ public class AnimUtils
         return anim;
     }
 
-    private static Animation createAnimation(float animSpeed, int animType, TextureAtlas atlas, Array<String> regionNames)
+    public static Animation createAnimation(float animSpeed, int animType, TextureAtlas atlas, Array<String> regionNames)
     {
         Array<TextureRegion> textureRegions = new Array<TextureRegion>(regionNames.size);
 

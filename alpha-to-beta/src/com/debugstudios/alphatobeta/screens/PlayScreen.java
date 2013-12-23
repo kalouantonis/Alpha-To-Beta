@@ -28,6 +28,8 @@ import com.debugstudios.framework.tilemap.TileMap;
  */
 public class PlayScreen implements GameScreen
 {
+    private static final String TAG = PlayScreen.class.getSimpleName();
+
     private Camera camera;
 
     private WorldRenderer worldRenderer;
@@ -43,7 +45,7 @@ public class PlayScreen implements GameScreen
 
     public PlayScreen(Game game)
     {
-        Assets.loadAll("maps/map.tmx");
+        Assets.loadAll("maps/map2.tmx");
 
         camera = new Camera(WORLD_WIDTH, WORLD_HEIGHT);
 
@@ -64,9 +66,11 @@ public class PlayScreen implements GameScreen
         {
             case Android:
                 Gdx.input.setInputProcessor(new PlayerTouchHandler(camera, player));
+                Gdx.app.debug(TAG, "Using Android input handler");
                 break;
             case Desktop:
                 Gdx.input.setInputProcessor(new PlayerInputHandler(camera, player));
+                Gdx.app.debug(TAG, "Using Desktop input handler");
                 break;
             default:
                 throw new RuntimeException("Unsupported platform!");
@@ -86,6 +90,11 @@ public class PlayScreen implements GameScreen
             camera.addZoom(0.1f);
         else if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
             camera.addZoom(-0.1f);
+        else if(Gdx.input.isKeyPressed(Input.Keys.G))
+        {
+            Gdx.app.debug(TAG, "Java Heap: " + Gdx.app.getJavaHeap() + '\n' +
+                            "Native Heap: " + Gdx.app.getNativeHeap());
+        }
     }
 
     @Override
