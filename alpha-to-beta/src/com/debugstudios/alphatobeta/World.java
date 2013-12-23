@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.debugstudios.alphatobeta.assets.PlayerLoader;
 import com.debugstudios.alphatobeta.players.HumanPlayer;
 import com.debugstudios.alphatobeta.players.Player;
+import com.debugstudios.alphatobeta.utils.Debug;
 import com.debugstudios.framework.tilemap.CollisionLayer;
 import com.debugstudios.framework.tilemap.TileMap;
 
@@ -60,6 +61,7 @@ public class World
 
     private void reloadScene()
     {
+
         Gdx.app.debug(TAG, "Reloading scene...");
 
         tileMap.reload();
@@ -97,6 +99,13 @@ public class World
         Assets.playerLoader.load("objects/HumanPlayer.xml", player, Assets.humanPlayerSheet);
 
         Gdx.app.debug(TAG, "Player loaded.");
+
+        Gdx.app.debug(TAG, "Calling GC...");
+        Debug.dumpHeap(TAG);
+        // Hint for GC to start collecting
+        System.gc();
+        Gdx.app.debug(TAG, "GC Called.");
+        Debug.dumpHeap(TAG);
 
         Gdx.app.debug(TAG, "Scene reloaded successfully!");
     }

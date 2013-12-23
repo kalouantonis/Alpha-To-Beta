@@ -15,6 +15,7 @@ import com.debugstudios.alphatobeta.World;
 import com.debugstudios.alphatobeta.input.PlayerInputHandler;
 import com.debugstudios.alphatobeta.input.PlayerTouchHandler;
 import com.debugstudios.alphatobeta.players.Player;
+import com.debugstudios.alphatobeta.utils.Debug;
 import com.debugstudios.alphatobeta.views.WorldDebugRenderer;
 import com.debugstudios.alphatobeta.views.WorldRenderer;
 import com.debugstudios.framework.Game;
@@ -92,8 +93,7 @@ public class PlayScreen implements GameScreen
             camera.addZoom(-0.1f);
         else if(Gdx.input.isKeyPressed(Input.Keys.G))
         {
-            Gdx.app.debug(TAG, "Java Heap: " + Gdx.app.getJavaHeap() + '\n' +
-                            "Native Heap: " + Gdx.app.getNativeHeap());
+            Debug.dumpHeap(TAG);
         }
     }
 

@@ -27,14 +27,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92ebc313-3081-4d16-bdbc-86854757c594" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/AnimUtils.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/AnimUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/Camera.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/Camera.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/HumanPlayer.xml" afterPath="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/HumanPlayer.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/utils/Debug.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta-android/assets/schemas/PlayerSchema.xml" afterPath="$PROJECT_DIR$/alpha-to-beta-android/assets/schemas/PlayerSchema.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -131,7 +125,25 @@
       <file leaf-file-name="World.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="53" selection-start="3143" selection-end="3143" vertical-scroll-proportion="0.0" vertical-offset="331" max-vertical-offset="1887">
+            <state line="103" column="25" selection-start="3210" selection-end="3210" vertical-scroll-proportion="0.0" vertical-offset="1241" max-vertical-offset="2023">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayScreen.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="95" column="29" selection-start="3010" selection-end="3010" vertical-scroll-proportion="0.0" vertical-offset="1203" max-vertical-offset="2193">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Debug.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/utils/Debug.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="21" selection-start="528" selection-end="528" vertical-scroll-proportion="0.5522042" vertical-offset="0" max-vertical-offset="431">
               <folding />
             </state>
           </provider>
@@ -150,24 +162,6 @@
         <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/AnimUtils.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="51" column="9" selection-start="1961" selection-end="1961" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="1139">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayScreen.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="62" selection-start="2352" selection-end="2352" vertical-scroll-proportion="0.0" vertical-offset="775" max-vertical-offset="2210">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HumanPlayer.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/alpha-to-beta-android/assets/objects/HumanPlayer.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="41" selection-start="455" selection-end="455" vertical-scroll-proportion="-0.30162412" vertical-offset="317" max-vertical-offset="748">
               <folding />
             </state>
           </provider>
@@ -195,7 +189,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/PlayScreen.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/PlayerTouchHandler.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/PlayerView.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/HumanPlayerView.java" />
@@ -239,13 +232,14 @@
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/HumanPlayer.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/Camera.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/schemas/PlayerSchema.xml" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/AnimUtils.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/HumanPlayer.xml" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/utils/Debug.java" />
       </list>
     </option>
   </component>
@@ -474,7 +468,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
+              <option name="myItemId" value="utils" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -488,7 +482,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="debugstudios" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alphatobeta" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -802,7 +808,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18504532" sideWeight="0.4992" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2688" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2688" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -896,13 +902,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="0" selection-start="1310" selection-end="1310" vertical-scroll-proportion="0.0" vertical-offset="782" max-vertical-offset="1700">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="109" column="8" selection-start="3005" selection-end="3005" vertical-scroll-proportion="0.0" vertical-offset="1853" max-vertical-offset="2091" />
@@ -1140,40 +1139,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="62" selection-start="2352" selection-end="2352" vertical-scroll-proportion="0.0" vertical-offset="775" max-vertical-offset="2210">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="53" selection-start="3143" selection-end="3143" vertical-scroll-proportion="0.0" vertical-offset="331" max-vertical-offset="1887">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="36" selection-start="2705" selection-end="2705" vertical-scroll-proportion="0.0" vertical-offset="548" max-vertical-offset="4896">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/AnimUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="51" column="9" selection-start="1961" selection-end="1961" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="1139">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="252" column="8" selection-start="8175" selection-end="8175" vertical-scroll-proportion="0.0" vertical-offset="3791" max-vertical-offset="4913">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1187,6 +1156,43 @@
     <entry file="file://$PROJECT_DIR$/alpha-to-beta-android/assets/objects/HumanPlayer.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="41" selection-start="455" selection-end="455" vertical-scroll-proportion="-0.30162412" vertical-offset="317" max-vertical-offset="748">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="252" column="8" selection-start="8175" selection-end="8175" vertical-scroll-proportion="0.0" vertical-offset="3791" max-vertical-offset="4913">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="29" selection-start="3010" selection-end="3010" vertical-scroll-proportion="0.0" vertical-offset="1203" max-vertical-offset="2193">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="36" selection-start="2705" selection-end="2705" vertical-scroll-proportion="0.0" vertical-offset="548" max-vertical-offset="4896">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="103" column="25" selection-start="3210" selection-end="3210" vertical-scroll-proportion="0.0" vertical-offset="1241" max-vertical-offset="2023">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/utils/Debug.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="21" selection-start="528" selection-end="528" vertical-scroll-proportion="0.5522042" vertical-offset="0" max-vertical-offset="431">
           <folding />
         </state>
       </provider>
