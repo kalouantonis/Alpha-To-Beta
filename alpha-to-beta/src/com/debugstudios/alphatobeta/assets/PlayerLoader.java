@@ -106,9 +106,9 @@ public class PlayerLoader extends DefaultHandler
 
             schemaValidator.validate(internalFile);
 
-            Gdx.app.debug(TAG, "XML File loading successful: " + internalFile);
-
             parser.parse(internalFile, this);
+
+            Gdx.app.debug(TAG, "XML File loading successful: " + internalFile);
         }
         catch (SAXException e)
         {
@@ -260,7 +260,7 @@ public class PlayerLoader extends DefaultHandler
         {
             if(inRegionName && (inLeftAnim || inRightAnim || inIdleAnim))
             {
-                speedRegionPair.addRegion(new String(ch, start, length));
+                speedRegionPair.addRegion(String.valueOf(ch, start, length));
             }
         }
 
@@ -268,17 +268,17 @@ public class PlayerLoader extends DefaultHandler
         {
             if(inMass)
             {
-                player.setMass(Float.parseFloat(new String(ch, start, length)));
+                player.setMass(Float.parseFloat(String.valueOf(ch, start, length)));
                 inMass = false;
             }
             else if(inJumpSpeed)
             {
-                player.JUMP_VELOCITY = Float.parseFloat(new String(ch, start, length));
+                player.JUMP_VELOCITY = Float.parseFloat(String.valueOf(ch, start, length));
                 inJumpSpeed = false;
             }
             else if(inMoveSpeed)
             {
-                player.MOVE_VELOCITY = Float.parseFloat(new String(ch, start, length));
+                player.MOVE_VELOCITY = Float.parseFloat(String.valueOf(ch, start, length));
                 inMoveSpeed = false;
             }
         }

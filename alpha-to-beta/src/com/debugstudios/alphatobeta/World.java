@@ -61,7 +61,8 @@ public class World
 
         Gdx.app.debug(TAG, "Reloading scene...");
 
-        tileMap.reload();
+        //tileMap.reload();
+        Assets.mapLoader.load("objects/maps/map2.xml", Assets.map);
         tileMap.getCamera().zoom = 1.f;
         Gdx.app.debug(TAG, "Reloaded tile map.");
 
@@ -94,7 +95,7 @@ public class World
 
 
         // Load rest of attributes from loaders
-        Assets.playerLoader.load("objects/HumanPlayer.xml", player, Assets.humanPlayerSheet);
+        Assets.playerLoader.load("objects/players/HumanPlayer.xml", player, Assets.humanPlayerSheet);
 
         Gdx.app.debug(TAG, "Player loaded.");
 

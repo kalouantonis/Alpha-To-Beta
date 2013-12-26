@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!--
+  ~ Copyright (C) Debug Studios, Inc - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Antonis Kalou <kalouantonis@gmail.com>, 12 2013
+  -->
+
+<Map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:noNamespaceSchemaLocation="../../schemas/MapSchema.xml">
+
+    <!--Background-->
+    <Layer level="0" index="0" />
+    <!--Collision-->
+    <Layer level="0" index="1" />
+    <!--Foreground -->
+    <Layer level="1" index="2" />
+
+    <FilePath>maps/map2.tmx</FilePath>
+</Map>

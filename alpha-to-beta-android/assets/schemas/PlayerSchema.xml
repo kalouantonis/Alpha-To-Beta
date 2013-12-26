@@ -63,8 +63,8 @@
 <xs:element name="Animation">
     <xs:complexType>
         <xs:sequence>
-            <xs:element ref="left"  />
-            <xs:element ref="right"  />
+            <xs:element ref="left" maxOccurs="unbounded" />
+            <xs:element ref="right" maxOccurs="unbounded" />
             <xs:element ref="idle" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>

@@ -7,7 +7,7 @@
   -->
 
 <Player xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="../schemas/PlayerSchema.xml">
+        xsi:noNamespaceSchemaLocation="../../schemas/PlayerSchema.xml">
     <Animation>
         <left interval="0.1" looping="true">
             <regionName>left1</regionName>

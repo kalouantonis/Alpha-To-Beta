@@ -9,6 +9,7 @@ package com.debugstudios.alphatobeta;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.debugstudios.alphatobeta.assets.MapLoader;
 import com.debugstudios.alphatobeta.assets.PlayerLoader;
 import com.debugstudios.framework.tilemap.TileMap;
 
@@ -24,6 +25,7 @@ public class Assets
     public static TileMap map = null;
     public static TextureAtlas humanPlayerSheet = null;
     public static PlayerLoader playerLoader = null;
+    public static MapLoader mapLoader = null;
 
     /** Do not allow instantiation */
     private Assets()
@@ -51,14 +53,14 @@ public class Assets
 
     public static void loadMap(String internalFile)
     {
+        if(mapLoader == null)
+            mapLoader = new MapLoader();
+
         if(map != null)
             // Clear previous map
             map.dispose();
 
-        map = new TileMap(internalFile);
-        map.addLayer(0, 0);
-        map.addLayer(0, 1);
-        map.addLayer(1, 2);
+        map = new TileMap();
     }
 
     public static void unload()

@@ -46,7 +46,7 @@ public class PlayScreen implements GameScreen
 
     public PlayScreen(Game game)
     {
-        Assets.loadAll("maps/map2.tmx");
+        Assets.loadAll("objects/maps/map2.xml");
 
         camera = new Camera(WORLD_WIDTH, WORLD_HEIGHT);
 

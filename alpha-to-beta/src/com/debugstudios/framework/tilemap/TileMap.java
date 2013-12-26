@@ -24,6 +24,7 @@
 
 package com.debugstudios.framework.tilemap;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -42,6 +43,7 @@ import java.util.TreeMap;
  */
 public class TileMap
 {
+    private static final String TAG = TileMap.class.getSimpleName();
     /** Layer data and stuff */
     private TiledMap internalTileMap;
     /** Renderer of our tile layer */
@@ -53,6 +55,11 @@ public class TileMap
     private String prevFile = null;
 
     private TreeMap<Integer, IntArray> layerMap = new TreeMap<Integer, IntArray>();
+
+    public TileMap()
+    {
+
+    }
 
     /**
      * Load Tile Map using internal assets file
@@ -83,9 +90,7 @@ public class TileMap
      */
     public TileMap(TiledMap tiledMap)
     {
-        internalTileMap = tiledMap;
-
-        tileRenderer = new OrthogonalTiledMapRenderer(internalTileMap);
+        setInternalTileMap(tiledMap);
     }
 
     public void addLayer(int level, int index)
@@ -120,6 +125,28 @@ public class TileMap
         layerMap.clear();
     }
 
+
+
+    /*s*
+     * Reload tile map
+     *
+     * @param filename Filename of TMX tilemap
+     */
+    public void reload(String filename)
+    {
+        // Delete old tile map
+        if(internalTileMap != null)
+            internalTileMap.dispose();
+
+        // Set new map to renderer
+        setInternalTileMap(new TmxMapLoader().load(filename));
+    }
+
+    public void reload()
+    {
+        reload(prevFile);
+    }
+
     /**
      * Render the tile map
      */
@@ -131,28 +158,6 @@ public class TileMap
         {
             tileRenderer.render(layers.toArray());
         }
-    }
-
-    /*s*
-     * Reload tile map
-     *
-     * @param filename Filename of TMX tilemap
-     */
-    public void reload(String filename)
-    {
-        // Delete old tile map
-        internalTileMap.dispose();
-
-        // Create new one
-        internalTileMap = new TmxMapLoader().load(filename);
-
-        // Set new map to renderer
-        tileRenderer.setMap(internalTileMap);
-    }
-
-    public void reload()
-    {
-        reload(prevFile);
     }
 
     /**
@@ -170,13 +175,21 @@ public class TileMap
     /**
      * Draw multiple layers, using indexes
      *
-     * @param layers Layers to draw
+     * @param level Level containing layers
      */
-    public void drawLayers(int[] layers)
+    public void drawLayers(int level)
     {
+        IntArray layers = layerMap.get(level);
+
+        if(layers == null)
+        {
+            Gdx.app.error(TAG, "No such level in layers: " + level);
+            return;
+        }
+
         updateCameraView();
 
-        tileRenderer.render(layers);
+        tileRenderer.render();
     }
 
     /**
@@ -236,6 +249,11 @@ public class TileMap
     public void setInternalTileMap(TiledMap internalTileMap)
     {
         this.internalTileMap = internalTileMap;
+
+        if(tileRenderer == null)
+            tileRenderer = new OrthogonalTiledMapRenderer(internalTileMap);
+
+        tileRenderer.setMap(internalTileMap);
     }
 
     /**
