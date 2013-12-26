@@ -32,7 +32,9 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.utils.IntArray;
 
+import java.util.TreeMap;
 /**
  * Class to simplify tile map operations
  *
@@ -50,6 +52,8 @@ public class TileMap
 
     private String prevFile = null;
 
+    private TreeMap<Integer, IntArray> layerMap = new TreeMap<Integer, IntArray>();
+
     /**
      * Load Tile Map using internal assets file
      *
@@ -61,7 +65,6 @@ public class TileMap
 
         prevFile = internalFile;
     }
-    // TODO: support asset manager
 
     /**
      * Create TileMap using file handle
@@ -85,6 +88,38 @@ public class TileMap
         tileRenderer = new OrthogonalTiledMapRenderer(internalTileMap);
     }
 
+    public void addLayer(int level, int index)
+    {
+        // Grab array reference
+        IntArray indexes = layerMap.get(level);
+
+        if(indexes != null)
+        {
+               indexes.add(index);
+        }
+        else
+        {
+            indexes = new IntArray();
+            indexes.add(index);
+
+            layerMap.put(level, indexes);
+        }
+    }
+
+    /**
+     * Remove layer from tile map. Note, this is an expensive operation
+     * @param layer Layer that needs to be removed. All indices inside that layer will be deleted
+     */
+    public void removeLayer(int layer)
+    {
+        layerMap.remove(layer);
+    }
+
+    public void clearLayers()
+    {
+        layerMap.clear();
+    }
+
     /**
      * Render the tile map
      */
@@ -92,10 +127,13 @@ public class TileMap
     {
         updateCameraView();
 
-        tileRenderer.render();
+        for(IntArray layers : layerMap.values())
+        {
+            tileRenderer.render(layers.toArray());
+        }
     }
 
-    /**
+    /*s*
      * Reload tile map
      *
      * @param filename Filename of TMX tilemap

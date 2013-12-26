@@ -27,8 +27,8 @@ package com.debugstudios.framework;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.debugstudios.framework.utils.Cleanup;
 import com.debugstudios.framework.screens.GameScreen;
+import com.debugstudios.framework.utils.Cleanup;
 
 public abstract class Game implements ApplicationListener
 {
@@ -67,7 +67,9 @@ public abstract class Game implements ApplicationListener
         screen.pause();
 
         // Clean up heap when game is inactive
-        Cleanup.requestGC(TAG);
+        Gdx.app.debug(TAG, "Calling GC...");
+        Cleanup.requestGC();
+        Gdx.app.debug(TAG, "GC Called.");
     }
 
     @Override

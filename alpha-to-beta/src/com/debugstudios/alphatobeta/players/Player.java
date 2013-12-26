@@ -44,6 +44,7 @@ public class Player extends DynamicEntity
     private CollisionLayer collisionLayer;
     /** Checks if x or y collision has occured */
     private boolean xCollision, yCollision;
+    float oldX, oldY;
 
     /** Animation data structures. */
     // TODO: Run left, idle is redundant
@@ -72,8 +73,8 @@ public class Player extends DynamicEntity
         xCollision = false;
         yCollision = false;
 
-        float oldX = position.x;
-        float oldY = position.y;
+        oldX = position.x;
+        oldY = position.y;
 
         position.x += velocity.x * deltaTime;
 

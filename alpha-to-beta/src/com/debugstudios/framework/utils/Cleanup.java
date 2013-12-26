@@ -7,23 +7,25 @@
 
 package com.debugstudios.framework.utils;
 
-import com.badlogic.gdx.Gdx;
-
 /**
  * Created by Antonis Kalou on 23/12/13.
  */
 public class Cleanup
 {
-    public static void requestGC(String tag)
+    private static final String TAG = Cleanup.class.getSimpleName();
+
+    /**
+     * Request the GC run. This is only a request however,
+     * the GC is allowed to ignore it.
+     *
+     */
+    public static void requestGC()
     {
         // Call GC to clean up
-        Gdx.app.debug(tag, "Calling GC...");
-        Debug.dumpHeap(tag);
+        Debug.dumpHeap(TAG);
 
         System.gc();
 
-
-        Gdx.app.debug(tag, "GC Called.");
-        Debug.dumpHeap(tag);
+        Debug.dumpHeap(TAG);
     }
 }

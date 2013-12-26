@@ -7,8 +7,6 @@
 
 package com.debugstudios.alphatobeta.players;
 
-import com.debugstudios.alphatobeta.Assets;
-
 /**
  * Created by Slacker on 17/12/13.
  *

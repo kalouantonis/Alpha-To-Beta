@@ -10,13 +10,11 @@ package com.debugstudios.alphatobeta.assets;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.alphatobeta.utils.SpeedRegionPair;
 import com.debugstudios.framework.graphics.AnimUtils;
 import com.debugstudios.framework.parsers.SAXFactory;
 import com.debugstudios.framework.parsers.SchemaValidator;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;

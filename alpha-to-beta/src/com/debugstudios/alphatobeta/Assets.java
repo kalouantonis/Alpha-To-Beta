@@ -56,6 +56,9 @@ public class Assets
             map.dispose();
 
         map = new TileMap(internalFile);
+        map.addLayer(0, 0);
+        map.addLayer(0, 1);
+        map.addLayer(1, 2);
     }
 
     public static void unload()

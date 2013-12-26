@@ -27,11 +27,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92ebc313-3081-4d16-bdbc-86854757c594" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/utils/Cleanup.java" />
-      <change type="MOVED" beforePath="C:\Users\Slacker\Programming\alpha-to-beta\alpha-to-beta\src\com\debugstudios\alphatobeta\utils\Debug.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/utils/Debug.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/MapParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/utils/Cleanup.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/utils/Cleanup.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/CollisionLayer.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/CollisionLayer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/HumanPlayer.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/HumanPlayer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta-android/assets/maps/map2.tmx" afterPath="$PROJECT_DIR$/alpha-to-beta-android/assets/maps/map2.tmx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="alpha-to-beta.iws" />
@@ -88,7 +95,22 @@
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java" line="234" class="com.debugstudios.alphatobeta.assets.PlayerLoader" package="com.debugstudios.alphatobeta.assets">
+      <breakpoint url="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java" line="232" class="com.debugstudios.alphatobeta.assets.PlayerLoader" package="com.debugstudios.alphatobeta.assets">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" line="58" class="com.debugstudios.alphatobeta.Assets" package="com.debugstudios.alphatobeta">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -113,111 +135,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PlayerLoader.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="252" column="8" selection-start="8175" selection-end="8175" vertical-scroll-proportion="0.0" vertical-offset="3791" max-vertical-offset="4913">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="World.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="23" selection-start="3153" selection-end="3153" vertical-scroll-proportion="0.0" vertical-offset="1139" max-vertical-offset="1938">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Cleanup.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/utils/Cleanup.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="0" selection-start="559" selection-end="559" vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="510">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="System.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-18/java/lang/System.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="198" column="23" selection-start="7094" selection-end="7094" vertical-scroll-proportion="0.0" vertical-offset="2367" max-vertical-offset="10710">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayScreen.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="95" column="29" selection-start="3008" selection-end="3008" vertical-scroll-proportion="0.0" vertical-offset="1203" max-vertical-offset="2193">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Debug.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/utils/Debug.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="17" selection-start="375" selection-end="375" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Game.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="81" column="0" selection-start="2328" selection-end="2328" vertical-scroll-proportion="0.66341466" vertical-offset="663" max-vertical-offset="1734">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TileMap.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="36" selection-start="2705" selection-end="2705" vertical-scroll-proportion="0.0" vertical-offset="548" max-vertical-offset="4896">
+            <state line="102" column="5" selection-start="3228" selection-end="3228" vertical-scroll-proportion="0.0" vertical-offset="866" max-vertical-offset="5661">
               <folding>
-                <element signature="e#0#8015#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#4615#4616#0" expanded="false" />
-                <element signature="e#4644#4645#0" expanded="false" />
-                <element signature="e#4704#4705#0" expanded="false" />
-                <element signature="e#4740#4741#0" expanded="false" />
-                <element signature="e#4844#4845#0" expanded="false" />
-                <element signature="e#4882#4883#0" expanded="false" />
-                <element signature="e#5012#5013#0" expanded="false" />
-                <element signature="e#5066#5067#0" expanded="false" />
-                <element signature="e#7203#7204#0" expanded="false" />
-                <element signature="e#7234#7235#0" expanded="false" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#2195#2214#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AnimUtils.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/AnimUtils.java">
+      <file leaf-file-name="MapParser.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/MapParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="9" selection-start="1961" selection-end="1961" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="1139">
-              <folding>
-                <element signature="e#0#3242#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#1665#1680#0" expanded="false" />
-                <element signature="e#2135#2150#0" expanded="false" />
-              </folding>
+            <state line="14" column="44" selection-start="419" selection-end="419" vertical-scroll-proportion="0.25542572" vertical-offset="0" max-vertical-offset="599">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java">
+      <file leaf-file-name="Assets.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="11" selection-start="1031" selection-end="1031" vertical-scroll-proportion="0.0" vertical-offset="163" max-vertical-offset="2754">
+            <state line="61" column="4" selection-start="1635" selection-end="1635" vertical-scroll-proportion="0.0" vertical-offset="574" max-vertical-offset="1173">
               <folding />
             </state>
           </provider>
@@ -236,10 +178,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/HumanPlayerView.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/PlayerID.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/utils/ModelViewPair.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerView.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/HumanPlayerView.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/framework/gameobjects/DynamicEntity.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/framework/gameobjects/DrawableEntity.java" />
@@ -249,14 +187,10 @@
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/models/Player.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/HumanPlayer.xml.xhtml" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldDebugRenderer.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldRenderer.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/input/PlayerTouchHandler.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/gameobjects/Entity.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/DebugRenderer.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/screens/GameScreen.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AbstractLayer.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AnimatedLayer.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/CollisionLayer.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/input/PlayerInputHandler.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/Player.xsl" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/PlayerSchema.xsl" />
@@ -268,25 +202,33 @@
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/SpeedAnimationPair.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/parsers/SpeedRegionPair.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/SpeedRegionPair.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/parsers/SchemaValidationException.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/parsers/SAXFactory.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/parsers/SchemaValidator.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/HumanPlayer.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/Camera.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/schemas/PlayerSchema.xml" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/AnimUtils.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/HumanPlayer.xml" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/utils/Debug.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/utils/Cleanup.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/utils/Cleanup.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AnimatedLayer.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AbstractLayer.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldRenderer.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/CollisionLayer.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/utils/IntPair.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/collections/IntPairTest.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/collections/IntPair.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/MapParser.java" />
       </list>
     </option>
   </component>
@@ -342,7 +284,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -497,7 +438,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
+              <option name="myItemId" value="tilemap" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -545,12 +486,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
+              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -571,7 +513,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="FullScreen" value="false" />
     <property name="SearchEverywhereHistory" value="map" />
-    <property name="options.lastSelected" value="editing.templates" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -580,8 +522,17 @@
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Xhtml" />
     <property name="LayoutCode.rearrangeEntries" value="false" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.debugstudios.framework.collections" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+      <recent name="junit.framework.TestCase" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Slacker\Programming\alpha-to-beta\alpha-to-beta-android\assets\objects" />
       <recent name="C:\Users\Slacker\Programming\alpha-to-beta\alpha-to-beta-android\assets\schemas" />
@@ -595,6 +546,22 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.AlphaToBeta Desktop">
+    <configuration default="false" name="IntPairTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.debugstudios.framework.collections.IntPairTest" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="alpha-to-beta" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -629,6 +596,35 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="XSLT" factoryName="XSLT">
+      <option name="myOutputFile" />
+      <option name="myOpenOutputFile" value="false" />
+      <option name="myOpenInBrowser" value="false" />
+      <option name="mySmartErrorHandling" value="true" />
+      <option name="myRunnerPort" value="34873" />
+      <option name="myVmArguments" />
+      <option name="myWorkingDirectory" />
+      <option name="myModule" />
+      <option name="myJdk" />
+      <parameters />
+      <OutputType value="CONSOLE" save-to-file="false" />
+      <FileType name="XML" />
+      <JdkChoice value="FROM_MODULE" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -654,35 +650,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
-    <configuration default="true" type="XSLT" factoryName="XSLT">
-      <option name="myOutputFile" />
-      <option name="myOpenOutputFile" value="false" />
-      <option name="myOpenInBrowser" value="false" />
-      <option name="mySmartErrorHandling" value="true" />
-      <option name="myRunnerPort" value="34873" />
-      <option name="myVmArguments" />
-      <option name="myWorkingDirectory" />
-      <option name="myModule" />
-      <option name="myJdk" />
-      <parameters />
-      <OutputType value="CONSOLE" save-to-file="false" />
-      <FileType name="XML" />
-      <JdkChoice value="FROM_MODULE" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -781,10 +748,16 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="2">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Android Application.alpha-to-beta-android" />
       <item index="1" class="java.lang.String" itemvalue="Application.AlphaToBeta Desktop" />
+      <item index="2" class="java.lang.String" itemvalue="Application.IntPairTest" />
     </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Application.IntPairTest" />
+      </list>
+    </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
@@ -846,8 +819,8 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2624" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.272" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2608" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2688" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18504532" sideWeight="0.5008" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18504532" sideWeight="0.5008" order="3" side_tool="true" content_ui="tabs" />
@@ -859,7 +832,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18504532" sideWeight="0.4992" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2688" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2656" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -874,13 +847,13 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3184" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18504532" sideWeight="0.5008" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18504532" sideWeight="0.4992" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2864" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -893,8 +866,8 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3216" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -953,101 +926,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/Animation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="0" selection-start="4871" selection-end="4871" vertical-scroll-proportion="0.0" vertical-offset="2040" max-vertical-offset="2907" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/Animation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="0" selection-start="4871" selection-end="4871" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3230" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta-desktop/src/com/debugstudios/alphatobeta/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="30" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="396" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/Graphics.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="151" column="15" selection-start="6091" selection-end="6091" vertical-scroll-proportion="0.33333334" vertical-offset="2106" max-vertical-offset="4752" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/OrthographicCamera.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="16" selection-start="1849" selection-end="1849" vertical-scroll-proportion="0.34710744" vertical-offset="450" max-vertical-offset="1836" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/Input.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="294" column="19" selection-start="11638" selection-end="11638" vertical-scroll-proportion="0.33240998" vertical-offset="4920" max-vertical-offset="7992" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/alpha-to-beta-desktop/libs/gdx-backend-lwjgl-sources.jar!/com/badlogic/gdx/backends/lwjgl/LwjglInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="316" column="0" selection-start="8233" selection-end="8233" vertical-scroll-proportion="0.3323263" vertical-offset="4462" max-vertical-offset="18486" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta-android/assets/fonts/debugFont.fnt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="42" selection-start="1310" selection-end="1310" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1908" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/math/MathUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="0" selection-start="6221" selection-end="6221" vertical-scroll-proportion="0.0" vertical-offset="3203" max-vertical-offset="4320" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta-android/assets/fonts/debugFont.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta-android/alpha-to-beta-android.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="415" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta-desktop/alpha-to-beta-desktop.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="415" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta-desktop/alpha-to-beta-desktop.eml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="415" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta-android/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="40" selection-start="91" selection-end="91" vertical-scroll-proportion="0.09214092" vertical-offset="0" max-vertical-offset="369" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta-android/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="209" selection-end="209" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
-          <folding>
-            <element signature="e#415#433#0" expanded="false" />
-            <element signature="e#521#539#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="174" column="17" selection-start="8054" selection-end="8054" vertical-scroll-proportion="0.9303483" vertical-offset="2346" max-vertical-offset="3196" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/SpriteBatch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="685" column="0" selection-start="23314" selection-end="23314" vertical-scroll-proportion="0.0" vertical-offset="10980" max-vertical-offset="19992" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta-android/assets/img/player.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta-android/assets/maps/map.tmx">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2652" />
@@ -1108,20 +986,6 @@
         <state line="13" column="0" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="26" selection-start="617" selection-end="617" vertical-scroll-proportion="0.44523808" vertical-offset="0" max-vertical-offset="420">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="0" selection-start="1933" selection-end="1933" vertical-scroll-proportion="0.0" vertical-offset="876" max-vertical-offset="1275">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/Animation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="13" selection-start="1149" selection-end="1149" vertical-scroll-proportion="0.0" vertical-offset="64" max-vertical-offset="2907" />
@@ -1139,52 +1003,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/HumanPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="36" selection-start="435" selection-end="435" vertical-scroll-proportion="0.0" vertical-offset="24" max-vertical-offset="493">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="32" selection-start="863" selection-end="863" vertical-scroll-proportion="0.0" vertical-offset="100" max-vertical-offset="1122">
-          <folding />
-        </state>
+        <state line="16" column="36" selection-start="435" selection-end="435" vertical-scroll-proportion="0.0" vertical-offset="24" max-vertical-offset="493" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/utils/SpeedRegionPair.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="280" selection-end="280" vertical-scroll-proportion="0.118329465" vertical-offset="0" max-vertical-offset="1309">
-          <folding>
-            <element signature="e#906#907#0" expanded="true" />
-            <element signature="e#936#937#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/Camera.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="62" selection-start="1576" selection-end="1576" vertical-scroll-proportion="0.3549884" vertical-offset="0" max-vertical-offset="2363">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="11" selection-start="1031" selection-end="1031" vertical-scroll-proportion="0.0" vertical-offset="163" max-vertical-offset="2754">
-          <folding />
-        </state>
+        <state line="8" column="0" selection-start="280" selection-end="280" vertical-scroll-proportion="0.118329465" vertical-offset="0" max-vertical-offset="1309" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/AnimUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="9" selection-start="1961" selection-end="1961" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="1139">
-          <folding>
-            <element signature="e#0#3242#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#1665#1680#0" expanded="false" />
-            <element signature="e#2135#2150#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="51" column="9" selection-start="1961" selection-end="1961" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="1139" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta-android/assets/schemas/PlayerSchema.xml">
@@ -1205,69 +1034,177 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="252" column="8" selection-start="8175" selection-end="8175" vertical-scroll-proportion="0.0" vertical-offset="3791" max-vertical-offset="4913">
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="29" selection-start="3008" selection-end="3008" vertical-scroll-proportion="0.0" vertical-offset="1203" max-vertical-offset="2193">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="36" selection-start="2705" selection-end="2705" vertical-scroll-proportion="0.0" vertical-offset="548" max-vertical-offset="4896">
-          <folding>
-            <element signature="e#0#8015#0" expanded="false" />
             <element signature="imports" expanded="false" />
-            <element signature="e#4615#4616#0" expanded="false" />
-            <element signature="e#4644#4645#0" expanded="false" />
-            <element signature="e#4704#4705#0" expanded="false" />
-            <element signature="e#4740#4741#0" expanded="false" />
-            <element signature="e#4844#4845#0" expanded="false" />
-            <element signature="e#4882#4883#0" expanded="false" />
-            <element signature="e#5012#5013#0" expanded="false" />
-            <element signature="e#5066#5067#0" expanded="false" />
-            <element signature="e#7203#7204#0" expanded="false" />
-            <element signature="e#7234#7235#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/utils/Debug.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="17" selection-start="375" selection-end="375" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+        <state line="14" column="17" selection-start="375" selection-end="375" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-18/java/lang/System.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="198" column="23" selection-start="7094" selection-end="7094" vertical-scroll-proportion="0.0" vertical-offset="2367" max-vertical-offset="10710" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/utils/Cleanup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="0" selection-start="696" selection-end="696" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="578" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/AlphaToBeta.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="26" selection-start="617" selection-end="617" vertical-scroll-proportion="0.5676127" vertical-offset="0" max-vertical-offset="599" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/OrthographicCamera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="16" selection-start="1905" selection-end="1905" vertical-scroll-proportion="0.4891486" vertical-offset="336" max-vertical-offset="1734" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/graphics/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="150" column="16" selection-start="4246" selection-end="4246" vertical-scroll-proportion="0.4040067" vertical-offset="2308" max-vertical-offset="2907" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/graphics/g2d/SpriteBatch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1128" column="17" selection-start="35263" selection-end="35263" vertical-scroll-proportion="0.33217993" vertical-offset="18321" max-vertical-offset="19992" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldDebugRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="17" selection-start="1210" selection-end="1210" vertical-scroll-proportion="0.46712804" vertical-offset="257" max-vertical-offset="1088" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="110" column="4" selection-start="3373" selection-end="3373" vertical-scroll-proportion="0.0" vertical-offset="1207" max-vertical-offset="2771" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="118" column="12" selection-start="3124" selection-end="3124" vertical-scroll-proportion="0.0" vertical-offset="1146" max-vertical-offset="1768">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/maps/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="13" selection-start="2138" selection-end="2138" vertical-scroll-proportion="0.24373956" vertical-offset="296" max-vertical-offset="1037" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/maps/tiled/TiledMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="30" selection-start="1124" selection-end="1124" vertical-scroll-proportion="0.27712855" vertical-offset="21" max-vertical-offset="833" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/maps/tiled/TiledMapRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="17" selection-start="1050" selection-end="1050" vertical-scroll-proportion="0.1764706" vertical-offset="0" max-vertical-offset="578" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/maps/tiled/renderers/BatchTiledMapRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="58" selection-start="1382" selection-end="1382" vertical-scroll-proportion="-0.7456747" vertical-offset="533" max-vertical-offset="2108" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/maps/tiled/renderers/OrthogonalTiledMapRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="54" selection-start="2451" selection-end="2451" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3043" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/maps/tiled/TiledMapTileLayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="11" selection-start="1658" selection-end="1658" vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="2601" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/maps/MapLayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="0" selection-start="1960" selection-end="1960" vertical-scroll-proportion="0.7638889" vertical-offset="826" max-vertical-offset="1258" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/views/WorldRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="8" selection-start="1101" selection-end="1101" vertical-scroll-proportion="0.0" vertical-offset="468" max-vertical-offset="1275" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AnimatedLayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="35" selection-start="1388" selection-end="1388" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="140" column="0" selection-start="3731" selection-end="3731" vertical-scroll-proportion="0.0" vertical-offset="1676" max-vertical-offset="2193">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="23" selection-start="3153" selection-end="3153" vertical-scroll-proportion="0.0" vertical-offset="1139" max-vertical-offset="1938">
+        <state line="46" column="0" selection-start="1404" selection-end="1404" vertical-scroll-proportion="0.0" vertical-offset="297" max-vertical-offset="1904">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-18/java/lang/System.java">
+    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/physics/box2d/BodyDef.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="198" column="23" selection-start="7094" selection-end="7094" vertical-scroll-proportion="0.0" vertical-offset="2367" max-vertical-offset="10710">
+        <state line="24" column="13" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.17274939" vertical-offset="99" max-vertical-offset="1258" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/AbstractLayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="22" selection-start="1363" selection-end="1363" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1785">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/utils/Cleanup.java">
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/CollisionLayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="559" selection-end="559" vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="510">
+        <state line="58" column="0" selection-start="2105" selection-end="2105" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="2363">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java">
+    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/utils/IntArray.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="0" selection-start="2328" selection-end="2328" vertical-scroll-proportion="0.66341466" vertical-offset="663" max-vertical-offset="1734">
+        <state line="25" column="13" selection-start="1137" selection-end="1137" vertical-scroll-proportion="-7.712855" vertical-offset="4773" max-vertical-offset="5372">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/android-sdk/sources/android-18/java/util/TreeMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="194" column="23" selection-start="7465" selection-end="7465" vertical-scroll-proportion="0.33256352" vertical-offset="2712" max-vertical-offset="29461">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="4" selection-start="1635" selection-end="1635" vertical-scroll-proportion="0.0" vertical-offset="574" max-vertical-offset="1173">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="102" column="5" selection-start="3228" selection-end="3228" vertical-scroll-proportion="0.0" vertical-offset="866" max-vertical-offset="5661">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2195#2214#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/MapParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="44" selection-start="419" selection-end="419" vertical-scroll-proportion="0.25542572" vertical-offset="0" max-vertical-offset="599">
           <folding />
         </state>
       </provider>
@@ -1338,7 +1275,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>alpha-to-beta-android</last-edited>
+          <last-edited>alpha-to-beta</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

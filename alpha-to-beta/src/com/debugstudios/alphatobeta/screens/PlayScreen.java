@@ -15,13 +15,13 @@ import com.debugstudios.alphatobeta.World;
 import com.debugstudios.alphatobeta.input.PlayerInputHandler;
 import com.debugstudios.alphatobeta.input.PlayerTouchHandler;
 import com.debugstudios.alphatobeta.players.Player;
-import com.debugstudios.framework.utils.Debug;
 import com.debugstudios.alphatobeta.views.WorldDebugRenderer;
 import com.debugstudios.alphatobeta.views.WorldRenderer;
 import com.debugstudios.framework.Game;
 import com.debugstudios.framework.graphics.Camera;
 import com.debugstudios.framework.screens.GameScreen;
 import com.debugstudios.framework.tilemap.TileMap;
+import com.debugstudios.framework.utils.Debug;
 
 
 /**

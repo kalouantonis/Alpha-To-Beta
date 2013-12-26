@@ -12,8 +12,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.debugstudios.alphatobeta.players.HumanPlayer;
 import com.debugstudios.alphatobeta.players.Player;
-import com.debugstudios.framework.utils.Cleanup;
-import com.debugstudios.framework.utils.Debug;
 import com.debugstudios.framework.tilemap.CollisionLayer;
 import com.debugstudios.framework.tilemap.TileMap;
 
@@ -41,7 +39,6 @@ public class World
     public World(TileMap tileMap)
     {
         this.tileMap = tileMap;
-
 
         players = new ArrayList<Player>(NUM_PLAYERS);
 
@@ -95,12 +92,11 @@ public class World
 
         player.setCollisionLayer(new CollisionLayer(tileMap.getTileLayer(1)));
 
+
         // Load rest of attributes from loaders
         Assets.playerLoader.load("objects/HumanPlayer.xml", player, Assets.humanPlayerSheet);
 
         Gdx.app.debug(TAG, "Player loaded.");
-
-        Cleanup.requestGC(TAG);
 
         Gdx.app.debug(TAG, "Scene reloaded successfully!");
     }

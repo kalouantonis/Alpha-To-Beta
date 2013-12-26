@@ -25,6 +25,7 @@
 package com.debugstudios.framework.tilemap;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.debugstudios.framework.gameobjects.Entity;
 
 /**
@@ -34,6 +35,8 @@ import com.debugstudios.framework.gameobjects.Entity;
  */
 public class CollisionLayer extends AbstractLayer
 {
+    private World world = null;
+
     public CollisionLayer(int width, int height, int tileWidth, int tileHeight)
     {
         super(width, height, tileWidth, tileHeight);
