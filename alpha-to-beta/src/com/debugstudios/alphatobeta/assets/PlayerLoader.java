@@ -106,7 +106,7 @@ public class PlayerLoader extends DefaultHandler
 
             schemaValidator.validate(internalFile);
 
-            parser.parse(internalFile, this);
+            parser.parse(Gdx.files.internal(internalFile).file(), this);
 
             Gdx.app.debug(TAG, "XML File loading successful: " + internalFile);
         }

@@ -19,6 +19,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -34,7 +35,8 @@ public class MapLoader extends DefaultHandler
     private TmxMapLoader tiledMapLoader;
     private TileMap map;
 
-    private boolean inFilePath;
+    private boolean inFilePath = false;
+    private boolean inForeground = false;
 
     private String prevFile = null;
 
@@ -54,6 +56,8 @@ public class MapLoader extends DefaultHandler
         prevFile = internalFile;
 
         this.map = map;
+        // Remove previous layers
+        this.map.clearLayers();
         this.tiledMapLoader = new TmxMapLoader();
 
         try
@@ -62,7 +66,7 @@ public class MapLoader extends DefaultHandler
 
             schemaValidator.validate(internalFile);
 
-            parser.parse(internalFile, this);
+            parser.parse(Gdx.files.internal(internalFile).path(), this);
 
             Gdx.app.debug(TAG, "XML File loading successful: " + internalFile);
         } catch (SAXException e)
@@ -88,10 +92,20 @@ public class MapLoader extends DefaultHandler
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
     {
-        if(qName.equalsIgnoreCase("Layer"))
+        if(qName.equalsIgnoreCase("Foreground"))
         {
-            map.addLayer(Integer.parseInt(attributes.getValue("level")),
-                    Integer.parseInt(attributes.getValue("index")));
+            inForeground = true;
+        }
+        else if(qName.equalsIgnoreCase("Layer"))
+        {
+            int level = Integer.parseInt(attributes.getValue("level"));
+            int index = Integer.parseInt(attributes.getValue("index"));
+
+            if(inForeground)
+                map.addForegroundLayer(level, index);
+            else
+                // Anything not declared in foreground will go to background
+                map.addBackgroundLayer(level, index);
         }
         else if(qName.equalsIgnoreCase("FilePath"))
         {
@@ -102,7 +116,11 @@ public class MapLoader extends DefaultHandler
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException
     {
-        if(qName.equalsIgnoreCase("FilePath"))
+        if(qName.equalsIgnoreCase("Foreground"))
+        {
+            inForeground = false;
+        }
+        else if(qName.equalsIgnoreCase("FilePath"))
         {
             inFilePath = false;
         }

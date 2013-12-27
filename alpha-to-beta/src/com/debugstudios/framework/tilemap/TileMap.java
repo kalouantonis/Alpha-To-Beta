@@ -54,7 +54,8 @@ public class TileMap
 
     private String prevFile = null;
 
-    private TreeMap<Integer, IntArray> layerMap = new TreeMap<Integer, IntArray>();
+    private TreeMap<Integer, IntArray> backgroundLayers = new TreeMap<Integer, IntArray>();
+    private TreeMap<Integer, IntArray> foregroundLayers = new TreeMap<Integer, IntArray>();
 
     public TileMap()
     {
@@ -93,10 +94,11 @@ public class TileMap
         setInternalTileMap(tiledMap);
     }
 
-    public void addLayer(int level, int index)
+
+    private void addLayer(TreeMap<Integer, IntArray> layers, int level, int index)
     {
         // Grab array reference
-        IntArray indexes = layerMap.get(level);
+        IntArray indexes = layers.get(level);
 
         if(indexes != null)
         {
@@ -107,24 +109,49 @@ public class TileMap
             indexes = new IntArray();
             indexes.add(index);
 
-            layerMap.put(level, indexes);
+            layers.put(level, indexes);
         }
-    }
-
-    /**
-     * Remove layer from tile map. Note, this is an expensive operation
-     * @param layer Layer that needs to be removed. All indices inside that layer will be deleted
-     */
-    public void removeLayer(int layer)
-    {
-        layerMap.remove(layer);
     }
 
     public void clearLayers()
     {
-        layerMap.clear();
+        backgroundLayers.clear();
+        foregroundLayers.clear();
     }
 
+    public void addBackgroundLayer(int level, int index)
+    {
+        addLayer(backgroundLayers, level, index);
+    }
+
+    /**
+     * Remove layer from tile map. Note, this is an expensive operation
+     * @param level Layer that needs to be removed. All indices inside that layer will be deleted
+     */
+    public void removeBackgroundLayer(int level)
+    {
+        backgroundLayers.remove(level);
+    }
+
+    public void clearBackgroundLayers()
+    {
+        backgroundLayers.clear();
+    }
+
+    public void addForegroundLayer(int level, int index)
+    {
+        addLayer(foregroundLayers, level, index);
+    }
+
+    public void removeForegroundLayer(int level)
+    {
+        foregroundLayers.remove(level);
+    }
+
+    public void clearForegroundLayer(int level)
+    {
+        foregroundLayers.clear();
+    }
 
 
     /*s*
@@ -150,11 +177,21 @@ public class TileMap
     /**
      * Render the tile map
      */
-    public void draw()
+    public void drawBackground()
     {
         updateCameraView();
 
-        for(IntArray layers : layerMap.values())
+        for(IntArray layers : backgroundLayers.values())
+        {
+            tileRenderer.render(layers.toArray());
+        }
+    }
+
+    public void drawForeground()
+    {
+        updateCameraView();
+
+        for(IntArray layers : foregroundLayers.values())
         {
             tileRenderer.render(layers.toArray());
         }
@@ -177,9 +214,9 @@ public class TileMap
      *
      * @param level Level containing layers
      */
-    public void drawLayers(int level)
+    public void drawForegroundLayers(int level)
     {
-        IntArray layers = layerMap.get(level);
+        IntArray layers = foregroundLayers.get(level);
 
         if(layers == null)
         {
@@ -189,7 +226,22 @@ public class TileMap
 
         updateCameraView();
 
-        tileRenderer.render();
+        tileRenderer.render(layers.toArray());
+    }
+
+    public void drawBackgroundLayers(int level)
+    {
+        IntArray layers = backgroundLayers.get(level);
+
+        if(layers == null)
+        {
+            Gdx.app.error(TAG, "No such level in layers: " + level);
+            return;
+        }
+
+        updateCameraView();
+
+        tileRenderer.render(layers.toArray());
     }
 
     /**

@@ -1,33 +1,52 @@
-<?xml version="1.0" ?>
-<!--
-  ~ Copyright (C) Debug Studios, Inc - All Rights Reserved
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Map" type="MapType">
+    <xs:annotation>
+      <xs:documentation>~ Copyright (C) Debug Studios, Inc - All Rights Reserved
   ~ Unauthorized copying of this file, via any medium is strictly prohibited
   ~ Proprietary and confidential
-  ~ Written by Antonis Kalou <kalouantonis@gmail.com>, 12 2013
-  -->
-
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
-<!--definition of attributes-->
-<xs:attribute name="index" type="xs:nonNegativeInteger" />
-<xs:attribute name="level" type="xs:nonNegativeInteger" />
-
-<!--definition of elements-->
-<xs:element name="Layer">
-    <xs:complexType>
-        <xs:attribute ref="level" use="required" />
-        <xs:attribute ref="index" use="required" />
-    </xs:complexType>
-</xs:element>
-<xs:element name="FilePath" nillable="false" />
-
-<xs:element name="Map">
-    <xs:complexType>
-        <xs:sequence>
-            <xs:element ref="Layer" maxOccurs="unbounded" />
-            <xs:element ref="FilePath" maxOccurs="1" />
-        </xs:sequence>
-    </xs:complexType>
-</xs:element>
-
+  ~ Written by Antonis Kalou &lt;kalouantonis@gmail.com>, 12 2013</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="ForegroundType">
+    <xs:sequence>
+      <xs:element type="LayerType" name="Layer">
+        <xs:annotation>
+          <xs:documentation>Foreground</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MapType">
+    <xs:sequence>
+      <xs:element type="BackgroundType" name="Background" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Drawn behind player</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="ForegroundType" name="Foreground" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Drawn in front of player</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="xs:string" name="FilePath" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LayerType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:nonNegativeInteger" name="level" use="required"/>
+        <xs:attribute type="xs:nonNegativeInteger" name="index" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="BackgroundType">
+    <xs:sequence>
+      <xs:element type="LayerType" name="Layer" maxOccurs="unbounded" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>BackgroundCollision</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
 </xs:schema>

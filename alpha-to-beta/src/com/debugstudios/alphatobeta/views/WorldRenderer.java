@@ -43,17 +43,23 @@ public class WorldRenderer
         camera.update();
 
         // Tile map uses own batch
-        renderTileMap();
+        renderBackgroundTileMap();
 
         batch.begin();
             renderPlayers();
         batch.end();
+
+        renderForegroundTileMap();
     }
 
-    private void renderTileMap()
+    private void renderBackgroundTileMap()
     {
-        // Just draw whole thing in background for now
-        world.tileMap.draw();
+        world.tileMap.drawBackground();
+    }
+
+    private void renderForegroundTileMap()
+    {
+        world.tileMap.drawForeground();
     }
 
     private void renderPlayers()

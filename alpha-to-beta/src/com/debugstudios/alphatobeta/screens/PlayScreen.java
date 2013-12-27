@@ -9,10 +9,13 @@ package com.debugstudios.alphatobeta.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.controllers.mappings.Ouya;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.debugstudios.alphatobeta.Assets;
 import com.debugstudios.alphatobeta.World;
 import com.debugstudios.alphatobeta.input.PlayerInputHandler;
+import com.debugstudios.alphatobeta.input.PlayerOuyaHandler;
 import com.debugstudios.alphatobeta.input.PlayerTouchHandler;
 import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.alphatobeta.views.WorldDebugRenderer;
@@ -63,9 +66,11 @@ public class PlayScreen implements GameScreen
         worldRenderer = new WorldRenderer(camera, spriteBatch, world);
         debugRenderer = new WorldDebugRenderer(camera, spriteBatch, world);
 
+
         switch (Gdx.app.getType())
         {
             case Android:
+                // TODO: Check if Ouya registers as android app
                 Gdx.input.setInputProcessor(new PlayerTouchHandler(camera, player));
                 Gdx.app.debug(TAG, "Using Android input handler");
                 break;
@@ -76,6 +81,9 @@ public class PlayScreen implements GameScreen
             default:
                 throw new RuntimeException("Unsupported platform!");
         }
+
+        if(Ouya.runningOnOuya)
+            Controllers.addListener(new PlayerOuyaHandler(camera, player));
 
         camera.setTarget(player);
 
