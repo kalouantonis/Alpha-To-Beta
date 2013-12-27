@@ -9,4 +9,17 @@
 		<relative-module-src project-related="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/"/>
 		<relative-module-cls project-related="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx.jar!/"/>
 	</lib>
+	<lib name="$MODULE_DIR$/libs/gdx-controllers.jar" scope="COMPILE">
+		<srcroot url="jar://$MODULE_DIR$/libs/sources/gdx-controllers-android-sources.jar!/"/>
+		<srcroot bind="false" url="jar://$MODULE_DIR$/libs/sources/gdx-controllers-desktop-sources.jar!/"/>
+		<srcroot bind="false" url="jar://$MODULE_DIR$/libs/sources/gdx-controllers-sources.jar!/"/>
+		<srcroot bind="false" url="jar://$MODULE_DIR$/libs/sources/gdx-controllers-gwt-sources.jar!/com/badlogic/gdx/controllers/gwt/emu"/>
+		<srcroot bind="false" url="jar://$MODULE_DIR$/libs/sources/gdx-controllers-gwt-sources.jar!/"/>
+		<relative-module-src project-related="jar://$PROJECT_DIR$/alpha-to-beta/libs/sources/gdx-controllers-android-sources.jar!/"/>
+		<relative-module-src project-related="jar://$PROJECT_DIR$/alpha-to-beta/libs/sources/gdx-controllers-desktop-sources.jar!/"/>
+		<relative-module-src project-related="jar://$PROJECT_DIR$/alpha-to-beta/libs/sources/gdx-controllers-sources.jar!/"/>
+		<relative-module-src project-related="jar://$PROJECT_DIR$/alpha-to-beta/libs/sources/gdx-controllers-gwt-sources.jar!/com/badlogic/gdx/controllers/gwt/emu"/>
+		<relative-module-src project-related="jar://$PROJECT_DIR$/alpha-to-beta/libs/sources/gdx-controllers-gwt-sources.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-controllers.jar!/"/>
+	</lib>
 </component>

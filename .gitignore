@@ -8,3 +8,6 @@ bin/*
 alpha-to-beta/bin/*
 alpha-to-beta-android/bin/*
 alpha-to-beta-desktop/bin/*
+
+.idea
+.idea/*
