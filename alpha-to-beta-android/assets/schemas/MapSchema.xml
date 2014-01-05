@@ -10,7 +10,7 @@
   </xs:element>
   <xs:complexType name="ForegroundType">
     <xs:sequence>
-      <xs:element type="LayerType" name="Layer">
+      <xs:element type="LayerType" name="Layer" maxOccurs="unbounded" minOccurs="0">
         <xs:annotation>
           <xs:documentation>Foreground</xs:documentation>
         </xs:annotation>

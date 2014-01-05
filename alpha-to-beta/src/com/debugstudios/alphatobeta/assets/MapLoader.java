@@ -32,7 +32,6 @@ public class MapLoader extends DefaultHandler
     private SchemaValidator schemaValidator;
     private static final String SCHEMA_FILE = "schemas/MapSchema.xml";
 
-    private TmxMapLoader tiledMapLoader;
     private TileMap map;
 
     private boolean inFilePath = false;
@@ -58,7 +57,6 @@ public class MapLoader extends DefaultHandler
         this.map = map;
         // Remove previous layers
         this.map.clearLayers();
-        this.tiledMapLoader = new TmxMapLoader();
 
         try
         {
@@ -84,7 +82,7 @@ public class MapLoader extends DefaultHandler
     public void reload(TileMap map)
     {
         if(prevFile == null)
-            throw new RuntimeException("Calling reload before calling load");
+            throw new RuntimeException(TAG + ": Calling reload before calling load");
 
         load(prevFile, map);
     }
@@ -131,7 +129,7 @@ public class MapLoader extends DefaultHandler
     {
         if(inFilePath)
         {
-            map.setInternalTileMap(tiledMapLoader.load(String.valueOf(ch, start, length)));
+            map.reload(String.valueOf(ch, start, length));
         }
     }
 

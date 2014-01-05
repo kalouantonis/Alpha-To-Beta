@@ -26,11 +26,10 @@ public class World
 
     private final int NUM_PLAYERS = 5;
 
-    public static final float WORLD_WIDTH = 480;
-    public static final float WORLD_HEIGHT = 360;
+//    public static final float WORLD_WIDTH = 480;
+//    public static final float WORLD_HEIGHT = 360;
 
     public TileMap tileMap;
-    public CollisionLayer collisionLayer;
 
     public Player player = null;
     // NOTE: If using threads, use Vector --> Is the very bestest best when thread run...

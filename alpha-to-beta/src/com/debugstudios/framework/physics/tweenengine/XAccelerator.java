@@ -22,35 +22,46 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.gameobjects;
+package com.debugstudios.framework.physics.tweenengine;
 
-import com.badlogic.gdx.math.Vector2;
+import com.debugstudios.framework.gameobjects.DynamicEntity;
 
 /**
- * Entity for drawable objects
- *
- * @author Antonis Kalou
+ * Created by Antonis Kalou on 12/30/13.
  */
-public abstract class DynamicEntity extends Entity
-{
-    /** Entity X and Y velocity */
-    public final Vector2 velocity;
-    /** Entity X and Y acceleration */
-    public Vector2 accel;
-
-    public DynamicEntity(float x, float y, float width, float height)
+public class XAccelerator implements Tween
     {
-        super(x, y, width, height);
+        DynamicEntity entity;
 
-        velocity = new Vector2(0, 0);
-        accel = new Vector2(0, 0);
+        float time;
+        float xAccel;
+
+        public XAccelerator(DynamicEntity entity, float finalXVel, float time)
+        {
+            this.entity = entity;
+            this.time = time;
+
+            // v = u + at
+            // --> a = (v-u)/t
+            xAccel = (finalXVel - entity.velocity.x) / time;
+
+            entity.accel.x = xAccel;
+        }
+
+        public void update(float deltaTime)
+        {
+            if(time <= 0)
+            {
+                entity.accel.x = 0;
+                return;
+            }
+
+            time -= deltaTime;
+        }
+
+        public boolean isFinished()
+        {
+            return time <= 0;
+        }
     }
 
-    /**
-     * Update entity according to delta time.
-     * All dynamic entities will need to perform this/
-     *
-     * @param deltaTime Tile elapsed since last update call
-     */
-    public abstract void update(float deltaTime);
-}

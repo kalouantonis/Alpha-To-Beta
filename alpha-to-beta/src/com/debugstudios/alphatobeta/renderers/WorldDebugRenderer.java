@@ -5,7 +5,7 @@
  * Written by Antonis Kalou <kalouantonis@gmail.com>, 12 2013
  */
 
-package com.debugstudios.alphatobeta.views;
+package com.debugstudios.alphatobeta.renderers;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

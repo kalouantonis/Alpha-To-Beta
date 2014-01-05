@@ -55,8 +55,7 @@ public class Assets
     {
         if(mapLoader == null)
             mapLoader = new MapLoader();
-
-        if(map != null)
+        else
             // Clear previous map
             map.dispose();
 

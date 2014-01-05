@@ -49,7 +49,6 @@ public class TileMap
     /** Renderer of our tile layer */
     private OrthogonalTiledMapRenderer tileRenderer;
     /** Camera for rendering */
-    // TODO: Use my camera, allow getting and setting of camera
     private OrthographicCamera camera = null;
 
     private String prevFile = null;
@@ -246,8 +245,6 @@ public class TileMap
 
     /**
      * Update camera
-     *
-     * @deprecated TODO: Make this automagic, so use my own camera class
      */
     private void updateCameraView()
     {
@@ -300,6 +297,10 @@ public class TileMap
      */
     public void setInternalTileMap(TiledMap internalTileMap)
     {
+//        if(internalTileMap != null)
+//            Dispose of previous tile map
+//            internalTileMap.dispose();
+
         this.internalTileMap = internalTileMap;
 
         if(tileRenderer == null)
@@ -307,6 +308,7 @@ public class TileMap
 
         tileRenderer.setMap(internalTileMap);
     }
+
 
     /**
      * Programatically set opacity, good for optimization.

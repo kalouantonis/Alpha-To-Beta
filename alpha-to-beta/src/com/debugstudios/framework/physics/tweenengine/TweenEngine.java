@@ -22,35 +22,56 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.gameobjects;
+package com.debugstudios.framework.physics.tweenengine;
 
 import com.badlogic.gdx.math.Vector2;
+import com.debugstudios.framework.gameobjects.DynamicEntity;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
- * Entity for drawable objects
- *
- * @author Antonis Kalou
+ * Created by Antonis Kalou on 12/29/13.
  */
-public abstract class DynamicEntity extends Entity
+public class TweenEngine
 {
-    /** Entity X and Y velocity */
-    public final Vector2 velocity;
-    /** Entity X and Y acceleration */
-    public Vector2 accel;
+    private List<Tween> tweens;
 
-    public DynamicEntity(float x, float y, float width, float height)
+    public TweenEngine()
     {
-        super(x, y, width, height);
-
-        velocity = new Vector2(0, 0);
-        accel = new Vector2(0, 0);
+        tweens = new ArrayList<Tween>();
     }
 
-    /**
-     * Update entity according to delta time.
-     * All dynamic entities will need to perform this/
-     *
-     * @param deltaTime Tile elapsed since last update call
-     */
-    public abstract void update(float deltaTime);
+    public void addTween(Tween tween)
+    {
+        tweens.add(tween);
+    }
+
+    public void removeTween(Tween tween)
+    {
+        tweens.remove(tween);
+    }
+
+    public void removeTween(int index)
+    {
+        tweens.remove(index);
+    }
+
+    public void update(float deltaTime)
+    {
+        Iterator<Tween> iterator = tweens.iterator();
+
+        while(iterator.hasNext())
+        {
+            Tween tween = iterator.next();
+            tween.update(deltaTime);
+
+            if(tween.isFinished())
+                iterator.remove();
+        }
+    }
+
+
 }
+

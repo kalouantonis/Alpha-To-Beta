@@ -67,9 +67,9 @@ public abstract class Game implements ApplicationListener
         screen.pause();
 
         // Clean up heap when game is inactive
-        Gdx.app.debug(TAG, "Calling GC...");
+        Gdx.app.debug(TAG, "Requesting GC...");
         Cleanup.requestGC();
-        Gdx.app.debug(TAG, "GC Called.");
+        Gdx.app.debug(TAG, "GC Requested.");
     }
 
     @Override
@@ -86,8 +86,8 @@ public abstract class Game implements ApplicationListener
         float deltaTime = Gdx.graphics.getDeltaTime();
 
         // TODO: Check device frame rate
-        if(deltaTime > 0.032f)
-            deltaTime = 0.032f;
+        if(deltaTime > 0.1f)
+            deltaTime = 0.1f;
 
         screen.update(deltaTime);
 
