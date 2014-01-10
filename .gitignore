@@ -11,3 +11,4 @@ alpha-to-beta-desktop/bin/*
 
 .idea
 .idea/*
+.idea/workspace.xml
