@@ -88,6 +88,7 @@ public class World
         {
             player.position.x = spawnPos.getRectangle().x;
             player.position.y = spawnPos.getRectangle().y;
+            player.velocity.set(0, 0);
         }
 
         player.setCollisionLayer(new CollisionLayer(tileMap.getTileLayer(1)));

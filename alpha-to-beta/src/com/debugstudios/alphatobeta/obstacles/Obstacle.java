@@ -7,6 +7,7 @@
 
 package com.debugstudios.alphatobeta.obstacles;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.debugstudios.framework.gameobjects.Entity;
 
 /**
@@ -16,6 +17,8 @@ public class Obstacle extends Entity
 {
     public float slowdown;
     public float damage;
+    // Use texture for now
+    public Texture texture;
 
     public Obstacle(float x, float y, float width, float height)
     {
