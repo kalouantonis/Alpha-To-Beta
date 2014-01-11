@@ -1,6 +1,5 @@
 package com.debugstudios.framework.datastructures;
 
-import android.util.FloatMath;
 import com.badlogic.gdx.math.MathUtils;
 import com.debugstudios.framework.gameobjects.DynamicEntity;
 import com.debugstudios.framework.gameobjects.Entity;
@@ -133,11 +132,11 @@ public class SpatialHashGrid
         // Relative
 
         // Lower left
-        int x1 = (int) FloatMath.floor(obj.position.x / cellSize);
-        int y1 = (int) FloatMath.floor(obj.position.y + obj.height / cellSize);
+        int x1 = (int) MathUtils.floor(obj.position.x / cellSize);
+        int y1 = (int) MathUtils.floor(obj.position.y + obj.height / cellSize);
         // Top right
-        int x2 = (int) FloatMath.floor((obj.position.x + obj.width) / cellSize);
-        int y2 = (int) FloatMath.floor((obj.position.y) / cellSize);
+        int x2 = (int) MathUtils.floor((obj.position.x + obj.width) / cellSize);
+        int y2 = (int) MathUtils.floor((obj.position.y) / cellSize);
 
         // Item contained withing one cell
         if(x1 == x2 && y1 == y2)

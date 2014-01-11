@@ -9,6 +9,7 @@ package com.debugstudios.alphatobeta.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.debugstudios.framework.parsers.AbstractLoader;
 import com.debugstudios.framework.parsers.SAXFactory;
 import com.debugstudios.framework.parsers.SchemaValidator;
 import com.debugstudios.framework.tilemap.TileMap;
@@ -25,7 +26,7 @@ import java.io.IOException;
 /**
  * Created by Antonis Kalou on 26/12/13.
  */
-public class MapLoader extends DefaultHandler
+public class MapLoader extends AbstractLoader
 {
     private static final String TAG = MapLoader.class.getSimpleName();
 

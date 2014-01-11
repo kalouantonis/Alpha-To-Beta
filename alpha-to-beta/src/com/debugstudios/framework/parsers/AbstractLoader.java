@@ -31,4 +31,6 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public abstract class AbstractLoader extends DefaultHandler
 {
+    // TODO: Add functionality for listening for file changes.
+    // TODO: This way, we have automagic engine reloading
 }

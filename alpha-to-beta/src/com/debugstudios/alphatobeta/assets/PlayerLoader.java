@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.alphatobeta.utils.SpeedRegionPair;
 import com.debugstudios.framework.graphics.AnimUtils;
+import com.debugstudios.framework.parsers.AbstractLoader;
 import com.debugstudios.framework.parsers.SAXFactory;
 import com.debugstudios.framework.parsers.SchemaValidator;
 import org.xml.sax.Attributes;
@@ -27,7 +28,7 @@ import java.io.IOException;
 /**
  * Created by Antonis Kalou on 18/12/13.
  */
-public class PlayerLoader extends DefaultHandler
+public class PlayerLoader extends AbstractLoader
 {
     /** Tag to use for logging */
     private static final String TAG = PlayerLoader.class.getSimpleName();

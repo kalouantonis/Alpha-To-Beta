@@ -17,8 +17,7 @@ public class Obstacle extends Entity
 {
     public float slowdown;
     public float damage;
-    // Use texture for now
-    public Texture texture;
+    public float mass;
 
     public Obstacle(float x, float y, float width, float height)
     {

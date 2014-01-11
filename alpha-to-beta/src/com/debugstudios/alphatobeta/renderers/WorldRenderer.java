@@ -8,12 +8,11 @@
 package com.debugstudios.alphatobeta.renderers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.debugstudios.alphatobeta.World;
 import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.framework.graphics.Camera;
-
-import javax.microedition.khronos.opengles.GL10;
 
 /**
  * Created by slacker on 15/12/13.
