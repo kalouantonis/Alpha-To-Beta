@@ -8,7 +8,6 @@
 package com.debugstudios.alphatobeta.assets;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.debugstudios.alphatobeta.obstacles.Obstacle;
 import com.debugstudios.alphatobeta.obstacles.ObstacleBuilder;
 import com.debugstudios.alphatobeta.obstacles.ObstacleFactory;
@@ -16,7 +15,6 @@ import com.debugstudios.framework.parsers.AbstractLoader;
 import com.debugstudios.framework.parsers.SAXFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -32,15 +30,17 @@ public class ObstacleLoader extends AbstractLoader
 
     String id;
 
-    boolean inPhysics;
+    boolean inPhysics = false;
     float width;
     float height;
+
+    boolean inMass = false;
     float mass;
 
-    boolean inDamage;
+    boolean inDamage = false;
     float damage;
 
-    boolean inSlowdown;
+    boolean inSlowdown = false;
     float slowdown;
 
 
@@ -53,7 +53,8 @@ public class ObstacleLoader extends AbstractLoader
         {
             SAXParser parser = SAXFactory.getInstance().createParser();
 
-            parser.parse(Gdx.files.internal(internalFile).path(), this);
+            //parser.parse(Gdx.files.internal(internalFile).path(), this);
+            parser.parse(internalFile, this);
         } catch (SAXException e)
         {
             e.printStackTrace();
@@ -126,6 +127,10 @@ public class ObstacleLoader extends AbstractLoader
             width = Float.valueOf(attributes.getValue("width"));
             height = Float.valueOf(attributes.getValue("height"));
         }
+        else if(inPhysics && qName.equalsIgnoreCase("mass"))
+        {
+            inMass = true;
+        }
         else if(qName.equalsIgnoreCase("Damage"))
         {
             inDamage = true;
@@ -142,6 +147,10 @@ public class ObstacleLoader extends AbstractLoader
         if(qName.equalsIgnoreCase("Physics"))
         {
             inPhysics = false;
+        }
+        else if(inPhysics && qName.equalsIgnoreCase("mass"))
+        {
+            inMass = false;
         }
         else if(qName.equalsIgnoreCase("Damage"))
         {
@@ -172,7 +181,7 @@ public class ObstacleLoader extends AbstractLoader
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException
     {
-        if(inPhysics)
+        if(inMass)
         {
             mass = Float.parseFloat(String.valueOf(ch, start, length));
         }
