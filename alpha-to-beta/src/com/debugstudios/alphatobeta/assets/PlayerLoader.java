@@ -18,7 +18,6 @@ import com.debugstudios.framework.parsers.SAXFactory;
 import com.debugstudios.framework.parsers.SchemaValidator;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;

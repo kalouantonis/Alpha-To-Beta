@@ -8,8 +8,6 @@
 package com.debugstudios.alphatobeta;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.debugstudios.alphatobeta.assets.MapLoader;
 import com.debugstudios.alphatobeta.assets.PlayerLoader;

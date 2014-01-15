@@ -24,6 +24,7 @@ public class ObstacleFactory
     public Obstacle create(String tag, float x, float y)
     {
         // Create new obstacle using copy constructor
+        // TODO: Use pool
         return new Obstacle(obstacleTemplateMap.get(tag), x, y);
     }
 

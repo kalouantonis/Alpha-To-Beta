@@ -8,19 +8,16 @@
 package com.debugstudios.alphatobeta.assets;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.debugstudios.framework.parsers.AbstractLoader;
 import com.debugstudios.framework.parsers.SAXFactory;
 import com.debugstudios.framework.parsers.SchemaValidator;
 import com.debugstudios.framework.tilemap.TileMap;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
-import java.io.File;
 import java.io.IOException;
 
 /**
