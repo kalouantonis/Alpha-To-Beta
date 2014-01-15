@@ -14,25 +14,26 @@ import java.util.TreeMap;
  */
 public class ObstacleFactory
 {
-    private TreeMap<String, ObstacleBuilder> obstacleBuilderMap;
+    private TreeMap<String, Obstacle> obstacleTemplateMap;
 
     public ObstacleFactory()
     {
-        obstacleBuilderMap = new TreeMap<String, ObstacleBuilder>();
+        obstacleTemplateMap = new TreeMap<String, Obstacle>();
     }
 
     public Obstacle create(String tag, float x, float y)
     {
-        return obstacleBuilderMap.get(tag).create(x, y);
+        // Create new obstacle using copy constructor
+        return new Obstacle(obstacleTemplateMap.get(tag), x, y);
     }
 
-    public void addObstacleBuilder(String tag, ObstacleBuilder factory)
+    public void addObstacleTemplate(String tag, Obstacle template)
     {
-        obstacleBuilderMap.put(tag, factory);
+        obstacleTemplateMap.put(tag, template);
     }
 
-    public void clearObstacleBuilders()
+    public void clearObstacleTemplates()
     {
-        obstacleBuilderMap.clear();
+        obstacleTemplateMap.clear();
     }
 }

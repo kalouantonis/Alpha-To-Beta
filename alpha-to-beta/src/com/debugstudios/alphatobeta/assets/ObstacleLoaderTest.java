@@ -43,12 +43,20 @@ public class ObstacleLoaderTest
         loader.loadDirectory("/home/slacker/IdeaProjects/alpha-to-beta/alpha-to-beta-android/assets/objects/obstacles",
                 factory, false);
 
-        Obstacle rock = factory.create("rock", 0, 0);
+        Obstacle tmpObstacle = factory.create("rock", 0, 0);
 
-        Assert.assertTrue(rock.width == 16);
-        Assert.assertTrue(rock.height == 16);
-        Assert.assertTrue(rock.mass == 2);
-        Assert.assertTrue(rock.slowdown == 0.1f);
-        Assert.assertTrue(rock.damage == 10);
+        Assert.assertTrue(tmpObstacle.width == 16);
+        Assert.assertTrue(tmpObstacle.height == 16);
+        Assert.assertTrue(tmpObstacle.mass == 2);
+        Assert.assertTrue(tmpObstacle.slowdown == 0.1f);
+        Assert.assertTrue(tmpObstacle.damage == 10);
+
+        tmpObstacle = factory.create("tree", 0, 0);
+
+        Assert.assertTrue(tmpObstacle.width == 8);
+        Assert.assertTrue(tmpObstacle.height == 16);
+        Assert.assertTrue(tmpObstacle.mass == 7);
+        Assert.assertTrue(tmpObstacle.slowdown == 1);
+        Assert.assertTrue(tmpObstacle.damage == 1);
     }
 }

@@ -28,10 +28,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92ebc313-3081-4d16-bdbc-86854757c594" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoaderTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/.classpath" afterPath="$PROJECT_DIR$/alpha-to-beta/.classpath" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/obstacles/tree.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/ObstacleBuilder.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/Obstacle.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/Obstacle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/ObstacleFactory.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/ObstacleFactory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoader.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/SpatialHashGrid.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/SpatialHashGrid.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoaderTest.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoaderTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="alpha-to-beta.iws" />
@@ -148,7 +151,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoader.java" line="118" class="com.debugstudios.alphatobeta.assets.ObstacleLoader" package="com.debugstudios.alphatobeta.assets">
+      <breakpoint url="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoaderTest.java" line="53" class="com.debugstudios.alphatobeta.assets.ObstacleLoaderTest" package="com.debugstudios.alphatobeta.assets">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -163,7 +166,82 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoader.java" line="146" class="com.debugstudios.alphatobeta.assets.ObstacleLoader" package="com.debugstudios.alphatobeta.assets">
+      <breakpoint url="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoaderTest.java" line="42" class="com.debugstudios.alphatobeta.assets.ObstacleLoaderTest" package="com.debugstudios.alphatobeta.assets">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoader.java" line="85" class="com.debugstudios.alphatobeta.assets.ObstacleLoader" package="com.debugstudios.alphatobeta.assets">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoader.java" line="117" class="com.debugstudios.alphatobeta.assets.ObstacleLoader" package="com.debugstudios.alphatobeta.assets">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoader.java" line="145" class="com.debugstudios.alphatobeta.assets.ObstacleLoader" package="com.debugstudios.alphatobeta.assets">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoader.java" line="175" class="com.debugstudios.alphatobeta.assets.ObstacleLoader" package="com.debugstudios.alphatobeta.assets">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoaderTest.java" line="45" class="com.debugstudios.alphatobeta.assets.ObstacleLoaderTest" package="com.debugstudios.alphatobeta.assets">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -207,19 +285,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ObstacleLoader.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoader.java">
+      <file leaf-file-name="ObstacleLoaderTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoaderTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="36" selection-start="898" selection-end="898" vertical-scroll-proportion="0.041002277" vertical-offset="144" max-vertical-offset="3258">
+            <state line="53" column="0" selection-start="1795" selection-end="1795" vertical-scroll-proportion="0.0" vertical-offset="570" max-vertical-offset="1134">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Obstacle.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/Obstacle.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="40" column="0" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.9430524" vertical-offset="198" max-vertical-offset="738">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TmxMapLoader.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/maps/tiled/TmxMapLoader.java">
+      <file leaf-file-name="ObstacleFactory.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/ObstacleFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="86" column="11" selection-start="3740" selection-end="3740" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="11106">
+            <state line="25" column="52" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0" vertical-offset="103" max-vertical-offset="720">
               <folding />
             </state>
           </provider>
@@ -238,7 +327,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/HumanPlayer.xml" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/utils/Debug.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/utils/Cleanup.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/utils/Cleanup.java" />
@@ -271,14 +359,10 @@
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/maps/map.xml" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Obstacle.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/ObstacleBuilder.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/obstacles/rock.xsd" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/obstacles/rock.xml" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/renderers/WorldRenderer.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/ObstacleFactory.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/Obstacle.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/MapLoader.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoader.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/parsers/AbstractLoader.java" />
@@ -287,8 +371,13 @@
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/SpatialHashGrid.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/PlayerLoaderTest.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/schemas/ObstacleSchema.xml" />
+        <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/obstacles/tree.xml" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoaderTest.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/ObstacleBuilder.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoader.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/ObstacleFactory.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/Obstacle.java" />
       </list>
     </option>
   </component>
@@ -753,6 +842,7 @@
       <recent name="com.debugstudios.framework.collections" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/obstacles" />
       <recent name="C:\Users\Slacker\Programming\alpha-to-beta\alpha-to-beta-android\assets\objects" />
       <recent name="C:\Users\Slacker\Programming\alpha-to-beta\alpha-to-beta-android\assets\schemas" />
     </key>
@@ -816,7 +906,13 @@
       </option>
       <envs />
       <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -1079,7 +1175,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2603834" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43610224" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3206951" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18504532" sideWeight="0.5008" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1156,11 +1252,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/input/PlayerTouchHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="13" selection-start="595" selection-end="595" vertical-scroll-proportion="0.3690205" vertical-offset="0" max-vertical-offset="2286" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/input/PlayerOuyaHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="37" column="12" selection-start="1016" selection-end="1016" vertical-scroll-proportion="0.0" vertical-offset="576" max-vertical-offset="1656" />
@@ -1336,20 +1427,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/Obstacle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="659" selection-end="659" vertical-scroll-proportion="0.0" vertical-offset="29" max-vertical-offset="468">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/ObstacleBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="44" selection-start="560" selection-end="560" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="27" selection-start="870" selection-end="870" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2268">
@@ -1408,20 +1485,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="25" selection-start="1416" selection-end="1416" vertical-scroll-proportion="0.0" vertical-offset="592" max-vertical-offset="1242">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/ObstacleFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="630" selection-end="630" vertical-scroll-proportion="0.0" vertical-offset="101" max-vertical-offset="702">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-1.7.0-openjdk-i386/jre/lib/rt.jar!/sun/misc/FloatingDecimal.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="106" column="0" selection-start="4344" selection-end="4344" vertical-scroll-proportion="0.0" vertical-offset="1572" max-vertical-offset="1998">
@@ -1450,15 +1513,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoaderTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1312" selection-end="1312" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="990">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/MapLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="132" column="20" selection-start="3813" selection-end="3813" vertical-scroll-proportion="0.0" vertical-offset="1566" max-vertical-offset="2232">
@@ -1475,14 +1529,51 @@
     </entry>
     <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/maps/tiled/TmxMapLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="11" selection-start="3740" selection-end="3740" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="11106">
+        <state line="86" column="11" selection-start="3740" selection-end="3740" vertical-scroll-proportion="-1.7323943" vertical-offset="1350" max-vertical-offset="11106">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta-android/assets/objects/obstacles/tree.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="14" selection-start="546" selection-end="546" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="0" selection-start="1541" selection-end="1541" vertical-scroll-proportion="0.0" vertical-offset="592" max-vertical-offset="1242">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="36" selection-start="898" selection-end="898" vertical-scroll-proportion="0.041002277" vertical-offset="144" max-vertical-offset="3258">
+        <state line="50" column="45" selection-start="1364" selection-end="1364" vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="3240">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/assets/ObstacleLoaderTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="0" selection-start="1795" selection-end="1795" vertical-scroll-proportion="0.0" vertical-offset="570" max-vertical-offset="1134">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/ObstacleFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="52" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0" vertical-offset="103" max-vertical-offset="720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/obstacles/Obstacle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="0" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.9430524" vertical-offset="198" max-vertical-offset="738">
           <folding />
         </state>
       </provider>

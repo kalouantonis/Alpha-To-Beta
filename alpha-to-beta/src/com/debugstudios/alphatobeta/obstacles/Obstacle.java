@@ -23,4 +23,19 @@ public class Obstacle extends Entity
     {
         super(x, y, width, height);
     }
+
+    /**
+     * Copy constructor
+     *
+     * @param another Object to copy
+     * @param x X position
+     * @param y Y position
+     */
+    public Obstacle(Obstacle another, float x, float y)
+    {
+        super(x, y, another.width, another.height);
+        slowdown = another.slowdown;
+        damage = another.damage;
+        mass = another.mass;
+    }
 }

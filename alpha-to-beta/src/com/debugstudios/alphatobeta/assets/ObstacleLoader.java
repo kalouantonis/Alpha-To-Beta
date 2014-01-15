@@ -7,9 +7,7 @@
 
 package com.debugstudios.alphatobeta.assets;
 
-import com.badlogic.gdx.Gdx;
 import com.debugstudios.alphatobeta.obstacles.Obstacle;
-import com.debugstudios.alphatobeta.obstacles.ObstacleBuilder;
 import com.debugstudios.alphatobeta.obstacles.ObstacleFactory;
 import com.debugstudios.framework.parsers.AbstractLoader;
 import com.debugstudios.framework.parsers.SAXFactory;
@@ -24,6 +22,7 @@ import java.nio.file.*;
 /**
  * Created by Antonis Kalou on 05/01/14.
  */
+// TODO: Use GDX ASync parser
 public class ObstacleLoader extends AbstractLoader
 {
     private ObstacleFactory factory;
@@ -47,7 +46,7 @@ public class ObstacleLoader extends AbstractLoader
     public void load(String internalFile, ObstacleFactory factory)
     {
         this.factory = factory;
-        this.factory.clearObstacleBuilders();
+        this.factory.clearObstacleTemplates();
 
         try
         {
@@ -70,7 +69,7 @@ public class ObstacleLoader extends AbstractLoader
     public void loadDirectory(String dirPath, ObstacleFactory factory, boolean recursive)
     {
         this.factory = factory;
-        this.factory.clearObstacleBuilders();
+        this.factory.clearObstacleTemplates();
 
         // Lazy initialization, so that it can be closed in final clause
         // Wont worry about final too much, I don't use it very often
@@ -162,19 +161,12 @@ public class ObstacleLoader extends AbstractLoader
         }
         else if(qName.equalsIgnoreCase("Obstacle"))
         {
-            factory.addObstacleBuilder(id, new ObstacleBuilder()
-            {
-                @Override
-                public Obstacle create(float x, float y)
-                {
-                    Obstacle obstacle = new Obstacle(x, y, width, height);
-                    obstacle.damage = damage;
-                    obstacle.slowdown = slowdown;
-                    obstacle.mass = mass;
+            Obstacle obstacleTemplate = new Obstacle(0, 0, width, height);
+            obstacleTemplate.damage = damage;
+            obstacleTemplate.mass = mass;
+            obstacleTemplate.slowdown = slowdown;
 
-                    return obstacle;
-                }
-            });
+            factory.addObstacleTemplate(id, obstacleTemplate);
         }
     }
 
