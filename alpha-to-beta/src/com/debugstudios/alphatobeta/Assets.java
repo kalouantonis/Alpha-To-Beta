@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.debugstudios.alphatobeta.assets.MapLoader;
 import com.debugstudios.alphatobeta.assets.ObstacleLoader;
 import com.debugstudios.alphatobeta.assets.PlayerLoader;
-import com.debugstudios.framework.tilemap.TileMap;
 
 /**
  * Created by slacker on 12/9/13.

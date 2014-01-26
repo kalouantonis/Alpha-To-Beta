@@ -24,9 +24,6 @@
 
 package com.debugstudios.framework.physics.tweenengine;
 
-import com.badlogic.gdx.math.Vector2;
-import com.debugstudios.framework.gameobjects.DynamicEntity;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

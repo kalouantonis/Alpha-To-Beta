@@ -118,6 +118,28 @@ public class SpatialHashGrid
         }
     }
 
+    public void clearStaticCells()
+    {
+        int len = staticCells.length;
+
+        for (int i = 0; i < len; ++i)
+        {
+           staticCells[i].clear();
+        }
+    }
+
+    public void clearAllCells()
+    {
+        // Both static and dynamic cells are same size
+        int len = staticCells.length;
+
+        for (int i = 0; i < len; ++i)
+        {
+            staticCells[i].clear();
+            dynamicCells[i].clear();
+        }
+    }
+
     public List<Entity> getPotentialColliders(Entity obj)
     {
         foundObjects.clear();

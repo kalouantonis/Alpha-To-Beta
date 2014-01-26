@@ -9,13 +9,11 @@ package com.debugstudios.alphatobeta;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.debugstudios.alphatobeta.obstacles.ObstacleFactory;
 import com.debugstudios.alphatobeta.players.HumanPlayer;
 import com.debugstudios.alphatobeta.players.Player;
-import com.debugstudios.alphatobeta.screens.PlayScreen;
 import com.debugstudios.framework.datastructures.SpatialHashGrid;
 import com.debugstudios.framework.graphics.Camera;
 import com.debugstudios.framework.tilemap.CollisionLayer;
@@ -36,9 +34,6 @@ public class World
 
     private final int NUM_PLAYERS = 5;
 
-//    public static final float WORLD_WIDTH = 480;
-//    public static final float WORLD_HEIGHT = 360;
-
     public TileMap tileMap;
     private Camera camera;
 
@@ -58,7 +53,7 @@ public class World
 
         players = new ArrayList<Player>(NUM_PLAYERS);
 
-        obstacleGrid = new SpatialHashGrid(WORLD_WIDTH, WORLD_HEIGHT, 100);
+        obstacleGrid = new SpatialHashGrid(WORLD_WIDTH, WORLD_HEIGHT, WORLD_WIDTH / 2.f);
 
         // TODO: Thread this, show loading screen
         reloadScene();
@@ -121,7 +116,6 @@ public class World
 
         player.setCollisionLayer(new CollisionLayer(tileMap.getTileLayer(1)));
 
-
         // Load rest of attributes from loaders
         Assets.playerLoader.load("objects/players/HumanPlayer.xml", player, Assets.humanPlayerSheet);
 
@@ -167,7 +161,6 @@ public class World
                                             // X World coords
                                             x * tileWidth,
                                             // Y World coords. Y is inverted
-                                            //((layerHeight - 1) - y) * tileHeight)
                                             y * tileHeight
                                     )
                             );
@@ -186,7 +179,7 @@ public class World
     {
         if(!obstacleGrid.getPotentialColliders(player).isEmpty())
         {
-            Gdx.app.log(TAG, "Collision with obstacle");
+            Gdx.app.log(TAG, "Potential Collision with obstacle");
         }
 
         updateCharacters(deltaTime);

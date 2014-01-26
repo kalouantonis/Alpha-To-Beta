@@ -17,13 +17,10 @@ import com.debugstudios.alphatobeta.World;
 import com.debugstudios.alphatobeta.input.PlayerInputHandler;
 import com.debugstudios.alphatobeta.input.PlayerOuyaHandler;
 import com.debugstudios.alphatobeta.input.PlayerTouchHandler;
-import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.alphatobeta.renderers.WorldDebugRenderer;
 import com.debugstudios.alphatobeta.renderers.WorldRenderer;
 import com.debugstudios.framework.Game;
-import com.debugstudios.framework.graphics.Camera;
 import com.debugstudios.framework.screens.GameScreen;
-import com.debugstudios.framework.tilemap.TileMap;
 import com.debugstudios.framework.utils.Debug;
 
 

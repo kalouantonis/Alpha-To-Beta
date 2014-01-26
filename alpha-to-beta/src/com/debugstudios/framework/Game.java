@@ -30,8 +30,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.debugstudios.framework.screens.GameScreen;
 import com.debugstudios.framework.utils.Cleanup;
 
-import java.util.Stack;
-
 public abstract class Game implements ApplicationListener
 {
     private static final String TAG = Game.class.getSimpleName();
