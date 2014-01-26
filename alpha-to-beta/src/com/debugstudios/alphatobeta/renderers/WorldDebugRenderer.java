@@ -25,9 +25,9 @@ public class WorldDebugRenderer
     World world;
     SpriteBatch batch;
 
-    public WorldDebugRenderer(Camera camera, SpriteBatch batch, World world)
+    public WorldDebugRenderer(SpriteBatch batch, World world)
     {
-        this.renderer = new DebugRenderer(camera);
+        this.renderer = new DebugRenderer(world.getCamera());
 
         this.batch = batch;
         this.world = world;

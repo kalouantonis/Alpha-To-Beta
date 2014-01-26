@@ -12,6 +12,7 @@ import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.controllers.mappings.Ouya;
 import com.badlogic.gdx.math.Vector3;
+import com.debugstudios.alphatobeta.World;
 import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.framework.graphics.Camera;
 
@@ -23,10 +24,10 @@ public class PlayerOuyaHandler implements ControllerListener
     private Camera camera;
     private Player player;
 
-    public PlayerOuyaHandler(Camera camera, Player player)
+    public PlayerOuyaHandler(World world)
     {
-        this.camera = camera;
-        this.player = player;
+        this.camera = world.getCamera();
+        this.player = world.player;
     }
 
     @Override

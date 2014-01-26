@@ -57,6 +57,7 @@ public class ObstacleLoader extends AbstractLoader
 
             //parser.parse(Gdx.files.internal(internalFile).path(), this);
             parser.parse(internalFile, this);
+
         } catch (SAXException e)
         {
             e.printStackTrace();

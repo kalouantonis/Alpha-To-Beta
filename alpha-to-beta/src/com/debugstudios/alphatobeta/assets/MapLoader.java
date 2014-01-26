@@ -62,7 +62,7 @@ public class MapLoader extends AbstractLoader
 
             schemaValidator.validate(internalFile);
 
-            parser.parse(Gdx.files.internal(internalFile).path(), this);
+            parser.parse(internalFile, this);
 
             Gdx.app.debug(TAG, "XML File loading successful: " + internalFile);
         } catch (SAXException e)

@@ -56,8 +56,8 @@ public class SpatialHashGrid
     {
         this.cellSize = cellSize;
 
-        this.cellsPerRow = (int) MathUtils.ceil(worldWidth / cellSize);
-        this.cellsPerCol = (int) MathUtils.ceil(worldHeight / cellSize);
+        this.cellsPerRow = MathUtils.ceil(worldWidth / cellSize);
+        this.cellsPerCol = MathUtils.ceil(worldHeight / cellSize);
 
         int numCells = cellsPerRow * cellsPerCol;
 
@@ -108,7 +108,7 @@ public class SpatialHashGrid
         }
     }
 
-    public void clearDynamicCells(Entity obj)
+    public void clearDynamicCells()
     {
         int len = dynamicCells.length;
 
@@ -156,11 +156,11 @@ public class SpatialHashGrid
         // Relative
 
         // Lower left
-        int x1 = (int) MathUtils.floor(obj.position.x / cellSize);
-        int y1 = (int) MathUtils.floor(obj.position.y + obj.height / cellSize);
+        int x1 = MathUtils.floor(obj.position.x / cellSize);
+        int y1 = MathUtils.floor((obj.position.y + obj.height) / cellSize);
         // Top right
-        int x2 = (int) MathUtils.floor((obj.position.x + obj.width) / cellSize);
-        int y2 = (int) MathUtils.floor((obj.position.y) / cellSize);
+        int x2 = MathUtils.floor((obj.position.x + obj.width) / cellSize);
+        int y2 = MathUtils.floor((obj.position.y) / cellSize);
 
         // Item contained withing one cell
         if(x1 == x2 && y1 == y2)

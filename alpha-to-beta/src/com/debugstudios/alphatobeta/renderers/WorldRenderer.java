@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.debugstudios.alphatobeta.World;
 import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.framework.graphics.Camera;
+import com.debugstudios.framework.tilemap.TileMap;
 
 /**
  * Created by slacker on 15/12/13.
@@ -24,13 +25,15 @@ public class WorldRenderer
     private World world;
     private SpriteBatch batch;
     private Camera camera;
+    private TileMap tileMap;
 
-    public WorldRenderer(Camera camera, SpriteBatch batch, World world)
+    public WorldRenderer(SpriteBatch batch, World world)
     {
-        this.camera = camera;
         this.batch = batch;
         this.world = world;
+        this.camera = world.getCamera();
 
+        this.tileMap = this.world.tileMap;
     }
 
     public void render()
@@ -53,12 +56,12 @@ public class WorldRenderer
 
     private void renderBackgroundTileMap()
     {
-        world.tileMap.drawBackground();
+        tileMap.drawBackground();
     }
 
     private void renderForegroundTileMap()
     {
-        world.tileMap.drawForeground();
+        tileMap.drawForeground();
     }
 
     private void renderPlayers()
@@ -78,8 +81,9 @@ public class WorldRenderer
                 batch.draw(player.getAnimationFrame(player.idleAnimation), xPos, yPos,
                         player.width, player.height);
         }
+    }
 
-
-
+    public void dispose()
+    {
     }
 }

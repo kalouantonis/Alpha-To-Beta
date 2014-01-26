@@ -34,48 +34,32 @@ public class PlayScreen implements GameScreen
 {
     private static final String TAG = PlayScreen.class.getSimpleName();
 
-    private Camera camera;
-
     private WorldRenderer worldRenderer;
     private WorldDebugRenderer debugRenderer;
 
-//    private int[] backgroundLayers;
-//    private int[] foregroundLayers;
-
-    private final float WORLD_WIDTH = 480;
-    private final float WORLD_HEIGHT = 360;
-
-    World world;
+    private World world;
 
     public PlayScreen(Game game)
     {
-        Assets.loadAll("objects/maps/map2.xml");
-
-        camera = new Camera(WORLD_WIDTH, WORLD_HEIGHT);
+        Assets.loadAll();
 
 
-        TileMap tileMap = Assets.map;
-        tileMap.setCamera(camera);
+        world = new World();
 
-
-        world = new World(tileMap);
-
-        Player player = world.player;
-
-        SpriteBatch spriteBatch = tileMap.getSpriteBatch();
-        worldRenderer = new WorldRenderer(camera, spriteBatch, world);
-        debugRenderer = new WorldDebugRenderer(camera, spriteBatch, world);
+        SpriteBatch spriteBatch = world.tileMap.getSpriteBatch();
+        worldRenderer = new WorldRenderer(spriteBatch, world);
+        debugRenderer = new WorldDebugRenderer(spriteBatch, world);
 
 
         switch (Gdx.app.getType())
         {
             case Android:
                 // TODO: Check if Ouya registers as android app
-                Gdx.input.setInputProcessor(new PlayerTouchHandler(camera, player));
+                Gdx.input.setInputProcessor(new PlayerTouchHandler(world));
                 Gdx.app.debug(TAG, "Using Android input handler");
                 break;
             case Desktop:
-                Gdx.input.setInputProcessor(new PlayerInputHandler(camera, player));
+                Gdx.input.setInputProcessor(new PlayerInputHandler(world));
                 Gdx.app.debug(TAG, "Using Desktop input handler");
                 break;
             default:
@@ -83,9 +67,7 @@ public class PlayScreen implements GameScreen
         }
 
         if(Ouya.runningOnOuya)
-            Controllers.addListener(new PlayerOuyaHandler(camera, player));
-
-        camera.setTarget(player);
+            Controllers.addListener(new PlayerOuyaHandler(world));
 
         Gdx.gl.glClearColor(135.f / 255.f, 206.f / 255.f, 235.f / 255.f, 1);
     }
@@ -95,11 +77,7 @@ public class PlayScreen implements GameScreen
     {
         world.pollInput();
 
-        if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT))
-            camera.addZoom(0.1f);
-        else if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
-            camera.addZoom(-0.1f);
-        else if(Gdx.input.isKeyPressed(Input.Keys.G))
+        if(Gdx.input.isKeyPressed(Input.Keys.G))
         {
             Debug.dumpHeap(TAG);
         }
@@ -141,6 +119,11 @@ public class PlayScreen implements GameScreen
     {
         Assets.unload();
         debugRenderer.dispose();
+
+        // Dispose sequence is important.
+        // Remove items that reference world data first
+        worldRenderer.dispose();
+        world.dispose();
     }
 
     @Override

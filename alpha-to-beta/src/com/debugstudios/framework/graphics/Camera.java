@@ -61,11 +61,6 @@ public class Camera extends OrthographicCamera
         this.position.set(0, 0, 0);
         this.zoom = 1.f;
 
-        // Positive Y
-        //this.setToOrtho(false, viewportWidth, viewportHeight);
-
-        Gdx.app.debug(LOG_TAG, "Viewport --> width: " + viewportWidth + ", height: " + viewportHeight);
-
         this.update();
     }
 

@@ -37,4 +37,9 @@ public class ObstacleFactory
     {
         obstacleTemplateMap.clear();
     }
+
+    public boolean contains(String id)
+    {
+        return obstacleTemplateMap.containsKey(id);
+    }
 }

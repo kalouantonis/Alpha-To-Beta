@@ -11,6 +11,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+import com.debugstudios.alphatobeta.World;
 import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.framework.graphics.Camera;
 
@@ -22,10 +23,10 @@ public class PlayerTouchHandler implements InputProcessor, GestureDetector.Gestu
     Player player;
     Camera camera;
 
-    public PlayerTouchHandler(Camera camera, Player player)
+    public PlayerTouchHandler(World world)
     {
-        this.player = player;
-        this.camera = camera;
+        this.player = world.player;
+        this.camera = world.getCamera();
     }
 
     @Override

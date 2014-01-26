@@ -10,6 +10,7 @@ package com.debugstudios.alphatobeta;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.debugstudios.alphatobeta.assets.MapLoader;
+import com.debugstudios.alphatobeta.assets.ObstacleLoader;
 import com.debugstudios.alphatobeta.assets.PlayerLoader;
 import com.debugstudios.framework.tilemap.TileMap;
 
@@ -22,10 +23,10 @@ public class Assets
 {
     private static final String TAG = Assets.class.getSimpleName();
 
-    public static TileMap map = null;
     public static TextureAtlas humanPlayerSheet = null;
     public static PlayerLoader playerLoader = null;
     public static MapLoader mapLoader = null;
+    public static ObstacleLoader obstacleLoader = null;
 
     /** Do not allow instantiation */
     private Assets()
@@ -33,16 +34,19 @@ public class Assets
         throw new AssertionError("Assets class can not be instantiated");
     }
 
-    public static void loadAll(String tileMapFile)
+    public static void loadAll()
     {
         loadTextures();
         Gdx.app.debug(TAG, "Textures loaded");
 
-        loadMap(tileMapFile);
-        Gdx.app.debug(TAG, "Tilemap file: " + tileMapFile + " loaded");
+        mapLoader = new MapLoader();
+        Gdx.app.debug(TAG, "Map Loader created");
 
         playerLoader = new PlayerLoader();
         Gdx.app.debug(TAG, "Player loader created");
+
+        obstacleLoader = new ObstacleLoader();
+        Gdx.app.debug(TAG, "Obstacle loader created");
     }
 
     public static void loadTextures()
@@ -50,23 +54,8 @@ public class Assets
         humanPlayerSheet = new TextureAtlas("img/player.txt");
     }
 
-
-    public static void loadMap(String internalFile)
-    {
-        if(mapLoader == null)
-            mapLoader = new MapLoader();
-        else
-            // Clear previous map
-            map.dispose();
-
-        map = new TileMap();
-    }
-
     public static void unload()
     {
         humanPlayerSheet.dispose();
-
-        if(map != null)
-            map.dispose();
     }
 }

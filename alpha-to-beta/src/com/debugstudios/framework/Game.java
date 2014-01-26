@@ -30,11 +30,16 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.debugstudios.framework.screens.GameScreen;
 import com.debugstudios.framework.utils.Cleanup;
 
+import java.util.Stack;
+
 public abstract class Game implements ApplicationListener
 {
     private static final String TAG = Game.class.getSimpleName();
 
     GameScreen screen;
+
+    // TODO: implement stack structure
+//    private Stack<GameScreen> screenStack;
 
     // Screen assets can be loaded here
     AssetManager assetManager;
@@ -45,6 +50,7 @@ public abstract class Game implements ApplicationListener
 
     public Game()
     {
+//        screenStack = new Stack<GameScreen>();
     }
 
     @Override
@@ -85,7 +91,7 @@ public abstract class Game implements ApplicationListener
 
         float deltaTime = Gdx.graphics.getDeltaTime();
 
-        // TODO: Check device frame rate
+        // FIXME: Check device frame rate
         if(deltaTime > 0.1f)
             deltaTime = 0.1f;
 

@@ -9,6 +9,7 @@ package com.debugstudios.alphatobeta.input;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.debugstudios.alphatobeta.World;
 import com.debugstudios.alphatobeta.players.Player;
 import com.debugstudios.framework.graphics.Camera;
 
@@ -24,10 +25,10 @@ public class PlayerInputHandler implements InputProcessor
     Player player;
     Camera camera;
 
-    public PlayerInputHandler(Camera camera, Player player)
+    public PlayerInputHandler(World world)
     {
-        this.player = player;
-        this.camera = camera;
+        this.player = world.player;
+        this.camera = world.getCamera();
     }
 
     @Override
