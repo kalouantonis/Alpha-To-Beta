@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework;
+package com.debugstudios.framework.math;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.debugstudios.framework.gameobjects.Entity;
 
 /**

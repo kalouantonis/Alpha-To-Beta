@@ -25,7 +25,7 @@
 package com.debugstudios.framework.datastructures;
 
 import com.badlogic.gdx.math.Rectangle;
-import com.debugstudios.framework.OverlapTester;
+import com.debugstudios.framework.math.OverlapTester;
 import com.debugstudios.framework.gameobjects.Entity;
 import org.junit.Test;
 
