@@ -11,16 +11,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Rectangle;
+import com.debugstudios.alphatobeta.obstacles.Obstacle;
 import com.debugstudios.alphatobeta.obstacles.ObstacleFactory;
 import com.debugstudios.alphatobeta.players.HumanPlayer;
 import com.debugstudios.alphatobeta.players.Player;
+import com.debugstudios.framework.OverlapTester;
+import com.debugstudios.framework.datastructures.QuadTree;
 import com.debugstudios.framework.datastructures.SpatialHashGrid;
+import com.debugstudios.framework.gameobjects.Entity;
 import com.debugstudios.framework.graphics.Camera;
 import com.debugstudios.framework.tilemap.CollisionLayer;
 import com.debugstudios.framework.tilemap.TileMap;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Antonis Kalou on 12/9/13.
@@ -40,7 +46,9 @@ public class World
     public Player player = null;
     // NOTE: If using threads, use Vector --> Is the very bestest best when thread run...
     public ArrayList<Player> players;
-    public SpatialHashGrid obstacleGrid;
+
+    public QuadTree obstacleGrid;
+    List<Entity> possibleColliders;
 
     public World()
     {
@@ -53,7 +61,8 @@ public class World
 
         players = new ArrayList<Player>(NUM_PLAYERS);
 
-        obstacleGrid = new SpatialHashGrid(WORLD_WIDTH, WORLD_HEIGHT, WORLD_WIDTH / 2.f);
+        obstacleGrid = new QuadTree(0, new Rectangle(0, 0, WORLD_WIDTH * 2, WORLD_HEIGHT * 2));
+        possibleColliders = new ArrayList<Entity>();
 
         // TODO: Thread this, show loading screen
         reloadScene();
@@ -154,7 +163,7 @@ public class World
                         if(factory.contains(id))
                         {
                             // Insert in to obstacle grid
-                            obstacleGrid.insertStaticObject(
+                            obstacleGrid.insert(
                                     factory.create(
                                             // ID from object
                                             id,
@@ -177,9 +186,22 @@ public class World
 
     public void update(float deltaTime)
     {
-        if(!obstacleGrid.getPotentialColliders(player).isEmpty())
+        possibleColliders.clear();
+
+        obstacleGrid.retrieve(possibleColliders, player);
+
+        if(!possibleColliders.isEmpty())
         {
-            Gdx.app.log(TAG, "Potential Collision with obstacle");
+            for(Entity collider : possibleColliders)
+            {
+                if(OverlapTester.overlapEntities(player, collider))
+                {
+                    //Gdx.app.debug(TAG, "Collision detected");
+                    float slowdown = ((Obstacle)collider).slowdown;
+
+                    player.velocity.x -= player.velocity.x < 0 ? -slowdown : slowdown;
+                }
+            }
         }
 
         updateCharacters(deltaTime);

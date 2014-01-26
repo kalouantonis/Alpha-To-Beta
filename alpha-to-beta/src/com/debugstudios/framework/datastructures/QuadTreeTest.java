@@ -25,6 +25,8 @@
 package com.debugstudios.framework.datastructures;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.debugstudios.framework.OverlapTester;
+import com.debugstudios.framework.gameobjects.Entity;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -44,10 +46,13 @@ public class QuadTreeTest
         int worldWidth = 2000;
         int worldHeight = 1000;
 
-        Rectangle dynamicItem = new Rectangle(random.nextInt(worldWidth), random.nextInt(worldHeight), 16, 16);
-        System.out.println("Object position: " + dynamicItem);
+        Entity dynamicItem = new Entity(random.nextInt(worldWidth), random.nextInt(worldHeight), 16, 16);
+        System.out.println("Object position: [" + dynamicItem.position.x + ", " +
+                dynamicItem.position.y + "]");
 
-        Rectangle[] staticItems = new Rectangle[10000];
+        Entity[] staticItems = new Entity[500];
+
+
 
 
         int len = staticItems.length;
@@ -56,28 +61,33 @@ public class QuadTreeTest
             int x = random.nextInt(worldWidth);
             int y = random.nextInt(worldHeight);
 
-            staticItems[i] = new Rectangle(x, y, 16.f, 16.f);
+            staticItems[i] = new Entity(x, y, 16.f, 16.f);
         }
 
         QuadTree quadTree = new QuadTree(0, new Rectangle(0, 0, worldWidth, worldHeight));
 
-        for(Rectangle object : staticItems)
+        for(Entity object : staticItems)
         {
             quadTree.insert(object);
         }
 
-        List<Rectangle> colliders = new ArrayList<Rectangle>();
+        List<Entity> colliders = new ArrayList<Entity>();
 
+        long startTime = System.nanoTime();
         quadTree.retrieve(colliders, dynamicItem);
+        long endTime = System.nanoTime();
+
+        System.out.println("Time taken: " + String.valueOf((endTime - startTime) / 1000000.d) + "ms");
 
         System.out.println("Possible colliders: " + colliders +
                             "\nLength: " + colliders.size());
 
         System.out.println("Real colliders:");
-        for(Rectangle possible : colliders)
+        for(Entity possible : colliders)
         {
-            if(dynamicItem.overlaps(possible))
-                System.out.println("\t" + possible);
+            if(OverlapTester.overlapEntities(dynamicItem, possible))
+                System.out.println("\t[" + possible.position.x + ", " +
+                                    possible.position.y + "]");
         }
     }
 }

@@ -14,5 +14,5 @@
     </Physics>
 
     <damage>10</damage>
-    <slowdown>0.1</slowdown>
+    <slowdown>5</slowdown>
 </Obstacle>

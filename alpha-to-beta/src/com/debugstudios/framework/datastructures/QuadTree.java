@@ -25,6 +25,7 @@
 package com.debugstudios.framework.datastructures;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.debugstudios.framework.gameobjects.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ public class QuadTree
 
     /** Current node level. 0 is topmost */
     private int level;
-    private List<Rectangle> objects;
+    private List<Entity> objects;
     /** Space that node represents */
     private Rectangle bounds;
     private QuadTree[] nodes;
@@ -47,7 +48,7 @@ public class QuadTree
     public QuadTree(int pLevel, Rectangle pBounds)
     {
         level = pLevel;
-        objects = new ArrayList<Rectangle>();
+        objects = new ArrayList<Entity>();
         bounds = pBounds;
         nodes = new QuadTree[4];
     }
@@ -97,19 +98,26 @@ public class QuadTree
      * @param pRect Rectangle area to check
      * @return Returns -1 if object can not fit withing the child nod and is part of the parent node
      */
-    private int getIndex(Rectangle pRect)
+    private int getIndex(Entity pRect)
     {
         int index = -1;
+
+        float x = pRect.position.x;
+        float y = pRect.position.y;
+        float width = pRect.width;
+        float height = pRect.height;
+
         double verticalMidpoint = bounds.getX() + (bounds.getWidth() / 2);
         double horizontalMidpoint = bounds.getY() + (bounds.getHeight() / 2);
 
+
         // Object can completelly fit within the top quadrants
-        boolean topQuadrant = (pRect.getY() < horizontalMidpoint && pRect.getY() + pRect.getHeight() < horizontalMidpoint);
+        boolean topQuadrant = (y < horizontalMidpoint && y + height < horizontalMidpoint);
         // Object can completely fit within the bottom quadrants
-        boolean bottomQuadrant = (pRect.getY() > horizontalMidpoint);
+        boolean bottomQuadrant = (y > horizontalMidpoint);
 
         // Object can completely fit within the left quadrants
-        if(pRect.getX() < verticalMidpoint && pRect.getX() + pRect.getWidth() < verticalMidpoint)
+        if(x < verticalMidpoint && x + width < verticalMidpoint)
         {
             if(topQuadrant)
             {
@@ -121,7 +129,7 @@ public class QuadTree
             }
         }
         // Object can completely fit within the right quadrants
-        else if(pRect.getX() > verticalMidpoint)
+        else if(x > verticalMidpoint)
         {
             if(topQuadrant)
                 index = 0;
@@ -139,7 +147,7 @@ public class QuadTree
      *
      * @param pRect Object to insert
      */
-    public void insert(Rectangle pRect)
+    public void insert(Entity pRect)
     {
         // Determine if there are any children to add to
         if(nodes[0] != null)
@@ -183,7 +191,7 @@ public class QuadTree
      * @param returnObjects Object list to fill
      * @param pRect Object to check
      */
-    public void retrieve(List<Rectangle> returnObjects, Rectangle pRect)
+    public void retrieve(List<Entity> returnObjects, Entity pRect)
     {
         int index = getIndex(pRect);
         if(index != -1 && nodes[0] != null)
