@@ -28,13 +28,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92ebc313-3081-4d16-bdbc-86854757c594" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/Assets.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/screens/PlayScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/SpatialHashGrid.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/SpatialHashGrid.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/physics/tweenengine/TweenEngine.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/physics/tweenengine/TweenEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/renderers/WorldDebugRenderer.java" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/renderers/WorldDebugRenderer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/QuadTree.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/QuadTreeTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="alpha-to-beta.iws" />
@@ -196,6 +191,21 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/QuadTreeTest.java" line="70" class="com.debugstudios.framework.datastructures.QuadTreeTest" package="com.debugstudios.framework.datastructures">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
     </line_breakpoints>
     <method_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint url="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/TileMap.java" line="126" class="com.debugstudios.framework.tilemap.TileMap" package="com.debugstudios.framework.tilemap">
@@ -225,10 +235,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="World.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="World.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="57" selection-start="3803" selection-end="3803" vertical-scroll-proportion="0.9786408" vertical-offset="1422" max-vertical-offset="3708">
+            <state line="112" column="57" selection-start="3803" selection-end="3803" vertical-scroll-proportion="0.0" vertical-offset="1422" max-vertical-offset="3708">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -239,7 +249,41 @@
       <file leaf-file-name="SpatialHashGrid.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/SpatialHashGrid.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="198" column="50" selection-start="5668" selection-end="5668" vertical-scroll-proportion="0.0" vertical-offset="2808" max-vertical-offset="4104">
+            <state line="112" column="16" selection-start="3369" selection-end="3369" vertical-scroll-proportion="0.0" vertical-offset="1351" max-vertical-offset="4194">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QuadTree.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/QuadTree.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="195" column="0" selection-start="6019" selection-end="6019" vertical-scroll-proportion="0.0" vertical-offset="2743" max-vertical-offset="3258">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QuadTreeTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/QuadTreeTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="59" selection-start="1783" selection-end="1783" vertical-scroll-proportion="0.41941747" vertical-offset="234" max-vertical-offset="1206">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2345#2356#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Rectangle.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/math/Rectangle.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="45" column="0" selection-start="1919" selection-end="1919" vertical-scroll-proportion="0.0" vertical-offset="351" max-vertical-offset="5202">
               <folding />
             </state>
           </provider>
@@ -258,8 +302,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/tilemap/CollisionLayer.java" />
-        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/utils/IntPair.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/collections/IntPairTest.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/collections/IntPair.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta-android/assets/schemas/PlayerSchema.xml" />
@@ -309,6 +351,8 @@
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/renderers/WorldDebugRenderer.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/SpatialHashGrid.java" />
         <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/QuadTree.java" />
+        <option value="$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/QuadTreeTest.java" />
       </list>
     </option>
   </component>
@@ -538,26 +582,8 @@
               <option name="myItemId" value="debugstudios" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="alpha-to-beta" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="alpha-to-beta" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="debugstudios" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="alphatobeta" />
+              <option name="myItemId" value="framework" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -579,37 +605,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="alphatobeta" />
+              <option name="myItemId" value="framework" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="screens" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="alpha-to-beta" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="alpha-to-beta" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="debugstudios" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="alphatobeta" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="renderers" />
+              <option name="myItemId" value="datastructures" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -628,40 +628,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="debugstudios" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="alphatobeta" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="obstacles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="alpha-to-beta" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="alpha-to-beta" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="debugstudios" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="alphatobeta" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="input" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -702,13 +668,14 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.debugstudios.framework.datastructures" />
+      <recent name="com.debugstudios.alphatobeta.assets" />
+      <recent name="com.debugstudios.framework.collections" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
       <recent name="junit.framework.TestCase" />
-    </key>
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="com.debugstudios.alphatobeta.assets" />
-      <recent name="com.debugstudios.framework.collections" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/alpha-to-beta-android/assets/objects/obstacles" />
@@ -718,17 +685,17 @@
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.debugstudios.framework.physics" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com" />
+      <recent name="com.debugstudios" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Slacker\Programming\alpha-to-beta\alpha-to-beta-android\assets\schemas" />
       <recent name="$PROJECT_DIR$/alpha-to-beta-android/assets/schemas" />
       <recent name="C:\Users\Slacker\Programming\alpha-to-beta\alpha-to-beta-android\assets\objects\players" />
     </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com" />
-      <recent name="com.debugstudios" />
-    </key>
   </component>
-  <component name="RunManager" selected="Application.AlphaToBeta Desktop">
+  <component name="RunManager" selected="JUnit.QuadTreeTest.testRetrieve">
     <configuration default="false" name="ObstacleLoaderTest.testLoad" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="alpha-to-beta" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -764,6 +731,34 @@
       <option name="PACKAGE_NAME" value="com.debugstudios.alphatobeta.assets" />
       <option name="MAIN_CLASS_NAME" value="com.debugstudios.alphatobeta.assets.ObstacleLoaderTest" />
       <option name="METHOD_NAME" value="testLoadDirectory" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="QuadTreeTest.testRetrieve" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="alpha-to-beta" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.debugstudios.framework.datastructures" />
+      <option name="MAIN_CLASS_NAME" value="com.debugstudios.framework.datastructures.QuadTreeTest" />
+      <option name="METHOD_NAME" value="testRetrieve" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -971,16 +966,18 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Android Application.alpha-to-beta-android" />
       <item index="1" class="java.lang.String" itemvalue="Application.AlphaToBeta Desktop" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.ObstacleLoaderTest.testLoad" />
       <item index="3" class="java.lang.String" itemvalue="JUnit.ObstacleLoaderTest.testLoadDirectory" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.QuadTreeTest.testRetrieve" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.ObstacleLoaderTest.testLoadDirectory" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ObstacleLoaderTest.testLoad" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.QuadTreeTest.testRetrieve" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ObstacleLoaderTest.testLoadDirectory" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.ObstacleLoaderTest.testLoad" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -1036,7 +1033,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="-3" width="1604" height="883" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1155,21 +1152,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/physics/tweenengine/TweenEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="3" selection-start="2160" selection-end="2160" vertical-scroll-proportion="0.0" vertical-offset="414" max-vertical-offset="1098" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/physics/tweenengine/XAccelerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta-android/assets/maps/map.tmx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2718" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/players/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="60" column="0" selection-start="2215" selection-end="2215" vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="2934" />
@@ -1436,18 +1418,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/SpatialHashGrid.java">
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="198" column="50" selection-start="5668" selection-end="5668" vertical-scroll-proportion="0.0" vertical-offset="2808" max-vertical-offset="4104">
+        <state line="112" column="57" selection-start="3803" selection-end="3803" vertical-scroll-proportion="0.0" vertical-offset="1422" max-vertical-offset="3708">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/alpha-to-beta/libs/gdx-sources.jar!/com/badlogic/gdx/math/Rectangle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="0" selection-start="1919" selection-end="1919" vertical-scroll-proportion="0.0" vertical-offset="351" max-vertical-offset="5202">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/alphatobeta/World.java">
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/SpatialHashGrid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="57" selection-start="3803" selection-end="3803" vertical-scroll-proportion="0.9786408" vertical-offset="1422" max-vertical-offset="3708">
+        <state line="112" column="16" selection-start="3369" selection-end="3369" vertical-scroll-proportion="0.0" vertical-offset="1351" max-vertical-offset="4194">
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/QuadTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="195" column="0" selection-start="6019" selection-end="6019" vertical-scroll-proportion="0.0" vertical-offset="2743" max-vertical-offset="3258">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alpha-to-beta/src/com/debugstudios/framework/datastructures/QuadTreeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="59" selection-start="1783" selection-end="1783" vertical-scroll-proportion="0.41941747" vertical-offset="234" max-vertical-offset="1206">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2345#2356#0" expanded="true" />
           </folding>
         </state>
       </provider>
