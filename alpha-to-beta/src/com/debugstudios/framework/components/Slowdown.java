@@ -22,42 +22,14 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.gameobjects;
+package com.debugstudios.framework.components;
 
-import java.util.TreeMap;
-import ashley.core.Entity;
+import ashley.core.Component;
 
 /**
- * Created by Antonis Kalou on 1/28/14.
+ * Created by Antonis Kalou on 1/29/14.
  */
-public abstract class EntityFactory<T>
+public class Slowdown extends Component
 {
-    protected TreeMap<String, T> entityTemplateMap;
-
-    public EntityFactory()
-    {
-        entityTemplateMap = new TreeMap<String, T>();
-    }
-
-    public abstract T create(String tag, float x, float y);
-
-    public void addEntityTemplate(String tag, T template)
-    {
-        entityTemplateMap.put(tag, template);
-    }
-
-    public void clearEntityTemplates()
-    {
-        entityTemplateMap.clear();
-    }
-
-    public boolean contains(String tag)
-    {
-        return entityTemplateMap.containsKey(tag);
-    }
-
-    public boolean contains(T entity)
-    {
-        return entityTemplateMap.containsValue(entity);
-    }
+    public float slowdown = 0.f;
 }

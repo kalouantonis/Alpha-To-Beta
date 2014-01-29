@@ -46,7 +46,7 @@ public class Player extends DynamicEntity
     private boolean xCollision, yCollision;
     float oldX, oldY;
 
-    /** Animation data structures. */
+    /** AnimatedRenderable data structures. */
     // TODO: Run left, idle is redundant
     public Animation runLeftAnimation = null;
     public Animation runRightAnimation = null;
@@ -149,7 +149,7 @@ public class Player extends DynamicEntity
 
     /**
      * Will return the texture region of selected animation according to state time
-     * @param animation Animation class used
+     * @param animation AnimatedRenderable class used
      * @return Texture region used in current state time
      */
     public TextureRegion getAnimationFrame(Animation animation)

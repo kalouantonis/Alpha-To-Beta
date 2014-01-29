@@ -22,42 +22,35 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.gameobjects;
+package com.debugstudios.framework.systems;
 
-import java.util.TreeMap;
 import ashley.core.Entity;
+import ashley.core.Family;
+import ashley.systems.IteratingSystem;
+import com.debugstudios.framework.components.Movement;
+import com.debugstudios.framework.components.Transform;
+import com.debugstudios.framework.tilemap.CollisionLayer;
 
 /**
- * Created by Antonis Kalou on 1/28/14.
+ * Created by Antonis Kalou on 1/29/14.
  */
-public abstract class EntityFactory<T>
+public class MovementSystem extends IteratingSystem
 {
-    protected TreeMap<String, T> entityTemplateMap;
+    CollisionLayer collisionLayer;
 
-    public EntityFactory()
+    public MovementSystem(CollisionLayer collisionLayer)
     {
-        entityTemplateMap = new TreeMap<String, T>();
+        super(Family.getFamilyFor(Transform.class, Movement.class));
+
+        this.collisionLayer = collisionLayer;
     }
 
-    public abstract T create(String tag, float x, float y);
-
-    public void addEntityTemplate(String tag, T template)
+    @Override
+    public void processEntity(Entity entity, float deltaTime)
     {
-        entityTemplateMap.put(tag, template);
-    }
+        Transform transform = entity.getComponent(Transform.class);
+        Movement movement = entity.getComponent(Movement.class);
 
-    public void clearEntityTemplates()
-    {
-        entityTemplateMap.clear();
-    }
 
-    public boolean contains(String tag)
-    {
-        return entityTemplateMap.containsKey(tag);
-    }
-
-    public boolean contains(T entity)
-    {
-        return entityTemplateMap.containsValue(entity);
     }
 }

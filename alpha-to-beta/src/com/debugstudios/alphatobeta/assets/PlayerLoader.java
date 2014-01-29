@@ -48,7 +48,7 @@ public class PlayerLoader extends AbstractLoader
 
     /** Pair of regions and speeds */
     private SpeedRegionPair speedRegionPair;
-//    private Animation currAnimation = null;
+//    private AnimatedRenderable currAnimation = null;
 
     // In animation element
     private boolean inAnim = false;
@@ -141,7 +141,7 @@ public class PlayerLoader extends AbstractLoader
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
     {
-        if(qName.equalsIgnoreCase("Animation"))
+        if(qName.equalsIgnoreCase("AnimatedRenderable"))
         {
             inAnim = true;
         }
@@ -212,7 +212,7 @@ public class PlayerLoader extends AbstractLoader
     public void endElement(String uri, String localName, String qName) throws SAXException
     {
 
-        if(qName.equalsIgnoreCase("Animation"))
+        if(qName.equalsIgnoreCase("AnimatedRenderable"))
         {
             inAnim = false;
         }

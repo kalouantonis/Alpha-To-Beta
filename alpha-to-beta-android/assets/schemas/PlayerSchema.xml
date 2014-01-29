@@ -28,7 +28,7 @@
 
     
 <!-- Definition of complex elements -->
-    <!-- Animation Directions-->
+    <!-- AnimatedRenderable Directions-->
     <!-- TODO: Use Run, Jump and Fall -->
     <xs:element name="left">
         <xs:complexType>

@@ -22,42 +22,29 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.gameobjects;
+package com.debugstudios.framework.components;
 
-import java.util.TreeMap;
-import ashley.core.Entity;
+import ashley.core.Component;
+import com.badlogic.gdx.math.Vector2;
+import com.debugstudios.framework.systems.MovementSystem;
 
 /**
- * Created by Antonis Kalou on 1/28/14.
+ * Created by Antonis Kalou on 1/29/14.
  */
-public abstract class EntityFactory<T>
+public class Movement extends Component
 {
-    protected TreeMap<String, T> entityTemplateMap;
+    public Vector2 velocity;
+    public Vector2 accel;
 
-    public EntityFactory()
+    public Movement()
     {
-        entityTemplateMap = new TreeMap<String, T>();
+       velocity = new Vector2();
+        accel = new Vector2();
     }
 
-    public abstract T create(String tag, float x, float y);
-
-    public void addEntityTemplate(String tag, T template)
+    public Movement(Vector2 velocity, Vector2 accel)
     {
-        entityTemplateMap.put(tag, template);
-    }
-
-    public void clearEntityTemplates()
-    {
-        entityTemplateMap.clear();
-    }
-
-    public boolean contains(String tag)
-    {
-        return entityTemplateMap.containsKey(tag);
-    }
-
-    public boolean contains(T entity)
-    {
-        return entityTemplateMap.containsValue(entity);
+        this.velocity = velocity;
+        this.accel = accel;
     }
 }

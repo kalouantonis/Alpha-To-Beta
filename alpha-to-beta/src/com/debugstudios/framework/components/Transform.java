@@ -22,42 +22,30 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.gameobjects;
+package com.debugstudios.framework.components;
 
-import java.util.TreeMap;
-import ashley.core.Entity;
+import ashley.core.Component;
+import com.badlogic.gdx.math.Vector2;
 
 /**
- * Created by Antonis Kalou on 1/28/14.
+ * Created by Antonis Kalou on 1/29/14.
  */
-public abstract class EntityFactory<T>
+public class Transform extends Component
 {
-    protected TreeMap<String, T> entityTemplateMap;
+    public Vector2 position;
+    public Vector2 bounds;
+    public Vector2 origin;
 
-    public EntityFactory()
+    public Transform(float x, float y, float width, float height)
     {
-        entityTemplateMap = new TreeMap<String, T>();
+        this.position = new Vector2(x, y);
+        this.bounds = new Vector2(width, height);
+        this.origin = new Vector2(width / 2, height / 2);
     }
 
-    public abstract T create(String tag, float x, float y);
-
-    public void addEntityTemplate(String tag, T template)
+    public Transform(Vector2 position, Vector2 bounds)
     {
-        entityTemplateMap.put(tag, template);
+        this(position.x, position.y, bounds.x, bounds.y);
     }
 
-    public void clearEntityTemplates()
-    {
-        entityTemplateMap.clear();
-    }
-
-    public boolean contains(String tag)
-    {
-        return entityTemplateMap.containsKey(tag);
-    }
-
-    public boolean contains(T entity)
-    {
-        return entityTemplateMap.containsValue(entity);
-    }
 }
