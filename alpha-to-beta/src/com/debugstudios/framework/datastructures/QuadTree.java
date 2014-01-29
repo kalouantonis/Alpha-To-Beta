@@ -39,7 +39,7 @@ public class QuadTree
     private final int MAX_LEVELS = 5;
 
     /** Current node level. 0 is topmost */
-    private int level;
+    private final int level;
     private List<Entity> objects;
     /** Space that node represents */
     private Rectangle bounds;

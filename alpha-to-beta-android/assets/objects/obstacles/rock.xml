@@ -9,10 +9,10 @@
         xsi:noNamespaceSchemaLocation="../../schemas/ObstacleSchema.xml">
     <Layer index="1" />
     <Property name="rock" />
-    <Physics width="16" height="16">
+    <Physics width="30" height="16">
         <mass>2</mass>
     </Physics>
 
     <damage>10</damage>
-    <slowdown>5</slowdown>
+    <slowdown>1</slowdown>
 </Obstacle>

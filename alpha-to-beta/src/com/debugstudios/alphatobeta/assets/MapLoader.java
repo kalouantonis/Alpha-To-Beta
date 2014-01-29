@@ -96,12 +96,15 @@ public class MapLoader extends AbstractLoader
         {
             int level = Integer.parseInt(attributes.getValue("level"));
             int index = Integer.parseInt(attributes.getValue("index"));
+            float opacity = Float.parseFloat(attributes.getValue("opacity"));
 
             if(inForeground)
                 map.addForegroundLayer(level, index);
             else
                 // Anything not declared in foreground will go to background
                 map.addBackgroundLayer(level, index);
+
+            map.setLayerOpacity(index, opacity);
         }
         else if(qName.equalsIgnoreCase("FilePath"))
         {

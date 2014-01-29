@@ -39,8 +39,8 @@ public class OverlapTester
         float e2X = collider.position.x;
         float e2Y = collider.position.y;
 
-        return e1X < e2X + collider.width
-                && e1X + tester.width > e2X &&
+        return e1X < e2X + collider.width &&
+                e1X + tester.width > e2X &&
                 e1Y < e2Y + collider.height &&
                 e1Y + tester.height > e2Y;
     }

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) [2013] [Antonis Kalou (kalouantonis@gmail.com)]
+ * Copyright (c) [2014] [Antonis Kalou (kalouantonis@gmail.com)]
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,41 +24,39 @@
 
 package com.debugstudios.framework.gameobjects;
 
-import com.badlogic.gdx.math.Vector2;
+import java.util.TreeMap;
 
 /**
- * Entity for drawable objects
- *
- * @author Antonis Kalou
+ * Created by Antonis Kalou on 1/28/14.
  */
-public abstract class DynamicEntity extends Entity
+public abstract class EntityFactory<T extends Entity>
 {
-    /** Entity X and Y velocity */
-    public Vector2 velocity;
-    /** Entity X and Y acceleration */
-    public Vector2 accel;
+    protected TreeMap<String, T> entityTemplateMap;
 
-    public DynamicEntity(float x, float y, float width, float height)
+    public EntityFactory()
     {
-        super(x, y, width, height);
-
-        velocity = new Vector2(0, 0);
-        accel = new Vector2(0, 0);
+        entityTemplateMap = new TreeMap<String, T>();
     }
 
-    public DynamicEntity(DynamicEntity another, float x, float y)
-    {
-        this(x, y, another.width, another.height);
+    public abstract T create(String tag, float x, float y);
 
-        this.velocity = another.velocity;
-        this.accel = another.accel;
+    public void addEntityTemplate(String tag, T template)
+    {
+        entityTemplateMap.put(tag, template);
     }
 
-    /**
-     * Update entity according to delta time.
-     * All dynamic entities will need to perform this/
-     *
-     * @param deltaTime Tile elapsed since last update call
-     */
-    public abstract void update(float deltaTime);
+    public void clearEntityTemplates()
+    {
+        entityTemplateMap.clear();
+    }
+
+    public boolean contains(String tag)
+    {
+        return entityTemplateMap.containsKey(tag);
+    }
+
+    public boolean contains(T entity)
+    {
+        return entityTemplateMap.containsValue(entity);
+    }
 }

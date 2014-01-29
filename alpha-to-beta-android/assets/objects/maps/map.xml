@@ -9,18 +9,20 @@
 <Map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:noNamespaceSchemaLocation="../../schemas/MapSchema.xml">
 
+    <FilePath>maps/map2.tmx</FilePath>
+
     <!--Drawn behind player-->
     <Background>
         <!--Background-->
-        <Layer level="0" index="0" />
+        <Layer level="0" index="0" opacity="1" />
         <!--Collision-->
-        <Layer level="0" index="1" />
+        <Layer level="0" index="1" opacity="1" />
     </Background>
 
     <!--Drawn in front of player-->
     <Foreground>
         <!--Foreground -->
+        <Layer level="1" index="2" opacity="1" />
     </Foreground>
 
-    <FilePath>maps/map.tmx</FilePath>
 </Map>

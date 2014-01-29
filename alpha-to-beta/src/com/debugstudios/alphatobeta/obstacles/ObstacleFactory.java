@@ -7,12 +7,14 @@
 
 package com.debugstudios.alphatobeta.obstacles;
 
+import com.debugstudios.framework.gameobjects.EntityFactory;
+
 import java.util.TreeMap;
 
 /**
  * Created by Antonis Kalou on 1/10/14.
  */
-public class ObstacleFactory
+/*public class ObstacleFactory
 {
     private TreeMap<String, Obstacle> obstacleTemplateMap;
 
@@ -41,5 +43,14 @@ public class ObstacleFactory
     public boolean contains(String id)
     {
         return obstacleTemplateMap.containsKey(id);
+    }
+}*/
+
+public class ObstacleFactory extends EntityFactory<Obstacle>
+{
+    @Override
+    public Obstacle create(String tag, float x, float y)
+    {
+        return new Obstacle(entityTemplateMap.get(tag), x, y);
     }
 }

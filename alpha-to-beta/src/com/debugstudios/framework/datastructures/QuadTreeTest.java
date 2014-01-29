@@ -50,9 +50,7 @@ public class QuadTreeTest
         System.out.println("Object position: [" + dynamicItem.position.x + ", " +
                 dynamicItem.position.y + "]");
 
-        Entity[] staticItems = new Entity[500];
-
-
+        Entity[] staticItems = new Entity[10000];
 
 
         int len = staticItems.length;

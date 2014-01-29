@@ -91,7 +91,7 @@ public class World
         Gdx.app.debug(TAG, "Reloading scene...");
 
         //tileMap.reload();
-        Assets.mapLoader.load("objects/maps/map2.xml", tileMap);
+        Assets.mapLoader.load("objects/maps/map.xml", tileMap);
         tileMap.getCamera().zoom = 1.f;
         Gdx.app.debug(TAG, "Reloaded tile map.");
 
@@ -128,6 +128,9 @@ public class World
         Assets.playerLoader.load("objects/players/HumanPlayer.xml", player, Assets.humanPlayerSheet);
 
         Gdx.app.debug(TAG, "Player loaded.");
+
+        // Clear previous quad tree
+        obstacleGrid.clear();
 
         // Load obstacles
         ObstacleFactory factory = new ObstacleFactory();
@@ -198,6 +201,7 @@ public class World
                     //Gdx.app.debug(TAG, "Collision detected");
                     float slowdown = ((Obstacle)collider).slowdown;
 
+                    // FIXME: Jesus man, fix this
                     player.velocity.x -= player.velocity.x < 0 ? -slowdown : slowdown;
                 }
             }
@@ -225,5 +229,6 @@ public class World
     public void dispose()
     {
         tileMap.dispose();
+        obstacleGrid.clear();
     }
 }

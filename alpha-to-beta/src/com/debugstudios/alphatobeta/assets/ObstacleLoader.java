@@ -49,7 +49,7 @@ public class ObstacleLoader extends AbstractLoader
     public void load(String internalFile, ObstacleFactory factory)
     {
         this.factory = factory;
-        this.factory.clearObstacleTemplates();
+        this.factory.clearEntityTemplates();
 
         try
         {
@@ -73,7 +73,7 @@ public class ObstacleLoader extends AbstractLoader
     public void loadDirectory(String dirPath, ObstacleFactory factory, boolean recursive)
     {
         this.factory = factory;
-        this.factory.clearObstacleTemplates();
+        this.factory.clearEntityTemplates();
 
         // Lazy initialization, so that it can be closed in final clause
         // Wont worry about final too much, I don't use it very often
@@ -170,7 +170,7 @@ public class ObstacleLoader extends AbstractLoader
             obstacleTemplate.mass = mass;
             obstacleTemplate.slowdown = slowdown;
 
-            factory.addObstacleTemplate(id, obstacleTemplate);
+            factory.addEntityTemplate(id, obstacleTemplate);
         }
     }
 
