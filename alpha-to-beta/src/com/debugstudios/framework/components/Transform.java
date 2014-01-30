@@ -24,13 +24,14 @@
 
 package com.debugstudios.framework.components;
 
-import ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.XmlReader;
+import com.debugstudios.framework.parsers.XmlHelpers;
 
 /**
  * Created by Antonis Kalou on 1/29/14.
  */
-public class Transform extends Component
+public class Transform extends ParsedComponent
 {
     public Vector2 position;
     public Vector2 bounds;
@@ -48,4 +49,40 @@ public class Transform extends Component
         this(position.x, position.y, bounds.x, bounds.y);
     }
 
+    @Override
+    public void load(XmlReader.Element compRoot)
+    {
+        /**
+         * XML Defined as such:
+         *
+         * <Component type="com.debugstudios.framework.Transform">
+         *      <!-- Not tile coordinates  -->
+         *      <Position x="20" y="22" />
+         *      <Bounds x="16" y="16" />
+         *      <!-- Optional. If not provided, x and y are taken by half of bounds -->
+         *      <Origin x="8" y="8" />
+         * </Component>
+         */
+
+        // Position
+        XmlReader.Element posElem = XmlHelpers.loadAndValidate(compRoot, "Position");
+        XmlHelpers.fillVectorFromElement(posElem, position);
+
+        // Bounds
+        XmlReader.Element boundsElem = XmlHelpers.loadAndValidate(compRoot, "Bounds");
+        XmlHelpers.fillVectorFromElement(boundsElem, bounds);
+
+        // Origin, manual validation
+        XmlReader.Element originElem = compRoot.getChildByName("Origin");
+
+        if(originElem != null)
+        {
+            XmlHelpers.fillVectorFromElement(originElem, origin);
+        }
+        else
+        {
+            // No origin element found, willing with half of bounds
+            origin.set(bounds.x / 2, bounds.y / 2);
+        }
+    }
 }

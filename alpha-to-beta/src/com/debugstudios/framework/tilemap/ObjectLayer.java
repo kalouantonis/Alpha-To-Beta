@@ -24,7 +24,7 @@
 
 package com.debugstudios.framework.tilemap;
 
-import com.debugstudios.framework.gameobjects.EntityFactory;
+import com.debugstudios.framework.entities.EntityFactory;
 
 /**
  * Created by Antonis Kalou on 1/28/14.

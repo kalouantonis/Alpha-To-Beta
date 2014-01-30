@@ -1,8 +1,8 @@
 package ashley.core;
 
 import ashley.utils.Pool;
-import ashley.utils.Pools;
 import ashley.utils.Pool.Poolable;
+import ashley.utils.Pools;
 
 /**
  * Engine derived class adding Entity and Component pooling. This improves performance in environments

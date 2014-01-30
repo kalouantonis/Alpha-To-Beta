@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) [2014] [Antonis Kalou (kalouantonis@gmail.com)]
+ * Copyright (c) [2013] [Antonis Kalou (kalouantonis@gmail.com)]
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,42 +22,43 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.gameobjects;
+package com.debugstudios.framework.entities;
 
-import java.util.TreeMap;
-import ashley.core.Entity;
+import com.badlogic.gdx.math.Vector2;
 
 /**
- * Created by Antonis Kalou on 1/28/14.
+ * Entity for drawable objects
+ *
+ * @author Antonis Kalou
  */
-public abstract class EntityFactory<T>
+public abstract class DynamicEntity extends Entity
 {
-    protected TreeMap<String, T> entityTemplateMap;
+    /** Entity X and Y velocity */
+    public Vector2 velocity;
+    /** Entity X and Y acceleration */
+    public Vector2 accel;
 
-    public EntityFactory()
+    public DynamicEntity(float x, float y, float width, float height)
     {
-        entityTemplateMap = new TreeMap<String, T>();
+        super(x, y, width, height);
+
+        velocity = new Vector2(0, 0);
+        accel = new Vector2(0, 0);
     }
 
-    public abstract T create(String tag, float x, float y);
-
-    public void addEntityTemplate(String tag, T template)
+    public DynamicEntity(DynamicEntity another, float x, float y)
     {
-        entityTemplateMap.put(tag, template);
+        this(x, y, another.width, another.height);
+
+        this.velocity = another.velocity;
+        this.accel = another.accel;
     }
 
-    public void clearEntityTemplates()
-    {
-        entityTemplateMap.clear();
-    }
-
-    public boolean contains(String tag)
-    {
-        return entityTemplateMap.containsKey(tag);
-    }
-
-    public boolean contains(T entity)
-    {
-        return entityTemplateMap.containsValue(entity);
-    }
+    /**
+     * Update entity according to delta time.
+     * All dynamic entities will need to perform this/
+     *
+     * @param deltaTime Tile elapsed since last update call
+     */
+    public abstract void update(float deltaTime);
 }

@@ -29,8 +29,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.debugstudios.framework.gameobjects.DynamicEntity;
-import com.debugstudios.framework.gameobjects.Entity;
+import com.debugstudios.framework.entities.DynamicEntity;
+import com.debugstudios.framework.entities.Entity;
 
 /**
  * Created by slacker on 14/12/13.

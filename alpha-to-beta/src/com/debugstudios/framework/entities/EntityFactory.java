@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) [2013] [Antonis Kalou (kalouantonis@gmail.com)]
+ * Copyright (c) [2014] [Antonis Kalou (kalouantonis@gmail.com)]
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,33 +22,42 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.gameobjects;
+package com.debugstudios.framework.entities;
 
-import com.badlogic.gdx.math.Vector2;
-
+import java.util.TreeMap;
 
 /**
- * Contains entity data and operations
- *
- * @author Antonis Kalou
+ * Created by Antonis Kalou on 1/28/14.
  */
-public class Entity
+// TODO: Factory does all entity parsing. Create automagic ID's.
+public abstract class EntityFactory<T>
 {
-    public Vector2 position;
-    public float width, height;
-    public Vector2 origin;
+    protected TreeMap<String, T> entityTemplateMap;
 
-    public Entity(float x, float y, float width, float height)
+    public EntityFactory()
     {
-        this.position = new Vector2(x, y);
-        this.width = width;
-        this.height = height;
-        this.origin = new Vector2(width / 2, height / 2);
+        entityTemplateMap = new TreeMap<String, T>();
     }
 
-    public Entity(Entity another, float x, float y)
+    public abstract T create(String tag, float x, float y);
+
+    public void addEntityTemplate(String tag, T template)
     {
-        this(x, y, another.width, another.height);
-        this.origin = another.origin;
+        entityTemplateMap.put(tag, template);
+    }
+
+    public void clearEntityTemplates()
+    {
+        entityTemplateMap.clear();
+    }
+
+    public boolean contains(String tag)
+    {
+        return entityTemplateMap.containsKey(tag);
+    }
+
+    public boolean contains(T entity)
+    {
+        return entityTemplateMap.containsValue(entity);
     }
 }

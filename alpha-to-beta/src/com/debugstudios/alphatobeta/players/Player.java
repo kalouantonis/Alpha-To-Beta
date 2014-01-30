@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.debugstudios.framework.gameobjects.DynamicEntity;
+import com.debugstudios.framework.entities.DynamicEntity;
 import com.debugstudios.framework.tilemap.CollisionLayer;
 
 /**
@@ -46,7 +46,7 @@ public class Player extends DynamicEntity
     private boolean xCollision, yCollision;
     float oldX, oldY;
 
-    /** AnimatedRenderable data structures. */
+    /** Animation data structures. */
     // TODO: Run left, idle is redundant
     public Animation runLeftAnimation = null;
     public Animation runRightAnimation = null;

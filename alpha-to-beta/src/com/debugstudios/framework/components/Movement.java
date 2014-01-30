@@ -24,16 +24,18 @@
 
 package com.debugstudios.framework.components;
 
-import ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
-import com.debugstudios.framework.systems.MovementSystem;
+import com.badlogic.gdx.utils.XmlReader;
+import com.debugstudios.framework.parsers.XmlHelpers;
 
 /**
  * Created by Antonis Kalou on 1/29/14.
  */
-public class Movement extends Component
+public class Movement extends ParsedComponent
 {
     public Vector2 velocity;
+    public Vector2 maxVelocity = new Vector2(100, 100);
+
     public Vector2 accel;
 
     public Movement()
@@ -46,5 +48,31 @@ public class Movement extends Component
     {
         this.velocity = velocity;
         this.accel = accel;
+    }
+
+    @Override
+    public void load(XmlReader.Element compRoot)
+    {
+        /**
+         * XML Defined as such
+         *
+         * <Component type="com.debugstudios.framwork.components.Movement">
+         *       <Velocity x="20" y="0" >
+         *          <MaxVelocity x="200" y="400" />
+         *       </Velocity>
+         *       <Acceleration x="0" y = "-9.8" />
+         * </Component>
+         */
+        // Velocity
+        XmlReader.Element velocityElem = XmlHelpers.loadAndValidate(compRoot, "Velocity");
+        XmlHelpers.fillVectorFromElement(velocityElem, velocity);
+
+        // MaxVelocity
+        XmlReader.Element maxVelElem = XmlHelpers.loadAndValidate(velocityElem, "MaxVelocity");
+        XmlHelpers.fillVectorFromElement(maxVelElem, maxVelocity);
+
+        // Acceleration
+        XmlReader.Element accelElem = XmlHelpers.loadAndValidate(compRoot, "Acceleration");
+        XmlHelpers.fillVectorFromElement(accelElem, accel);
     }
 }

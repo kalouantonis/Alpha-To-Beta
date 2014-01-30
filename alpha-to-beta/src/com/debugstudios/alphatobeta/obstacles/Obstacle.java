@@ -7,7 +7,7 @@
 
 package com.debugstudios.alphatobeta.obstacles;
 
-import com.debugstudios.framework.gameobjects.Entity;
+import com.debugstudios.framework.entities.Entity;
 
 /**
  * Created by Antonis Kalou on 12/30/13.

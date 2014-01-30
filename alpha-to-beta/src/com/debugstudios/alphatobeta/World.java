@@ -16,10 +16,10 @@ import com.debugstudios.alphatobeta.obstacles.Obstacle;
 import com.debugstudios.alphatobeta.obstacles.ObstacleFactory;
 import com.debugstudios.alphatobeta.players.HumanPlayer;
 import com.debugstudios.alphatobeta.players.Player;
-import com.debugstudios.framework.math.OverlapTester;
 import com.debugstudios.framework.datastructures.QuadTree;
-import com.debugstudios.framework.gameobjects.Entity;
+import com.debugstudios.framework.entities.Entity;
 import com.debugstudios.framework.graphics.Camera;
+import com.debugstudios.framework.math.OverlapTester;
 import com.debugstudios.framework.tilemap.CollisionLayer;
 import com.debugstudios.framework.tilemap.TileMap;
 

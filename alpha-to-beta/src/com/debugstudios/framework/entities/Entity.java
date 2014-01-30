@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) [2014] [Antonis Kalou (kalouantonis@gmail.com)]
+ * Copyright (c) [2013] [Antonis Kalou (kalouantonis@gmail.com)]
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,14 +22,33 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.components;
+package com.debugstudios.framework.entities;
 
-import ashley.core.Component;
+import com.badlogic.gdx.math.Vector2;
+
 
 /**
- * Created by Antonis Kalou on 1/29/14.
+ * Contains entity data and operations
+ *
+ * @author Antonis Kalou
  */
-public class Slowdown extends Component
+public class Entity
 {
-    public float slowdown = 0.f;
+    public Vector2 position;
+    public float width, height;
+    public Vector2 origin;
+
+    public Entity(float x, float y, float width, float height)
+    {
+        this.position = new Vector2(x, y);
+        this.width = width;
+        this.height = height;
+        this.origin = new Vector2(width / 2, height / 2);
+    }
+
+    public Entity(Entity another, float x, float y)
+    {
+        this(x, y, another.width, another.height);
+        this.origin = another.origin;
+    }
 }

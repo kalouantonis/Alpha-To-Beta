@@ -25,7 +25,7 @@
 package com.debugstudios.framework.datastructures;
 
 import com.badlogic.gdx.math.Rectangle;
-import com.debugstudios.framework.gameobjects.Entity;
+import com.debugstudios.framework.entities.Entity;
 
 import java.util.ArrayList;
 import java.util.List;

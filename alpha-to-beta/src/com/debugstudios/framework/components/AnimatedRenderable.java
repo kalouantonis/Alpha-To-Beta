@@ -29,4 +29,5 @@ package com.debugstudios.framework.components;
  */
 public class AnimatedRenderable
 {
+
 }

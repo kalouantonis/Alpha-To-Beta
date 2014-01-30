@@ -7,9 +7,7 @@
 
 package com.debugstudios.alphatobeta.obstacles;
 
-import com.debugstudios.framework.gameobjects.EntityFactory;
-
-import java.util.TreeMap;
+import com.debugstudios.framework.entities.EntityFactory;
 
 /**
  * Created by Antonis Kalou on 1/10/14.
@@ -46,6 +44,11 @@ import java.util.TreeMap;
     }
 }*/
 
+// TODO: Make singleton. In this way we can create new object anywhere
+// TODO: If attribute "id" exists, add it to the factory and then
+// TODO: re-use it any time it is detected within a context
+// TODO: Maybe use this for every object. Give an "id" and load it
+// TODO: according to if it exists in the factory, avoid double loading
 public class ObstacleFactory extends EntityFactory<Obstacle>
 {
     @Override

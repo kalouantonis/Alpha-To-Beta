@@ -26,7 +26,7 @@ package com.debugstudios.framework.tilemap;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.debugstudios.framework.gameobjects.Entity;
+import com.debugstudios.framework.entities.Entity;
 
 /**
  * TileMapLayer with support for collision detection

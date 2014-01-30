@@ -1,10 +1,10 @@
 package ashley.core;
 
-import java.util.BitSet;
-
 import ashley.signals.Signal;
 import ashley.utils.ObjectMap;
 import ashley.utils.ObjectMap.Keys;
+
+import java.util.BitSet;
 
 /**
  * Entities are simple containers. They can hold components that give them "data". The component's data

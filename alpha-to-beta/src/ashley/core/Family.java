@@ -1,8 +1,8 @@
 package ashley.core;
 
-import java.util.BitSet;
-
 import ashley.utils.ObjectMap;
+
+import java.util.BitSet;
 
 /**
  * A family represents a group of components. It is used to describe what entities a system

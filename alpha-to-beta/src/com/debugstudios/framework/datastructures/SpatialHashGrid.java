@@ -25,8 +25,8 @@
 package com.debugstudios.framework.datastructures;
 
 import com.badlogic.gdx.math.MathUtils;
-import com.debugstudios.framework.gameobjects.DynamicEntity;
-import com.debugstudios.framework.gameobjects.Entity;
+import com.debugstudios.framework.entities.DynamicEntity;
+import com.debugstudios.framework.entities.Entity;
 
 import java.util.ArrayList;
 import java.util.List;

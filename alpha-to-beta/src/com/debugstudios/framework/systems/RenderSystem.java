@@ -24,9 +24,51 @@
 
 package com.debugstudios.framework.systems;
 
+import ashley.core.Engine;
+import ashley.core.Entity;
+import ashley.core.EntitySystem;
+import ashley.utils.IntMap;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.debugstudios.framework.graphics.Camera;
+
 /**
  * Created by Antonis Kalou on 1/29/14.
  */
-public class RenderSystem
+public class RenderSystem extends EntitySystem
 {
+    IntMap<Entity> entities;
+
+    /**
+     * Set up the rendering system
+     *
+     * @param spriteBatch
+     * @param camera
+     */
+    public RenderSystem(SpriteBatch spriteBatch, Camera camera)
+    {
+        this(0);
+
+        entities = new IntMap<Entity>();
+    }
+
+    public RenderSystem(int priority)
+    {
+        super(priority);
+    }
+
+    /**
+     *
+     * @param engine The Engine this system was added to
+     */
+    @Override
+    public void addedToEngine(Engine engine)
+    {
+        super.addedToEngine(engine);
+    }
+
+    @Override
+    public void update(float deltaTime)
+    {
+        super.update(deltaTime);
+    }
 }

@@ -24,7 +24,7 @@
 
 package com.debugstudios.framework.math;
 
-import com.debugstudios.framework.gameobjects.Entity;
+import com.debugstudios.framework.entities.Entity;
 
 /**
  * Created by Antonis Kalou on 1/26/14.

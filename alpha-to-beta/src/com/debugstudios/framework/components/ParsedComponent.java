@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) [2013] [Antonis Kalou (kalouantonis@gmail.com)]
+ * Copyright (c) [2014] [Antonis Kalou (kalouantonis@gmail.com)]
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,43 +22,15 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.gameobjects;
+package com.debugstudios.framework.components;
 
-import com.badlogic.gdx.math.Vector2;
+import ashley.core.Component;
+import com.badlogic.gdx.utils.XmlReader;
 
 /**
- * Entity for drawable objects
- *
- * @author Antonis Kalou
+ * Created by Antonis Kalou on 1/30/14.
  */
-public abstract class DynamicEntity extends Entity
+public abstract class ParsedComponent extends Component
 {
-    /** Entity X and Y velocity */
-    public Vector2 velocity;
-    /** Entity X and Y acceleration */
-    public Vector2 accel;
-
-    public DynamicEntity(float x, float y, float width, float height)
-    {
-        super(x, y, width, height);
-
-        velocity = new Vector2(0, 0);
-        accel = new Vector2(0, 0);
-    }
-
-    public DynamicEntity(DynamicEntity another, float x, float y)
-    {
-        this(x, y, another.width, another.height);
-
-        this.velocity = another.velocity;
-        this.accel = another.accel;
-    }
-
-    /**
-     * Update entity according to delta time.
-     * All dynamic entities will need to perform this/
-     *
-     * @param deltaTime Tile elapsed since last update call
-     */
-    public abstract void update(float deltaTime);
+    public abstract void load(XmlReader.Element compRoot);
 }
