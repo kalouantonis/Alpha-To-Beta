@@ -24,46 +24,10 @@
 
 package com.debugstudios.framework.components;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.utils.XmlReader;
-import com.debugstudios.framework.graphics.AnimUtils;
-
 /**
- * Created by Antonis Kalou on 1/29/14.
+ * Created by Antonis Kalou on 1/30/14.
  */
-public class AnimatedRenderable extends AbstractAnimation
+public abstract class AbstractAnimation extends ParsedComponent
 {
-    public Animation animation;
-
-    public AnimatedRenderable()
-    {
-        animation = null;
-    }
-
-    public AnimatedRenderable(TextureAtlas animAtlas, float animSpeed, String ... regionNames)
-    {
-        AnimUtils.createLoopAnimation(animSpeed, animAtlas, regionNames);
-    }
-
-    public AnimatedRenderable(Animation animation)
-    {
-        this.animation = animation;
-    }
-
-    @Override
-    public void load(XmlReader.Element compRoot)
-    {
-        /**
-         * XML defined as such:
-         *
-         * <Component type="com.debugstudios.framework.components.AnimatedRenderable">
-         *      <AtlasFile>path/to/atlas.txt</AtlasFile>
-         *      <!-- In seconds -->
-         *      <AnimationSpeed>0.1</AnimationSpeed>
-         *      <!-- Set to normal by default -->
-         *      <AnimationType>Looping</AnimationType>
-         * </Component>
-         */
-    }
+    public float stateTime = 0f;
 }

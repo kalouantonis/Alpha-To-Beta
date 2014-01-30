@@ -31,20 +31,22 @@ import com.debugstudios.framework.parsers.XmlHelpers;
 /**
  * Created by Antonis Kalou on 1/29/14.
  */
-public class Movement extends ParsedComponent
+public class Physics extends ParsedComponent
 {
     public Vector2 velocity;
     public Vector2 maxVelocity = new Vector2(100, 100);
 
     public Vector2 accel;
 
-    public Movement()
+    public float mass = 0f;
+
+    public Physics()
     {
        velocity = new Vector2();
         accel = new Vector2();
     }
 
-    public Movement(Vector2 velocity, Vector2 accel)
+    public Physics(Vector2 velocity, Vector2 accel)
     {
         this.velocity = velocity;
         this.accel = accel;
@@ -56,11 +58,13 @@ public class Movement extends ParsedComponent
         /**
          * XML Defined as such
          *
-         * <Component type="com.debugstudios.framwork.components.Movement">
+         * <Component type="com.debugstudios.framwork.components.Physics">
          *       <Velocity x="20" y="0" >
          *          <MaxVelocity x="200" y="400" />
          *       </Velocity>
          *       <Acceleration x="0" y = "-9.8" />
+         *       <!-- Optional, set to 0 by default-->
+         *       <Mass>20</Mass>
          * </Component>
          */
         // Velocity
@@ -74,5 +78,16 @@ public class Movement extends ParsedComponent
         // Acceleration
         XmlReader.Element accelElem = XmlHelpers.loadAndValidate(compRoot, "Acceleration");
         XmlHelpers.fillVectorFromElement(accelElem, accel);
+
+        // Mass
+        XmlReader.Element massElem = compRoot.getChildByName("Mass");
+        if(massElem != null)
+        {
+            mass = Float.parseFloat(massElem.getText());
+        }
+        else
+        {
+            mass = 0;
+        }
     }
 }

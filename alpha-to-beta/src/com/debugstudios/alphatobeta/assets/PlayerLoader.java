@@ -48,7 +48,7 @@ public class PlayerLoader extends AbstractLoader
 
     /** Pair of regions and speeds */
     private SpeedRegionPair speedRegionPair;
-//    private Animation currAnimation = null;
+//    private AbstractAnimation currAnimation = null;
 
     // In animation element
     private boolean inAnim = false;

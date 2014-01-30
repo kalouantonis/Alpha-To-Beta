@@ -27,8 +27,14 @@ package com.debugstudios.framework.systems;
 import ashley.core.Engine;
 import ashley.core.Entity;
 import ashley.core.EntitySystem;
+import ashley.core.Family;
 import ashley.utils.IntMap;
+import ashley.utils.Sort;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.debugstudios.framework.components.Renderable;
+import com.debugstudios.framework.components.Transform;
 import com.debugstudios.framework.graphics.Camera;
 
 /**
@@ -36,7 +42,12 @@ import com.debugstudios.framework.graphics.Camera;
  */
 public class RenderSystem extends EntitySystem
 {
+    // TODO: Use comparator to compare positional z co-ords
     IntMap<Entity> entities;
+    Family family;
+
+    SpriteBatch spriteBatch;
+    Camera camera;
 
     /**
      * Set up the rendering system
@@ -46,14 +57,18 @@ public class RenderSystem extends EntitySystem
      */
     public RenderSystem(SpriteBatch spriteBatch, Camera camera)
     {
-        this(0);
-
-        entities = new IntMap<Entity>();
+        this(0, spriteBatch, camera);
     }
 
-    public RenderSystem(int priority)
+    public RenderSystem(int priority, SpriteBatch spriteBatch, Camera camera)
     {
         super(priority);
+
+        entities = new IntMap<Entity>();
+        family = Family.getFamilyFor(Transform.class, Renderable.class);
+
+        this.spriteBatch = spriteBatch;
+        this.camera = camera;
     }
 
     /**
@@ -64,11 +79,36 @@ public class RenderSystem extends EntitySystem
     public void addedToEngine(Engine engine)
     {
         super.addedToEngine(engine);
+
+        // TODO: Check if super classes are counted in renderable
+        entities = engine.getEntitiesFor(family);
     }
 
     @Override
     public void update(float deltaTime)
     {
-        super.update(deltaTime);
+        IntMap.Keys keys = entities.keys();
+
+        while(keys.hasNext)
+        {
+            Entity entity = entities.get(keys.next());
+
+            Transform transformComp = entity.getComponent(Transform.class);
+            Renderable renderableComp = entity.getComponent(Renderable.class);
+
+            Rectangle transform = transformComp.transform;
+            Vector2 origin = transformComp.origin;
+            Vector2 scale = transformComp.scale;
+
+            spriteBatch.draw(
+                    renderableComp.texture, transform.x, transform.y,
+                    origin.x, origin.y,
+                    transform.width, transform.height,
+                    scale.x, scale.y,
+                    transformComp.rotation,
+                    0, 0, (int)transform.width, (int)transform.height,
+                    renderableComp.flipX, renderableComp.flipY
+            );
+        }
     }
 }

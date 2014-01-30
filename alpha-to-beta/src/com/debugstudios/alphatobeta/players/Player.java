@@ -46,7 +46,7 @@ public class Player extends DynamicEntity
     private boolean xCollision, yCollision;
     float oldX, oldY;
 
-    /** Animation data structures. */
+    /** AbstractAnimation data structures. */
     // TODO: Run left, idle is redundant
     public Animation runLeftAnimation = null;
     public Animation runRightAnimation = null;

@@ -25,6 +25,7 @@
 package com.debugstudios.framework.tilemap;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.debugstudios.framework.entities.Entity;
 
@@ -88,6 +89,18 @@ public class CollisionLayer extends AbstractLayer
         return false;
     }
 
+    public boolean collidesRight(Rectangle rectangle)
+    {
+        float len = rectangle.height;
+        for(float step = 0; step <= len; step += getTileHeight() / 2.f)
+        {
+            if(cellContainsTile(rectangle.x + rectangle.width, rectangle.y + step))
+                return true;
+        }
+
+        return false;
+    }
+
     /**
      * Check left side of gameobject for collisions with tile
      *
@@ -105,6 +118,17 @@ public class CollisionLayer extends AbstractLayer
         return false;
     }
 
+    public boolean collidesLeft(Rectangle rectangle)
+    {
+        float len = rectangle.height;
+        for(float step = 0; step <= len; step += getTileHeight() / 2.f)
+        {
+            if(cellContainsTile(rectangle.x, rectangle.y + step))
+                return true;
+        }
+
+        return false;
+    }
     /**
      * Check top side of gameobject for collisions with tile
      *
@@ -122,6 +146,18 @@ public class CollisionLayer extends AbstractLayer
         return false;
     }
 
+    public boolean collidesTop(Rectangle rectangle)
+    {
+        float width = rectangle.width;
+        for(float step = 0; step <= width; step += getTileWidth() / 2.f)
+        {
+            if(cellContainsTile(rectangle.x + step, rectangle.y + rectangle.height))
+                return true;
+        }
+
+        return false;
+    }
+
     /**
      * Check bottom side of gameobject for collisions with tile
      *
@@ -133,6 +169,18 @@ public class CollisionLayer extends AbstractLayer
         for(float step = 0; step <= gameobject.width; step += getTileWidth() / 2.f)
         {
             if(cellContainsTile(gameobject.position.x + step, gameobject.position.y))
+                return true;
+        }
+
+        return false;
+    }
+
+    public boolean collidesBottom(Rectangle rectangle)
+    {
+        float width = rectangle.width;
+        for(float step = 0; step <= width; step += getTileWidth() / 2.f)
+        {
+            if(cellContainsTile(rectangle.x + step, rectangle.y))
                 return true;
         }
 

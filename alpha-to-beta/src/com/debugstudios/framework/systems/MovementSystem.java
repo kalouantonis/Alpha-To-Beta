@@ -27,7 +27,10 @@ package com.debugstudios.framework.systems;
 import ashley.core.Entity;
 import ashley.core.Family;
 import ashley.systems.IteratingSystem;
-import com.debugstudios.framework.components.Movement;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.debugstudios.framework.components.Physics;
 import com.debugstudios.framework.components.Transform;
 import com.debugstudios.framework.tilemap.CollisionLayer;
 
@@ -36,11 +39,16 @@ import com.debugstudios.framework.tilemap.CollisionLayer;
  */
 public class MovementSystem extends IteratingSystem
 {
-    CollisionLayer collisionLayer;
+    private CollisionLayer collisionLayer;
+
+    private boolean xCollision = false;
+    private boolean yCollision = false;
+    float oldX;
+    float oldY;
 
     public MovementSystem(CollisionLayer collisionLayer)
     {
-        super(Family.getFamilyFor(Transform.class, Movement.class));
+        super(Family.getFamilyFor(Transform.class, Physics.class));
 
         this.collisionLayer = collisionLayer;
     }
@@ -48,9 +56,55 @@ public class MovementSystem extends IteratingSystem
     @Override
     public void processEntity(Entity entity, float deltaTime)
     {
-        Transform transform = entity.getComponent(Transform.class);
-        Movement movement = entity.getComponent(Movement.class);
+        Transform transformComp = entity.getComponent(Transform.class);
+        Physics physicsComp = entity.getComponent(Physics.class);
 
 
+        Rectangle transform = transformComp.transform;
+        Vector2 velocity = physicsComp.velocity;
+        Vector2 accel = physicsComp.accel;
+
+
+         if(!xCollision)
+            velocity.x += accel.x * deltaTime;
+         if(!yCollision)
+            velocity.y += accel.y * deltaTime;
+
+        velocity.x = MathUtils.clamp(velocity.x, -physicsComp.maxVelocity.x, physicsComp.maxVelocity.x);
+        velocity.y = MathUtils.clamp(velocity.y, -physicsComp.maxVelocity.y, physicsComp.maxVelocity.y);
+
+        xCollision = false;
+        yCollision = false;
+
+        oldX = transform.x;
+        oldY = transform.y;
+
+        transform.x += velocity.x * deltaTime;
+
+        if(velocity.x > 0)
+            xCollision = collisionLayer.collidesRight(transform);
+        else if(velocity.x < 0)
+            xCollision = collisionLayer.collidesLeft(transform);
+
+        if(xCollision)
+            transform.x = oldX;
+
+        transform.y += velocity.y * deltaTime;
+
+        if(velocity.y > 0)
+            yCollision = collisionLayer.collidesTop(transform);
+        else if(velocity.y < 0)
+        {
+            yCollision = collisionLayer.collidesBottom(transform);
+
+//            if(yCollision)
+//                numJumps = 0;
+        }
+
+        if(yCollision)
+        {
+            transform.y = oldY;
+            velocity.y = 0;
+        }
     }
 }

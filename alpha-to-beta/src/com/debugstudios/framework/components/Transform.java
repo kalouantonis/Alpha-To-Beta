@@ -24,6 +24,7 @@
 
 package com.debugstudios.framework.components;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.XmlReader;
 import com.debugstudios.framework.parsers.XmlHelpers;
@@ -33,20 +34,30 @@ import com.debugstudios.framework.parsers.XmlHelpers;
  */
 public class Transform extends ParsedComponent
 {
-    public Vector2 position;
-    public Vector2 bounds;
+    // TODO: Make position Vector3 so as to use Z for layering
+    public Rectangle transform;
+    public float z = 0f;
     public Vector2 origin;
+    public float rotation;
+    public Vector2 scale;
 
     public Transform(float x, float y, float width, float height)
     {
-        this.position = new Vector2(x, y);
-        this.bounds = new Vector2(width, height);
+        this.transform = new Rectangle(x, y, width, height);
         this.origin = new Vector2(width / 2, height / 2);
+
+        this.scale = new Vector2(1f, 1f);
+        this.rotation = 0;
     }
 
     public Transform(Vector2 position, Vector2 bounds)
     {
         this(position.x, position.y, bounds.x, bounds.y);
+    }
+
+    public Transform(Rectangle transform)
+    {
+        this(transform.x, transform.y, transform.width, transform.height);
     }
 
     @Override
@@ -56,21 +67,24 @@ public class Transform extends ParsedComponent
          * XML Defined as such:
          *
          * <Component type="com.debugstudios.framework.Transform">
-         *      <!-- Not tile coordinates  -->
-         *      <Position x="20" y="22" />
-         *      <Bounds x="16" y="16" />
+         *      <!-- Not tile coordinates, Z is optional, set to 0 by default  -->
+         *      <Transform x="0" y="0" z="10" width="16" height="16" />
          *      <!-- Optional. If not provided, x and y are taken by half of bounds -->
          *      <Origin x="8" y="8" />
+         *      <!-- Optional. Set to 0 by default -->
+         *      <Rotation>120</Rotation>
+         *      <!-- Optional. Set to 1 by default -->
+         *      <Scale x="1" y="2" />
          * </Component>
          */
 
-        // Position
-        XmlReader.Element posElem = XmlHelpers.loadAndValidate(compRoot, "Position");
-        XmlHelpers.fillVectorFromElement(posElem, position);
-
-        // Bounds
-        XmlReader.Element boundsElem = XmlHelpers.loadAndValidate(compRoot, "Bounds");
-        XmlHelpers.fillVectorFromElement(boundsElem, bounds);
+        // Transform
+        XmlReader.Element transformElem = XmlHelpers.loadAndValidate(compRoot, "Transform");
+        transform.x = transformElem.getFloatAttribute("x");
+        transform.y = transformElem.getFloatAttribute("y");
+        transform.width = transformElem.getFloatAttribute("width");
+        transform.height = transformElem.getFloatAttribute("height");
+        z = transformElem.getFloatAttribute("z");
 
         // Origin, manual validation
         XmlReader.Element originElem = compRoot.getChildByName("Origin");
@@ -82,7 +96,31 @@ public class Transform extends ParsedComponent
         else
         {
             // No origin element found, willing with half of bounds
-            origin.set(bounds.x / 2, bounds.y / 2);
+            origin.set(transform.width / 2, transform.y / 2);
+        }
+
+        // Rotation
+        XmlReader.Element rotationElem = compRoot.getChildByName("Rotation");
+
+        if(rotationElem != null)
+        {
+            // Should work
+            this.rotation = Float.parseFloat(rotationElem.getText());
+        }
+        else
+        {
+            // Set to 0 by default
+            this.rotation = 0;
+        }
+
+        XmlReader.Element scaleElem = compRoot.getChildByName("Scale");
+        if(scaleElem != null)
+        {
+            XmlHelpers.fillVectorFromElement(scaleElem, scale);
+        }
+        else
+        {
+            scale.set(1f, 1f);
         }
     }
 }

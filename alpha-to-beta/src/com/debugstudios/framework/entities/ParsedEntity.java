@@ -47,21 +47,22 @@ public class ParsedEntity extends ashley.core.Entity
         {
             FileHandle xmlFile = Gdx.files.getFileHandle(filePath, fileType);
 
+            // FIXME: Singleton or loader, dont want to waste resources now do we?
             XmlReader xml = new XmlReader();
             XmlReader.Element root = xml.parse(xmlFile);
 
-            for(XmlReader.Element element : root.getChildrenByName("Component"))
+            for(XmlReader.Element compElement : root.getChildrenByName("Component"))
             {
-                String compClass = element.getAttribute("type");
+                String compClass = compElement.getAttribute("type");
                 if(compClass == null)
-                    throw new RuntimeException("Could not load '" + filePath + "' - No type defined");
+                    throw new RuntimeException(TAG + ": Could not load '" + filePath + "' - No type defined");
 
                 try
                 {
                     // Create new parsed component from class name
                     ParsedComponent component = (ParsedComponent)Class.forName(compClass).newInstance();
                     // Load using element
-                    component.load(element);
+                    component.load(compElement);
 
                     // Add component to entity
                     this.add(component);
@@ -77,6 +78,7 @@ public class ParsedEntity extends ashley.core.Entity
                     e.printStackTrace();
                 }
             }
+            // TODO: Use recursion to load referenced GameObjects
         }
         catch (IOException e)
         {
