@@ -102,6 +102,19 @@ public class Engine {
 		entity.componentAdded.remove(componentAdded);
 		entity.componentRemoved.remove(componentRemoved);
 	}
+
+    /**
+     * Clear all entities
+     *
+     * TODO: Optimize
+     */
+    public void removeAllEntities()
+    {
+        for(Entity entity : entities)
+        {
+            removeEntity(entity);
+        }
+    }
 	
 	/**
 	 * Add the EntitySystem to this Engine

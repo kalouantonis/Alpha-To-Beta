@@ -48,7 +48,12 @@ public class MovementSystem extends IteratingSystem
 
     public MovementSystem(CollisionLayer collisionLayer)
     {
-        super(Family.getFamilyFor(Transform.class, Physics.class));
+        this(0, collisionLayer);
+    }
+
+    public MovementSystem(int priority, CollisionLayer collisionLayer)
+    {
+        super(Family.getFamilyFor(Transform.class, Physics.class), priority);
 
         this.collisionLayer = collisionLayer;
     }
@@ -63,7 +68,6 @@ public class MovementSystem extends IteratingSystem
         Rectangle transform = transformComp.transform;
         Vector2 velocity = physicsComp.velocity;
         Vector2 accel = physicsComp.accel;
-
 
          if(!xCollision)
             velocity.x += accel.x * deltaTime;

@@ -22,16 +22,16 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.components;
+package com.debugstudios.framework.events;
 
-import ashley.core.Component;
-import com.badlogic.gdx.utils.XmlReader;
-import com.debugstudios.framework.parsers.XmlReaderException;
+import java.util.UUID;
 
 /**
- * Created by Antonis Kalou on 1/30/14.
+ * Created by slacker on 2/4/14.
  */
-public abstract class ParsedComponent extends Component
+public interface IEventData
 {
-    public abstract void load(XmlReader.Element compRoot) throws XmlReaderException;
+    public UUID getEventType();
+    public float getTimeStamp();
+    public String getName();
 }

@@ -43,11 +43,11 @@ public class XmlHelpers
         fill.y = element.getFloatAttribute("y");
     }
 
-    public static XmlReader.Element loadAndValidate(XmlReader.Element root, String elemName)
+    public static XmlReader.Element loadAndValidate(XmlReader.Element root, String elemName) throws XmlReaderException
     {
         XmlReader.Element child = root.getChildByName(elemName);
         if(child == null)
-            throw new RuntimeException("No such element: " + elemName + " in root: " + root.getName());
+            throw new XmlReaderException("No such element: " + elemName + " in root: " + root.getName());
 
         return child;
     }

@@ -43,16 +43,16 @@ public class WorldDebugRenderer
         batch.end();
 
         renderer.begin();
-            renderPlayerDebug(world.player);
+//            renderPlayerDebug(world.player);
         renderer.end();
     }
 
     private void renderDebugInfo()
     {
-        Player player = world.player;
+//        Player player = world.player;
 
-        renderer.drawFont(batch, "Velocity X: " + player.velocity.x, 0, 0);
-        renderer.drawFont(batch, "Velocity Y: " + player.velocity.y, 0, renderer.getFontHeight());
+//        renderer.drawFont(batch, "Velocity X: " + player.velocity.x, 0, 0);
+//        renderer.drawFont(batch, "Velocity Y: " + player.velocity.y, 0, renderer.getFontHeight());
     }
 
     private void renderPlayerDebug(Player player)

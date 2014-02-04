@@ -22,16 +22,60 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.components;
+package com.debugstudios.framework.managers;
 
-import ashley.core.Component;
-import com.badlogic.gdx.utils.XmlReader;
-import com.debugstudios.framework.parsers.XmlReaderException;
+import ashley.utils.ObjectMap;
+import com.badlogic.gdx.graphics.Texture;
 
 /**
- * Created by Antonis Kalou on 1/30/14.
+ * Created by slacker on 2/1/14.
  */
-public abstract class ParsedComponent extends Component
+public abstract class ObjectManager<T>
 {
-    public abstract void load(XmlReader.Element compRoot) throws XmlReaderException;
+    private ObjectMap<String, T> objectMap;
+
+    public ObjectManager()
+    {
+        objectMap = new ObjectMap<String, T>();
+    }
+
+    public T load(String filename)
+    {
+        if(contains(filename))
+            return objectMap.get(filename);
+
+        T object = createObject(filename);
+        objectMap.put(filename, object);
+
+        return object;
+    }
+
+    protected abstract T createObject(String filename);
+
+    public boolean contains(String filename)
+    {
+        return objectMap.containsKey(filename);
+    }
+
+    public boolean contains(T value)
+    {
+        return objectMap.containsValue(value, false);
+    }
+
+    public T get(String filename)
+    {
+        // TODO: Error checking
+        return objectMap.get(filename);
+    }
+
+
+    public T remove(String filename)
+    {
+        return objectMap.remove(filename);
+    }
+
+    public void clear()
+    {
+        objectMap.clear();
+    }
 }

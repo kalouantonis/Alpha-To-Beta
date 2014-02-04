@@ -27,6 +27,7 @@ package com.debugstudios.framework.components;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.XmlReader;
 import com.debugstudios.framework.parsers.XmlHelpers;
+import com.debugstudios.framework.parsers.XmlReaderException;
 
 /**
  * Created by Antonis Kalou on 1/29/14.
@@ -53,15 +54,14 @@ public class Physics extends ParsedComponent
     }
 
     @Override
-    public void load(XmlReader.Element compRoot)
+    public void load(XmlReader.Element compRoot) throws XmlReaderException
     {
         /**
          * XML Defined as such
          *
          * <Component type="com.debugstudios.framwork.components.Physics">
-         *       <Velocity x="20" y="0" >
-         *          <MaxVelocity x="200" y="400" />
-         *       </Velocity>
+         *       <Velocity x="20" y="0" />
+         *      <MaxVelocity x="200" y="400" />
          *       <Acceleration x="0" y = "-9.8" />
          *       <!-- Optional, set to 0 by default-->
          *       <Mass>20</Mass>
@@ -72,7 +72,7 @@ public class Physics extends ParsedComponent
         XmlHelpers.fillVectorFromElement(velocityElem, velocity);
 
         // MaxVelocity
-        XmlReader.Element maxVelElem = XmlHelpers.loadAndValidate(velocityElem, "MaxVelocity");
+        XmlReader.Element maxVelElem = XmlHelpers.loadAndValidate(compRoot, "MaxVelocity");
         XmlHelpers.fillVectorFromElement(maxVelElem, maxVelocity);
 
         // Acceleration

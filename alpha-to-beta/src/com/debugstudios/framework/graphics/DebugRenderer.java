@@ -41,13 +41,13 @@ public class DebugRenderer
     private ShapeRenderer shapeRenderer;
     /** Font renderer for debug information */
     private BitmapFont debugFont = null;
-    /** Camera, used for rendering fonts */
+    /** CameraComponent, used for rendering fonts */
     private Camera camera;
 
     /**
      * Create new debug renderer, load internal renderers
      *
-     * @param camera Camera instance
+     * @param camera CameraComponent instance
      */
     public DebugRenderer(Camera camera)
     {

@@ -28,6 +28,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.XmlReader;
 import com.debugstudios.framework.parsers.XmlHelpers;
+import com.debugstudios.framework.parsers.XmlReaderException;
 
 /**
  * Created by Antonis Kalou on 1/29/14.
@@ -40,6 +41,11 @@ public class Transform extends ParsedComponent
     public Vector2 origin;
     public float rotation;
     public Vector2 scale;
+
+    public Transform()
+    {
+        this(0, 0, 1, 1);
+    }
 
     public Transform(float x, float y, float width, float height)
     {
@@ -61,7 +67,7 @@ public class Transform extends ParsedComponent
     }
 
     @Override
-    public void load(XmlReader.Element compRoot)
+    public void load(XmlReader.Element compRoot) throws XmlReaderException
     {
         /**
          * XML Defined as such:
@@ -84,7 +90,7 @@ public class Transform extends ParsedComponent
         transform.y = transformElem.getFloatAttribute("y");
         transform.width = transformElem.getFloatAttribute("width");
         transform.height = transformElem.getFloatAttribute("height");
-        z = transformElem.getFloatAttribute("z");
+        z = transformElem.getFloatAttribute("z", 0f);
 
         // Origin, manual validation
         XmlReader.Element originElem = compRoot.getChildByName("Origin");

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) [2013] [Antonis Kalou (kalouantonis@gmail.com)]
+ * Copyright (c) [2014] [Antonis Kalou (kalouantonis@gmail.com)]
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,46 +22,15 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.physics.tweenengine;
-
-import com.debugstudios.framework.entities.DynamicEntity;
+package com.debugstudios.framework.parsers;
 
 /**
- * Created by Antonis Kalou on 12/30/13.
+ * Created by Antonis Kalou on 1/30/14.
  */
-public class XAccelerator implements Tween
+public class XmlReaderException extends InstantiationException
+{
+    public XmlReaderException(String message)
     {
-        DynamicEntity entity;
-
-        float time;
-        float xAccel;
-
-        public XAccelerator(DynamicEntity entity, float finalXVel, float time)
-        {
-            this.entity = entity;
-            this.time = time;
-
-            // v = u + at
-            // --> a = (v-u)/t
-            xAccel = (finalXVel - entity.velocity.x) / time;
-
-            entity.accel.x = xAccel;
-        }
-
-        public void update(float deltaTime)
-        {
-            if(time <= 0)
-            {
-                entity.accel.x = 0;
-                return;
-            }
-
-            time -= deltaTime;
-        }
-
-        public boolean isFinished()
-        {
-            return time <= 0;
-        }
+        super(message);
     }
-
+}

@@ -24,14 +24,43 @@
 
 package com.debugstudios.framework.components;
 
-import ashley.core.Component;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.XmlReader;
+import com.debugstudios.framework.graphics.Camera;
+import com.debugstudios.framework.parsers.XmlHelpers;
 import com.debugstudios.framework.parsers.XmlReaderException;
 
 /**
- * Created by Antonis Kalou on 1/30/14.
+ * Created by Antonis Kalou on 1/29/14.
  */
-public abstract class ParsedComponent extends Component
+public class CameraComponent extends ParsedComponent
 {
-    public abstract void load(XmlReader.Element compRoot) throws XmlReaderException;
+    public Camera camera;
+
+    public CameraComponent()
+    {
+        camera = new Camera();
+    }
+
+    public CameraComponent(float viewportWidth, float viewportHeight)
+    {
+        camera = new Camera(viewportWidth, viewportHeight);
+    }
+
+    @Override
+    public void load(XmlReader.Element compRoot) throws XmlReaderException
+    {
+        /**
+         * XML defined as such:
+         *
+         * <Component type="com.debugstudios.framework.components.CameraComponent">
+         *     <Viewport width="200" height="200" />
+         * </Component>
+         */
+
+        XmlReader.Element viewportElem = XmlHelpers.loadAndValidate(compRoot, "Viewport");
+
+        camera.viewportWidth = viewportElem.getFloatAttribute("width", Gdx.graphics.getWidth());
+        camera.viewportHeight = viewportElem.getFloatAttribute("height", Gdx.graphics.getHeight());
+    }
 }

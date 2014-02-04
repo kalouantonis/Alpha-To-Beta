@@ -27,7 +27,7 @@ public class PlayerInputHandler implements InputProcessor
 
     public PlayerInputHandler(World world)
     {
-        this.player = world.player;
+//        this.player = world.player;
         this.camera = world.getCamera();
     }
 
@@ -49,8 +49,6 @@ public class PlayerInputHandler implements InputProcessor
     @Override
     public boolean keyUp(int keycode)
     {
-        if(keycode == Input.Keys.A || keycode == Input.Keys.D ||
-                 keycode == Input.Keys.LEFT || keycode == Input.Keys.RIGHT)
             player.velocity.x = 0;
 
         return true;

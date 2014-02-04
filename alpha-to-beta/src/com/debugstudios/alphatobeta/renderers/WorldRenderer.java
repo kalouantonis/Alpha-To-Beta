@@ -33,7 +33,7 @@ public class WorldRenderer
         this.world = world;
         this.camera = world.getCamera();
 
-        this.tileMap = this.world.tileMap;
+//        this.tileMap = this.world.tileMap;
     }
 
     public void render()
@@ -66,7 +66,7 @@ public class WorldRenderer
 
     private void renderPlayers()
     {
-        for(Player player : world.players)
+        /*for(Player player : world.players)
         {
             float xPos = player.position.x;
             float yPos = player.position.y;
@@ -80,7 +80,7 @@ public class WorldRenderer
             else
                 batch.draw(player.getAnimationFrame(player.idleAnimation), xPos, yPos,
                         player.width, player.height);
-        }
+        }*/
     }
 
     public void dispose()

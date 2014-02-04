@@ -30,7 +30,9 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.XmlReader;
+import com.debugstudios.framework.managers.TextureManager;
 import com.debugstudios.framework.parsers.XmlHelpers;
+import com.debugstudios.framework.parsers.XmlReaderException;
 
 
 /**
@@ -62,7 +64,7 @@ public class Renderable extends ParsedComponent
 
 
     @Override
-    public void load(XmlReader.Element compRoot)
+    public void load(XmlReader.Element compRoot) throws XmlReaderException
     {
         /**
          * XML File will be as such:
@@ -81,22 +83,25 @@ public class Renderable extends ParsedComponent
         String fileName = textureFileElem.getText();
 
         // Attempt to access type
-        String fileTypeResolve = textureFileElem.getAttribute("type");
+        String fileTypeResolve = textureFileElem.getAttribute("type", "internal");
 
         // Internal by default
-        Files.FileType fileType= Files.FileType.Internal;
-        if(!fileTypeResolve.isEmpty())
+        Files.FileType fileType;
+
+        // File type provided
+        if(fileTypeResolve.equalsIgnoreCase("internal"))
+            fileType = Files.FileType.Internal;
+        else if(fileTypeResolve.equalsIgnoreCase("external"))
+            fileType = Files.FileType.External;
+        else if(fileTypeResolve.equalsIgnoreCase("absolute"))
+            fileType = Files.FileType.Absolute;
+        else
         {
-            // File type provided
-            if(fileTypeResolve.equalsIgnoreCase("external"))
-                fileType = Files.FileType.External;
-            else if(fileTypeResolve.equalsIgnoreCase("absolute"))
-                fileType = Files.FileType.Absolute;
-            else
-                Gdx.app.error(TAG, "Unrecognised file type: " + fileTypeResolve);
+            throw new XmlReaderException("Unrecoginsed file type: " + fileTypeResolve);
         }
 
-        texture = new Texture(Gdx.files.getFileHandle(fileName, fileType));
+        //texture = new Texture(Gdx.files.getFileHandle(fileName, fileType));
+        texture = TextureManager.getInstance().load(Gdx.files.getFileHandle(fileName, fileType));
 
         // Flip args
         XmlReader.Element flipElem = compRoot.getChildByName("Flip");

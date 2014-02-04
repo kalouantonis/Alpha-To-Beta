@@ -22,11 +22,28 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.components;
+package com.debugstudios.framework.events;
 
 /**
- * Created by Antonis Kalou on 1/29/14.
+ * Created by slacker on 2/4/14.
  */
-public class Camera
+public abstract class BaseEventData implements IEventData
 {
+    float timeStamp;
+
+    public BaseEventData(float timeStamp)
+    {
+        this.timeStamp = timeStamp;
+    }
+
+    public BaseEventData()
+    {
+        this(0f);
+    }
+
+    @Override
+    public float getTimeStamp()
+    {
+        return timeStamp;
+    }
 }

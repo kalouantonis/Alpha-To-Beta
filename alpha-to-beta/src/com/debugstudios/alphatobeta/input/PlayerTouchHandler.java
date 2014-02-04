@@ -25,7 +25,7 @@ public class PlayerTouchHandler implements InputProcessor, GestureDetector.Gestu
 
     public PlayerTouchHandler(World world)
     {
-        this.player = world.player;
+//        this.player = world.player;
         this.camera = world.getCamera();
     }
 

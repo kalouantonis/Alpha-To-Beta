@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) [2013] [Antonis Kalou (kalouantonis@gmail.com)]
+ * Copyright (c) [2014] [Antonis Kalou (kalouantonis@gmail.com)]
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,13 +22,46 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.physics.tweenengine;
+package com.debugstudios.framework.managers;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
 
 /**
- * Created by Antonis Kalou on 12/30/13.
+ * Created by slacker on 2/1/14.
  */
-public interface Tween
+public class TextureManager extends ObjectReferenceManager<Texture>
 {
-    public void update(float deltaTime);
-    public boolean isFinished();
+    private static final String TAG = TextureManager.class.getSimpleName();
+
+    private static TextureManager ourInstance = new TextureManager();
+
+    public static TextureManager getInstance()
+    {
+        return ourInstance;
+    }
+
+    private TextureManager()
+    {
+        super();
+    }
+
+    public Texture load(FileHandle fileHandle)
+    {
+        return super.load(fileHandle.path());
+    }
+
+    @Override
+    protected Texture createObject(String filename)
+    {
+        Gdx.app.debug(TAG, "Creating new texture: " + filename);
+        return new Texture(filename);
+    }
+
+    @Override
+    protected void dispose(Texture object)
+    {
+        object.dispose();
+    }
 }

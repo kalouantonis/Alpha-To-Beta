@@ -1,0 +1,14 @@
+<Entity>
+    <Component type="com.debugstudios.framework.components.Transform">
+        <Transform x="100" y="200" width="16" height="16" />
+    </Component>
+    <Component type="com.debugstudios.framework.components.Renderable">
+        <TextureFile>img/heart.png</TextureFile>
+    </Component>
+    <Component type="com.debugstudios.framework.components.Physics">
+        <Velocity x="0" y="0" />
+        <MaxVelocity x="200" y="200" />
+        <Acceleration x="1" y="0" />
+    </Component>
+    <Component type="com.debugstudios.alphatobeta.components.PlayerInputComponent" />
+</Entity>

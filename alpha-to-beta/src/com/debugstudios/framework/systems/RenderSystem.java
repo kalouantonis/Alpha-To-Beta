@@ -29,13 +29,16 @@ import ashley.core.Entity;
 import ashley.core.EntitySystem;
 import ashley.core.Family;
 import ashley.utils.IntMap;
-import ashley.utils.Sort;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.debugstudios.framework.components.CameraComponent;
 import com.debugstudios.framework.components.Renderable;
 import com.debugstudios.framework.components.Transform;
 import com.debugstudios.framework.graphics.Camera;
+
+import javax.microedition.khronos.opengles.GL10;
 
 /**
  * Created by Antonis Kalou on 1/29/14.
@@ -43,32 +46,40 @@ import com.debugstudios.framework.graphics.Camera;
 public class RenderSystem extends EntitySystem
 {
     // TODO: Use comparator to compare positional z co-ords
-    IntMap<Entity> entities;
-    Family family;
+    IntMap<Entity> renderables;
+
+    Family renderableFamily;
 
     SpriteBatch spriteBatch;
-    Camera camera;
+
+    public RenderSystem(Rectangle worldSize)
+    {
+        this(new SpriteBatch(), worldSize);
+    }
+
+    public RenderSystem(int priority, Rectangle worldSize)
+    {
+        this(priority, new SpriteBatch(),  worldSize);
+    }
 
     /**
      * Set up the rendering system
      *
      * @param spriteBatch
-     * @param camera
      */
-    public RenderSystem(SpriteBatch spriteBatch, Camera camera)
+    public RenderSystem(SpriteBatch spriteBatch, Rectangle worldSize)
     {
-        this(0, spriteBatch, camera);
+        this(0, spriteBatch, worldSize);
     }
 
-    public RenderSystem(int priority, SpriteBatch spriteBatch, Camera camera)
+    public RenderSystem(int priority, SpriteBatch spriteBatch, Rectangle worldSize)
     {
         super(priority);
 
-        entities = new IntMap<Entity>();
-        family = Family.getFamilyFor(Transform.class, Renderable.class);
+        renderables = new IntMap<Entity>();
+        renderableFamily = Family.getFamilyFor(Transform.class, Renderable.class);
 
         this.spriteBatch = spriteBatch;
-        this.camera = camera;
     }
 
     /**
@@ -81,17 +92,22 @@ public class RenderSystem extends EntitySystem
         super.addedToEngine(engine);
 
         // TODO: Check if super classes are counted in renderable
-        entities = engine.getEntitiesFor(family);
+        renderables = engine.getEntitiesFor(renderableFamily);
     }
 
     @Override
     public void update(float deltaTime)
     {
-        IntMap.Keys keys = entities.keys();
+        // Clear screen buffer
+        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+
+        IntMap.Keys keys = renderables.keys();
+
+        spriteBatch.begin();
 
         while(keys.hasNext)
         {
-            Entity entity = entities.get(keys.next());
+            Entity entity = renderables.get(keys.next());
 
             Transform transformComp = entity.getComponent(Transform.class);
             Renderable renderableComp = entity.getComponent(Renderable.class);
@@ -110,5 +126,7 @@ public class RenderSystem extends EntitySystem
                     renderableComp.flipX, renderableComp.flipY
             );
         }
+
+        spriteBatch.end();
     }
 }

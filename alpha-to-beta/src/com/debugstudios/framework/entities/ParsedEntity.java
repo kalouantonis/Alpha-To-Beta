@@ -30,6 +30,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.XmlReader;
 import com.debugstudios.framework.components.ParsedComponent;
+import com.debugstudios.framework.parsers.XmlReaderException;
 
 import java.io.IOException;
 
@@ -49,6 +50,8 @@ public class ParsedEntity extends ashley.core.Entity
 
             // FIXME: Singleton or loader, dont want to waste resources now do we?
             XmlReader xml = new XmlReader();
+
+            Gdx.app.debug(TAG, "Parsing Entity XML: " + xmlFile.path());
             XmlReader.Element root = xml.parse(xmlFile);
 
             for(XmlReader.Element compElement : root.getChildrenByName("Component"))
@@ -57,15 +60,26 @@ public class ParsedEntity extends ashley.core.Entity
                 if(compClass == null)
                     throw new RuntimeException(TAG + ": Could not load '" + filePath + "' - No type defined");
 
+
                 try
                 {
                     // Create new parsed component from class name
                     ParsedComponent component = (ParsedComponent)Class.forName(compClass).newInstance();
                     // Load using element
-                    component.load(compElement);
+                    try
+                    {
+                        Gdx.app.debug(TAG, "\tParsing component: " + compClass);
+                        component.load(compElement);
 
-                    // Add component to entity
-                    this.add(component);
+                        // Add component to entity
+                        this.add(component);
+                    }
+                    catch (XmlReaderException e)
+                    {
+                        Gdx.app.debug(TAG, "Failed to add component to entity. Ignoring " + compClass +
+                                        "\n\t" + e.getMessage());
+                    }
+
 
                 } catch (ClassNotFoundException e)
                 {

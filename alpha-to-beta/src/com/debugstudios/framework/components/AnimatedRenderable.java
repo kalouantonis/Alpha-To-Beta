@@ -26,8 +26,11 @@ package com.debugstudios.framework.components;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader;
 import com.debugstudios.framework.graphics.AnimUtils;
+import com.debugstudios.framework.parsers.XmlHelpers;
+import com.debugstudios.framework.parsers.XmlReaderException;
 
 /**
  * Created by Antonis Kalou on 1/29/14.
@@ -52,7 +55,7 @@ public class AnimatedRenderable extends AbstractAnimation
     }
 
     @Override
-    public void load(XmlReader.Element compRoot)
+    public void load(XmlReader.Element compRoot) throws XmlReaderException
     {
         /**
          * XML defined as such:
@@ -63,7 +66,51 @@ public class AnimatedRenderable extends AbstractAnimation
          *      <AnimationSpeed>0.1</AnimationSpeed>
          *      <!-- Set to normal by default -->
          *      <AnimationType>Looping</AnimationType>
+         *      <RegionNames>
+         *          <Region name="left1" />
+         *          <Region name="left2" />
+         *      </RegionNames>
          * </Component>
          */
+
+        XmlReader.Element atlasElem = XmlHelpers.loadAndValidate(compRoot, "AtlasFile");
+        String filepath = atlasElem.getText();
+
+        XmlReader.Element animSpeedElem = XmlHelpers.loadAndValidate(compRoot, "AnimationSpeed");
+        float animSpeed = Float.parseFloat(animSpeedElem.getText());
+
+        XmlReader.Element animTypeElem = compRoot.getChildByName("AnimationType");
+        String animTypeResolve = animTypeElem.getText();
+
+        int animType = Animation.NORMAL;
+        if(animTypeElem != null && !animTypeResolve.isEmpty())
+        {
+            if(animTypeResolve.equalsIgnoreCase("Looping"))
+                animType = Animation.LOOP;
+            else if(animTypeResolve.equalsIgnoreCase("Reversed"))
+                animType = Animation.REVERSED;
+            else if(animTypeResolve.equalsIgnoreCase("Random"))
+                animType = Animation.LOOP_RANDOM;
+        }
+
+
+        // Regions
+        XmlReader.Element regionNameElem = compRoot.getChildByName("RegionNames");
+        Array<String> regions = new Array<String>();
+
+
+        for(XmlReader.Element regionElem : regionNameElem.getChildrenByName("Region"))
+        {
+            String name = regionNameElem.getAttribute("name", "");
+
+            if(!name.isEmpty())
+                regions.add(name);
+        }
+
+        // Load texture atlas
+        TextureAtlas atlas = new TextureAtlas(filepath);
+
+        // Create animation
+        animation = AnimUtils.createAnimation(animSpeed, animType, atlas, regions);
     }
 }

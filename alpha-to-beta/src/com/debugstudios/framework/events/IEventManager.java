@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) [2013] [Antonis Kalou (kalouantonis@gmail.com)]
+ * Copyright (c) [2014] [Antonis Kalou (kalouantonis@gmail.com)]
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,53 +22,38 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.physics.tweenengine;
+package com.debugstudios.framework.events;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import ashley.signals.Listener;
+
+import java.util.UUID;
 
 /**
- * Created by Antonis Kalou on 12/29/13.
+ * Created by slacker on 2/4/14.
  */
-public class TweenEngine
+public abstract class IEventManager
 {
-    private List<Tween> tweens;
+    int INFINITE = 0xffffffff;
 
-    public TweenEngine()
+    public IEventManager(String name)
     {
-        tweens = new ArrayList<Tween>();
+
     }
 
-    public void addTween(Tween tween)
+    public abstract void AddListener(Listener<IEventData> eventListener, UUID eventType);
+
+    public abstract void RemoveListener(Listener<IEventData> eventListener, UUID eventType);
+
+    public abstract void TriggerEvent(IEventData event);
+
+    public abstract void QueueEvent(IEventData event);
+
+    public abstract void AbortEvent(long eventType, boolean allOfType);
+
+    public abstract void Update(float maxMillis);
+
+    public void Update()
     {
-        tweens.add(tween);
+        Update(INFINITE);
     }
-
-    public void removeTween(Tween tween)
-    {
-        tweens.remove(tween);
-    }
-
-    public void removeTween(int index)
-    {
-        tweens.remove(index);
-    }
-
-    public void update(float deltaTime)
-    {
-        Iterator<Tween> iterator = tweens.iterator();
-
-        while(iterator.hasNext())
-        {
-            Tween tween = iterator.next();
-            tween.update(deltaTime);
-
-            if(tween.isFinished())
-                iterator.remove();
-        }
-    }
-
-
 }
-

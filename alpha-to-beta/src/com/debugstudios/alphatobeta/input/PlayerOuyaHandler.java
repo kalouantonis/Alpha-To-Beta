@@ -27,7 +27,7 @@ public class PlayerOuyaHandler implements ControllerListener
     public PlayerOuyaHandler(World world)
     {
         this.camera = world.getCamera();
-        this.player = world.player;
+//        this.player = world.player;
     }
 
     @Override

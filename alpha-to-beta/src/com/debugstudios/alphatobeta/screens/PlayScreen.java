@@ -43,28 +43,28 @@ public class PlayScreen implements GameScreen
 
         world = new World();
 
-        SpriteBatch spriteBatch = world.tileMap.getSpriteBatch();
-        worldRenderer = new WorldRenderer(spriteBatch, world);
-        debugRenderer = new WorldDebugRenderer(spriteBatch, world);
+//        SpriteBatch spriteBatch = world.tileMap.getSpriteBatch();
+//        worldRenderer = new WorldRenderer(spriteBatch, world);
+//        debugRenderer = new WorldDebugRenderer(spriteBatch, world);
 
 
-        switch (Gdx.app.getType())
-        {
-            case Android:
-                // TODO: Check if Ouya registers as android app
-                Gdx.input.setInputProcessor(new PlayerTouchHandler(world));
-                Gdx.app.debug(TAG, "Using Android input handler");
-                break;
-            case Desktop:
-                Gdx.input.setInputProcessor(new PlayerInputHandler(world));
-                Gdx.app.debug(TAG, "Using Desktop input handler");
-                break;
-            default:
-                throw new RuntimeException("Unsupported platform!");
-        }
-
-        if(Ouya.runningOnOuya)
-            Controllers.addListener(new PlayerOuyaHandler(world));
+//        switch (Gdx.app.getType())
+//        {
+//            case Android:
+//                // TODO: Check if Ouya registers as android app
+//                Gdx.input.setInputProcessor(new PlayerTouchHandler(world));
+//                Gdx.app.debug(TAG, "Using Android input handler");
+//                break;
+//            case Desktop:
+//                Gdx.input.setInputProcessor(new PlayerInputHandler(world));
+//                Gdx.app.debug(TAG, "Using Desktop input handler");
+//                break;
+//            default:
+//                throw new RuntimeException("Unsupported platform!");
+//        }
+//
+//        if(Ouya.runningOnOuya)
+//            Controllers.addListener(new PlayerOuyaHandler(world));
 
         Gdx.gl.glClearColor(135.f / 255.f, 206.f / 255.f, 235.f / 255.f, 1);
     }
@@ -96,8 +96,8 @@ public class PlayScreen implements GameScreen
 
         //tileMap.draw();
 
-        worldRenderer.render();
-        debugRenderer.render();
+//        worldRenderer.render();
+//        debugRenderer.render();
     }
 
     @Override
@@ -115,11 +115,11 @@ public class PlayScreen implements GameScreen
     public void dispose()
     {
         Assets.unload();
-        debugRenderer.dispose();
+//        debugRenderer.dispose();
 
         // Dispose sequence is important.
         // Remove items that reference world data first
-        worldRenderer.dispose();
+//        worldRenderer.dispose();
         world.dispose();
     }
 

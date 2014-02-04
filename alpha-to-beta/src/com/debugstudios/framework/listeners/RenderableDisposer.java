@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) [2013] [Antonis Kalou (kalouantonis@gmail.com)]
+ * Copyright (c) [2014] [Antonis Kalou (kalouantonis@gmail.com)]
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,20 +22,24 @@
  * SOFTWARE.
  */
 
-package com.debugstudios.framework.resources;
+package com.debugstudios.framework.listeners;
 
-import org.xml.sax.helpers.DefaultHandler;
+import ashley.core.Entity;
+import ashley.signals.Listener;
+import ashley.signals.Signal;
+import com.debugstudios.framework.components.Renderable;
 
 /**
- * Created by Antonis Kalou on 18/12/13.
- *
- * @author Antonis Kalou
+ * Created by slacker on 2/1/14.
  */
-public class XMLResource extends DefaultHandler
+public class RenderableDisposer implements Listener<Entity>
 {
-    private final String xmlResFolder = "objects";
-
-    public XMLResource()
+    @Override
+    public void receive(Signal<Entity> signal, Entity object)
     {
+        Renderable renderable = object.getComponent(Renderable.class);
+
+        if(renderable != null)
+            renderable.texture.dispose();
     }
 }
