@@ -5,7 +5,6 @@
 #include <memory>
 #include <SFML/System/Vector2.hpp>
 
-//#include <Screens/IScreen.h>
 
 namespace sf
 {
@@ -39,8 +38,6 @@ public:
         return instance;
     }
 
-    // Work with raw pointers for now
-    // TODO: Check raw ptrs
     void push(UScreenPtr pScreen);
     void change(UScreenPtr pScreen);
     void pop();

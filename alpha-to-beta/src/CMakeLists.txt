@@ -50,7 +50,7 @@ add_executable(alphatobeta ${SOURCE_FILE_LIST})
 target_link_libraries(
 	alphatobeta;
 
-	tinyxml2static;		# XML Lib
+	tinyxml2;			# XML Lib
 	entityx;			# ES Lib 
 	core; 				# Core Lib
 	sfml-system; 		# SFML core

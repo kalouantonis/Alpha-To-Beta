@@ -31,6 +31,7 @@ protected:
 
 private:
     EntityManagerPtr m_pEntityManager;
+    XMLoader m_xmlLoader;
 };
 
 #endif // ENTITYFACTORY_H

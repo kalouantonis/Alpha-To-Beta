@@ -21,15 +21,15 @@ EntityFactory::EntityFactory(EntityManagerPtr pEntityManager)
 void EntityFactory::loadEntity(const std::string &filename)
 {
     // Get root element of xml file
-    const tinyxml2::XMLElement* pRoot = XMLoader::loadAndGetRoot(filename.c_str());
+    const tinyxml2::XMLElement* pRoot = m_xmlLoader.loadAndGetRoot(filename.c_str());
 
     // check if root exists
     if(!pRoot)
     {
         std::string errmsg = "Failed to load xml resource: " + filename;
 
-        if(XMLoader::hasErrorOccured())
-            errmsg += XMLoader::getLastError();
+        if(m_xmlLoader.hasErrorOccured())
+            errmsg += m_xmlLoader.getLastError();
 
         CORE_ERROR(errmsg);
         return;

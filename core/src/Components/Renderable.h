@@ -15,13 +15,15 @@ public:
      * @brief Renderable
      * @param texture
      */
-    explicit Renderable(sf::ConstTexturePtr texture);
+    explicit Renderable(sf::TexturePtr texture);
 
     virtual bool load(const tinyxml2::XMLElement *pElement) override;
 
     // Constant, texture data can not be modified
     // Note: May change in the future if mods are needed
-    sf::ConstTexturePtr pTexture;
+    sf::TexturePtr pTexture;
+    // Draw order
+    int order;
 };
 
 typedef std::shared_ptr<Renderable> RenderablePtr;

@@ -7,25 +7,25 @@
 class XMLoader
 {
 public:
-    static bool loadFile(const char* filename);
+    bool loadFile(const char* filename);
     /**
      * @brief Gets root from loaded document
      * @return
      */
-    static tinyxml2::XMLElement* getRoot();
+    tinyxml2::XMLElement* getRoot();
     /**
      * @brief Loads and gets the root of the document
      * @param filename
      * @return
      */
-    static tinyxml2::XMLElement* loadAndGetRoot(const char* filename);
+    tinyxml2::XMLElement* loadAndGetRoot(const char* filename);
 
     // Maybe get second error string too
-    static std::string getLastError() { return m_doc.GetErrorStr1(); } 
-    static bool hasErrorOccured() { return m_doc.Error(); }
+    std::string getLastError() { return m_doc.GetErrorStr1(); } 
+    bool hasErrorOccured() { return m_doc.Error(); }
 
 private:
-    static tinyxml2::XMLDocument m_doc;
+    tinyxml2::XMLDocument m_doc;
 };
 
 #endif // XMLOADER_H

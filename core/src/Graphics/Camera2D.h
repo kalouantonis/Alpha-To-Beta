@@ -18,8 +18,10 @@ class Camera2D
 {
 public:
     Camera2D(sf::RenderTargetPtr renderTarget);
+    
     explicit Camera2D(sf::RenderTargetPtr renderTarget,
                       float frustrumWidth, float frustrumHeight);
+
     explicit Camera2D(sf::RenderTargetPtr renderTarget,
                       const sf::View& view);
 	~Camera2D();

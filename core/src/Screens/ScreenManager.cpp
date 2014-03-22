@@ -4,6 +4,21 @@
 #include <Utils/Logger.h>
 #include <assert.h>
 
+// Allocator /////////////////////////////////////////////////////////
+void _deleter(IScreen* p)
+{
+    CORE_DEBUG("Disposing screen...");
+    p->dispose();
+    CORE_DEBUG("Deleting screen...");
+    delete p;
+}
+
+UScreenPtr make_screen(IScreen* screen)
+{
+    return UScreenPtr(screen, _deleter);
+}
+//////////////////////////////////////////////////////////////////////
+
 void ScreenManager::push(UScreenPtr pScreen)
 {
     // Transform ownership to manager
@@ -66,15 +81,3 @@ void ScreenManager::dispose()
     }
 }
 
-void _deleter(IScreen* p)
-{
-    CORE_DEBUG("Disposing screen...");
-    p->dispose();
-    CORE_DEBUG("Deleting screen...");
-    delete p;
-}
-
-UScreenPtr make_screen(IScreen* screen)
-{
-    return UScreenPtr(screen, _deleter);
-}

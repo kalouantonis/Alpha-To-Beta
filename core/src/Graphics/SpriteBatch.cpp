@@ -20,7 +20,6 @@ SpriteBatch::SpriteBatch(sf::RenderTargetPtr renderTarget, int capacity)
 
 SpriteBatch::~SpriteBatch()
 {
-    //delete[] m_vertices;
 }
 
 void SpriteBatch::begin()
@@ -99,7 +98,6 @@ void SpriteBatch::draw(const TextureRegion &region, float x, float y, float widt
         switchTexture(newTexture);
     else if(m_numSprites >= m_maxSprites)
         flush();
-
 
     sf::Vertex* pQuad = getNextQuad();
 
