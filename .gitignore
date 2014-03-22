@@ -1,14 +1,7 @@
-out/*
-bin/*
-*/bin
-*/bin/*
+# Build files
+build
+*/build
 
-*.apk
-*.class
-alpha-to-beta/bin/*
-alpha-to-beta-android/bin/*
-alpha-to-beta-desktop/bin/*
-
-.idea
-.idea/*
-.idea/workspace.xml
+# Sublime files
+*.sublime-project
+*.sublime-workspace

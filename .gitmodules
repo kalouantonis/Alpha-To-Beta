@@ -1,0 +1,9 @@
+[submodule "entityx"]
+    path = dependencies/entityx
+    url = https://github.com/alecthomas/entityx.git
+    ignore = dirty
+
+[submodule "tinyxml2"]
+    path = dependencies/tinyxml2
+    url = https://github.com/leethomason/tinyxml2.git
+    ignore = dirty

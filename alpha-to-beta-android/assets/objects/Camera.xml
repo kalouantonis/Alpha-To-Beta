@@ -1,8 +1,0 @@
-<Entity>
-    <Component type="com.debugstudios.framework.components.Transform">
-        <Transform x="200" y="200" width="16" height="16" />
-    </Component>
-    <Component type="com.debugstudios.framework.components.CameraComponent">
-        <Viewport width="640" height="480" />
-    </Component>
-</Entity>

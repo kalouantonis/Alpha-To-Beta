@@ -1,0 +1,5 @@
+1. Use tinyxml memory pool if need arises or use std::fast_pool_allocator in std:vector or list (better)
+2. Use stable_sort for sorting layers. I think it wont re-arrange things that are of the same comperator.
+    I dont want to re-arrange items between layers
+    // Maybe only sort by texture, keep layers in map
+
