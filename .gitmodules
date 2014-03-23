@@ -8,7 +8,7 @@
     url = https://github.com/leethomason/tinyxml2.git
     ignore = dirty
 
-[submodule "artemis-cpp"]
+[submodule "Artemis-Cpp"]
 	path = dependencies/artemis-cpp
 	url = https://github.com/vinova/Artemis-Cpp.git
 	ignore = dirty
