@@ -5,7 +5,8 @@ cmake_minimum_required(VERSION 2.8)
 project(ALPHA_TO_BETA)
 	
 # Find SFML before proceeding
-find_package(SFML QUIET REQUIRED)
+find_package(SFML REQUIRED)
+find_package(Boost REQUIRED)
 
 # C++11 support and warnings 
 add_definitions(-std=c++11 -Wall)

@@ -10,6 +10,11 @@ RenderSystem::RenderSystem(SpriteBatch& spriteBatch)
 {
 }
 
+// void RenderSystem::configure(entityx::ptr<entityx::EventManager> events)
+// {
+// 	events->subscribe<ComponentAddedEvent<Renderable> >(*this);
+// }
+
 void RenderSystem::update(entityx::ptr<entityx::EntityManager> es, 
 	entityx::ptr<entityx::EventManager> event, float dt)
 {
@@ -30,3 +35,8 @@ void RenderSystem::update(entityx::ptr<entityx::EntityManager> es,
 	// End rendering
 	m_spriteBatch.end();
 }
+
+// void receive(const ComponentAddedEvent<Renderable>& renderable)
+// {
+	
+// }

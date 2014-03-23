@@ -2,7 +2,6 @@
 #include <Utils/Logger.h>
 
 #include <SFML/Window/Keyboard.hpp>
-#include <Resources/SingletonTextureHolder.h>
 
 GameScreen::GameScreen(sf::RenderTargetPtr window)
     : IScreen(window)

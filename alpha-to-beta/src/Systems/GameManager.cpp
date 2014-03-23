@@ -2,8 +2,9 @@
 #include <Systems/MovementSystem.h>
 #include <Systems/RenderSystem.h>
 
+#include <Entities/EntityFactory.h>
+
 #include <Utils/Logger.h>
-#include <Resources/SingletonTextureHolder.h>
 
 // TODO: GTFO
 #include <Components/Transform.h>
@@ -24,9 +25,11 @@ void GameManager::configure()
 
 void GameManager::initialize()
 {
-    SingletonTextureHolder& instance = SingletonTextureHolder::instance();
-    instance.load("heart", "assets/img.png");
-    instance.load("player", "assets/still1.png");
+    EntityFactory factory(entity_manager);
+    factory.loadFromDirectory("assets");
+
+    m_textureHolder.load("heart", "assets/img.png");
+    m_textureHolder.load("player", "assets/still1.png");
 
     CORE_DEBUG("Loaded textures...");
 
@@ -35,16 +38,16 @@ void GameManager::initialize()
     entityx::Entity entity = entity_manager->create();
 
     entity.assign<Transform>(100, 100, 32, 32);
-    entity.assign<Renderable>(instance.get("heart"));
+    entity.assign<Renderable>(m_textureHolder.get("heart"));
     entity.assign<Physics>(1, 0, 2, 0);
 
     entity = entity_manager->create();
     entity.assign<Transform>(150, 150, 16, 16);
-    entity.assign<Renderable>(instance.get("heart"));
+    entity.assign<Renderable>(m_textureHolder.get("heart"));
 
     entity = entity_manager->create();
     entity.assign<Transform>(250, 250, 64, 64);
-    entity.assign<Renderable>(instance.get("player"));
+    entity.assign<Renderable>(m_textureHolder.get("player"));
 
     CORE_DEBUG("Initialization complete.");
 }
@@ -68,5 +71,5 @@ void GameManager::dispose()
     entity_manager->destroy_all();
 
     CORE_DEBUG("Disposing textures...");
-    SingletonTextureHolder::instance().clear();
+    m_textureHolder.clear();
 }

@@ -1,9 +1,10 @@
 #include <Components/Renderable.h>
 #include <tinyxml2.h>
 
-#include <Resources/SingletonTextureHolder.h>
 #include <Utils/Logger.h>
 
+// Instanciate static property
+TextureHolder Renderable::m_sTextureHolder;
 
 Renderable::Renderable()
     : pTexture(nullptr)
@@ -55,10 +56,9 @@ bool Renderable::load(const tinyxml2::XMLElement *pElement)
 		textureId = textureFile;
 	}
 
-	SingletonTextureHolder::instance().load(textureId, textureFile);
+	textureHolder().load(textureId, textureFile);
 
-	this->pTexture = SingletonTextureHolder::instance().get(textureId);
+	this->pTexture = textureHolder().get(textureId);
 
     return true;
 }
-

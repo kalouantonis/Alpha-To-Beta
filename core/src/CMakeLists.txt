@@ -5,6 +5,8 @@ include_directories(
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinyxml2;
 	# EntityX
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/entityx;
+	# Boost library
+	${Boost_INCLUDE_DIR};
 )
 
 
@@ -17,7 +19,6 @@ set(
 
 set(
 	COMPONENTS_SRC
-	"Components/ParsedComponent.h"
 	"Components/Renderable.cpp"
 	"Components/Renderable.h"
 	"Components/Transform.cpp"
@@ -47,9 +48,9 @@ set(
 	RESOURCES_SRC
 	"Resources/GenericObjectFactory.h"
 	"Resources/ResourceHolder.h"
+	"Resources/ResourceHolderDef.h"
 	"Resources/SharedResourceHolder.h"
 	"Resources/SingletonResourceHolder.h"
-	"Resources/SingletonTextureHolder.h"
 	"Resources/XMLoader.cpp"
 	"Resources/XMLoader.h"
 )
@@ -83,6 +84,7 @@ set(
 
 	${MAIN_SRC};
 	${COMPONENTS_SRC};
+	${ENTITIES_SRC};
 	${GRAPHICS_SRC};
 	${RESOURCES_SRC};
 	${SCREENS_SRC};

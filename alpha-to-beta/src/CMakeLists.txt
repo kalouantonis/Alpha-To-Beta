@@ -3,6 +3,8 @@ include_directories(
 	.;
 	# EntityX
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/entityx;
+	# TinyXML
+	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinyxml2;
 	# Core LIB
 	${ALPHA_TO_BETA_SOURCE_DIR}/core/src;
 	# SFML
@@ -52,6 +54,8 @@ target_link_libraries(
 
 	tinyxml2;			# XML Lib
 	entityx;			# ES Lib 
+	boost_system; 		# Boost 
+	boost_filesystem;	# Filesystem support
 	core; 				# Core Lib
 	sfml-system; 		# SFML core
 	sfml-window;		# SFML Window system

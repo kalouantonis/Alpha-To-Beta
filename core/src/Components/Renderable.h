@@ -1,10 +1,11 @@
 #ifndef RENDERABLE_H
 #define RENDERABLE_H
-
+// TODO: May need to change entity.h to separate components in to different headers
+#include <entityx/Entity.h>
+#include <Resources/ResourceHolderDef.h>
 #include <SFMLPtrDef.h>
-#include <Components/ParsedComponent.h>
 
-class Renderable: public ParsedComponent<Renderable>
+class Renderable: public entityx::Component<Renderable>
 {
 public:
     /**
@@ -24,6 +25,15 @@ public:
     sf::TexturePtr pTexture;
     // Draw order
     int order;
+
+protected:
+    TextureHolder& textureHolder() const { return m_sTextureHolder; }
+
+private:
+    /**
+     * Static resource holder, used by this class and all inheritors
+     */
+    static TextureHolder m_sTextureHolder;
 };
 
 typedef std::shared_ptr<Renderable> RenderablePtr;

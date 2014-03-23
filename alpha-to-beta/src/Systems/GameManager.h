@@ -4,6 +4,9 @@
 #include <Systems/SystemManager.h>
 #include <Graphics/SpriteBatch.h>
 
+// TODO: GTFO
+#include <Resources/ResourceHolderDef.h>
+
 class GameManager: public SystemManager
 {
 public:
@@ -19,6 +22,9 @@ protected:
 
 private:
 	SpriteBatch m_spriteBatch;
+	// TODO: GTFO
+	TextureHolder m_textureHolder;
+
 };
 
 #endif // GAME_MANAGER_H

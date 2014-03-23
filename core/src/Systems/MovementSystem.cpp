@@ -14,7 +14,8 @@ void MovementSystem::update(entityx::ptr<entityx::EntityManager> es,
 		PhysicsPtr physics = entity.component<Physics>();
 
 		// Update velocity
-		physics->velocity += (physics->acceleration * physics->mass) * dt;
+		if(physics->mass != 0)
+			physics->velocity += (physics->acceleration * physics->mass) * dt;
 
 		// Update position
 		transform->position += physics->velocity * dt;

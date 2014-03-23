@@ -2,10 +2,13 @@
 #define ENTITYFACTORY_H
 
 #include <Resources/GenericObjectFactory.h>
-#include <Components/ParsedComponent.h>
+#include <entityx/Entity.h>
+#include <Resources/XMLoader.h>
+#include <memory>
 
 // TODO: Move this eventually
 typedef std::shared_ptr<entityx::EntityManager> EntityManagerPtr;
+typedef std::shared_ptr<entityx::BaseComponent> ComponentPtr;
 
 /**
  * @brief Creates new entities from files.
@@ -16,18 +19,17 @@ class EntityFactory
 {
 public:
     EntityFactory(EntityManagerPtr pEntityManager);
-    virtual ~EntityFactory() {}
+    ~EntityFactory() {}
 
     // Will need to recurse directories too
-    void loadEntity(const std::string& filename);
+    void loadFromFile(const std::string& filename);
+    void loadFromDirectory(const std::string& path, bool recurse = true);
 
 protected:
-    virtual ComponentPtr createComponent(const tinyxml2::XMLElement* pElement);
+    ComponentPtr createComponent(const tinyxml2::XMLElement* pElement);
 
     // Use component family ID
-    // TODO: Check that new family is created for every component
-    // that inherits from ParsedComponent
-    GenericObjectFactory<ParsedComponent::Family, ParsedComponent> m_componentFactory;
+    GenericObjectFactory<entityx::BaseComponent::Family, entityx::BaseComponent> m_componentFactory;
 
 private:
     EntityManagerPtr m_pEntityManager;

@@ -1,10 +1,10 @@
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
 
-#include <Components/ParsedComponent.h>
+#include <entityx/Entity.h>
 #include <SFML/System/Vector2.hpp>
 
-class Transform: public ParsedComponent<Transform>
+class Transform: public entityx::Component<Transform>
 {
 public:
     Transform(float x = 0.f, float y = 0.f, float width = 1.f, float height = 1.f);
