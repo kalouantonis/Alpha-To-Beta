@@ -9,6 +9,6 @@
     ignore = dirty
 
 [submodule "Artemis-Cpp"]
-	path = dependencies/artemis-cpp
+	path = dependencies/Artemis-Cpp
 	url = https://github.com/vinova/Artemis-Cpp.git
 	ignore = dirty
