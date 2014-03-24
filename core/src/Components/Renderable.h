@@ -1,11 +1,11 @@
 #ifndef RENDERABLE_H
 #define RENDERABLE_H
-// TODO: May need to change entity.h to separate components in to different headers
-#include <entityx/Entity.h>
+
+#include <Components/ParsedComponent.h>
 #include <Resources/ResourceHolderDef.h>
 #include <SFMLPtrDef.h>
 
-class Renderable: public entityx::Component<Renderable>
+class Renderable: public ParsedComponent
 {
 public:
     /**

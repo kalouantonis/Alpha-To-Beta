@@ -22,7 +22,7 @@ namespace artemis {
 	class World {
   public:
     World();
-    ~World();
+    virtual ~World();
     SystemManager * getSystemManager();
     EntityManager * getEntityManager();
     TagManager *   getTagManager();

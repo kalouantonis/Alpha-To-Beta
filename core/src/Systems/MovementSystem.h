@@ -1,13 +1,23 @@
 #ifndef MOVEMENT_SYSTEM_H
 #define MOVEMENT_SYSTEM_H
 
-#include <entityx/System.h>
+#include <Artemis/EntityProcessingSystem.h>
+#include <Artemis/ComponentMapper.h>
 
-class MovementSystem: public entityx::System<MovementSystem>
+#include <Components/Transform.h>
+#include <Components/Physics.h>
+
+class MovementSystem: public artemis::EntityProcessingSystem
 {
 public:
-	void update(entityx::ptr<entityx::EntityManager> es, 
-		entityx::ptr<entityx::EventManager> event, float dt) override;
+	MovementSystem();
+
+	virtual void initialize() override;
+	virtual void processEntity(artemis::Entity& e) override;
+
+private:
+	artemis::ComponentMapper<Transform> m_transformMapper;
+	artemis::ComponentMapper<Physics> m_physicsMapper;
 };
 
 #endif // MOVEMENT_SYSTEM_H

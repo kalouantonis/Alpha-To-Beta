@@ -1,10 +1,10 @@
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
-#include <entityx/Entity.h>
+#include <Components/ParsedComponent.h>
 #include <SFML/System/Vector2.hpp>
 
-class Physics: public entityx::Component<Physics>
+class Physics: public ParsedComponent
 {
 public:
 	Physics(float xVel = 0.f, float yVel = 0.f, 

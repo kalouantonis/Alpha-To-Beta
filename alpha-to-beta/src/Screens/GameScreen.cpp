@@ -18,7 +18,8 @@ bool GameScreen::init()
     try
     {
         // Initialize manager
-        m_manager.start();
+        // m_manager.start()    ;
+        m_manager.initialize();
 
         return true;
     }
@@ -33,7 +34,7 @@ bool GameScreen::init()
 void GameScreen::dispose()
 {
     CORE_DEBUG("Stopping GameManager...");
-    m_manager.stop();
+    // m_manager.stop();
 
     CORE_DEBUG("Disposing GameManager...");
     m_manager.dispose();

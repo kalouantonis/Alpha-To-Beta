@@ -29,7 +29,7 @@ protected:
     ComponentPtr createComponent(const tinyxml2::XMLElement* pElement);
 
     // Use component family ID
-    GenericObjectFactory<entityx::BaseComponent::Family, entityx::BaseComponent> m_componentFactory;
+    GenericObjectFactory<entityx::Component::family(), entityx::Component> m_componentFactory;
 
 private:
     EntityManagerPtr m_pEntityManager;

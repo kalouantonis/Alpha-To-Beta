@@ -20,6 +20,8 @@ Renderable::Renderable(sf::TexturePtr texture)
 
 bool Renderable::load(const tinyxml2::XMLElement *pElement)
 {
+	order = pElement->QueryAttribute("order", &order);
+
 	const tinyxml2::XMLElement* textureElement = pElement->FirstChildElement("Texture");
 
 	if(!textureElement)
@@ -29,7 +31,6 @@ bool Renderable::load(const tinyxml2::XMLElement *pElement)
 		return false;
 	}
 
-	order = textureElement->QueryAttribute("order", &order);
 
 	const tinyxml2::XMLElement* fileElem = textureElement->FirstChildElement("File");
 

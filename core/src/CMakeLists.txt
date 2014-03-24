@@ -3,12 +3,17 @@ include_directories(
 	.;
 	# TinyXML include
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinyxml2;
-	# EntityX
-	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/entityx;
+	# Artemis
+	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/Artemis-Cpp/include;
 	# Boost library
 	${Boost_INCLUDE_DIR};
 )
 
+
+link_directories(
+	# Artemis-Cpp
+	${ALPHA_TO_BETA_BINARY_DIR}/dependencies/Artemis-Cpp;
+)
 
 set(
 	MAIN_SRC
@@ -19,6 +24,7 @@ set(
 
 set(
 	COMPONENTS_SRC
+	"Components/ParsedComponent.h"
 	"Components/Renderable.cpp"
 	"Components/Renderable.h"
 	"Components/Transform.cpp"
@@ -29,8 +35,8 @@ set(
 
 set(
 	ENTITIES_SRC
-	"Entities/EntityFactory.cpp"
-	"Entities/EntityFactory.h"
+	# "Entities/EntityFactory.cpp"
+	# "Entities/EntityFactory.h"
 )
 
 # Graphics/*.{h|cpp}
@@ -68,7 +74,8 @@ set(
 	"Systems/MovementSystem.h"
 	"Systems/RenderSystem.cpp"
 	"Systems/RenderSystem.h"
-	"Systems/SystemManager.h"
+	"Systems/WorldManager.cpp"
+	"Systems/WorldManager.h"
 )
 
 set(
@@ -99,5 +106,10 @@ add_library(
   	${SOURCE_FILE_LIST}	# List of files
 )
 
+
 # Link libraries
-target_link_libraries(core)
+target_link_libraries(
+	core; 
+
+	ArtemisCpp; 	# Artemis EC System
+)

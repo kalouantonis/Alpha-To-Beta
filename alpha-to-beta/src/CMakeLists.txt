@@ -1,8 +1,8 @@
 include_directories(
 	# Current DIR
 	.;
-	# EntityX
-	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/entityx;
+	# Artemis
+	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/Artemis-Cpp/include;
 	# TinyXML
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinyxml2;
 	# Core LIB
@@ -14,8 +14,6 @@ include_directories(
 link_directories(
 	#Link TinyXML
 	${ALPHA_TO_BETA_BINARY_DIR}/dependencies/tinyxml2;
-	# EntityX
-	${ALPHA_TO_BETA_BINARY_DIR}/dependencies/entityx;
 	# Core	
 	${ALPHA_TO_BETA_BINARY_DIR}/core/src;
 )
@@ -53,7 +51,6 @@ target_link_libraries(
 	alphatobeta;
 
 	tinyxml2;			# XML Lib
-	entityx;			# ES Lib 
 	boost_system; 		# Boost 
 	boost_filesystem;	# Filesystem support
 	core; 				# Core Lib
