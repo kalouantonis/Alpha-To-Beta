@@ -2,6 +2,9 @@
 #include <Utils/Logger.h>
 
 #include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Event.hpp>
+
+#include <Resources/ResourceDef.h>
 
 GameScreen::GameScreen(sf::RenderTargetPtr window)
     : IScreen(window)
@@ -17,8 +20,8 @@ bool GameScreen::init()
 
     try
     {
+        TextureLocator::provide(TextureLocator::Ptr(new TextureHolder()));
         // Initialize manager
-        // m_manager.start()    ;
         m_manager.initialize();
 
         return true;
@@ -33,18 +36,20 @@ bool GameScreen::init()
 
 void GameScreen::dispose()
 {
-    CORE_DEBUG("Stopping GameManager...");
-    // m_manager.stop();
-
     CORE_DEBUG("Disposing GameManager...");
     m_manager.dispose();
+    
+    CORE_DEBUG("Disposing textures...");
+    TextureLocator::getObject()->clear();
+
+    CORE_DEBUG("Disposing TextureLocator...");
+    TextureLocator::remove();
 
     CORE_DEBUG("GameScreen disposed...");
 }
 
 void GameScreen::pollInput(const sf::Event &event)
 {
-
 }
 
 void GameScreen::update(float deltaTime)
@@ -61,10 +66,10 @@ void GameScreen::update(float deltaTime)
         m_camera.rotate(-10.f * deltaTime);
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
         m_camera.rotate(10.f * deltaTime);
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
-        m_camera.zoom(1.1f);
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
-        m_camera.zoom(0.9f);
+    // else if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+    //     m_camera.zoom(1.1f);
+    // else if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
+    //     m_camera.zoom(0.9f);
 
 
     m_manager.update(deltaTime);

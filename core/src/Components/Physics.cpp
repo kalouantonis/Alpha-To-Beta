@@ -1,4 +1,9 @@
 #include <Components/Physics.h>
+#include <Utils/Logger.h>
+
+#include <tinyxml2.h>
+
+const char* Physics::g_name = "Physics";
 
 Physics::Physics(float xVel, float yVel, 
 		float xAccel, float yAccel, float mass)
@@ -10,6 +15,32 @@ Physics::Physics(float xVel, float yVel,
 
 bool Physics::load(const tinyxml2::XMLElement *pElement)
 {
-	return false;	
+	const tinyxml2::XMLElement* childElement = pElement->FirstChildElement("Velocity");
+
+	if(!childElement)
+	{
+		CORE_WARNING("No Velocity element declared in Physics component");
+		return false;
+	}
+
+	childElement->QueryFloatAttribute("x", &velocity.x);
+	childElement->QueryFloatAttribute("y", &velocity.y);
+
+	childElement = pElement->FirstChildElement("Acceleration");
+
+	if(childElement)
+	{
+		childElement->QueryFloatAttribute("x", &acceleration.x);
+		childElement->QueryFloatAttribute("y", &acceleration.y);
+	}
+
+	childElement = pElement->FirstChildElement("Mass");
+
+	if(childElement)
+	{
+		childElement->QueryFloatText(&mass);
+	}
+
+	return true;	
 }
 

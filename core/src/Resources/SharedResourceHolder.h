@@ -69,18 +69,26 @@ public:
 		m_resourceMap.erase(found);
 	}
 
-	void clear() { m_resourceMap.clear(); }
+	void clear() 
+	{ 
+		if(!m_resourceMap.empty())
+			m_resourceMap.clear();
+	}
+	
 	bool empty() const { return m_resourceMap.empty(); }
 
 private:
 	void insertResource(Identifier id, const Ptr& resource)
 	{
 		// Insert and check success
-		auto inserted = m_resourceMap.insert(std::make_pair(id, std::move(resource)));
-		assert(inserted.second);
+		/*auto inserted = */m_resourceMap.insert(std::make_pair(id, std::move(resource)));
+		//assert(inserted.second);
 	}
 
 	std::map<Identifier, Ptr> m_resourceMap;
 };
+
+template <class T>
+std::shared_ptr<T> make_holder(T* resouceHolder);
 
 #endif // SharedResourceHolder_h__

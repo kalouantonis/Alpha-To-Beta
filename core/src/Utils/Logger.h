@@ -41,12 +41,9 @@ private:
 };
 
 
-// TODO: Jesus, fix these
-
 #ifndef NDEBUG // If in debug mode
 
 // Note, the do-while removes the ; at the end of the call
-// TODO: Make them display error message box
 // TODO: Create assert
 #define CORE_FATAL(str) \
     do \

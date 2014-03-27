@@ -8,7 +8,6 @@
  * @brief Singleton containing resources.
  *
  * Should be cleared, but should also clear itself when destructed
- * TODO: Test that theory
  */
 template <class Identifier, class Resource>
 class SingletonResouceHolder

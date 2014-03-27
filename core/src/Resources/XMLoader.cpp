@@ -4,7 +4,7 @@ bool XMLoader::loadFile(const char *filename)
 {
     m_doc.LoadFile(filename);
 
-    return m_doc.Error();
+    return !m_doc.Error();
 }
 
 tinyxml2::XMLElement *XMLoader::getRoot()

@@ -3,13 +3,12 @@
 
 #include <Systems/WorldManager.h>
 #include <Graphics/SpriteBatch.h>
+#include <Entities/Level.h>
 
 // Fwd defs
 class RenderSystem;
 class MovementSystem;
 
-// TODO: GTFO
-#include <Resources/ResourceHolderDef.h>
 
 class GameManager: public WorldManager
 {
@@ -24,11 +23,10 @@ public:
 
 private:
 	SpriteBatch m_spriteBatch;
-	// TODO: GTFO
-	TextureHolder m_textureHolder;
 
 	RenderSystem* m_renderSystem;
 	MovementSystem* m_movementSystem;
+	std::shared_ptr<Level> m_level;
 };
 
 #endif // GAME_MANAGER_H

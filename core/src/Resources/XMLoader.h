@@ -21,11 +21,12 @@ public:
     tinyxml2::XMLElement* loadAndGetRoot(const char* filename);
 
     // Maybe get second error string too
-    std::string getLastError() { return m_doc.GetErrorStr1(); } 
-    bool hasErrorOccured() { return m_doc.Error(); }
+    std::string getLastError() const { return m_doc.GetErrorStr1(); } 
+    bool hasErrorOccured() const { return m_doc.Error(); }
 
 private:
     tinyxml2::XMLDocument m_doc;
+    const char* m_resourceName;
 };
 
 #endif // XMLOADER_H

@@ -24,7 +24,7 @@ public:
 
     // TODO: Check if I should use references of pointers
     // Also, fix it, because it doesnt work
-    void setShader(const sf::Shader* shader);
+    //void setShader(const sf::Shader* shader);
 
     void draw(sf::ConstTexturePtr pTexture, const sf::Vector2f& position,
         const sf::Vector2f& bounds);

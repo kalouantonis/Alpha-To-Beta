@@ -3,6 +3,8 @@
 
 #include <Utils/Logger.h>
 
+const char* Transform::g_name = "Transform";
+
 Transform::Transform(float x, float y, float width, float height)
     : position(x, y)
     , bounds(width, height)
@@ -16,36 +18,27 @@ Transform::Transform(float x, float y, float width, float height)
 
 bool Transform::load(const tinyxml2::XMLElement *pElement)
 {
-	// Get position element
-	const tinyxml2::XMLElement* transformElem = pElement->FirstChildElement("Transform");
+	pElement->QueryFloatAttribute("x", &position.x);
+	pElement->QueryFloatAttribute("y", &position.y);
 
-	if(!transformElem)
-	{
-		CORE_WARNING("No transform element for Transform component.");
-		return false;
-	}
-
-	position.x = transformElem->QueryAttribute("x", &position.x);
-	position.y = transformElem->QueryAttribute("y", &position.y);
-
-	bounds.x = transformElem->QueryAttribute("width", &bounds.x);
-	bounds.y = transformElem->QueryAttribute("height", &bounds.y);
+	pElement->QueryFloatAttribute("width", &bounds.x);
+	pElement->QueryFloatAttribute("height", &bounds.y);
 
 	// Scale element, not required
-	const tinyxml2::XMLElement* scaleElem = pElement->FirstChildElement("Scale");
+	const tinyxml2::XMLElement* childElement = pElement->FirstChildElement("Scale");
 
-	if(scaleElem)
+	if(childElement)
 	{
-		scale.x = transformElem->QueryAttribute("x", &scale.x);
-		scale.y = transformElem->QueryAttribute("y", &scale.y);
+		pElement->QueryFloatAttribute("x", &scale.x);
+		pElement->QueryFloatAttribute("y", &scale.y);
 	}
 
 	// Rotation element, not required
-	const tinyxml2::XMLElement* rotationElem = pElement->FirstChildElement("Rotation");
+	childElement = pElement->FirstChildElement("Rotation");
 
-	if(rotationElem)
+	if(childElement)
 	{
-		rotation = rotationElem->QueryAttribute("angle", &rotation);
+		childElement->QueryFloatAttribute("angle", &rotation);
 	}
 
 	return true;

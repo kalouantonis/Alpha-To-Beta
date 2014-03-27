@@ -55,7 +55,6 @@ private:
     ScreenManager(const ScreenManager&) {}
     void operator=(const ScreenManager&) {}
 
-    // TODO: Use Unique PTr's
     std::vector<UScreenPtr> m_screenStack;
 };
 

@@ -17,6 +17,9 @@ public:
      */
     virtual bool load(const tinyxml2::XMLElement *pElement) override;
 
+    static const char* g_name;
+    virtual const char* getName() const override { return g_name; }
+
     sf::Vector2f position;
     sf::Vector2f bounds;
     sf::Vector2f origin;

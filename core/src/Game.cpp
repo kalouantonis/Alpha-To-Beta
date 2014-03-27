@@ -17,6 +17,7 @@
 
 Game::Game()
 	: m_bRunning(false)
+    , m_bInFocus(false)
 {
 }
 
@@ -24,10 +25,16 @@ Game::~Game()
 {
 }
 
-void Game::init(const char* title, int width, int height)
+void Game::init(const char* title, int width, int height, bool fullscreen)
 {
-    //m_window.create(sf::VideoMode(width, height), title);
-    m_pWindow.reset(new sf::RenderWindow(sf::VideoMode(width, height), title),
+    // TODO: Load context settings from game settings file
+    // Disable resizing for now
+    sf::Uint32 winFlags = sf::Style::Close;
+
+    if(fullscreen)
+        winFlags |= sf::Style::Fullscreen;
+
+    m_pWindow.reset(new sf::RenderWindow(sf::VideoMode(width, height), title, winFlags),
                    // Define custom de-allocator when all references are destroyed
                    [](sf::RenderWindow* p) {
         CORE_INFO("Closing window...");
@@ -55,14 +62,16 @@ void Game::init(const char* title, int width, int height)
 
 void Game::render()
 {
-	// Clear screen
-    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    m_pWindow->clear();
+    if(m_bInFocus)
+    {
+    	// Clear screen
+        m_pWindow->clear();
 
-    ScreenManager::getInstance().render();
+        ScreenManager::getInstance().render();
 
-    // Flip screen buffers
-    m_pWindow->display();
+        // Flip screen buffers
+        m_pWindow->display();
+    }
 }
 
 void Game::pollInput()
@@ -76,6 +85,14 @@ void Game::pollInput()
 		case sf::Event::Closed:
 			m_bRunning = false;
 			break;
+        case sf::Event::LostFocus:
+            CORE_LOG("EVENT", "Window lost focus");
+            m_bInFocus = false;
+            break;
+        case sf::Event::GainedFocus:
+            CORE_LOG("EVENT", "Window gained focus");
+            m_bInFocus = true;
+            break;
         case sf::Event::Resized:
             ScreenManager::getInstance().resize(sf::Vector2u(event.size.width, event.size.height));
             break;
@@ -87,8 +104,8 @@ void Game::pollInput()
 
 void Game::update(float dt)
 {
-
-    ScreenManager::getInstance().update(dt);
+    if(m_bInFocus)
+        ScreenManager::getInstance().update(dt);
 }
 
 void Game::dispose()

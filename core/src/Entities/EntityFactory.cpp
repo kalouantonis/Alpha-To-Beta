@@ -8,17 +8,25 @@
 #include <Components/Renderable.h>
 #include <Components/Physics.h>
 
+#include <Artemis/Entity.h>
+#include <Artemis/TagManager.h>
+
 #include <boost/filesystem.hpp>
 
 using namespace boost;
 
 
-EntityFactory::EntityFactory(EntityManagerPtr pEntityManager)
-    : m_pEntityManager(pEntityManager)
+EntityFactory::EntityFactory(WorldManager& worldManager)
+    : m_worldManager(worldManager)
 {
-    m_componentFactory.declare<Transform>(Transform::family());
-    m_componentFactory.declare<Renderable>(Renderable::family());
-    m_componentFactory.declare<Physics>(Physics::family());
+    m_componentFactory.declare<Transform>(Transform::g_name);
+    m_componentFactory.declare<Renderable>(Renderable::g_name);
+    m_componentFactory.declare<Physics>(Physics::g_name);
+}
+
+EntityFactory::~EntityFactory()
+{
+    m_componentFactory.clear();
 }
 
 void EntityFactory::loadFromFile(const std::string &filename)
@@ -48,39 +56,62 @@ void EntityFactory::loadFromFile(const std::string &filename)
     }
 
     // Request new empty entity from manager
-    entityx::Entity entity = m_pEntityManager->create();
+    artemis::Entity& entity = m_worldManager.createEntity();
+
+    // Try and get tag attribute from xml entity
+    const char* tag = pRoot->Attribute("tag");
+
+
+    if(tag != NULL)
+    {
+        if(!m_worldManager.getTagManager()->isSubscribed(tag))
+            m_worldManager.getTagManager()->subscribe(tag, entity);
+    }
+
 
 
     // Go through each element (component def in this case)
     for(auto pElem = pRoot->FirstChildElement(); pElem != NULL;
         pElem = pElem->NextSiblingElement())
     {
-        ComponentPtr pComponent(createComponent(pElem));
+        ParsedComponent* pComponent = createComponent(pElem);
 
         if(pComponent != nullptr)
         {
-            // add component in to entity
-            entity.assign(pComponent);
+            // add component to entity
+            entity.addComponent(pComponent);
         }
         else
         {
-            CORE_WARNING("Failed to load component from " + filename
-                         + ", it will be ignored");
+            CORE_ERROR("Failed to load component from " + filename);
         }
     }
 
-    CORE_DEBUG("Created entity from " + filename);
+    if(entity.getComponents().isEmpty())
+    {
+        CORE_WARNING("No components in entity, removing...");
+        entity.remove();
+    }
+    else
+    {
+        CORE_DEBUG("Created entity from " + filename);
+        entity.refresh();
+    }
 }
 
-void EntityFactory::loadFromDirectory(const std::string &path, bool recurse)
+void EntityFactory::load(const std::string &path, bool recurse)
 {
+    // m_prevResource = path;
+
     // convert to file system path
     filesystem::path fsPath(path);
 
     try
     {
+        // Check file existance
         if(filesystem::exists(fsPath))
         {
+            // Only use xml files
             if((filesystem::is_regular_file(fsPath)) &&
                 (fsPath.extension().generic_string() == ".xml"))
             {
@@ -97,11 +128,12 @@ void EntityFactory::loadFromDirectory(const std::string &path, bool recurse)
                     std::copy(
                         filesystem::recursive_directory_iterator(fsPath),
                         filesystem::recursive_directory_iterator(), 
-                        std::back_inserter(fileVec)
+                        std::back_inserter(fileVec) // Insert in to new file vector
                     );
                 }
                 else
                 {
+                    // Ignore folders
                     std::copy(
                         filesystem::directory_iterator(fsPath),
                         filesystem::directory_iterator(),
@@ -111,10 +143,11 @@ void EntityFactory::loadFromDirectory(const std::string &path, bool recurse)
 
                 for(auto file : fileVec)
                 {
-                    if((!filesystem::is_regular_file(file)) &&          // Just a normal file
+                    if((filesystem::is_regular_file(file)) &&          // Just a normal file
                         (file.extension().generic_string() == ".xml"))  // Has XML extension
                     {
-                        loadFromFile(fsPath.native() + file.filename().native());
+                        // TODO: Change to platform agnostic path separator
+                        loadFromFile(fsPath.native() + '/' +  file.filename().native());
                     }
                 }
             }
@@ -134,13 +167,28 @@ void EntityFactory::loadFromDirectory(const std::string &path, bool recurse)
     }
 }
 
-ComponentPtr EntityFactory::createComponent(const tinyxml2::XMLElement *pElement)
+ParsedComponent* EntityFactory::createComponent(const tinyxml2::XMLElement *pElement)
 {
     // Get element value
     const char* componentName = pElement->Value();
 
-    //ComponentPtr pComponent(m_componentFactory.create())
-    //pComponent->load(pElement);
+    // Create component
+    ParsedComponent* pComponent = m_componentFactory.create(componentName);
 
-    return ComponentPtr();
+    // initialize the component if we found one
+    if(pComponent != nullptr)
+    {
+        if(!pComponent->load(pElement))
+        {
+            CORE_ERROR("Component failed to initialize: " + std::string(componentName));
+            return nullptr;
+        }
+    }
+    else
+    {
+        CORE_ERROR("Couldn't find a component named: " + std::string(componentName));
+        return nullptr;
+    }
+
+    return pComponent;
 }

@@ -2,7 +2,6 @@
 #define RENDERABLE_H
 
 #include <Components/ParsedComponent.h>
-#include <Resources/ResourceHolderDef.h>
 #include <SFMLPtrDef.h>
 
 class Renderable: public ParsedComponent
@@ -20,20 +19,14 @@ public:
 
     virtual bool load(const tinyxml2::XMLElement *pElement) override;
 
+    static const char* g_name;
+    virtual const char* getName() const override { return g_name; }
+
     // Constant, texture data can not be modified
     // Note: May change in the future if mods are needed
     sf::TexturePtr pTexture;
     // Draw order
     int order;
-
-protected:
-    TextureHolder& textureHolder() const { return m_sTextureHolder; }
-
-private:
-    /**
-     * Static resource holder, used by this class and all inheritors
-     */
-    static TextureHolder m_sTextureHolder;
 };
 
 typedef std::shared_ptr<Renderable> RenderablePtr;

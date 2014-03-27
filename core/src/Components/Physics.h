@@ -9,9 +9,12 @@ class Physics: public ParsedComponent
 public:
 	Physics(float xVel = 0.f, float yVel = 0.f, 
 		float xAccel = 0.f, float yAccel = 0.f, 
-		float mass = 1.f);
+		float mass = 0.f);
 
 	virtual bool load(const tinyxml2::XMLElement* pElement) override;
+
+	static const char* g_name;
+	virtual const char* getName() const override { return g_name; }
 
 	sf::Vector2f velocity;
 	sf::Vector2f acceleration;

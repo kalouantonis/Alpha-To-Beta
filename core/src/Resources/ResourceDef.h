@@ -1,9 +1,11 @@
-#ifndef RESOURCE_HOLDER_DEF_H
-#define RESOURCE_HOLDER_DEF_H
+#ifndef RESOURCEDEF_H
+#define RESOURCEDEF_H
 
 #include <Resources/SharedResourceHolder.h>
+#include <Resources/Locator.h>
 #include <SFML/Graphics/Texture.hpp>
 
 typedef SharedResourceHolder<std::string, sf::Texture> TextureHolder;
+typedef Locator<TextureHolder> TextureLocator;
 
-#endif // RESOURCE_HOLDER_DEF_H
+#endif // RESOURCEDEF_H

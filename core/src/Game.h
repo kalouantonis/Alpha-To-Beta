@@ -19,7 +19,7 @@ public:
 	Game();
 	virtual ~Game();
 
-	void init(const char* title, int width, int height);
+	void init(const char* title, int width, int height, bool fullscreen = false);
 
 	virtual void pollInput();
 	virtual void update(float dt);
@@ -36,9 +36,9 @@ public:
 
 private:
 	bool m_bRunning;
+	/** True if window is currently focused */
+	bool m_bInFocus;
     sf::RenderWindowPtr m_pWindow;
 };
-
-
 
 #endif /* GAME_H_ */

@@ -17,7 +17,7 @@ public:
      * @param id The identifier used
      * @return true if actually registered a new item, false if already exists
      */
-    bool declare(Identifier id)
+    bool declare(const Identifier& id)
     {
         auto findIt = m_creators.find(id);
         if(findIt == m_creators.end()) // not found
@@ -39,7 +39,7 @@ public:
      * @param id The predefined ID
      * @return New object
      */
-    BaseClass* create(Identifier id)
+    BaseClass* create(const Identifier& id)
     {
         auto findIt = m_creators.find(id);
         if(findIt != m_creators.end())
@@ -59,7 +59,8 @@ public:
     void clear()
     {
         //delegate to internal map
-        m_creators.clear();
+        if(!m_creators.empty())
+            m_creators.clear();
     }
 
 private:

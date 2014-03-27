@@ -10,7 +10,6 @@
 RenderSystem::RenderSystem(SpriteBatch& spriteBatch)
 	: m_spriteBatch(spriteBatch)
 {
-	// Guarantee component types
 	addComponentType<Transform>();
 	addComponentType<Renderable>();
 }
@@ -24,7 +23,6 @@ void RenderSystem::begin()
 {
 	// Sort drawables by texture
 
-	// Begin drawing
 	m_spriteBatch.begin();
 }
 
@@ -55,11 +53,21 @@ void RenderSystem::end()
 
 void RenderSystem::added(artemis::Entity& e)
 {
-	m_drawables[e.getUniqueId()] = DrawablePair(
-		// Static casting is safe, as the type is guaranteed
-		static_cast<Renderable*>(e.getComponent<Transform>()),
-		static_cast<Transform*>(e.getComponent<Renderable>())
-	);
+	// Handle adding to map
+	artemis::Component* transform = e.getComponent<Transform>();
+	artemis::Component* renderable = e.getComponent<Renderable>();
+
+	if((transform != NULL) && (renderable != NULL))
+	{
+		m_drawables[e.getUniqueId()] = DrawablePair(
+			// Static casting is safe, as the type is guaranteed
+			static_cast<Renderable*>(renderable),
+			static_cast<Transform*>(transform)
+		);
+	} 
+
+
+	// map[e.getId()] = std::make_pair(transform, renderable)
 }
 
 void RenderSystem::removed(artemis::Entity& e)
@@ -79,35 +87,3 @@ void RenderSystem::dispose()
 	if(!m_drawables.empty())
 		m_drawables.clear();
 }
-
-
-// void RenderSystem::configure(entityx::ptr<entityx::EventManager> events)
-// {
-// 	events->subscribe<ComponentAddedEvent<Renderable> >(*this);
-// }
-
-// void RenderSystem::update(entityx::ptr<entityx::EntityManager> es, 
-// 	entityx::ptr<entityx::EventManager> event, float dt)
-// {
-// 	// Begin rendering
-// 	m_spriteBatch.begin();
-
-// 	// Sort textures using begin and end iter 
-
-// 	for(auto entity : es->entities_with_components<Transform, Renderable>())
-// 	{
-// 		TransformPtr transform = entity.component<Transform>();
-// 		RenderablePtr renderable = entity.component<Renderable>();
-
-// 		m_spriteBatch.draw(renderable->pTexture, transform->position, 
-// 			transform->bounds);
-// 	}
-
-// 	// End rendering
-// 	m_spriteBatch.end();
-// }
-
-// void receive(const ComponentAddedEvent<Renderable>& renderable)
-// {
-	
-// }

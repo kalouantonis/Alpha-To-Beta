@@ -9,7 +9,6 @@ include_directories(
 	${Boost_INCLUDE_DIR};
 )
 
-
 link_directories(
 	# Artemis-Cpp
 	${ALPHA_TO_BETA_BINARY_DIR}/dependencies/Artemis-Cpp;
@@ -35,8 +34,10 @@ set(
 
 set(
 	ENTITIES_SRC
-	# "Entities/EntityFactory.cpp"
-	# "Entities/EntityFactory.h"
+	"Entities/EntityFactory.cpp"
+	"Entities/EntityFactory.h"
+	"Entities/Level.cpp"
+	"Entities/Level.h"
 )
 
 # Graphics/*.{h|cpp}
@@ -53,8 +54,9 @@ set(
 set(
 	RESOURCES_SRC
 	"Resources/GenericObjectFactory.h"
+	"Resources/Locator.h"
 	"Resources/ResourceHolder.h"
-	"Resources/ResourceHolderDef.h"
+	"Resources/ResourceDef.h"
 	"Resources/SharedResourceHolder.h"
 	"Resources/SingletonResourceHolder.h"
 	"Resources/XMLoader.cpp"
@@ -82,6 +84,8 @@ set(
 	UTILS_SRC
 	"Utils/Logger.cpp"
 	"Utils/Logger.h"
+	"Utils/String.cpp"
+	"Utils/String.h"
 	"Utils/QuadTree.h"
 )
 

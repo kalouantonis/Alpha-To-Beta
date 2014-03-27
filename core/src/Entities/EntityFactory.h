@@ -2,13 +2,10 @@
 #define ENTITYFACTORY_H
 
 #include <Resources/GenericObjectFactory.h>
-#include <entityx/Entity.h>
 #include <Resources/XMLoader.h>
-#include <memory>
 
-// TODO: Move this eventually
-typedef std::shared_ptr<entityx::EntityManager> EntityManagerPtr;
-typedef std::shared_ptr<entityx::BaseComponent> ComponentPtr;
+#include <Components/ParsedComponent.h>
+#include <Systems/WorldManager.h>
 
 /**
  * @brief Creates new entities from files.
@@ -18,22 +15,27 @@ typedef std::shared_ptr<entityx::BaseComponent> ComponentPtr;
 class EntityFactory
 {
 public:
-    EntityFactory(EntityManagerPtr pEntityManager);
-    ~EntityFactory() {}
+    EntityFactory(WorldManager& worldManager);
+    ~EntityFactory();
 
-    // Will need to recurse directories too
-    void loadFromFile(const std::string& filename);
-    void loadFromDirectory(const std::string& path, bool recurse = true);
+    void load(const std::string& path, bool recurse = true);
+    // TODO: Move this to level
+    // void reload();
 
 protected:
-    ComponentPtr createComponent(const tinyxml2::XMLElement* pElement);
+    ParsedComponent* createComponent(const tinyxml2::XMLElement* pElement);
 
     // Use component family ID
-    GenericObjectFactory<entityx::Component::family(), entityx::Component> m_componentFactory;
+    GenericObjectFactory<std::string, ParsedComponent> m_componentFactory;
+
+    void loadFromFile(const std::string& filename);
 
 private:
-    EntityManagerPtr m_pEntityManager;
+    // Store world reference
+    WorldManager& m_worldManager;
     XMLoader m_xmlLoader;
+
+    // std::string m_prevResource;
 };
 
 #endif // ENTITYFACTORY_H

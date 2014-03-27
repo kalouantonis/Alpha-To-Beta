@@ -31,10 +31,6 @@ message(STATUS "Configuring TinyXML2...")
 add_subdirectory("dependencies/tinyxml2")
 
 #Add entityx dependency
-#message(STATUS "Configuring EntityX...")
-#add_subdirectory("dependencies/entityx")
-
-#Add entityx dependency
 message(STATUS "Configuring Artemis-Cpp...")
 add_subdirectory("dependencies/Artemis-Cpp")
 

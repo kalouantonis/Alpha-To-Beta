@@ -1,6 +1,8 @@
 #ifndef WORLDMANAGER_H
 #define WORLDMANAGER_H
 
+#include <memory>
+
 #include <Artemis/World.h>
 #include <SFML/System/NonCopyable.hpp>
 
@@ -15,5 +17,7 @@ public:
 	virtual void update(float delta);
 	virtual void render() = 0;
 };
+
+typedef std::shared_ptr<WorldManager> WorldManagerPtr;
 
 #endif // WORLDMANAGER_H

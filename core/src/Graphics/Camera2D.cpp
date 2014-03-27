@@ -37,7 +37,8 @@ Camera2D::~Camera2D()
 void Camera2D::resize(const sf::Vector2u &size)
 {
     // Reset view so that we can see more of the world when resized
-    m_view.reset(sf::FloatRect(0, 0, size.x, size.y));
+    //m_view.reset(sf::FloatRect(0, 0, size.x, size.y));
+    // TODO: Fix aspect ratio
     updateTarget();
 }
 

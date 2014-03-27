@@ -41,10 +41,10 @@ void SpriteBatch::end()
     m_bDrawing = false;
 }
 
-void SpriteBatch::setShader(const sf::Shader *shader)
-{
-    m_states.shader = shader;
-}
+// void SpriteBatch::setShader(const sf::Shader *shader)
+// {
+//     m_states.shader = shader;
+// }
 
 void SpriteBatch::draw(sf::ConstTexturePtr pTexture, float x, float y)
 {

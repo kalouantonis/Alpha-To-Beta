@@ -26,7 +26,7 @@ int main()
 
 	Game game;
 
-    game.init("Alpha To Beta", 640, 480);
+    game.init("Alpha To Beta", 800, 600);
 
 
     ScreenManager::getInstance().push(
