@@ -3,6 +3,7 @@
 
 #include <Utils/Logger.h>
 #include <Utils/String.h>
+#include <Utils/Helpers.h>
 
 #include <Resources/ResourceDef.h>
 

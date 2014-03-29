@@ -50,7 +50,6 @@ add_executable(alphatobeta ${SOURCE_FILE_LIST})
 target_link_libraries(
 	alphatobeta;
 
-	tinyxml2;			# XML Lib
 	boost_system; 		# Boost 
 	boost_filesystem;	# Filesystem support
 	core; 				# Core Lib

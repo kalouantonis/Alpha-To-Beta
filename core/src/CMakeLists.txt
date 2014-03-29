@@ -116,4 +116,5 @@ target_link_libraries(
 	core; 
 
 	ArtemisCpp; 	# Artemis EC System
+	tinyxml2static
 )

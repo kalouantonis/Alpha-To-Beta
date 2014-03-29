@@ -41,5 +41,10 @@ add_subdirectory("core/src")
 message(STATUS "Configuring Game...")
 add_subdirectory("alpha-to-beta/src")
 
+if(${BUILD_EDITOR})
+	message(STATUS "Configuring Editor...")
+	add_subdirectory("editor/src")
+endif(${BUILD_EDITOR})
+
 # Copy game assets
 file(COPY ${CMAKE_SOURCE_DIR}/alpha-to-beta/assets DESTINATION ${CMAKE_BINARY_DIR})
