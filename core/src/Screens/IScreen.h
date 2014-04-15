@@ -21,7 +21,6 @@ public:
     virtual ~IScreen() {}
 
     virtual bool init() = 0;
-    virtual void dispose() = 0;
 
     virtual void pollInput(const sf::Event&) = 0;
     virtual void update(float) = 0;

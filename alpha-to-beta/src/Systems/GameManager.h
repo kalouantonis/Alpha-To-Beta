@@ -14,11 +14,11 @@ class GameManager: public WorldManager
 {
 public:
 	GameManager(SpriteBatch& spriteBatch);
-	virtual ~GameManager() {}
+	virtual ~GameManager();
 
 	virtual void update(float delta) final;
 	virtual void render() final;
-	virtual void dispose() final;
+	//virtual void dispose() final;
 	virtual void initialize() final;
 
 private:

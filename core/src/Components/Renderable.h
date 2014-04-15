@@ -3,6 +3,7 @@
 
 #include <Components/ParsedComponent.h>
 #include <SFMLPtrDef.h>
+#include <Graphics/TextureRegion.h>
 
 class Renderable: public ParsedComponent
 {
@@ -11,6 +12,7 @@ public:
      * @brief Will create an empty renderable with a null texture
      */
     Renderable();
+    explicit Renderable(TextureRegion& textureRegion);
     /**
      * @brief Renderable
      * @param texture
@@ -24,7 +26,7 @@ public:
 
     // Constant, texture data can not be modified
     // Note: May change in the future if mods are needed
-    sf::TexturePtr pTexture;
+    TextureRegion textureRegion;
     // Draw order
     int order;
 };

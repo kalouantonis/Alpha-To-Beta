@@ -5,29 +5,15 @@
 #include <memory>
 #include <SFML/System/Vector2.hpp>
 
+#include <Screens/IScreen.h>
 
 namespace sf
 {
 class Event;
 }
 
-class IScreen;
+typedef std::unique_ptr<IScreen> UScreenPtr;
 
-/**
- * @brief Used for unique_ptr disposal, should not be used externally
- * 
- * @param p Screen to be deleted
- */
-inline void _deleter(IScreen* p);
-typedef std::unique_ptr<IScreen, std::function<void(IScreen*)>> UScreenPtr;
-
-/**
- * @brief Create a new unique pointer from a screen ptr
- * 
- * @param screen Pointer to screen instance
- * @return Unique pointer with assigned destructor 
- */
-UScreenPtr make_screen(IScreen* screen);
 
 class ScreenManager
 {

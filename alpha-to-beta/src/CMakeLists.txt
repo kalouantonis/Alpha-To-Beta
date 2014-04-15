@@ -5,6 +5,10 @@ include_directories(
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/Artemis-Cpp/include;
 	# TinyXML
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinyxml2;
+	# TMX Parser
+	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tmx-parser;
+	# Boost
+	${Boost_INCLUDE_DIR};
 	# Core LIB
 	${ALPHA_TO_BETA_SOURCE_DIR}/core/src;
 	# SFML
@@ -14,6 +18,8 @@ include_directories(
 link_directories(
 	#Link TinyXML
 	${ALPHA_TO_BETA_BINARY_DIR}/dependencies/tinyxml2;
+	# Boost
+	${Boost_LIBRARY_DIRS};
 	# Core	
 	${ALPHA_TO_BETA_BINARY_DIR}/core/src;
 )
@@ -50,11 +56,9 @@ add_executable(alphatobeta ${SOURCE_FILE_LIST})
 target_link_libraries(
 	alphatobeta;
 
-	boost_system; 		# Boost 
-	boost_filesystem;	# Filesystem support
-	core; 				# Core Lib
-	sfml-system; 		# SFML core
-	sfml-window;		# SFML Window system
-	sfml-graphics;		# SFML Graphics system
+    ${Boost_SYSTEM_LIBRARY};
+    ${Boost_FILESYSTEM_LIBRARY};
+    core; 							# Core Lib
+	${SFML_LIBRARIES};
 )
 

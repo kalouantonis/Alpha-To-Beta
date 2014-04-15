@@ -10,6 +10,7 @@
 
 Camera2D::Camera2D(sf::RenderTargetPtr renderTarget)
     : m_pRenderTarget(renderTarget)
+	, m_zoom(1.f)
 {
     m_view = m_pRenderTarget->getView();
 }
@@ -89,8 +90,10 @@ void Camera2D::setCenter(const sf::Vector2f &origin)
 void Camera2D::zoom(float factor)
 {
     // Store factor for getter
-    m_zoom = factor;
+    m_zoom *= factor;
     m_view.zoom(factor);
     updateTarget();
 }
+
+
 

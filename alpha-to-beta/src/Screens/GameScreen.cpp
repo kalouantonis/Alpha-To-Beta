@@ -34,10 +34,10 @@ bool GameScreen::init()
     }
 }
 
-void GameScreen::dispose()
+GameScreen::~GameScreen()
 {
-    CORE_DEBUG("Disposing GameManager...");
-    m_manager.dispose();
+    // CORE_DEBUG("Disposing GameManager...");
+    // m_manager.dispose();
     
     CORE_DEBUG("Disposing textures...");
     TextureLocator::getObject()->clear();
@@ -50,27 +50,26 @@ void GameScreen::dispose()
 
 void GameScreen::pollInput(const sf::Event &event)
 {
+	if(event.type == sf::Event::MouseWheelMoved)
+	{
+		m_camera.zoom(event.mouseWheel.delta != 1 ? 1.1f : 0.9f);
+	}
 }
 
 void GameScreen::update(float deltaTime)
 {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         m_camera.move(100 * deltaTime, 0);
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         m_camera.move(-100 * deltaTime, 0);
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         m_camera.move(0, 100 * deltaTime);
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
         m_camera.move(0, -100 * deltaTime);
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
         m_camera.rotate(-10.f * deltaTime);
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
         m_camera.rotate(10.f * deltaTime);
-    // else if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
-    //     m_camera.zoom(1.1f);
-    // else if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
-    //     m_camera.zoom(0.9f);
-
 
     m_manager.update(deltaTime);
 }

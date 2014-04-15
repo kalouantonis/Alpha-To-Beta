@@ -71,9 +71,6 @@ void GameManager::render()
 }
 
 
-void GameManager::dispose()
+GameManager::~GameManager()
 {
-    CORE_DEBUG("Destroying entities...");
-    // entity_manager->destroy_all();
-
 }

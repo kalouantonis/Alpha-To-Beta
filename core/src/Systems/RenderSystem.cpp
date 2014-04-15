@@ -40,7 +40,7 @@ void RenderSystem::processEntity(artemis::Entity &e)
 		Transform* transform = pair.second;
 
 		// Draw renderable
-		m_spriteBatch.draw(renderable->pTexture, 
+        m_spriteBatch.draw(renderable->textureRegion,
 			transform->position.x, transform->position.y, 
 			transform->bounds.x, transform->bounds.y);
 	}

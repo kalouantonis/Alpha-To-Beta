@@ -1,7 +1,7 @@
 #ifndef _RESOURCEHOLDER_H
 #define _RESOURCEHOLDER_H
 
-#include <map>
+#include <unordered_map>
 #include <memory>
 #include <cassert>
 
@@ -78,7 +78,7 @@ private:
 		assert(inserted.second);
 	}
 
-	std::map<Identifier, ResourcePtr>	m_resourceMap;
+	std::unordered_map<Identifier, ResourcePtr>	m_resourceMap;
 };
 
 #endif // _RESOURCEHOLDER_H

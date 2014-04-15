@@ -10,11 +10,10 @@ class GameScreen: public IScreen
 {
 public:
     GameScreen(sf::RenderTargetPtr window);
+    ~GameScreen();
 
     // IScreen interface
     bool init() final;
-    void dispose() final;
-
     void pollInput(const sf::Event &event) final;
     void update(float deltaTime) final;
     void render() final;

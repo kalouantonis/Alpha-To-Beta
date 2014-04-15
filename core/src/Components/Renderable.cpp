@@ -13,14 +13,20 @@
 const char* Renderable::g_name = "Renderable";
 
 Renderable::Renderable()
-    : pTexture(nullptr)
+    : textureRegion(nullptr)
     , order(0)
 {
 
 }
 
+Renderable::Renderable(TextureRegion& region)
+	: textureRegion(region)
+{
+
+}
+
 Renderable::Renderable(sf::TexturePtr texture)
-    : pTexture(texture)
+    : textureRegion(texture)
 {
 }
 
@@ -49,28 +55,15 @@ bool Renderable::load(const tinyxml2::XMLElement *pElement)
 	// Trim whitespace
 	boost::algorithm::trim(textureFile);
 
-	std::string textureId = make_string(textureElement->Attribute("id"));
+	sf::TexturePtr pTexture = TextureLocator::getObject()->get(textureFile);
 
-	if(textureId.empty())
-		textureId = textureFile;
-
-	bool smooth = false;
-	textureElement->QueryBoolAttribute("smooth", &smooth);
-
-	try
+	if(!pTexture)
 	{
-		TextureLocator::getObject()->load(textureId, textureFile);
-	}
-	catch(std::runtime_error& ex)
-	{
-		CORE_ERROR(ex.what());
+		CORE_ERROR("Failed to get texture: " + textureFile);
 		return false;
 	}
 
-	this->pTexture = TextureLocator::getObject()->get(textureId);
-
-	if(smooth)
-		this->pTexture->setSmooth(true);
+	this->textureRegion.setTexture(pTexture);
 
     return true;
 }

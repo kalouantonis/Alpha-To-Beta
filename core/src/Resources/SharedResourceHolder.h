@@ -1,7 +1,7 @@
 #ifndef SharedResourceHolder_h__
 #define SharedResourceHolder_h__
 
-#include <map>
+#include <unordered_map>
 #include <memory>
 #include <cassert>
 
@@ -47,18 +47,22 @@ public:
 
         auto found = m_resourceMap.find(id);
         // If at end, then not found
-        assert(found != m_resourceMap.end());
+        //assert(found != m_resourceMap.end());
+        if(found != m_resourceMap.end())
+	        return found->second;
 
-        return found->second;
+	    return nullptr;
     }
 
     ConstPtr get(Identifier id) const
 	{
 		auto found = m_resourceMap.find(id);
 		// If at end, then not found
-		assert(found != m_resourceMap.end());
+		// assert(found != m_resourceMap.end());
+		if(found != m_resourceMap.end())
+			return found->second;
 
-		return found->second;
+		return nullptr;
     }
 
 	void remove(Identifier id)
@@ -85,7 +89,7 @@ private:
 		//assert(inserted.second);
 	}
 
-	std::map<Identifier, Ptr> m_resourceMap;
+	std::unordered_map<Identifier, Ptr> m_resourceMap;
 };
 
 template <class T>

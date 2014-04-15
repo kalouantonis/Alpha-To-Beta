@@ -38,12 +38,19 @@ public:
     void draw(sf::ConstTexturePtr pTexture, float x, float y);
     void draw(sf::ConstTexturePtr pTexture, float x, float y,
               float width, float height);
+    void draw(sf::ConstTexturePtr pTexture, float x, float y, 
+        float width, float height, float rotation);
+
     void draw(const TextureRegion& region, float x, float y,
               float width, float height);
 
 private:
     void flush();
     void switchTexture(const sf::Texture* const pTexture);
+    // Check the current state of the sprite batch.
+    // Is in charge of swithing textures or flushing the buffer
+    // if required
+    void checkBatchState(const sf::Texture* const pTexture);
 
     /**
      * @brief Request next available quad from vertex buffer

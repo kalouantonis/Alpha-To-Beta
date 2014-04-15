@@ -4,18 +4,40 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 # Project name, used later
 project(ALPHA_TO_BETA)
 	
+option("CMAKE_BUILD_TYPE" "Project build type" "Release")
+
 # Find SFML before proceeding
-find_package(SFML REQUIRED)
-find_package(Boost REQUIRED)
+find_package(SFML COMPONENTS system window graphics REQUIRED)
+
+# Boost vars
+if(${WIN32})
+    # Only link statically for windows
+    set(Boost_USE_STATIC_LIBS ON)
+    set(Boost_USE_MULTITHREADED ON)
+    set(Boost_USE_STATIC_RUNTIME ON)
+endif(${WIN32})
+
+find_package(Boost COMPONENTS system filesystem REQUIRED)
 
 # C++11 support and warnings 
-add_definitions(-std=c++11 -Wall)
+if(${UNIX})
+	add_definitions(-std=c++11 -Wall)
+elseif(${WIN32})
+	# Wall is too much
+	add_definitions(/W3)
+endif(${UNIX})
 
 # Conditional compilation 
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	MESSAGE(STATUS "Building in debug mode...")
 	# Debug mode
-	add_definitions(-D_DEBUG -ggdb)
+	add_definitions(-D_DEBUG)
+	
+	if(${UNIX})
+          #add_definitions(-ggdb)
+	elseif(${WIN32})
+		add_definitions(/g3)
+	endif(${UNIX})
 elseif(${CMAKE_BUILD_TYPE} STREQUAL "Release")
 	MESSAGE(STATUS "Building in release mode...")
 	# Release mode
@@ -30,6 +52,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 message(STATUS "Configuring TinyXML2...")
 add_subdirectory("dependencies/tinyxml2")
 
+message(STATUS "Configuring libtmx-parser...")
+add_subdirectory("dependencies/libtmx-parser")
+
 #Add entityx dependency
 message(STATUS "Configuring Artemis-Cpp...")
 add_subdirectory("dependencies/Artemis-Cpp")
@@ -41,10 +66,5 @@ add_subdirectory("core/src")
 message(STATUS "Configuring Game...")
 add_subdirectory("alpha-to-beta/src")
 
-if(${BUILD_EDITOR})
-	message(STATUS "Configuring Editor...")
-	add_subdirectory("editor/src")
-endif(${BUILD_EDITOR})
-
 # Copy game assets
-file(COPY ${CMAKE_SOURCE_DIR}/alpha-to-beta/assets DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY ${CMAKE_SOURCE_DIR}/alpha-to-beta/assets DESTINATION ${ALPHA_TO_BETA_BINARY_DIR})

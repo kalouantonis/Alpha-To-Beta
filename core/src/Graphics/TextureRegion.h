@@ -13,17 +13,24 @@
 class TextureRegion
 {
 public:
-    TextureRegion(sf::ConstTexturePtr texture, float x, float y,
+    TextureRegion();
+	explicit TextureRegion(sf::TexturePtr pTexture);
+    explicit TextureRegion(sf::TexturePtr pTexture, float x, float y,
                   float width, float height);
+
+    // Overload assignment op for textures
+    // Allows backwards compatibility with plain texture pointers
+    // TextureRegion& operator=(sf::TexturePtr pTexture);
 
 	float u1, v1;
 	float u2, v2;
 
-    sf::ConstTexturePtr getTexture() const { return m_texture; }
+    sf::ConstTexturePtr getTexture() const { return m_pTexture; }
+    void setTexture(sf::TexturePtr pTexture);
 
 private:
-	// Not sure if i should use referencing or strongptr
-    sf::ConstTexturePtr m_texture;
+	// TODO: Type and find a way to keep constants
+    sf::TexturePtr m_pTexture;
 };
 
 #endif /* TEXTUREREGION_H_ */

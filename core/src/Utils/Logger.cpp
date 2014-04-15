@@ -3,6 +3,11 @@
 #include <errno.h>
 #include <string.h>
 
+Logger::Logger()
+{
+    m_pLogFile = stdout;
+}
+
 Logger::~Logger()
 {
    if(m_pLogFile != stdout)
@@ -24,11 +29,6 @@ void Logger::log(const std::string &tag, const std::string &msg, const char *fun
     fillOutputBuffer(outputBuffer, tag, msg, funcName, sourceFile, lineNum);
 
     fprintf(m_pLogFile, "%s", outputBuffer.c_str());
-}
-
-Logger::Logger()
-{
-    m_pLogFile = stdout;
 }
 
 void Logger::fillOutputBuffer(std::string &outputBuffer, const std::string &tag, const std::string &msg,
@@ -79,3 +79,4 @@ FILE *Logger::loadFileStream(FILE *stream, const char *filename)
 
     return newStream;
 }
+

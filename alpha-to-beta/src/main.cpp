@@ -30,7 +30,7 @@ int main()
 
 
     ScreenManager::getInstance().push(
-        make_screen(new GameScreen(game.getWindow()))
+        UScreenPtr(new GameScreen(game.getWindow()))
     );
 
     // Timing

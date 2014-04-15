@@ -101,8 +101,6 @@ void EntityFactory::loadFromFile(const std::string &filename)
 
 void EntityFactory::load(const std::string &path, bool recurse)
 {
-    // m_prevResource = path;
-
     // convert to file system path
     filesystem::path fsPath(path);
 
@@ -127,12 +125,13 @@ void EntityFactory::load(const std::string &path, bool recurse)
                     // Get recursive
                     std::copy(
                         filesystem::recursive_directory_iterator(fsPath),
-                        filesystem::recursive_directory_iterator(), 
+                        filesystem::recursive_directory_iterator(),
                         std::back_inserter(fileVec) // Insert in to new file vector
                     );
                 }
                 else
                 {
+                    // FIXME: Recurse if broken
                     // Ignore folders
                     std::copy(
                         filesystem::directory_iterator(fsPath),
@@ -141,13 +140,12 @@ void EntityFactory::load(const std::string &path, bool recurse)
                     );
                 }
 
-                for(auto file : fileVec)
+                for(const auto& file : fileVec)
                 {
                     if((filesystem::is_regular_file(file)) &&          // Just a normal file
                         (file.extension().generic_string() == ".xml"))  // Has XML extension
                     {
-                        // TODO: Change to platform agnostic path separator
-                        loadFromFile(fsPath.native() + '/' +  file.filename().native());
+                        loadFromFile(file.string());
                     }
                 }
             }

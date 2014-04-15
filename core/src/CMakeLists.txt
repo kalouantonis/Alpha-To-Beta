@@ -3,6 +3,9 @@ include_directories(
 	.;
 	# TinyXML include
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinyxml2;
+	# TMX Parser
+	#${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tmx-parser;
+	${tmxparser_SOURCE_DIR};
 	# Artemis
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/Artemis-Cpp/include;
 	# Boost library
@@ -12,6 +15,11 @@ include_directories(
 link_directories(
 	# Artemis-Cpp
 	${ALPHA_TO_BETA_BINARY_DIR}/dependencies/Artemis-Cpp;
+    # TinyXML
+    ${tinyxml2_BINARY_DIR}
+	# TMX Parser
+#	${ALPHA_TO_BETA_BINARY_DIR}/dependencies/tmx-parser;
+    ${tmxparser_BINARY_DIR}
 )
 
 set(
@@ -52,6 +60,12 @@ set(
 )
 
 set(
+	MAPS_SRC
+	"Maps/MapLoader.cpp"
+	"Maps/MapLoader.h"
+)
+
+set(
 	RESOURCES_SRC
 	"Resources/GenericObjectFactory.h"
 	"Resources/Locator.h"
@@ -82,6 +96,8 @@ set(
 
 set(
 	UTILS_SRC
+	"Utils/FileSystem.cpp"
+	"Utils/FileSystem.h"
 	"Utils/Logger.cpp"
 	"Utils/Logger.h"
 	"Utils/String.cpp"
@@ -97,6 +113,7 @@ set(
 	${COMPONENTS_SRC};
 	${ENTITIES_SRC};
 	${GRAPHICS_SRC};
+	${MAPS_SRC};
 	${RESOURCES_SRC};
 	${SCREENS_SRC};
 	${SYSTEMS_SRC};
@@ -111,10 +128,11 @@ add_library(
 )
 
 
-# Link libraries
+# Link static libraries
 target_link_libraries(
 	core; 
 
 	ArtemisCpp; 	# Artemis EC System
-	tinyxml2static
+	tinyxml2static; # TinyXML
+    tmxparser;		# TMX parser
 )

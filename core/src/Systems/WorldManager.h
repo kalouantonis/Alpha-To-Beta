@@ -13,7 +13,7 @@ public:
 	virtual ~WorldManager() {}
 
 	virtual void initialize() = 0;
-	virtual void dispose() = 0;
+	// virtual void dispose() = 0;
 	virtual void update(float delta);
 	virtual void render() = 0;
 };

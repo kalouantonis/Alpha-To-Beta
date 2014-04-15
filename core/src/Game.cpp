@@ -12,6 +12,7 @@
 
 #include <Game.h>
 #include <Utils/Logger.h>
+#include <Utils/FileSystem.h>
 #include <Screens/ScreenManager.h>
 
 
@@ -54,10 +55,15 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
             + '.' + std::to_string(settings.minorVersion));
 
     // Seed randomizer
-    srand(time(NULL));
+    srand((unsigned int) time(NULL));
     CORE_DEBUG("Randomizer seeded...");
 
+	CORE_INFO("Current working directory: " + getCurrentWorkingDir());
+
 	m_bRunning = true;
+	// Set to true now, for some reason, windows doesnt catch the 
+	// focused event when the game is loaded
+	m_bInFocus = true;
 }
 
 void Game::render()

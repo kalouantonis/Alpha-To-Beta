@@ -7,6 +7,8 @@
 #include <Components/ParsedComponent.h>
 #include <Systems/WorldManager.h>
 
+typedef GenericObjectFactory<std::string, ParsedComponent> ComponentFactory;
+
 /**
  * @brief Creates new entities from files.
  * @details Loads components from entity XML files
@@ -19,14 +21,14 @@ public:
     ~EntityFactory();
 
     void load(const std::string& path, bool recurse = true);
-    // TODO: Move this to level
-    // void reload();
+
+    const ComponentFactory& getComponentFactory() { return m_componentFactory; }
 
 protected:
     ParsedComponent* createComponent(const tinyxml2::XMLElement* pElement);
 
     // Use component family ID
-    GenericObjectFactory<std::string, ParsedComponent> m_componentFactory;
+    ComponentFactory m_componentFactory;
 
     void loadFromFile(const std::string& filename);
 
@@ -34,8 +36,6 @@ private:
     // Store world reference
     WorldManager& m_worldManager;
     XMLoader m_xmlLoader;
-
-    // std::string m_prevResource;
 };
 
 #endif // ENTITYFACTORY_H

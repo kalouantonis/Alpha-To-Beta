@@ -6,6 +6,7 @@
 #include <SFML/Graphics/Texture.hpp>
 
 #include <assert.h>
+//#include <glm/glm.hpp>
 
 const unsigned short VERTICES_IN_QUAD = 4;
 
@@ -64,12 +65,7 @@ void SpriteBatch::draw(sf::ConstTexturePtr pTexture, float x, float y, float wid
     // Check that begin was called
     assert(m_bDrawing && "Must call begin before draw");
 
-    const sf::Texture* newTexture = pTexture.get();
-
-    if(newTexture != m_states.texture)
-        switchTexture(newTexture);
-    else if(m_numSprites >= m_maxSprites)
-        flush();
+    checkBatchState(pTexture.get());
 
     sf::Vertex* pQuad = getNextQuad();
 
@@ -88,28 +84,38 @@ void SpriteBatch::draw(sf::ConstTexturePtr pTexture, float x, float y, float wid
     ++m_numSprites;
 }
 
+void SpriteBatch::draw(sf::ConstTexturePtr pTexture, float x, float y, float width, float height, float rotation)
+{
+    // float rad = glm::radians(rotation);
+    // float cosval = glm::cos(rad);
+    // float sinval = glm::sin(rad);
+
+    // sf::Vertex* pQuad = getNextQuad();
+
+    // pQuad[0].position = sf::Vector2f(x * cosval - y * sinval);
+}
+
 void SpriteBatch::draw(const TextureRegion &region, float x, float y, float width, float height)
 {
     assert(m_bDrawing && "Must call begin before draw");
 
-    auto newTexture = region.getTexture().get();
-
-    if(newTexture != m_states.texture)
-        switchTexture(newTexture);
-    else if(m_numSprites >= m_maxSprites)
-        flush();
+    checkBatchState(region.getTexture().get());
 
     sf::Vertex* pQuad = getNextQuad();
 
+    // Position Vertices
     pQuad[0].position = sf::Vector2f(x, y);
     pQuad[1].position = sf::Vector2f(x + width, y);
-    pQuad[1].position = sf::Vector2f(x + width, y + height);
-    pQuad[1].position = sf::Vector2f(x, y + height);
+    pQuad[2].position = sf::Vector2f(x + width, y + height);
+    pQuad[3].position = sf::Vector2f(x, y + height);
 
+    // Texture Vertices
     pQuad[0].texCoords = sf::Vector2f(region.u1, region.v1);
     pQuad[1].texCoords = sf::Vector2f(region.u2, region.v1);
-    pQuad[1].texCoords = sf::Vector2f(region.u2, region.v2);
-    pQuad[1].texCoords = sf::Vector2f(region.u1, region.v2);
+    pQuad[2].texCoords = sf::Vector2f(region.u2, region.v2);
+    pQuad[3].texCoords = sf::Vector2f(region.u1, region.v2);
+
+    ++m_numSprites;
 }
 
 void SpriteBatch::flush()
@@ -128,6 +134,14 @@ void SpriteBatch::switchTexture(const sf::Texture *pTexture)
 
     // NOTE: Contains raw pointer, could be the source of errors
     m_states.texture = pTexture;
+}
+
+void SpriteBatch::checkBatchState(const sf::Texture* const pTexture)
+{
+    if(pTexture != m_states.texture)
+        switchTexture(pTexture);
+    else if(m_numSprites >= m_maxSprites)
+        flush();
 }
 
 sf::Vertex *SpriteBatch::getNextQuad()
