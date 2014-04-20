@@ -12,3 +12,7 @@
 	path = dependencies/Artemis-Cpp
 	url = https://github.com/vinova/Artemis-Cpp.git
 	ignore = dirty
+
+[submodule "dependencies/Chipmunk2D"]
+	path = dependencies/Chipmunk2D
+	url = https://github.com/slembcke/Chipmunk2D.git
