@@ -4,12 +4,19 @@
 #include <Components/ParsedComponent.h>
 #include <SFML/System/Vector2.hpp>
 
+// #include <Systems/PhysicsSystem.h>
+
+const float STATIC_BODY_MASS = 0.f;
+
 class Physics: public ParsedComponent
 {
+	// friend class PhysicsSystem;
+
 public:
-	Physics(float xVel = 0.f, float yVel = 0.f, 
-		float xAccel = 0.f, float yAccel = 0.f, 
-		float mass = 0.f);
+
+	Physics(const sf::Vector2f& velocity = sf::Vector2f(0, 0), 
+		const sf::Vector2f& acceleration = sf::Vector2f(0, 0), 
+		float mass = STATIC_BODY_MASS);
 
 	virtual bool load(const tinyxml2::XMLElement* pElement) override;
 
@@ -18,7 +25,12 @@ public:
 
 	sf::Vector2f velocity;
 	sf::Vector2f acceleration;
+	/**
+	 * If mass is 0, it will be a static object
+	 */
 	float mass;
+
+private:
 };
 
 typedef std::shared_ptr<Physics> PhysicsPtr;

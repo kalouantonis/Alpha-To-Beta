@@ -7,6 +7,8 @@ include_directories(
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinyxml2;
 	# TMX Parser
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tmx-parser;
+	# Box2D
+	${Box2D_SOURCE_DIR};
 	# Boost
 	${Boost_INCLUDE_DIR};
 	# Core LIB
@@ -52,13 +54,13 @@ set(
 # Create executable
 add_executable(alphatobeta ${SOURCE_FILE_LIST})
 
+
 # Link dependant libraries
 target_link_libraries(
-	alphatobeta;
+    alphatobeta;
 
-    ${Boost_SYSTEM_LIBRARY};
-    ${Boost_FILESYSTEM_LIBRARY};
-    core; 							# Core Lib
-	${SFML_LIBRARIES};
+    #${Boost_LIBRARIES};     # Only used components that were requested
+    core; 	            # Core Lib
+    ${SFML_LIBRARIES};
 )
 

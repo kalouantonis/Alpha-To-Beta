@@ -2,10 +2,10 @@
 #define QuadTree_h__
 
 #include <array>
-#include <vector>
+#include <unordered_map>
 
 #include <SFML/Graphics/Rect.hpp>
-#include <entityx/Entity.h>
+#include <Artemis/Entity.h>
 
 class QuadTree
 {
@@ -14,21 +14,29 @@ public:
 	~QuadTree();
 
 	// Note: May use shared_ptrs. Not sure of the implementation yet
-	void insert(const entityx::Entity& entity);
+	void insert(const artemis::Entity& entity);
 
 	void clear();
-	void split();
 
-	void retrieve(std::vector<entityx::Entity>& objects, 
-		const entityx::Entity& entity);
+	void retrieve(std::unordered_map<int, const Transform* transform>& objects, 
+		const artemis::Entity& entity);
 
 private:
 	unsigned int m_level;
 
+	/**
+	 * @brief Splits the node in to 4 subnodes
+	 */
+	void split();
+
 	int getIndex(float x, float y, float width, float height);
 
 	sf::FloatRect m_bounds;
-	std::vector<entityx::Entity> m_objects;
+
+	typedef std::pair<int, const Transform*> TransformPair;
+	typedef std::vector<TransformPair> TransformVector;
+
+	TransformVector m_objects;
 	std::array<QuadTree, 4> m_nodes;
 };
 

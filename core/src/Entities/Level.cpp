@@ -12,7 +12,8 @@ using namespace boost;
 
 Level::Level(WorldManager& worldManager)
 	: m_entityFactory(worldManager)
-	, m_entityManager(worldManager.getEntityManager())
+    , m_mapLoader(worldManager)
+    , m_entityManager(worldManager.getEntityManager())
 {
 }
 
@@ -79,28 +80,30 @@ void Level::load(const std::string& filename)
 	// Trim whitespace
 	boost::algorithm::trim(mapFile);
 
+    m_mapLoader.load(mapFile, assetFile);
+
 	// Object files
-	childElem = pRoot->FirstChildElement("Objects");
+	// childElem = pRoot->FirstChildElement("Objects");
 
-	if(!childElem)
-	{
-		CORE_ERROR("No Object element defined in " + filename);
-		return;
-	}
+	// if(!childElem)
+	// {
+	// 	CORE_ERROR("No Object element defined in " + filename);
+	// 	return;
+	// }
 
-	std::string objectFile = make_string(childElem->GetText());
+	// std::string objectFile = make_string(childElem->GetText());
 
-	if(objectFile.empty())
-	{
-		CORE_ERROR("No object file defined in: " + filename);
-		return;
-	}
+	// if(objectFile.empty())
+	// {
+	// 	CORE_ERROR("No object file defined in: " + filename);
+	// 	return;
+	// }
 
-	// Trim whitespace
-	boost::algorithm::trim(objectFile);
+	// // Trim whitespace
+	// boost::algorithm::trim(objectFile);
 
-	// Load object directory using entity loader
-	m_entityFactory.load(objectFile);
+	// // Load object directory using entity loader
+	// m_entityFactory.load(objectFile);
 
 	// Load constants....
 }

@@ -13,7 +13,7 @@
 #include <assert.h>
 
 TextureRegion::TextureRegion()
-	: m_pTexture(nullptr)
+    : TextureRegion(nullptr)
 {
 
 }
@@ -40,7 +40,8 @@ void TextureRegion::setTexture(sf::TexturePtr pTexture)
 	}
 	else
 	{
-		texSize = sf::Vector2u(1, 1);
+        // Invalidate, will not be drawn
+        texSize = sf::Vector2u(0, 0);
 	}
 
 	u1 = v1 = 0;

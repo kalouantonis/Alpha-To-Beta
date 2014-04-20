@@ -6,12 +6,16 @@
 
 #define GetCurrDir _getcwd
 
+const char pathSeparator = '\\';
+
 #elif __unix__ // Define function for linux
 
 #include <unistd.h>
 
 // Store function pointer
 #define GetCurrDir getcwd
+
+const char pathSeparator = '/';
 
 #else
 
@@ -22,7 +26,10 @@
 // Defines FILENAME_MAX
 #include <stdio.h>
 
-std::string getCurrentWorkingDir()
+namespace fs
+{
+
+std::string currentWorkingDir()
 {
 	char currPath[FILENAME_MAX];
 
@@ -36,4 +43,12 @@ std::string getCurrentWorkingDir()
 
 	// Automagic boxing
 	return currPath;
+}
+
+
+const char nativeSeparator()
+{
+    return pathSeparator;
+}
+
 }

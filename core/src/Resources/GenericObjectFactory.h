@@ -11,12 +11,12 @@ template <class Identifier, class BaseClass>
 class GenericObjectFactory
 {
 public:
-    template <class SubClass>
     /**
      * @brief Registers a new object creator
      * @param id The identifier used
      * @return true if actually registered a new item, false if already exists
      */
+    template <class SubClass>
     bool declare(const Identifier& id)
     {
         auto findIt = m_creators.find(id);
@@ -59,8 +59,7 @@ public:
     void clear()
     {
         //delegate to internal map
-        if(!m_creators.empty())
-            m_creators.clear();
+        m_creators.clear();
     }
 
 private:

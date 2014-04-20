@@ -47,7 +47,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
     CORE_INFO("Window created...");
 
 	// Get context settings
-    sf::ContextSettings settings = m_pWindow->getSettings();
+    const sf::ContextSettings& settings = m_pWindow->getSettings();
     CORE_LOG("OGL", "Depth Bits: " + std::to_string(settings.depthBits));
     CORE_LOG("OGL", "Stencil Bits: " + std::to_string(settings.stencilBits));
     CORE_LOG("OGL", "Anti-aliasing level: " + std::to_string(settings.antialiasingLevel));
@@ -58,7 +58,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
     srand((unsigned int) time(NULL));
     CORE_DEBUG("Randomizer seeded...");
 
-	CORE_INFO("Current working directory: " + getCurrentWorkingDir());
+    CORE_INFO("Current working directory: " + fs::currentWorkingDir());
 
 	m_bRunning = true;
 	// Set to true now, for some reason, windows doesnt catch the 
@@ -82,6 +82,7 @@ void Game::render()
 
 void Game::pollInput()
 {
+    // TODO: Allow game to receive events, such as close requests and stuff
 	sf::Event event;
 
     while(m_pWindow->pollEvent(event))
@@ -112,6 +113,7 @@ void Game::update(float dt)
 {
     if(m_bInFocus)
         ScreenManager::getInstance().update(dt);
+
 }
 
 void Game::dispose()

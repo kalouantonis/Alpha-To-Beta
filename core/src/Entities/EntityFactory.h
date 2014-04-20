@@ -7,6 +7,9 @@
 #include <Components/ParsedComponent.h>
 #include <Systems/WorldManager.h>
 
+// ID Used for invalid entities
+const long INVALID_ENTITY = -666;
+
 typedef GenericObjectFactory<std::string, ParsedComponent> ComponentFactory;
 
 /**
@@ -21,6 +24,7 @@ public:
     ~EntityFactory();
 
     void load(const std::string& path, bool recurse = true);
+    artemis::Entity& loadFromFile(const std::string& filename);
 
     const ComponentFactory& getComponentFactory() { return m_componentFactory; }
 
@@ -30,12 +34,13 @@ protected:
     // Use component family ID
     ComponentFactory m_componentFactory;
 
-    void loadFromFile(const std::string& filename);
 
 private:
     // Store world reference
     WorldManager& m_worldManager;
     XMLoader m_xmlLoader;
+
+    void invalidateEntity(artemis::Entity& entity);
 };
 
 #endif // ENTITYFACTORY_H

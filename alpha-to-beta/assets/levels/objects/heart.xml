@@ -1,7 +1,7 @@
 <Entity>
 	<Renderable>
 		<Texture id="heart">
-			img.png
+			assets/img.png
 		</Texture>
 	</Renderable>
 

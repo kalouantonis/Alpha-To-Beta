@@ -20,12 +20,12 @@ void MovementSystem::processEntity(artemis::Entity& e)
 	// Get delta time
 	float dt = world->getDelta();
 
+	float mass = pPhysics->mass;
+
 	// Update velocity
-	if(pPhysics->mass != 0)
+	if(mass != 0.f)
 	{
-		pPhysics->velocity += (pPhysics->mass != 0)
-			? ((pPhysics->acceleration * pPhysics->mass) * dt)
-			: (pPhysics->acceleration * dt);
+		pPhysics->velocity += (pPhysics->acceleration * mass) * dt;
 	}
 
 	// Update position

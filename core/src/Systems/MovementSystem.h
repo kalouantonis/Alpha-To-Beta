@@ -13,7 +13,7 @@ public:
 	MovementSystem();
 
 	virtual void initialize() override;
-	virtual void processEntity(artemis::Entity& e) override;
+	virtual void processEntity(artemis::Entity& e) final;
 
 private:
 	artemis::ComponentMapper<Transform> m_transformMapper;

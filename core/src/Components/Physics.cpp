@@ -5,10 +5,9 @@
 
 const char* Physics::g_name = "Physics";
 
-Physics::Physics(float xVel, float yVel, 
-		float xAccel, float yAccel, float mass)
-	: velocity(xVel, yVel)
-	, acceleration(xAccel, yAccel)
+Physics::Physics(const sf::Vector2f& velocity, const sf::Vector2f& acceleration, float mass)
+	: velocity(velocity)
+	, acceleration(acceleration)
 	, mass(mass)
 {
 }

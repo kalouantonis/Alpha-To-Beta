@@ -29,10 +29,21 @@ EntityFactory::~EntityFactory()
     m_componentFactory.clear();
 }
 
-void EntityFactory::loadFromFile(const std::string &filename)
+void EntityFactory::invalidateEntity(artemis::Entity& entity)
+{
+    // Set as invalid ID so as to be able to validate success later
+    entity.setUniqueId(INVALID_ENTITY);
+    // Remove from world
+    entity.remove();
+}
+
+artemis::Entity& EntityFactory::loadFromFile(const std::string &filename)
 {
     // Get root element of xml file
     const tinyxml2::XMLElement* pRoot = m_xmlLoader.loadAndGetRoot(filename.c_str());
+
+    // Request new empty entity from manager
+    artemis::Entity& entity = m_worldManager.createEntity();
 
     // check if root exists
     if(!pRoot)
@@ -40,10 +51,14 @@ void EntityFactory::loadFromFile(const std::string &filename)
         std::string errmsg = "Failed to load xml resource: " + filename;
 
         if(m_xmlLoader.hasErrorOccured())
-            errmsg += m_xmlLoader.getLastError();
+        {
+            errmsg += "\n\tDetails: " + m_xmlLoader.getLastError();
+        }
 
         CORE_ERROR(errmsg);
-        return;
+
+        invalidateEntity(entity);
+        return entity;
     }
 
     if(pRoot->NoChildren())
@@ -51,12 +66,9 @@ void EntityFactory::loadFromFile(const std::string &filename)
         CORE_WARNING("No children in xml: " + filename
                    + ", will not load entity.");
 
-        // exit
-        return;
+        invalidateEntity(entity);
+        return entity;
     }
-
-    // Request new empty entity from manager
-    artemis::Entity& entity = m_worldManager.createEntity();
 
     // Try and get tag attribute from xml entity
     const char* tag = pRoot->Attribute("tag");
@@ -97,6 +109,8 @@ void EntityFactory::loadFromFile(const std::string &filename)
         CORE_DEBUG("Created entity from " + filename);
         entity.refresh();
     }
+
+    return entity;
 }
 
 void EntityFactory::load(const std::string &path, bool recurse)

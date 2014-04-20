@@ -34,10 +34,6 @@ public:
 	// void update(entityx::ptr<entityx::EntityManager> es,
 	// 	entityx::ptr<entityx::EventManager> event, float dt) override;
 
-	virtual void begin() final;
-	virtual void end() final;
-	virtual void added(artemis::Entity& e) override;
-	virtual void removed(artemis::Entity& e) override;
 
 	virtual void processEntity(artemis::Entity& e) override;
 
@@ -49,6 +45,11 @@ public:
 
 
 private:
+	virtual void added(artemis::Entity& e) override;
+	virtual void removed(artemis::Entity& e) override;
+	virtual void begin() final;
+	virtual void end() final;
+
 	SpriteBatch m_spriteBatch;
 
 	artemis::ComponentMapper<Transform> m_transformMapper;

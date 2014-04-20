@@ -13,6 +13,7 @@
 // Needed for base class info
 #include <SFML/Graphics/RenderWindow.hpp>
 
+
 class Game
 {
 public:

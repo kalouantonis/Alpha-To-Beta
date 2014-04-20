@@ -21,8 +21,8 @@ bool Transform::load(const tinyxml2::XMLElement *pElement)
 	pElement->QueryFloatAttribute("x", &position.x);
 	pElement->QueryFloatAttribute("y", &position.y);
 
-	pElement->QueryFloatAttribute("width", &bounds.x);
-	pElement->QueryFloatAttribute("height", &bounds.y);
+	// pElement->QueryFloatAttribute("width", &bounds.x);
+	// pElement->QueryFloatAttribute("height", &bounds.y);
 
 	// Scale element, not required
 	const tinyxml2::XMLElement* childElement = pElement->FirstChildElement("Scale");

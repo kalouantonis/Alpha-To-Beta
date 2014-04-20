@@ -10,7 +10,7 @@
 
 Camera2D::Camera2D(sf::RenderTargetPtr renderTarget)
     : m_pRenderTarget(renderTarget)
-	, m_zoom(1.f)
+    , m_zoom(1.f)
 {
     m_view = m_pRenderTarget->getView();
 }

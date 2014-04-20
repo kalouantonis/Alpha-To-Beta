@@ -2,6 +2,7 @@
 #define LEVEL_H
 
 #include <Entities/EntityFactory.h>
+#include <Maps/MapLoader.h>
 
 class Level
 {
@@ -19,6 +20,8 @@ private:
 	 */
 	EntityFactory m_entityFactory;
 
+    MapLoader m_mapLoader;
+
 	/**
 	 * @brief The manager of world entities
 	 */
@@ -35,6 +38,7 @@ private:
 	 * @param assetDir Asset directory to load from
 	 * @return false if loading failed
 	 */
+    // TODO: Load assets using relative asset dir filename. Same goes for maps
 	bool loadAssets(const std::string& assetDir);
 
 	/**

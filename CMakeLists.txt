@@ -52,10 +52,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 message(STATUS "Configuring TinyXML2...")
 add_subdirectory("dependencies/tinyxml2")
 
-message(STATUS "Configuring libtmx-parser...")
-add_subdirectory("dependencies/libtmx-parser")
+message(STATUS "Configuring tmx-parser...")
+add_subdirectory("dependencies/tmx-parser")
 
-#Add entityx dependency
+#Add artemis dependency
 message(STATUS "Configuring Artemis-Cpp...")
 add_subdirectory("dependencies/Artemis-Cpp")
 
@@ -67,4 +67,4 @@ message(STATUS "Configuring Game...")
 add_subdirectory("alpha-to-beta/src")
 
 # Copy game assets
-file(COPY ${CMAKE_SOURCE_DIR}/alpha-to-beta/assets DESTINATION ${ALPHA_TO_BETA_BINARY_DIR})
+#file(COPY ${CMAKE_SOURCE_DIR}/alpha-to-beta/assets DESTINATION ${ALPHA_TO_BETA_BINARY_DIR})

@@ -7,7 +7,7 @@
 class Transform: public ParsedComponent
 {
 public:
-    Transform(float x = 0.f, float y = 0.f, float width = 1.f, float height = 1.f);
+    Transform(float x = 0.f, float y = 0.f, float width = 0.f, float height = 0.f);
 
     /**
      * @brief Load component from XML definition

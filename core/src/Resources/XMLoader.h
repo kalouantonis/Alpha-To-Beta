@@ -26,7 +26,6 @@ public:
 
 private:
     tinyxml2::XMLDocument m_doc;
-    const char* m_resourceName;
 };
 
 #endif // XMLOADER_H

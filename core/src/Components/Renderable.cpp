@@ -12,39 +12,63 @@
 
 const char* Renderable::g_name = "Renderable";
 
-Renderable::Renderable()
-    : textureRegion(nullptr)
-    , order(0)
+Renderable::Renderable(int order, float width, float height)
+    : m_textureRegion(nullptr)
+    , order(order)
+    // Invalid width and height because no texture was previded
+    , width(width), height(height)
 {
-
 }
 
-Renderable::Renderable(TextureRegion& region)
-	: textureRegion(region)
+Renderable::Renderable(sf::TexturePtr pTexture, int order, float width, float height)
+    // Dont delegate, causes delegation cycle due to ambiguity
+    : m_textureRegion(pTexture)
+    , order(order)
 {
-
+	if(width == 0.f && height == 0.f)
+	{
+		// Region width
+		width = m_textureRegion.u2 - m_textureRegion.u1;
+		// Region height
+		height = m_textureRegion.v2 - m_textureRegion.v1;
+	}
+	else
+	{
+		this->width = width;
+		this->height = height;
+	}
 }
 
-Renderable::Renderable(sf::TexturePtr texture)
-    : textureRegion(texture)
+Renderable::Renderable(TextureRegion& region, int order, float width, float height)
+    : order(order)
 {
+	if(width == 0.f && height == 0.f)
+	{
+		setTextureRegion(region);
+	}
+	else
+	{
+		m_textureRegion = region;
+		this->width = width;
+		this->height = height;
+	}
 }
 
 bool Renderable::load(const tinyxml2::XMLElement *pElement)
 {
 	pElement->QueryIntAttribute("order", &order);
 
-	const tinyxml2::XMLElement* textureElement = pElement->FirstChildElement("Texture");
+	const tinyxml2::XMLElement* childElement = pElement->FirstChildElement("Texture");
 
-	if(!textureElement)
+	if(!childElement)
 	{
 		CORE_WARNING("No Texture element declared in Renderable component.");
 
 		return false;
 	}
-	
+
 	// Get file name
-	std::string textureFile = make_string(textureElement->GetText());
+	std::string textureFile = make_string(childElement->GetText());
 
 	if(textureFile.empty())
 	{
@@ -63,7 +87,21 @@ bool Renderable::load(const tinyxml2::XMLElement *pElement)
 		return false;
 	}
 
-	this->textureRegion.setTexture(pTexture);
+	TextureRegion tmpRegion;
+	tmpRegion.setTexture(pTexture);
+
+	childElement = pElement->FirstChildElement("Dimensions");
+
+	if(childElement)
+	{
+		pElement->QueryFloatAttribute("width", &width);
+		pElement->QueryFloatAttribute("height", &height);
+		m_textureRegion = tmpRegion;
+	}
+	else
+	{
+		setTextureRegion(tmpRegion);
+	}
 
     return true;
 }

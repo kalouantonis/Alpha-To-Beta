@@ -3,6 +3,12 @@
 
 #include <string>
 
-std::string getCurrentWorkingDir();
+namespace fs
+{
+
+std::string currentWorkingDir();
+const char nativeSeparator();
+
+}
 
 #endif // !FILESYSTEM_H_

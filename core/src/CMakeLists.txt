@@ -4,7 +4,6 @@ include_directories(
 	# TinyXML include
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinyxml2;
 	# TMX Parser
-	#${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tmx-parser;
 	${tmxparser_SOURCE_DIR};
 	# Artemis
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/Artemis-Cpp/include;
@@ -132,6 +131,7 @@ add_library(
 target_link_libraries(
 	core; 
 
+    ${Boost_LIBRARIES};
 	ArtemisCpp; 	# Artemis EC System
 	tinyxml2static; # TinyXML
     tmxparser;		# TMX parser

@@ -7,6 +7,6 @@
     </Assets>
     # TODO: Asset folder and level file (.tmx)
     <MapFile>
-        level1.tmx
+        assets/level1.tmx
     </MapFile>
 </Level>

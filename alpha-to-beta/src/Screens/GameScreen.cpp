@@ -70,7 +70,7 @@ void GameScreen::update(float deltaTime)
         m_camera.rotate(-10.f * deltaTime);
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
         m_camera.rotate(10.f * deltaTime);
-
+    
     m_manager.update(deltaTime);
 }
 

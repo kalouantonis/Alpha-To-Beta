@@ -16,7 +16,10 @@ class Texture;
 
 // Typedefs
 typedef std::shared_ptr<RenderTarget> RenderTargetPtr;
-typedef std::shared_ptr<Texture> TexturePtr;
+// Non modifyable texture by default
+typedef std::shared_ptr<const Texture> TexturePtr;
+// allow modification
+typedef std::shared_ptr<Texture> ModTexturePtr;
 // Non-modyfiable texture pointer. Can't modify data or pointer
 typedef const std::shared_ptr<const Texture> ConstTexturePtr;
 typedef std::shared_ptr<RenderWindow> RenderWindowPtr;
