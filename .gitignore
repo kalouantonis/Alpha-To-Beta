@@ -5,3 +5,5 @@ build
 # Sublime files
 *.sublime-project
 *.sublime-workspace
+
+*.framework
