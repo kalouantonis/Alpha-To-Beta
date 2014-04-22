@@ -11,3 +11,5 @@
 [submodule "dependencies/Chipmunk2D"]
 	path = dependencies/Chipmunk2D
 	url = https://github.com/slembcke/Chipmunk2D.git
+	branch = 6.2.x
+
