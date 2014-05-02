@@ -44,6 +44,8 @@ public:
     void draw(const TextureRegion& region, float x, float y,
               float width, float height);
 
+    sf::RenderTargetPtr getRenderTarget() const { return m_pRenderTarget; }
+
 private:
     void flush();
     void switchTexture(const sf::Texture* const pTexture);

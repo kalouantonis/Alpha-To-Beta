@@ -17,7 +17,6 @@ link_directories(
     # TinyXML
     ${tinyxml2_BINARY_DIR}
 	# TMX Parser
-#	${ALPHA_TO_BETA_BINARY_DIR}/dependencies/tmx-parser;
     ${tmxparser_BINARY_DIR}
 )
 
@@ -37,6 +36,14 @@ set(
 	"Components/Transform.h"
 	"Components/Physics.cpp"
 	"Components/Physics.h"
+	"Components/DynamicBody.cpp"
+	"Components/DynamicBody.h"
+)
+
+set(
+	DATA_STRUCTURES_SRC
+	# "DataStructures/QuadTree.cpp"
+	# "DataStructures/QuadTree.h"
 )
 
 set(
@@ -85,10 +92,10 @@ set(
 
 set(
 	SYSTEMS_SRC
-	"Systems/MovementSystem.cpp"
-	"Systems/MovementSystem.h"
 	"Systems/RenderSystem.cpp"
 	"Systems/RenderSystem.h"
+	"Systems/PhysicsSystem.cpp"
+	"Systems/PhysicsSystem.h"
 	"Systems/WorldManager.cpp"
 	"Systems/WorldManager.h"
 )
@@ -101,7 +108,6 @@ set(
 	"Utils/Logger.h"
 	"Utils/String.cpp"
 	"Utils/String.h"
-	"Utils/QuadTree.h"
 )
 
 # Add all current *.cpp files in to build
@@ -110,6 +116,7 @@ set(
 
 	${MAIN_SRC};
 	${COMPONENTS_SRC};
+	${DATA_STRUCTURES_SRC};
 	${ENTITIES_SRC};
 	${GRAPHICS_SRC};
 	${MAPS_SRC};
@@ -135,4 +142,5 @@ target_link_libraries(
 	ArtemisCpp; 	# Artemis EC System
 	tinyxml2static; # TinyXML
     tmxparser;		# TMX parser
+    # chipmunk_static
 )

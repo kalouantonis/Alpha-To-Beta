@@ -1,6 +1,7 @@
 #include <Systems/GameManager.h>
-#include <Systems/MovementSystem.h>
+
 #include <Systems/RenderSystem.h>
+#include <Systems/PhysicsSystem.h>
 
 #include <Artemis/Entity.h>
 #include <Artemis/SystemManager.h>
@@ -24,16 +25,16 @@ void GameManager::initialize()
     // factory.loadFromDirectory("assets");
     artemis::SystemManager* systemManager = this->getSystemManager();
 
-    CORE_DEBUG("Creating movement system...");
-
-    m_movementSystem = static_cast<MovementSystem*>(
-        systemManager->setSystem(new MovementSystem())
-    );
-
     CORE_DEBUG("Creating render system...");
 
     m_renderSystem = static_cast<RenderSystem*>(
         systemManager->setSystem(new RenderSystem(m_spriteBatch))
+    );
+
+    CORE_DEBUG("Creating physics system");
+
+    m_physicsSystem = static_cast<PhysicsSystem*>(
+        systemManager->setSystem(new PhysicsSystem(sf::Vector2f(0, -9.81f)))
     );
 
     CORE_DEBUG("Initializing all systems...");
@@ -57,16 +58,11 @@ void GameManager::update(float delta)
         //TextureLocator::getObject()->clear();
         m_level->reload();
     }
-
-	// Update movement using delta time
-	// system_manager->update<MovementSystem>(dt);
-    m_movementSystem->process();
 }
 
 void GameManager::render()
 {
 	// Call render systems
-	// system_manager->update<RenderSystem>(0.0);	
     m_renderSystem->process();
 }
 

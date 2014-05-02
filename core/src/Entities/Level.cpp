@@ -116,6 +116,7 @@ void Level::reload(bool reloadResources, bool reloadEntities)
 	{
 		CORE_LOG("LEVEL", "Removing all entities from manager...");
 		m_entityManager->removeAllEntities();
+		// TODO: Reload all systems
 	}
 
 	if(reloadResources)

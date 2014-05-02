@@ -64,8 +64,8 @@ void RenderSystem::added(artemis::Entity& e)
 			static_cast<Renderable*>(renderable),
 			static_cast<Transform*>(transform)
 		);
-	} 
 
+	} 
 
 	// map[e.getId()] = std::make_pair(transform, renderable)
 }

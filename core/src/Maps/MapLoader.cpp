@@ -6,7 +6,7 @@
 
 #include <Components/Renderable.h>
 #include <Components/Transform.h>
-#include <Components/Physics.h>
+// #include <Components/TileBody.h>
 
 #include <Resources/ResourceDef.h>
 #include <Utils/Logger.h>
@@ -148,7 +148,7 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
                 if(collidable)
                 {
                     // load bodies
-                    e.addComponent(new Physics());
+                    // e.addComponent(new TileBody(x * tileWidth, y * tileHeight, tileWidth, tileHeight));
                 }
 
                 // Commit entity changes
@@ -169,7 +169,7 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* objectGroup)
 
         if(type == "entity")
         {
-            const std::string& fileName = object->GetProperties().GetLiteralProperty("File");
+            const std::string& fileName = object->GetProperties().GetLiteralProperty("file");
 
             if(!fileName.empty())
             {
@@ -211,7 +211,7 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* objectGroup)
             }
             else
             {
-                CORE_ERROR("No File property in Entity object definition");
+                CORE_ERROR("No 'file' property in 'entity' object definition");
             }
         }
     }

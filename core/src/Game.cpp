@@ -15,7 +15,6 @@
 #include <Utils/FileSystem.h>
 #include <Screens/ScreenManager.h>
 
-
 Game::Game()
 	: m_bRunning(false)
     , m_bInFocus(false)

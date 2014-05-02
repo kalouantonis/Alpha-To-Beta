@@ -59,6 +59,9 @@ add_subdirectory("dependencies/tmx-parser")
 message(STATUS "Configuring Artemis-Cpp...")
 add_subdirectory("dependencies/Artemis-Cpp")
 
+# message(STATUS "Configuring Chipmunk2D...")
+# add_subdirectory("dependencies/Chipmunk2D")
+
 # Core framework
 message(STATUS "Configuring Core...")
 add_subdirectory("core/src")

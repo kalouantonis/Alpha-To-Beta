@@ -7,7 +7,7 @@
 
 // Fwd defs
 class RenderSystem;
-class MovementSystem;
+class PhysicsSystem;
 
 
 class GameManager: public WorldManager
@@ -25,7 +25,8 @@ private:
 	SpriteBatch m_spriteBatch;
 
 	RenderSystem* m_renderSystem;
-	MovementSystem* m_movementSystem;
+	PhysicsSystem* m_physicsSystem;
+
 	std::shared_ptr<Level> m_level;
 };
 

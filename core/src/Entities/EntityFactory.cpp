@@ -21,7 +21,7 @@ EntityFactory::EntityFactory(WorldManager& worldManager)
 {
     m_componentFactory.declare<Transform>(Transform::g_name);
     m_componentFactory.declare<Renderable>(Renderable::g_name);
-    m_componentFactory.declare<Physics>(Physics::g_name);
+    // m_componentFactory.declare<Physics>(Physics::g_name);
 }
 
 EntityFactory::~EntityFactory()

@@ -17,7 +17,6 @@ GameScreen::GameScreen(sf::RenderTargetPtr window)
 
 bool GameScreen::init()
 {
-
     try
     {
         TextureLocator::provide(TextureLocator::Ptr(new TextureHolder()));

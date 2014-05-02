@@ -46,7 +46,7 @@ void Logger::fillOutputBuffer(std::string &outputBuffer, const std::string &tag,
     }
     if(sourceFile != NULL)
     {
-        outputBuffer += "\n";
+        outputBuffer += "\nSource File: ";
         outputBuffer += sourceFile;
     }
     if(lineNum != 0)
