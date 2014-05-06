@@ -15,6 +15,8 @@
 #include <Utils/FileSystem.h>
 #include <Screens/ScreenManager.h>
 
+ #include <Input/InputLocator.h>
+
 Game::Game()
 	: m_bRunning(false)
     , m_bInFocus(false)
@@ -103,7 +105,8 @@ void Game::pollInput()
             ScreenManager::getInstance().resize(sf::Vector2u(event.size.width, event.size.height));
             break;
         default:
-            ScreenManager::getInstance().pollInput(event);
+            //ScreenManager::getInstance().pollInput(event);
+            InputLocator::dispatchEvent(event);
 		}
 	}
 }

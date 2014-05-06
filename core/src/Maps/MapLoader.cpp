@@ -6,19 +6,23 @@
 
 #include <Components/Renderable.h>
 #include <Components/Transform.h>
-// #include <Components/TileBody.h>
+#include <Components/StaticBody.h>
 
 #include <Resources/ResourceDef.h>
+
+#include <Physics/PhysicsLocator.h>
+
 #include <Utils/Logger.h>
 #include <Utils/FileSystem.h>
 
 #include <TmxParser/Tmx.h>
 
+#include <Artemis/World.h>
 #include <Artemis/Entity.h>
 
 #include <boost/algorithm/string.hpp>
 
-MapLoader::MapLoader(WorldManager &world)
+MapLoader::MapLoader(artemis::World &world)
     : m_worldManager(world)
     , m_entityFactory(world)
 {
@@ -32,6 +36,8 @@ void MapLoader::load(const std::string &mapFile, const std::string &assetDir)
     m_prevAssetDir = assetDir;
 
     Tmx::Map map;
+
+    CORE_DEBUG("Loading map: " + assetDir + '/' + mapFile);
 
     // Parse map using asset directory
     map.ParseFile(mapFile);
@@ -58,14 +64,20 @@ void MapLoader::load(const std::string &mapFile, const std::string &assetDir)
             // if collidable, generate box2d static bodies
             bool collidable = tileLayer->GetProperties().HasProperty("collidable");
 
-
-            loadTileEntities(tileLayer, map.GetTileWidth(), map.GetTileHeight(), collidable);
+            // TODO: Account for spacing and margins
+            loadTileEntities(
+                tileLayer, 
+                map.GetTileWidth() / PhysicsLocator::PixelsPerMeter.x, 
+                map.GetTileHeight() / PhysicsLocator::PixelsPerMeter.y, 
+                collidable
+            );
         }
 	}
 
     for(const Tmx::ObjectGroup* objectGroup : map.GetObjectGroups())
     {
-        loadObjectGroup(objectGroup);
+        // The tile height is the same for the whole map
+        loadObjectGroup(objectGroup, map.GetTileHeight());
     }
 
 	// load all object layers and xml files. Also, must be of type ENTITY
@@ -88,7 +100,7 @@ void MapLoader::loadTileSet(const std::string &assetDir, const Tmx::Tileset* til
     int tileWidth = tileset->GetTileWidth();
     int tileHeight = tileset->GetTileHeight();
 
-    // Offset using margins too
+    // Offset using spacing too
     int xOffset = tileset->GetTileWidth() + tileset->GetSpacing();
     int yOffset = tileset->GetTileHeight() + tileset->GetSpacing();
 
@@ -129,6 +141,7 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
     // NOTE: The parser automagically multiplies by tile width & height
     int layerHeight = layer->GetHeight();
     int layerWidth = layer->GetWidth();
+    float yOffset = (layerHeight / 2.f) + tileHeight;
 
 
     for(int x = 0; x < layerWidth; ++x)
@@ -141,15 +154,13 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
             {
                 // Create new entity
                 artemis::Entity& e = m_worldManager.createEntity();
-                e.addComponent(new Transform(x * tileWidth, y * tileHeight, tileWidth, tileHeight));
+
+                // TODO: Load from file if 'file' property exists
+
+                // Convert tile layer to inverse cartesian coordinates
+                e.addComponent(new Transform(x * tileWidth, (int)(y - yOffset) * tileHeight));
                 // Insert new renderable using tileset id
                 e.addComponent(new Renderable(m_tileTextures[tile.id], layer->GetZOrder(), tileWidth, tileHeight));
-
-                if(collidable)
-                {
-                    // load bodies
-                    // e.addComponent(new TileBody(x * tileWidth, y * tileHeight, tileWidth, tileHeight));
-                }
 
                 // Commit entity changes
                 e.refresh();
@@ -158,61 +169,85 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
     }
 }
 
-void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* objectGroup)
+void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHeight)
 {
-    for(const Tmx::Object* object : objectGroup->GetObjects())
+    bool bCollidable = pObjectGroup->GetProperties().HasProperty("collidable");
+    int order = pObjectGroup->GetZOrder();
+
+    // We've got some screwed up offsets. For some reason, we need to increment by half 
+    // the height of the map + one tile
+    float yOffset = ((pObjectGroup->GetHeight() / 2.f) * tileHeight) + tileHeight;
+
+    for(const Tmx::Object* object : pObjectGroup->GetObjects())
     {
         // Dont reference, we need to convert
         std::string type = object->GetType();
         // convert to lower case
         boost::algorithm::to_lower(type);
 
-        if(type == "entity")
+        const std::string& fileName = object->GetProperties().GetLiteralProperty("file");
+
+        artemis::Entity& entity = m_worldManager.createEntity();
+
+        if(!fileName.empty())
         {
-            const std::string& fileName = object->GetProperties().GetLiteralProperty("file");
-
-            if(!fileName.empty())
+            if(!m_entityFactory.loadFromFile(fileName, entity))
             {
-                artemis::Entity& entity = m_entityFactory.loadFromFile(fileName);
-
-                if(entity.getUniqueId() == INVALID_ENTITY)
-                {
-                    CORE_ERROR("Invalid entity for: " + object->GetName());
-                    continue;
-                }
-
-                // Safe to cast, we know its of that type anyway
-                Transform* transformComp = static_cast<Transform*>(entity.getComponent<Transform>());
-
-                if(!transformComp) // Transform does not already exist
-                {
-                    entity.addComponent(new Transform(object->GetX(), object->GetY(), object->GetWidth(), object->GetHeight()));
-                }
-                else
-                {
-                    // Override previous positions
-                    transformComp->position.x = object->GetX();
-                    transformComp->position.y = object->GetY();
-
-                    if(transformComp->bounds.x == 0 && transformComp->bounds.y == 0) // no width & height
-                    {
-                        transformComp->bounds.x = object->GetWidth();
-                        transformComp->bounds.y = object->GetHeight();
-                    }
-                }
-
-                Renderable* renderableComp = static_cast<Renderable*>(entity.getComponent<Renderable>());
-
-                if((renderableComp != NULL) && (renderableComp->width == 0.f && renderableComp->height == 0.f))
-                {
-                    renderableComp->width = object->GetWidth();
-                    renderableComp->height = object->GetHeight();
-                }
-            }
-            else
-            {
-                CORE_ERROR("No 'file' property in 'entity' object definition");
+                CORE_ERROR("Failed to load entity for: " + object->GetName());
+                // Ignore entity, it failed to load
+                continue;
             }
         }
+
+        // Safe to cast, we know its of that type anyway
+        Transform* transformComp = static_cast<Transform*>(entity.getComponent<Transform>());
+
+        if(!transformComp) // Transform does not already exist
+        {
+            // Store for later
+            transformComp = new Transform();
+            entity.addComponent(transformComp);
+        }
+
+        // Override previous positions
+        transformComp->position.x = object->GetX() / PhysicsLocator::PixelsPerMeter.x;
+        transformComp->position.y = (object->GetY()  - yOffset) / PhysicsLocator::PixelsPerMeter.y;
+
+        Renderable* renderableComp = static_cast<Renderable*>(entity.getComponent<Renderable>());
+
+        if((renderableComp != NULL) && (renderableComp->width == 0.f && renderableComp->height == 0.f))
+        {
+            renderableComp->width = object->GetWidth() / PhysicsLocator::PixelsPerMeter.x;
+            renderableComp->height = object->GetHeight() / PhysicsLocator::PixelsPerMeter.y;
+
+            renderableComp->order = order;
+       }
+
+       if(bCollidable) // Is entity collidable?
+       {
+            Physics* physicsComp = static_cast<Physics*>(entity.getComponent<StaticBody>());
+
+            if(physicsComp == NULL)
+            {
+                // Create new physics component
+                physicsComp = new StaticBody(
+                    object->GetWidth() / PhysicsLocator::PixelsPerMeter.x,
+                    object->GetHeight() / PhysicsLocator::PixelsPerMeter.y
+                );
+
+                // Add to entity
+                entity.addComponent(physicsComp);
+
+                // Pre-initialize component
+                physicsComp->initialize(
+                    transformComp->position.x, 
+                    transformComp->position.y, 
+                    transformComp->rotation
+                );
+            }
+       }
+
+       // Reload 
+       entity.refresh();
     }
 }

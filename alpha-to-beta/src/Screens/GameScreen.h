@@ -2,9 +2,19 @@
 #define GAMESCREEN_H
 
 #include <Screens/IScreen.h>
+
 #include <Graphics/SpriteBatch.h>
 #include <Graphics/Camera2D.h>
-#include <Systems/GameManager.h>
+
+#include <Entities/Level.h>
+
+#include <Artemis/World.h>
+
+// fwd decls
+class RenderSystem;
+class PhysicsSystem;
+class PlayerInputSystem;
+class Box2DRenderer;
 
 class GameScreen: public IScreen
 {
@@ -21,9 +31,19 @@ public:
     void resize(const sf::Vector2u &size) final;
 
 private:
+    // GameManager m_manager;
+	artemis::World m_world;
+
     SpriteBatch m_spriteBatch;
     Camera2D m_camera;
-    GameManager m_manager;
+
+    RenderSystem* m_pRenderSystem;
+    PhysicsSystem* m_pPhysicsSystem;
+    PlayerInputSystem* m_pInputSystem;
+
+    std::shared_ptr<Box2DRenderer> m_pB2Renderer;
+
+    Level m_level;
 };
 
 #endif // GAMESCREEN_H

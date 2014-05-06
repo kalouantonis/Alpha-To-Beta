@@ -5,6 +5,8 @@
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFMLPtrDef.h>
 
+#include <Graphics/Vertices.h>
+
 #include <memory>
 
 class TextureRegion;
@@ -38,8 +40,8 @@ public:
     void draw(sf::ConstTexturePtr pTexture, float x, float y);
     void draw(sf::ConstTexturePtr pTexture, float x, float y,
               float width, float height);
-    void draw(sf::ConstTexturePtr pTexture, float x, float y, 
-        float width, float height, float rotation);
+    void draw(const TextureRegion& region, float x, float y, float width, float height, 
+        float originX, float originY, float rotation);
 
     void draw(const TextureRegion& region, float x, float y,
               float width, float height);

@@ -5,11 +5,16 @@
 #include <Resources/XMLoader.h>
 
 #include <Components/ParsedComponent.h>
-#include <Systems/WorldManager.h>
+// #include <Systems/WorldManager.h>
+
+// fwd def
+namespace artemis
+{
+class World;
+class Entity;
+}
 
 // ID Used for invalid entities
-const long INVALID_ENTITY = -666;
-
 typedef GenericObjectFactory<std::string, ParsedComponent> ComponentFactory;
 
 /**
@@ -20,11 +25,12 @@ typedef GenericObjectFactory<std::string, ParsedComponent> ComponentFactory;
 class EntityFactory
 {
 public:
-    EntityFactory(WorldManager& worldManager);
+    EntityFactory(artemis::World& world);
     ~EntityFactory();
 
     void load(const std::string& path, bool recurse = true);
-    artemis::Entity& loadFromFile(const std::string& filename);
+    bool loadFromFile(const std::string& filename, artemis::Entity& entity);
+    bool loadFromFile(const std::string& filename);
 
     const ComponentFactory& getComponentFactory() { return m_componentFactory; }
 
@@ -37,10 +43,8 @@ protected:
 
 private:
     // Store world reference
-    WorldManager& m_worldManager;
+    artemis::World& m_worldManager;
     XMLoader m_xmlLoader;
-
-    void invalidateEntity(artemis::Entity& entity);
 };
 
 #endif // ENTITYFACTORY_H

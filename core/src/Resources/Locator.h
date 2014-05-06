@@ -2,6 +2,7 @@
 #define LOCATOR_H
 
 #include <assert.h>
+#include <memory>
 
 template <class T>
 class Locator

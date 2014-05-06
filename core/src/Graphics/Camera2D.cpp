@@ -8,6 +8,8 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <Graphics/Camera2D.h>
 
+#include <SFML/OpenGL.hpp>
+
 Camera2D::Camera2D(sf::RenderTargetPtr renderTarget)
     : m_pRenderTarget(renderTarget)
     , m_zoom(1.f)
@@ -24,22 +26,29 @@ Camera2D::Camera2D(sf::RenderTargetPtr renderTarget, float frustrumWidth, float 
     resize(m_pRenderTarget->getSize());
 }
 
+Camera2D::Camera2D(sf::RenderTargetPtr renderTarget, const sf::Vector2f& frustrum)
+    : Camera2D(renderTarget, frustrum.x, frustrum.y)
+{
+
+}
+
 Camera2D::Camera2D(sf::RenderTargetPtr renderTarget, const sf::View &view)
     : m_pRenderTarget(renderTarget)
     , m_view(view)
 {
-
+    updateTarget();
 }
 
 Camera2D::~Camera2D()
 {
 }
 
-void Camera2D::resize(const sf::Vector2u &size)
+void Camera2D::resize(const sf::Vector2u& size)
 {
-    // Reset view so that we can see more of the world when resized
-    //m_view.reset(sf::FloatRect(0, 0, size.x, size.y));
-    // TODO: Fix aspect ratio
+    m_view.setSize(size.x, size.y);
+    // Center camera
+    m_view.setCenter(size.x / 2.f, size.y / 2.f);
+    // Convert to cartesian coords
     updateTarget();
 }
 

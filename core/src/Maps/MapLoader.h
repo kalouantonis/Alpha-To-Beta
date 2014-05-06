@@ -14,17 +14,20 @@ class Tileset;
 class ObjectGroup;
 }
 
-class WorldManager;
+namespace artemis
+{
+class World;
+}
 
 class MapLoader
 {
 public:
-    MapLoader(WorldManager& m_worldManager);
+    MapLoader(artemis::World& m_worldManager);
 
     void load(const std::string& mapFile, const std::string& assetDir);
 	void reload();
 private:
-    WorldManager& m_worldManager;
+    artemis::World& m_worldManager;
     // Used to create entities for map
     EntityFactory m_entityFactory;
 
@@ -35,7 +38,14 @@ private:
     void loadTileEntities(const Tmx::Layer* layer,
 		int tileWidth, int tileHeight, bool collidable);
 
-    void loadObjectGroup(const Tmx::ObjectGroup* objectGroup);
+    /**
+     * @brief Load object groups. Need tile height for y offset
+     * @details [long description]
+     * 
+     * @param pObjectGroup [description]
+     * @param tileHeight [description]
+     */
+    void loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHeight);
 
 	// Previously loaded file
     std::string m_prevMapFile;

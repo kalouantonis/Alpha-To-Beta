@@ -28,6 +28,7 @@ void RenderSystem::begin()
 
 void RenderSystem::processEntity(artemis::Entity &e)
 {
+	// !TODO: Dont do this you idiot...
 	DrawableMap::iterator findIt = m_drawables.find(e.getUniqueId());
 
 	// Check that entity under given id exists in drawables
@@ -42,7 +43,10 @@ void RenderSystem::processEntity(artemis::Entity &e)
 		// Draw renderable
         m_spriteBatch.draw(renderable->getTextureRegion(),
 			transform->position.x, transform->position.y, 
-			renderable->width, renderable->height);
+			renderable->width, renderable->height,
+			transform->origin.x, transform->origin.y,
+			//transform->scale.x, transform->scale.y,
+			transform->rotation);
 	}
 }
 

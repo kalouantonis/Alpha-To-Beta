@@ -8,7 +8,7 @@ include_directories(
 	# TMX Parser
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tmx-parser;
 	# Box2D
-	# ${Box2D_SOURCE_DIR};
+	${Box2D_SOURCE_DIR};
 	# Boost
 	${Boost_INCLUDE_DIR};
 	# Core LIB
@@ -40,8 +40,8 @@ set(
 
 set(
 	SYSTEMS_SRC
-	"Systems/GameManager.cpp"
-	"Systems/GameManager.h"
+	"Systems/PlayerInputSystem.cpp"
+	"Systems/PlayerInputSystem.h"
 )
 
 set(

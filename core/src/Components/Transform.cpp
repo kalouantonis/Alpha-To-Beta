@@ -5,15 +5,15 @@
 
 const char* Transform::g_name = "Transform";
 
-Transform::Transform(float x, float y, float width, float height)
+Transform::Transform(float x, float y)
     : position(x, y)
-    , bounds(width, height)
+    , origin(0.f, 0.f)
     , scale(1.f, 1.f)
     , rotation(0.f)
 {
 	// Validate origin
-	origin.x = (width != 0) ? width : 0;
-	origin.y = (height != 0) ? height : 0;
+	//origin.x = (width != 0) ? width : 0;
+	//origin.y = (height != 0) ? height : 0;
 }
 
 bool Transform::load(const tinyxml2::XMLElement *pElement)

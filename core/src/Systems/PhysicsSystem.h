@@ -10,14 +10,16 @@
 class PhysicsSystem: public artemis::EntityProcessingSystem
 {
 public:
-	PhysicsSystem(const sf::Vector2f& gravity);
+	PhysicsSystem();
 	~PhysicsSystem();
 
 	virtual void initialize() override;
+
 	virtual void processEntity(artemis::Entity& e) final;
 
 private:
-	virtual void begin() final;
+	// virtual void begin() final;
+	virtual void added(artemis::Entity& e) final;
 
 	// cpSpace* m_space;
 

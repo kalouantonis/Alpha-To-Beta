@@ -6,22 +6,27 @@
 // Component includes
 #include <Components/Transform.h>
 #include <Components/Renderable.h>
-#include <Components/Physics.h>
+#include <Components/DynamicBody.h>
+#include <Components/JumpBehaviour.h>
+#include <Components/PlayerInput.h>
 
 #include <Artemis/Entity.h>
 #include <Artemis/TagManager.h>
+#include <Artemis/World.h>
 
 #include <boost/filesystem.hpp>
 
 using namespace boost;
 
 
-EntityFactory::EntityFactory(WorldManager& worldManager)
+EntityFactory::EntityFactory(artemis::World& worldManager)
     : m_worldManager(worldManager)
 {
     m_componentFactory.declare<Transform>(Transform::g_name);
     m_componentFactory.declare<Renderable>(Renderable::g_name);
-    // m_componentFactory.declare<Physics>(Physics::g_name);
+    m_componentFactory.declare<DynamicBody>(DynamicBody::g_name);
+    m_componentFactory.declare<JumpBehaviour>(JumpBehaviour::g_name);
+    m_componentFactory.declare<PlayerInput>(PlayerInput::g_name);
 }
 
 EntityFactory::~EntityFactory()
@@ -29,21 +34,16 @@ EntityFactory::~EntityFactory()
     m_componentFactory.clear();
 }
 
-void EntityFactory::invalidateEntity(artemis::Entity& entity)
+bool EntityFactory::loadFromFile(const std::string &filename)
 {
-    // Set as invalid ID so as to be able to validate success later
-    entity.setUniqueId(INVALID_ENTITY);
-    // Remove from world
-    entity.remove();
+    // Create new entity
+    return loadFromFile(filename, m_worldManager.createEntity());
 }
 
-artemis::Entity& EntityFactory::loadFromFile(const std::string &filename)
+bool EntityFactory::loadFromFile(const std::string& filename, artemis::Entity& entity)
 {
-    // Get root element of xml file
+     // Get root element of xml file
     const tinyxml2::XMLElement* pRoot = m_xmlLoader.loadAndGetRoot(filename.c_str());
-
-    // Request new empty entity from manager
-    artemis::Entity& entity = m_worldManager.createEntity();
 
     // check if root exists
     if(!pRoot)
@@ -57,17 +57,14 @@ artemis::Entity& EntityFactory::loadFromFile(const std::string &filename)
 
         CORE_ERROR(errmsg);
 
-        invalidateEntity(entity);
-        return entity;
+        return false;
     }
 
     if(pRoot->NoChildren())
     {
         CORE_WARNING("No children in xml: " + filename
                    + ", will not load entity.");
-
-        invalidateEntity(entity);
-        return entity;
+        return false;
     }
 
     // Try and get tag attribute from xml entity
@@ -110,7 +107,7 @@ artemis::Entity& EntityFactory::loadFromFile(const std::string &filename)
         entity.refresh();
     }
 
-    return entity;
+    return true;
 }
 
 void EntityFactory::load(const std::string &path, bool recurse)

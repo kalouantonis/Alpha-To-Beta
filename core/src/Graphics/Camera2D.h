@@ -21,6 +21,7 @@ public:
     
     explicit Camera2D(sf::RenderTargetPtr renderTarget,
                       float frustrumWidth, float frustrumHeight);
+    explicit Camera2D(sf::RenderTargetPtr renderTarget, const sf::Vector2f& frustrum);
 
     explicit Camera2D(sf::RenderTargetPtr renderTarget,
                       const sf::View& view);
@@ -34,6 +35,8 @@ public:
     void setRotation(float amount);
     float getRotation() const;
     void rotate(float amount);
+
+    const sf::Vector2f& getSize() { return m_view.getSize(); }
 
     sf::Vector2f getCenter() const;
     void setCenter(const sf::Vector2f &origin);

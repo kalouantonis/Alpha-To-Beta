@@ -4,10 +4,16 @@
 #include <Entities/EntityFactory.h>
 #include <Maps/MapLoader.h>
 
+// fwd defs
+namespace artemis
+{
+class EntityManager;
+}
+
 class Level
 {
 public:
-	Level(WorldManager& worldManager);
+	Level(artemis::World& worldManager);
 
 	void load(const std::string& filename);
 	void reload(bool reloadResources = true, bool reloadEntities = true);

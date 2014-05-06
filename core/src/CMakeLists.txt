@@ -7,6 +7,8 @@ include_directories(
 	${tmxparser_SOURCE_DIR};
 	# Artemis
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/Artemis-Cpp/include;
+	# Box2D
+	${Box2D_SOURCE_DIR};
 	# Boost library
 	${Boost_INCLUDE_DIR};
 )
@@ -15,9 +17,11 @@ link_directories(
 	# Artemis-Cpp
 	${ALPHA_TO_BETA_BINARY_DIR}/dependencies/Artemis-Cpp;
     # TinyXML
-    ${tinyxml2_BINARY_DIR}
+    ${tinyxml2_BINARY_DIR};
+    # Box2D
+    ${Box2D_BINARY_DIR};
 	# TMX Parser
-    ${tmxparser_BINARY_DIR}
+    ${tmxparser_BINARY_DIR};
 )
 
 set(
@@ -38,6 +42,12 @@ set(
 	"Components/Physics.h"
 	"Components/DynamicBody.cpp"
 	"Components/DynamicBody.h"
+	"Components/StaticBody.cpp"
+	"Components/StaticBody.h"
+	"Components/JumpBehaviour.cpp"
+	"Components/JumpBehaviour.h"
+	"Components/PlayerInput.cpp"
+	"Components/PlayerInput.h"
 )
 
 set(
@@ -63,12 +73,34 @@ set(
 	"Graphics/SpriteBatch.h"
 	"Graphics/TextureRegion.cpp"
 	"Graphics/TextureRegion.h"
+	# "Graphics/Vertices.cpp"
+	# "Graphics/Vertices.h"
+)
+
+set(
+	INPUT_SRC
+	"Input/InputLocator.cpp"
+	"Input/InputLocator.h"
+	"Input/InputProcessor.h"
 )
 
 set(
 	MAPS_SRC
 	"Maps/MapLoader.cpp"
 	"Maps/MapLoader.h"
+)
+
+set(
+	MATH_SRC
+	"Math/Vector.h"
+)
+
+set(
+	PHYSICS_SRC
+	"Physics/Box2DRenderer.cpp"
+	"Physics/Box2DRenderer.h"
+	"Physics/PhysicsLocator.cpp"
+	"Physics/PhysicsLocator.h"
 )
 
 set(
@@ -120,6 +152,8 @@ set(
 	${ENTITIES_SRC};
 	${GRAPHICS_SRC};
 	${MAPS_SRC};
+	${MATH_SRC};
+	${PHYSICS_SRC};
 	${RESOURCES_SRC};
 	${SCREENS_SRC};
 	${SYSTEMS_SRC};
@@ -141,6 +175,6 @@ target_link_libraries(
     ${Boost_LIBRARIES};
 	ArtemisCpp; 	# Artemis EC System
 	tinyxml2static; # TinyXML
+	Box2D;			# Physics Engine
     tmxparser;		# TMX parser
-    # chipmunk_static
 )

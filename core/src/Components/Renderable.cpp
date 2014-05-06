@@ -15,7 +15,7 @@ const char* Renderable::g_name = "Renderable";
 Renderable::Renderable(int order, float width, float height)
     : m_textureRegion(nullptr)
     , order(order)
-    // Invalid width and height because no texture was previded
+    // Invalid width and height because no texture was provided
     , width(width), height(height)
 {
 }
@@ -25,6 +25,7 @@ Renderable::Renderable(sf::TexturePtr pTexture, int order, float width, float he
     : m_textureRegion(pTexture)
     , order(order)
 {
+
 	if(width == 0.f && height == 0.f)
 	{
 		// Region width
@@ -87,8 +88,7 @@ bool Renderable::load(const tinyxml2::XMLElement *pElement)
 		return false;
 	}
 
-	TextureRegion tmpRegion;
-	tmpRegion.setTexture(pTexture);
+	TextureRegion tmpRegion(pTexture);
 
 	childElement = pElement->FirstChildElement("Dimensions");
 
