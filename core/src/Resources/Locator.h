@@ -13,7 +13,6 @@ public:
 	static Ptr getObject()
 	{
 		// Make sure we arent returning a null object
-		assert(m_sObject != nullptr);
 		return m_sObject;
 	}
 
