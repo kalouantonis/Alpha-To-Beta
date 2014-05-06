@@ -11,6 +11,12 @@ template <class Identifier, class BaseClass>
 class GenericObjectFactory
 {
 public:
+    ~GenericObjectFactory()
+    {
+        if(!m_creators.empty())
+            m_creators.clear();
+    }
+
     /**
      * @brief Registers a new object creator
      * @param id The identifier used

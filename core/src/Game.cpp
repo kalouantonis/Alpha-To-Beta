@@ -105,7 +105,9 @@ void Game::pollInput()
             ScreenManager::getInstance().resize(sf::Vector2u(event.size.width, event.size.height));
             break;
         default:
-            //ScreenManager::getInstance().pollInput(event);
+            // Polling for screens
+            ScreenManager::getInstance().pollInput(event);
+            // Polling for event receivers
             InputLocator::dispatchEvent(event);
 		}
 	}

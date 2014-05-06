@@ -12,7 +12,6 @@ public:
 
 	static Ptr getObject()
 	{
-		// Make sure we arent returning a null object
 		return m_sObject;
 	}
 

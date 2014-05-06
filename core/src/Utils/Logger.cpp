@@ -31,6 +31,12 @@ void Logger::log(const std::string &tag, const std::string &msg, const char *fun
     fprintf(m_pLogFile, "%s", outputBuffer.c_str());
 }
 
+void Logger::flush()
+{
+    // Flush output buffer
+    fflush(m_pLogFile);
+}
+
 void Logger::fillOutputBuffer(std::string &outputBuffer, const std::string &tag, const std::string &msg,
                                     const char *funcName, const char *sourceFile, unsigned int lineNum)
 {

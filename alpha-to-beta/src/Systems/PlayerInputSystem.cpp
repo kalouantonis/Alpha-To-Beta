@@ -77,8 +77,6 @@ void PlayerInputSystem::processEntities(artemis::ImmutableBag<artemis::Entity*>&
 
 		if(pJumpBehaviour != nullptr)
 		{
-			CORE_DEBUG("Jumping...");
-
 			m_pPlayerBody->body->ApplyLinearImpulse(
 				toB2Vec(pJumpBehaviour->impulse),
 				toB2Vec(m_pPlayerBody->getPosition()),

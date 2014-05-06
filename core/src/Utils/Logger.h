@@ -20,6 +20,11 @@ public:
     void log(const std::string& tag, const std::string& msg,
          const char* funcName, const char* sourceFile, unsigned int lineNum);
 
+    /**
+     * @brief Flushes output buffer. Called for critical events
+     */
+    void flush();
+
     // Used for error logging
     //static void error(bool isFatal, const std::string& msg,
     //     const char* funcName, const char* sourceFile, unsigned int lineNum);
@@ -49,6 +54,7 @@ private:
     do \
     { \
         Logger::instance().log("FATAL", str, __FUNCTION__, __FILE__, __LINE__);\
+        Logger::instance().flush(); \
         std::terminate(); \
     } \
     while(0)\
@@ -57,6 +63,7 @@ private:
     do \
     { \
         Logger::instance().log("ERROR",str, __FUNCTION__, __FILE__, __LINE__); \
+        Logger::instance().flush(); \
     } \
     while(0)\
 
@@ -65,6 +72,7 @@ private:
     do \
     { \
         Logger::instance().log("WARNING", str, __FUNCTION__, __FILE__, __LINE__);\
+        Logger::instance().flush(); \
     } \
     while(0)\
 
@@ -73,6 +81,7 @@ private:
     do \
     { \
         Logger::instance().log("DEBUG", str, NULL, NULL, 0); \
+        Logger::instance().flush(); \
     } \
     while(0) \
 
@@ -90,6 +99,7 @@ private:
     do \
     { \
         Logger::instance().log("FATAL", str, NULL, NULL, 0); \
+        Logger::instance().flush(); \
         std::terminate(); \
     } \
     while(0)\
@@ -99,6 +109,7 @@ private:
     do \
     { \
         Logger::instance().log("ERROR",str, NULL, NULL, 0); \
+        Logger::instance().flush(); \
     } \
     while(0)\
 
