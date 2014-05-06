@@ -1,0 +1,10 @@
+[submodule "tinyxml2"]
+    path = dependencies/tinyxml2
+    url = https://github.com/leethomason/tinyxml2.git
+    ignore = dirty
+
+[submodule "Artemis-Cpp"]
+	path = dependencies/Artemis-Cpp
+	url = https://github.com/vinova/Artemis-Cpp.git
+	ignore = dirty
+

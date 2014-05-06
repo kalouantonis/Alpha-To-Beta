@@ -1,0 +1,12 @@
+<Level>
+    <Objects>
+        assets/levels/objects
+    </Objects>
+    <Assets>
+        assets
+    </Assets>
+    # TODO: Asset folder and level file (.tmx)
+    <MapFile>
+        assets/level1.tmx
+    </MapFile>
+</Level>
