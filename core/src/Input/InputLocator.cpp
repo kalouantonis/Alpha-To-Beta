@@ -18,7 +18,19 @@ void InputLocator::dispatchEvent(const sf::Event& event)
 	case sf::Event::MouseButtonPressed:
 		inputProcessor->mousePressed(event.mouseButton);
 		break;
+    case sf::Event::MouseButtonReleased:
+        inputProcessor->mouseReleased(event.mouseButton);
+        break;
+    case sf::Event::MouseWheelMoved:
+        inputProcessor->mouseScrolled(event.mouseWheel);
 	default:
 		break;
 	}
 }
+
+
+//Locator::Ptr owned_processor(InputProcessor *p)
+//{
+//    // Void deleter
+//    return Locator::Ptr(p, [](InputProcessor* p) {});
+//}

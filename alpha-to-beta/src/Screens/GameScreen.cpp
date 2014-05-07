@@ -4,6 +4,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 
+#include <Input/InputLocator.h>
+
 #include <Systems/RenderSystem.h>
 #include <Systems/PhysicsSystem.h>
 #include <Systems/PlayerInputSystem.h>
@@ -57,6 +59,9 @@ bool GameScreen::init()
         m_pInputSystem = static_cast<PlayerInputSystem*>(
             systemManager->setSystem(new PlayerInputSystem())
         );
+
+        // Set input processor
+        InputLocator::provide(void_deleter_ptr(m_pInputSystem));
 
         CORE_DEBUG("Initializing physics renderer...");
         PhysicsLocator::getObject()->SetDebugDraw(m_pB2Renderer.get());

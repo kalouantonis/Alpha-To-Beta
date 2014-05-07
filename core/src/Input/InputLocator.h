@@ -14,4 +14,12 @@ private:
 	static void dispatchEvent(const sf::Event& event);
 };
 
+/**
+ * @brief Create input processor that does not belong to locator.
+ * Simply, the locator will not delete the object
+ * @param p
+ * @return
+ */
+//InputLocator::Ptr owned_processor(InputProcessor* p);
+
 #endif // INPUT_LOCATOR_H

@@ -58,12 +58,3 @@ void ScreenManager::resize(const sf::Vector2u &size)
     if(!m_screenStack.empty())
         m_screenStack.back()->resize(size);
 }
-
-void ScreenManager::dispose()
-{
-    if(!m_screenStack.empty())
-    {
-        m_screenStack.clear();
-    }
-}
-

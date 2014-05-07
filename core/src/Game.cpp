@@ -119,9 +119,3 @@ void Game::update(float dt)
         ScreenManager::getInstance().update(dt);
 
 }
-
-void Game::dispose()
-{
-    CORE_DEBUG("Disposing screens...");
-    ScreenManager::getInstance().dispose();
-}

@@ -22,11 +22,9 @@ public:
 
 	void init(const char* title, int width, int height, bool fullscreen = false);
 
-	virtual void pollInput();
-	virtual void update(float dt);
-	virtual void render();
-
-	virtual void dispose();
+    void pollInput();
+    void update(float dt);
+    void render();
 
     sf::RenderTargetPtr getWindow() const { return m_pWindow; }
 
