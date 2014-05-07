@@ -102,6 +102,9 @@ GameScreen::~GameScreen()
     // Clear out all entities
     m_world.getEntityManager()->removeAllEntities();
     
+    CORE_DEBUG("Removing input processor...");
+    InputLocator::remove();
+
     CORE_DEBUG("Disposing textures...");
     TextureLocator::getObject()->clear();
 

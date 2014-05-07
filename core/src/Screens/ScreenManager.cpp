@@ -9,7 +9,11 @@ void ScreenManager::push(UScreenPtr pScreen)
 {
     // Transform ownership to manager
     m_screenStack.push_back(std::move(pScreen));
-    assert(m_screenStack.back()->init() != false);
+
+    if(!m_screenStack.back()->init())
+    {
+        assert("Screen initialization failed");
+    }
 }
 
 void ScreenManager::change(UScreenPtr pScreen)

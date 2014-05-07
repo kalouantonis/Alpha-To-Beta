@@ -1,4 +1,4 @@
-##ifndef SHAPE_BATCH_H
+#ifndef SHAPE_BATCH_H
 #define SHAPE_BATCH_H
 
 /**

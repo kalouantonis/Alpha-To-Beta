@@ -65,9 +65,6 @@ void SpriteBatch::draw(sf::ConstTexturePtr pTexture, const sf::Vector2f &positio
 
 void SpriteBatch::draw(sf::ConstTexturePtr pTexture, float x, float y, float width, float height)
 {
-    // Check that begin was called
-    assert(m_bDrawing && "Must call begin before draw");
-
     checkBatchState(pTexture.get());
 
     sf::Vertex* pQuad = getNextQuad();
@@ -90,8 +87,6 @@ void SpriteBatch::draw(sf::ConstTexturePtr pTexture, float x, float y, float wid
 void SpriteBatch::draw(const TextureRegion& region, float x, float y, float width, float height, 
                         float originX, float originY, float rotation)
 {
-    assert(m_bDrawing && "Must call begin before draw");
-
     checkBatchState(region.getTexture().get());
 
     // Covert degrees to radians
@@ -189,8 +184,6 @@ void SpriteBatch::draw(const TextureRegion& region, float x, float y, float widt
 
 void SpriteBatch::draw(const TextureRegion &region, float x, float y, float width, float height)
 {
-    assert(m_bDrawing && "Must call begin before draw");
-
     checkBatchState(region.getTexture().get());
 
     sf::Vertex* pQuad = getNextQuad();
@@ -231,6 +224,8 @@ void SpriteBatch::switchTexture(const sf::Texture *pTexture)
 
 void SpriteBatch::checkBatchState(const sf::Texture* const pTexture)
 {
+    assert(m_bDrawing && "Must call begin before draw");
+
     if(pTexture != m_states.texture)
         switchTexture(pTexture);
     else if(m_numSprites >= m_maxSprites)
