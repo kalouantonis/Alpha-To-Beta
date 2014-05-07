@@ -4,6 +4,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 
+#include <Input/InputLocator.h>
+
 #include <Systems/RenderSystem.h>
 #include <Systems/PhysicsSystem.h>
 #include <Systems/PlayerInputSystem.h>
@@ -58,6 +60,9 @@ bool GameScreen::init()
             systemManager->setSystem(new PlayerInputSystem())
         );
 
+        // Set input processor
+        InputLocator::provide(void_deleter_ptr(m_pInputSystem));
+
         CORE_DEBUG("Initializing physics renderer...");
         PhysicsLocator::getObject()->SetDebugDraw(m_pB2Renderer.get());
         m_pB2Renderer->SetFlags(Box2DRenderer::e_shapeBit);
@@ -97,6 +102,9 @@ GameScreen::~GameScreen()
     // Clear out all entities
     m_world.getEntityManager()->removeAllEntities();
     
+    CORE_DEBUG("Removing input processor...");
+    InputLocator::remove();
+
     CORE_DEBUG("Disposing textures...");
     TextureLocator::getObject()->clear();
 

@@ -100,7 +100,7 @@ bool Renderable::load(const tinyxml2::XMLElement *pElement)
 	}
 	else
 	{
-		setTextureRegion(tmpRegion);
+        m_textureRegion = tmpRegion;
 	}
 
     return true;

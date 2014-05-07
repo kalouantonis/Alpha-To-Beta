@@ -1,3 +1,5 @@
+project(alphatobeta)
+
 include_directories(
 	# Current DIR
 	.;
@@ -64,3 +66,4 @@ target_link_libraries(
     ${SFML_LIBRARIES};
 )
 
+install(TARGETS alphatobeta DESTINATION alphatobeta)

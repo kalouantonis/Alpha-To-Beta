@@ -1,3 +1,5 @@
+project(core)
+
 include_directories(
 	# Subdirectory include
 	.;
@@ -60,7 +62,7 @@ set(
 	ENTITIES_SRC
 	"Entities/EntityFactory.cpp"
 	"Entities/EntityFactory.h"
-	"Entities/Level.cpp"
+    "Entities/Level.cpp"
 	"Entities/Level.h"
 )
 
@@ -151,6 +153,7 @@ set(
 	${DATA_STRUCTURES_SRC};
 	${ENTITIES_SRC};
 	${GRAPHICS_SRC};
+	${INPUT_SRC};
 	${MAPS_SRC};
 	${MATH_SRC};
 	${PHYSICS_SRC};
@@ -178,3 +181,7 @@ target_link_libraries(
 	Box2D;			# Physics Engine
     tmxparser;		# TMX parser
 )
+
+install(TARGETS core
+    RUNTIME DESTINATION ${core_BINARY_DIR}
+    ARCHIVE DESTINATION ${core_BINARY_DIR})

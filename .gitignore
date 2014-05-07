@@ -7,3 +7,7 @@ build
 *.sublime-workspace
 
 *.framework
+
+# QtCreator files
+*.user
+*.user.*

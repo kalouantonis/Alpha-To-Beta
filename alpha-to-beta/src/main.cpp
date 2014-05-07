@@ -56,7 +56,6 @@ int main()
 		game.render();
 	}
 
-	game.dispose();
 
     return EXIT_SUCCESS;
 }

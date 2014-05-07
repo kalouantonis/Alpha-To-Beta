@@ -9,7 +9,11 @@ void ScreenManager::push(UScreenPtr pScreen)
 {
     // Transform ownership to manager
     m_screenStack.push_back(std::move(pScreen));
-    assert(m_screenStack.back()->init() != false);
+
+    if(!m_screenStack.back()->init())
+    {
+        assert("Screen initialization failed");
+    }
 }
 
 void ScreenManager::change(UScreenPtr pScreen)
@@ -58,12 +62,3 @@ void ScreenManager::resize(const sf::Vector2u &size)
     if(!m_screenStack.empty())
         m_screenStack.back()->resize(size);
 }
-
-void ScreenManager::dispose()
-{
-    if(!m_screenStack.empty())
-    {
-        m_screenStack.clear();
-    }
-}
-

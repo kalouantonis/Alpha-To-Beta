@@ -31,7 +31,34 @@ PlayerInputSystem::~PlayerInputSystem()
 
 bool PlayerInputSystem::containsValidEntity()
 {
-	return (m_pPlayerBody != nullptr) || (m_eid != INVALID_ID);
+    return (m_pPlayerBody != nullptr) || (m_eid != INVALID_ID);
+}
+
+void PlayerInputSystem::keyPressed(sf::Event::KeyEvent key)
+{
+// TODO: This is continuous input, we can't have that for jumping
+    if(key.code == sf::Keyboard::Space)
+    {
+        //m_pPlayerBody->body->ApplyLinearI
+        const JumpBehaviour* pJumpBehaviour = dynamic_cast<const JumpBehaviour*>(
+            // Get from world using ID
+            world->getEntity(m_eid).getComponent<JumpBehaviour>()
+        );
+
+        if(pJumpBehaviour != nullptr)
+        {
+            m_pPlayerBody->body->ApplyLinearImpulse(
+                toB2Vec(pJumpBehaviour->impulse),
+                m_pPlayerBody->body->GetPosition(),
+                true
+            );
+        }
+    }
+}
+
+void PlayerInputSystem::keyReleased(sf::Event::KeyEvent key)
+{
+
 }
 
 void PlayerInputSystem::added(artemis::Entity& e)
@@ -66,33 +93,13 @@ void PlayerInputSystem::processEntities(artemis::ImmutableBag<artemis::Entity*>&
 	if(!containsValidEntity())
 		return;
 
-	// TODO: This is continuous input, we can't have that for jumping
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-	{
-		//m_pPlayerBody->body->ApplyLinearI
-		const JumpBehaviour* pJumpBehaviour = dynamic_cast<const JumpBehaviour*>(
-			// Get from world using ID
-			world->getEntity(m_eid).getComponent<JumpBehaviour>()
-		);
-
-		if(pJumpBehaviour != nullptr)
-		{
-			CORE_DEBUG("Jumping...");
-
-			m_pPlayerBody->body->ApplyLinearImpulse(
-				toB2Vec(pJumpBehaviour->impulse),
-				toB2Vec(m_pPlayerBody->getPosition()),
-				true
-			);
-		}
-	}
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		m_pPlayerBody->body->ApplyLinearImpulse(b2Vec2(0.2f, 0.f), 
 			m_pPlayerBody->body->GetPosition(), true
 		);
 	}
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		m_pPlayerBody->body->ApplyLinearImpulse(b2Vec2(-0.2f, 0.f), 
 			m_pPlayerBody->body->GetPosition(), true

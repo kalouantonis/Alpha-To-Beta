@@ -12,8 +12,6 @@ public:
 
 	static Ptr getObject()
 	{
-		// Make sure we arent returning a null object
-		assert(m_sObject != nullptr);
 		return m_sObject;
 	}
 
@@ -34,5 +32,17 @@ private:
 // Initialize object
 template <class T>
 std::shared_ptr<T> Locator<T>::m_sObject = nullptr;
+
+template <class T>
+/**
+ * @brief Create object that will not be deleted by locator
+ * @param p
+ * @return
+ */
+inline std::shared_ptr<T> void_deleter_ptr(T* p)
+{
+    // Void deleter lambda
+    return std::shared_ptr<T>(p, [](T* p) {});
+}
 
 #endif // LOCATOR_H
