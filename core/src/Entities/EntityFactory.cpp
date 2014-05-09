@@ -190,6 +190,9 @@ ParsedComponent* EntityFactory::createComponent(const tinyxml2::XMLElement *pEle
         if(!pComponent->load(pElement))
         {
             CORE_ERROR("Component failed to initialize: " + std::string(componentName));
+            // Destroy un-used component
+            delete pComponent;
+
             return nullptr;
         }
     }

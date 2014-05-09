@@ -34,8 +34,6 @@ public:
 
     void resize(const sf::Vector2u& size);
 
-    void dispose();
-
 private:
     ScreenManager(): m_screenStack() {}
     ScreenManager(const ScreenManager&) {}

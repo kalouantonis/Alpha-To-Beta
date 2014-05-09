@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 # Project name, used later
 project(ALPHA_TO_BETA)
 	
+
 option("CMAKE_BUILD_TYPE" "Project build type" "Release")
 
 # Find SFML before proceeding
@@ -31,7 +32,7 @@ endif(${UNIX})
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	MESSAGE(STATUS "Building in debug mode...")
 	# Debug mode
-	add_definitions(-D_DEBUG)
+    add_definitions(-D_DEBUG)
 	
 	if(${UNIX})
           #add_definitions(-ggdb)
@@ -41,7 +42,7 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 elseif(${CMAKE_BUILD_TYPE} STREQUAL "Release")
 	MESSAGE(STATUS "Building in release mode...")
 	# Release mode
-	add_definitions(-DNDEBUG -O3)
+    #add_definitions(-DNDEBUG -O3)
 endif(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 
 # Set executable output directory
@@ -71,3 +72,7 @@ add_subdirectory("alpha-to-beta/src")
 
 # Copy game assets
 #file(COPY ${CMAKE_SOURCE_DIR}/alpha-to-beta/assets DESTINATION ${ALPHA_TO_BETA_BINARY_DIR})
+
+#install(TARGETS ALPHA_TO_BETA DESTINATION alphatobeta)
+
+include(CPack)

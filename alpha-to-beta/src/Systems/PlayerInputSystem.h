@@ -2,11 +2,12 @@
 #define PLAYER_INPUT_SYSTEM_H
 
 #include <Artemis/EntitySystem.h>
+#include <Input/InputProcessor.h>
 
 //fwd defs
 class DynamicBody;
 
-class PlayerInputSystem: public artemis::EntitySystem
+class PlayerInputSystem: public artemis::EntitySystem, public InputProcessor
 {
 public:
 	PlayerInputSystem();
@@ -26,6 +27,14 @@ private:
 	 * Store the entity ID, for checking if removed entity matches current entity
 	 */
 	int m_eid;
+
+    // InputProcessor interface
+private:
+    void keyPressed(sf::Event::KeyEvent key);
+    void keyReleased(sf::Event::KeyEvent key);
+    void mousePressed(sf::Event::MouseButtonEvent event) {}
+    void mouseReleased(sf::Event::MouseButtonEvent event) {}
+    void mouseScrolled(sf::Event::MouseWheelEvent scroll) {}
 };
 
 #endif // PLAYER_INPUT_SYSTEM_H

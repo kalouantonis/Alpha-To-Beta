@@ -105,7 +105,9 @@ void Game::pollInput()
             ScreenManager::getInstance().resize(sf::Vector2u(event.size.width, event.size.height));
             break;
         default:
-            //ScreenManager::getInstance().pollInput(event);
+            // Polling for screens
+            ScreenManager::getInstance().pollInput(event);
+            // Polling for event receivers
             InputLocator::dispatchEvent(event);
 		}
 	}
@@ -116,10 +118,4 @@ void Game::update(float dt)
     if(m_bInFocus)
         ScreenManager::getInstance().update(dt);
 
-}
-
-void Game::dispose()
-{
-    CORE_DEBUG("Disposing screens...");
-    ScreenManager::getInstance().dispose();
 }
