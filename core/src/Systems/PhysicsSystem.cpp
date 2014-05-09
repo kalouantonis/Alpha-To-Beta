@@ -7,7 +7,7 @@
 
 PhysicsSystem::PhysicsSystem()
 {
-	addComponentType<Transform>();
+    addComponentType<Transform>();
 }
 
 PhysicsSystem::~PhysicsSystem()
@@ -39,7 +39,7 @@ void PhysicsSystem::added(artemis::Entity& e)
 		);
 	}
 
-	if(body != NULL && !body->isInitialized())
+    if((body != NULL && !body->isInitialized()))
 	{
 		body->initialize(
 			transformComp->position.x, 
@@ -57,7 +57,7 @@ void PhysicsSystem::processEntity(artemis::Entity &e)
 	Transform* transform = m_transformMapper.get(e);
 	DynamicBody* dynamicBody = m_physicsMapper.get(e);
 	
-	if(dynamicBody != NULL)
+    if(dynamicBody != NULL)
 	{
 		transform->position = dynamicBody->getPosition();
 		transform->rotation = dynamicBody->getRotation();

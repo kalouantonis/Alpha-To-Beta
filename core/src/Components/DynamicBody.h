@@ -10,7 +10,7 @@ public:
 	DynamicBody();
 	explicit DynamicBody(float width, float height);
 	explicit DynamicBody(float x, float y, float width, float height);
-	// ~DynamicBody();
+     ~DynamicBody();
 
 	static const char* g_name;
 	virtual const char* getName() const final { return g_name; }

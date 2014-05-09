@@ -6,6 +6,8 @@
 
 #include <Input/InputLocator.h>
 
+#include <Memory/loose_ptr.h>
+
 #include <Systems/RenderSystem.h>
 #include <Systems/PhysicsSystem.h>
 #include <Systems/PlayerInputSystem.h>
@@ -61,7 +63,7 @@ bool GameScreen::init()
         );
 
         // Set input processor
-        InputLocator::provide(void_deleter_ptr(m_pInputSystem));
+        InputLocator::provide(loose_ptr(m_pInputSystem));
 
         CORE_DEBUG("Initializing physics renderer...");
         PhysicsLocator::getObject()->SetDebugDraw(m_pB2Renderer.get());

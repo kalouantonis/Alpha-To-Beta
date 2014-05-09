@@ -7,6 +7,7 @@
 #include <Components/Renderable.h>
 #include <Components/Transform.h>
 #include <Components/StaticBody.h>
+#include <Components/DynamicBody.h>
 
 #include <Resources/ResourceDef.h>
 
@@ -227,7 +228,7 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
        {
             Physics* physicsComp = static_cast<Physics*>(entity.getComponent<StaticBody>());
 
-            if(physicsComp == NULL)
+            if(physicsComp == NULL && entity.getComponent<DynamicBody>() == NULL)
             {
                 // Create new physics component
                 physicsComp = new StaticBody(
