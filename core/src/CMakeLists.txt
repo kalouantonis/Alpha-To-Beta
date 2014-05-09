@@ -98,6 +98,11 @@ set(
 )
 
 set(
+    MEMORY_SRC
+    "Memory/loose_ptr.h"
+)
+
+set(
 	PHYSICS_SRC
 	"Physics/Box2DRenderer.cpp"
 	"Physics/Box2DRenderer.h"
@@ -156,6 +161,7 @@ set(
 	${INPUT_SRC};
 	${MAPS_SRC};
 	${MATH_SRC};
+    ${MEMORY_SRC};
 	${PHYSICS_SRC};
 	${RESOURCES_SRC};
 	${SCREENS_SRC};

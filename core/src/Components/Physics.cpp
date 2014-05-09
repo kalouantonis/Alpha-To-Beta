@@ -15,6 +15,7 @@ Physics::Physics()
 	, m_dimensions(0.f, 0.f)
 	, m_halfWidth(0.f)
 	, m_halfHeight(0.f)
+    , m_bInitialized(false)
 {
 
 }
@@ -24,6 +25,7 @@ Physics::Physics(float width, float height)
 	, m_dimensions(width, height)
 	, m_halfWidth(width / 2.f)
 	, m_halfHeight(height / 2.f)
+    , m_bInitialized(false)
 {
 
 }
@@ -32,7 +34,8 @@ Physics::~Physics()
 {
 	if(body)
 	{
-		PhysicsLocator::getObject()->DestroyBody(body);
+        PhysicsLocator::getObject()->DestroyBody(body);
+        body = nullptr;
 	}
 }
 
@@ -42,8 +45,8 @@ void Physics::setDimensions(float width, float height)
 	m_dimensions.y = height;
 
 	// set half height
-	m_halfWidth = width / 2.f;
-	m_halfHeight = height / 2.f;
+    m_halfWidth = width / 2.f;
+    m_halfHeight = height / 2.f;
 }
 
 bool Physics::load(const tinyxml2::XMLElement* pElement) 
@@ -65,6 +68,8 @@ bool Physics::load(const tinyxml2::XMLElement* pElement)
 
 sf::Vector2f Physics::getPosition() 
 {
+    assert(body != nullptr);
+
 	return sf::Vector2f(
 		// This should be center of mass, so we are trying to
 		// convert to invert cartesian coordinates
