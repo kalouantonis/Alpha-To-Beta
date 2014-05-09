@@ -19,19 +19,20 @@ DynamicBody::DynamicBody()
 DynamicBody::DynamicBody(float width, float height)
 	: Physics(width, height)
 {
-	body = PhysicsLocator::createDynamicBody();
+    body = PhysicsLocator::createDynamicBody();
 }
 
 DynamicBody::DynamicBody(float x, float y, float width, float height)
-	: Physics(width, height)
+    : DynamicBody(width, height)
 {
 	// pre-initialize
 	initialize(x, y);
 }
 
-// DynamicBody::~DynamicBody()
-// {
-// }
+DynamicBody::~DynamicBody()
+{
+
+}
 
 void DynamicBody::initialize(float x, float y, float rotation)
 {
@@ -52,8 +53,9 @@ void DynamicBody::initialize(float x, float y, float rotation)
 		b2PolygonShape polygonShape;
 		polygonShape.SetAsBox(m_halfWidth, m_halfHeight);
 
-		b2FixtureDef fixtureDef;
+        b2FixtureDef fixtureDef;
 		fixtureDef.shape = &polygonShape;
+        // Use default values
 		fixtureDef.density = 0.5f;
 		fixtureDef.restitution = 0.2f;
 		fixtureDef.friction = 0.4f;
@@ -67,5 +69,8 @@ void DynamicBody::initialize(float x, float y, float rotation)
 
 bool DynamicBody::load(const tinyxml2::XMLElement* pElement)
 {
-	return Physics::load(pElement);
+    if(!Physics::load(pElement))
+        return false;
+
+    return true;
 }
