@@ -7,6 +7,8 @@ include_directories(
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinyxml2;
 	# TMX Parser
 	${tmxparser_SOURCE_DIR};
+    # FastDelegate
+    ${FastDelegate_SOURCE_DIR};
 	# Artemis
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/Artemis-Cpp/include;
 	# Box2D
@@ -56,6 +58,8 @@ set(
 	DATA_STRUCTURES_SRC
 	# "DataStructures/QuadTree.cpp"
 	# "DataStructures/QuadTree.h"
+    "DataStructures/ConcurrentQueue.h"
+    "DataStructures/ConcurrentQueue.cpp"
 )
 
 set(
@@ -64,6 +68,15 @@ set(
 	"Entities/EntityFactory.h"
     "Entities/Level.cpp"
 	"Entities/Level.h"
+)
+
+set(
+    EVENTS_SRC
+    "Events/EventData.h"
+    "Events/EventManager.cpp"
+    "Events/EventManager.h"
+    "Events/EventManagerImpl.cpp"
+    "Events/EventManagerImpl.h"
 )
 
 # Graphics/*.{h|cpp}
@@ -156,7 +169,8 @@ set(
 	${MAIN_SRC};
 	${COMPONENTS_SRC};
 	${DATA_STRUCTURES_SRC};
-	${ENTITIES_SRC};
+    ${ENTITIES_SRC};
+    ${EVENTS_SRC};
 	${GRAPHICS_SRC};
 	${INPUT_SRC};
 	${MAPS_SRC};

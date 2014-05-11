@@ -56,6 +56,9 @@ add_subdirectory("dependencies/tinyxml2")
 message(STATUS "Configuring tmx-parser...")
 add_subdirectory("dependencies/tmx-parser")
 
+message(STATUS "Configuring FastDelegate")
+add_subdirectory("dependencies/FastDelegate")
+
 #Add artemis dependency
 message(STATUS "Configuring Artemis-Cpp...")
 add_subdirectory("dependencies/Artemis-Cpp")
