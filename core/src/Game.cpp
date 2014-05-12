@@ -14,6 +14,7 @@
 #include <Utils/Logger.h>
 #include <Utils/FileSystem.h>
 #include <Screens/ScreenManager.h>
+#include <Events/EventManagerImpl.h>
 
  #include <Input/InputLocator.h>
 
@@ -60,6 +61,9 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
     CORE_DEBUG("Randomizer seeded...");
 
     CORE_INFO("Current working directory: " + fs::currentWorkingDir());
+
+    CORE_DEBUG("Creating event manager...");
+    m_pEventManager.reset(new EventManager("Default Event Manager", true));
 
 	m_bRunning = true;
 	// Set to true now, for some reason, windows doesnt catch the 
@@ -116,6 +120,8 @@ void Game::pollInput()
 void Game::update(float dt)
 {
     if(m_bInFocus)
+    {
+        IEventManager::get()->update();
         ScreenManager::getInstance().update(dt);
-
+    }
 }
