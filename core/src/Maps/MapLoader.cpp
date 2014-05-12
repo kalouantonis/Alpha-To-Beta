@@ -2,8 +2,6 @@
 
 #include <assert.h>
 
-#include <Systems/WorldManager.h>
-
 #include <Components/Renderable.h>
 #include <Components/Transform.h>
 #include <Components/StaticBody.h>
