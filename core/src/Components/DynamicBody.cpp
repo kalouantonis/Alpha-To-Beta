@@ -107,5 +107,17 @@ bool DynamicBody::load(const tinyxml2::XMLElement* pElement)
         body->CreateFixture(&fixtureDef);
     }
 
+    const tinyxml2::XMLElement* pChildElement =
+            pElement->FirstChildElement("FixedRotation");
+
+    if(pChildElement != NULL)
+    {
+        bool bFixedRotation = false;
+        if(pChildElement->QueryBoolText(&bFixedRotation) == tinyxml2::XML_CAN_NOT_CONVERT_TEXT)
+            CORE_ERROR("Invalid boolean value for FixedRotation");
+
+        body->SetFixedRotation(bFixedRotation);
+    }
+
     return true;
 }

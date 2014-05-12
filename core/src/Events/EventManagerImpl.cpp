@@ -98,7 +98,7 @@ bool EventManager::queueEvent(const EventDataPtr &pEvent)
         return false;
     }
 
-    CORE_LOG(LOG_TAG, "Queueing event: " + std::string(pEvent->getName()));
+    CORE_LOG(LOG_TAG, "Queuing event: " + std::string(pEvent->getName()));
 
     auto foundIt = m_eventListeners.find(pEvent->getEventType());
     // Finding failed
@@ -155,7 +155,7 @@ bool EventManager::abortEvent(EventType eventType, bool allOfType)
     return bSuccess;
 }
 
-bool EventManager::update(float deltaTime)
+bool EventManager::update()
 {
     // Not sure if this will work in a threaded environment.
     // The pop could continue without getting any real time event.
