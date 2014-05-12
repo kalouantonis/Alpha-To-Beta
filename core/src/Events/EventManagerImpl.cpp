@@ -157,13 +157,11 @@ bool EventManager::abortEvent(EventType eventType, bool allOfType)
 
 bool EventManager::update()
 {
-    // Not sure if this will work in a threaded environment.
-    // The pop could continue without getting any real time event.
-    // The while loop in the queue should handle this, but one can't be too
-    // sure
-    EventDataPtr pRealTimeEvent = m_realtimeEventQueue.pop();
     // Add events to current thread queue
-    queueEvent(pRealTimeEvent);
+    while(!m_realtimeEventQueue.empty())
+    {
+        queueEvent(m_realtimeEventQueue.pop());
+    }
 
     // Store currently active queue
     int queueToProcess = m_activeQueue;

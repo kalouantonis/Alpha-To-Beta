@@ -58,8 +58,8 @@ set(
 	DATA_STRUCTURES_SRC
 #     "DataStructures/QuadTree.cpp"
 #     "DataStructures/QuadTree.h"
+#    "DataStructures/ConcurrentQueue.cpp"
     "DataStructures/ConcurrentQueue.h"
-    "DataStructures/ConcurrentQueue.cpp"
 )
 
 set(
@@ -204,4 +204,5 @@ target_link_libraries(
 
 install(TARGETS core
     RUNTIME DESTINATION ${core_BINARY_DIR}
-    ARCHIVE DESTINATION ${core_BINARY_DIR})
+    ARCHIVE DESTINATION ${core_BINARY_DIR}
+)

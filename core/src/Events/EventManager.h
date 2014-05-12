@@ -93,4 +93,6 @@ public:
     static IEventManager* get();
 };
 
+typedef std::shared_ptr<IEventManager> EventManagerPtr;
+
 #endif // EVENTMANAGER_H_
