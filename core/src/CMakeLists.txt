@@ -148,8 +148,6 @@ set(
 	"Systems/RenderSystem.h"
 	"Systems/PhysicsSystem.cpp"
 	"Systems/PhysicsSystem.h"
-	"Systems/WorldManager.cpp"
-	"Systems/WorldManager.h"
 )
 
 set(
