@@ -8,6 +8,8 @@
 
 #include <Memory/loose_ptr.h>
 
+#include <Events/JumpListener.h>
+
 #include <Systems/RenderSystem.h>
 #include <Systems/PhysicsSystem.h>
 #include <Systems/PlayerInputSystem.h>
@@ -28,6 +30,7 @@ GameScreen::GameScreen(sf::RenderTargetPtr window)
     , m_pRenderSystem(nullptr)
     , m_pPhysicsSystem(nullptr)
     , m_pInputSystem(nullptr)
+    , m_pJumpListener(nullptr)
     , m_pB2Renderer(new Box2DRenderer(window))
     , m_level(m_world)
 {
@@ -68,6 +71,9 @@ bool GameScreen::init()
         CORE_DEBUG("Initializing physics renderer...");
         PhysicsLocator::getObject()->SetDebugDraw(m_pB2Renderer.get());
         m_pB2Renderer->SetFlags(Box2DRenderer::e_shapeBit);
+
+        CORE_DEBUG("Adding listeners...");
+        m_pJumpListener.reset(new JumpListener());
 
         CORE_DEBUG("Initializing all systems...");
         systemManager->initializeAll();

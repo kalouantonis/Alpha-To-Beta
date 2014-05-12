@@ -89,6 +89,7 @@ private:
     do \
     { \
         Logger::instance().log(tag, str, NULL, NULL, 0); \
+        Logger::instance().flush(); \
     } \
     while(0) \
 
