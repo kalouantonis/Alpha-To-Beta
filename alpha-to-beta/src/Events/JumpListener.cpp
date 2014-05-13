@@ -23,7 +23,10 @@ JumpListener::JumpListener()
 JumpListener::~JumpListener()
 {
     // Remove listener from manager
-//    IEventManager::get()->removeListener(m_delegate, JumpEvent::sEventType);
+    IEventManager::get()->removeListener(
+                fastdelegate::MakeDelegate(this, &JumpListener::receive),
+                JumpEvent::sEventType
+    );
 }
 
 void JumpListener::receive(EventDataPtr pEvent)

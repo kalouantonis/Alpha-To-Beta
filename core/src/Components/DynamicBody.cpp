@@ -63,7 +63,7 @@ void DynamicBody::initialize(float x, float y, float rotation)
 	{
 		// Create polygon shape by default
 		b2PolygonShape polygonShape;
-		polygonShape.SetAsBox(m_halfWidth, m_halfHeight);
+        initializePolyVertices(polygonShape);
 
         b2FixtureDef fixtureDef;
 		fixtureDef.shape = &polygonShape;
@@ -79,15 +79,31 @@ void DynamicBody::initialize(float x, float y, float rotation)
 
 bool DynamicBody::load(const tinyxml2::XMLElement* pElement)
 {
-    if(!Physics::load(pElement))
+    // Override physics impl
+    const tinyxml2::XMLElement* pChildElement = pElement->FirstChildElement("Dimensions");
+
+    if(pChildElement == NULL)
+    {
+        CORE_ERROR("No Dimensions element defined in DynamicBody");
         return false;
+    }
+
+    float xOffset = 0.f, yOffset = 0.f;
+
+    pChildElement->QueryFloatAttribute("x", &xOffset);
+    pChildElement->QueryFloatAttribute("y", &yOffset);
+    pChildElement->QueryFloatAttribute("width", &m_dimensions.x);
+    pChildElement->QueryFloatAttribute("height", &m_dimensions.y);
+
+    m_halfWidth = m_dimensions.x / 2.f;
+    m_halfHeight = m_dimensions.y / 2.f;
 
     for(const tinyxml2::XMLElement* pChildElement = pElement->FirstChildElement("Fixture");
         pChildElement != NULL; pChildElement = pElement->NextSiblingElement("Fixture"))
     {
         // TODO: Change to loading dimensions using each fixure independently
         b2PolygonShape polyShape;
-        polyShape.SetAsBox(m_halfWidth, m_halfHeight);
+        initializePolyVertices(polyShape, xOffset, yOffset);
 
         b2FixtureDef fixtureDef;
         fixtureDef.shape = &polyShape;
@@ -107,8 +123,7 @@ bool DynamicBody::load(const tinyxml2::XMLElement* pElement)
         body->CreateFixture(&fixtureDef);
     }
 
-    const tinyxml2::XMLElement* pChildElement =
-            pElement->FirstChildElement("FixedRotation");
+    pChildElement = pElement->FirstChildElement("FixedRotation");
 
     if(pChildElement != NULL)
     {
@@ -120,4 +135,19 @@ bool DynamicBody::load(const tinyxml2::XMLElement* pElement)
     }
 
     return true;
+}
+
+void DynamicBody::initializePolyVertices(b2PolygonShape &polyShape, float xOffset, float yOffset)
+{
+    b2Vec2 polyVertices[4];
+    // Bottom left
+    polyVertices[0] = b2Vec2(-m_halfWidth + xOffset, -m_halfHeight + yOffset);
+    // Bottom right
+    polyVertices[1] = b2Vec2(m_halfWidth, -m_halfHeight + yOffset);
+    // Top Right
+    polyVertices[2] = b2Vec2(m_halfWidth, m_halfHeight);
+    // Top left
+    polyVertices[3] = b2Vec2(-m_halfWidth + xOffset, m_halfHeight);
+
+    polyShape.Set(polyVertices, 4);
 }

@@ -6,5 +6,5 @@ std::string make_string(const char* str)
 		// Empty string
 		return std::string();
 	else
-		return std::string(str);
+        return std::string(str);
 }
