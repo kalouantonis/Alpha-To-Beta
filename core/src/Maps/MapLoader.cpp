@@ -119,7 +119,9 @@ void MapLoader::loadTileSet(const std::string &assetDir, const Tmx::Tileset* til
     int tilesetHeight = image->GetHeight();
 
     // Tile ID's are fucked up and index from gid - 1
-    int gid = tileset->GetFirstGid() - 1;
+    int gid = 0;
+
+    TileSetContainer& tileSetContainer = m_tileTextures[m_tileTextures.size()];
 
     // Take in to account if the tile + dimensions is large enough to fit in image
     for(int y = tileset->GetMargin() /*Offset by spacing*/; y + tileHeight < tilesetHeight; y += yOffset)
@@ -130,7 +132,7 @@ void MapLoader::loadTileSet(const std::string &assetDir, const Tmx::Tileset* til
             // set texture in to map using ID
             // Tilesets have constantly incrementing ID'S
             // Its good to make sure that im setting ID's correctly and parsing images correctly
-            m_tileTextures[gid++] = TextureRegion(pTexture, x, y, tileWidth, tileHeight);
+            tileSetContainer[gid++] = TextureRegion(pTexture, x, y, tileWidth, tileHeight);
         }
     }
 
@@ -151,7 +153,7 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
         {
             const Tmx::MapTile& tile = layer->GetTile(x, y);
 
-            if(tile.id != 0 && tile.tilesetId != -1) // Valid tile ID
+            if(tile.id != -1 && tile.tilesetId != -1) // Valid tile ID
             {
                 // Create new entity
                 artemis::Entity& e = m_worldManager.createEntity();
@@ -161,7 +163,8 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
                 // Convert tile layer to inverse cartesian coordinates
                 e.addComponent(new Transform(x * tileWidth, (int)(y - yOffset) * tileHeight));
                 // Insert new renderable using tileset id
-                e.addComponent(new Renderable(m_tileTextures[tile.id], layer->GetZOrder(), tileWidth, tileHeight));
+                e.addComponent(new Renderable(m_tileTextures[tile.tilesetId][tile.id],
+                        layer->GetZOrder(), tileWidth, tileHeight));
 
                 // Commit entity changes
                 e.refresh();
