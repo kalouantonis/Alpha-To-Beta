@@ -40,7 +40,8 @@ void JumpListener::receive(EventDataPtr pEvent)
     {
         pDynamicBody->body->ApplyLinearImpulse(
             toB2Vec(pJumpBehaviour->impulse),
-            pDynamicBody->body->GetPosition(),
+            // Get object center
+            pDynamicBody->body->GetWorldCenter(),
             true
         );
     }
