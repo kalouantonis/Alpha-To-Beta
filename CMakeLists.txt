@@ -8,7 +8,9 @@ project(ALPHA_TO_BETA)
 option("CMAKE_BUILD_TYPE" "Project build type" "Release")
 
 # Find SFML before proceeding
-find_package(SFML COMPONENTS system window graphics REQUIRED)
+if(${UNIX})
+	find_package(SFML COMPONENTS system window graphics REQUIRED)
+endif(${UNIX})
 
 # Boost vars
 if(${WIN32})
