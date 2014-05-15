@@ -94,13 +94,13 @@ void PlayerInputSystem::processEntities(artemis::ImmutableBag<artemis::Entity*>&
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		m_pPlayerBody->body->ApplyLinearImpulse(b2Vec2(0.2f, 0.f), 
-			m_pPlayerBody->body->GetPosition(), true
+            m_pPlayerBody->body->GetWorldCenter(), true
 		);
 	}
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		m_pPlayerBody->body->ApplyLinearImpulse(b2Vec2(-0.2f, 0.f), 
-			m_pPlayerBody->body->GetPosition(), true
+            m_pPlayerBody->body->GetWorldCenter(), true
 		);
 	}
 }

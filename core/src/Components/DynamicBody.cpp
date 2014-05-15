@@ -7,6 +7,7 @@
 
 #include <Box2D/Dynamics/b2Fixture.h>
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
+#include <Box2D/Collision/Shapes/b2CircleShape.h>
 
 #include <Utils/Logger.h>
 

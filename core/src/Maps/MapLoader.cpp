@@ -161,7 +161,7 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
                 // TODO: Load from file if 'file' property exists
 
                 // Convert tile layer to inverse cartesian coordinates
-                e.addComponent(new Transform(x * tileWidth, (int)(y - yOffset) * tileHeight));
+                e.addComponent(new Transform(x * tileWidth, (y - yOffset) * tileHeight));
                 // Insert new renderable using tileset id
                 e.addComponent(new Renderable(m_tileTextures[tile.tilesetId][tile.id],
                         layer->GetZOrder(), tileWidth, tileHeight));
