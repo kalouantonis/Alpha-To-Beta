@@ -4,6 +4,8 @@
 #include <Artemis/EntitySystem.h>
 #include <Input/InputProcessor.h>
 
+#include <Events/EventData.h>
+
 //fwd defs
 class DynamicBody;
 

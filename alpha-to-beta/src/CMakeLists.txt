@@ -9,6 +9,8 @@ include_directories(
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinyxml2;
 	# TMX Parser
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tmx-parser;
+    # FastDelegate
+    ${FastDelegate_SOURCE_DIR};
 	# Box2D
 	${Box2D_SOURCE_DIR};
 	# Boost
@@ -26,6 +28,14 @@ link_directories(
 	${Boost_LIBRARY_DIRS};
 	# Core	
 	${ALPHA_TO_BETA_BINARY_DIR}/core/src;
+)
+
+set(
+    EVENTS_SRC
+    "Events/JumpEvent.cpp"
+    "Events/JumpEvent.h"
+    "Events/JumpListener.cpp"
+    "Events/JumpListener.h"
 )
 
 set(
@@ -48,6 +58,8 @@ set(
 
 set(
 	SOURCE_FILE_LIST;
+
+    ${EVENTS_SRC};
 	${MAIN_SRC};
 	${SCREENS_SRC};
 	${SYSTEMS_SRC};

@@ -4,6 +4,8 @@
 #include <Components/Physics.h>
 #include <SFML/System/Vector2.hpp>
 
+class b2PolygonShape;
+
 class DynamicBody: public Physics
 {
 public:
@@ -17,6 +19,10 @@ public:
 
 	virtual void initialize(float x, float y, float rotation = 0.f) final;
 	virtual bool load(const tinyxml2::XMLElement* pElement) final;
+
+private:
+    void initializePolyVertices(b2PolygonShape& polyShape,
+                                float xOffset = 0.f, float yOffset = 0.f);
 };
 
 #endif // DYNAMIC_BODY_H

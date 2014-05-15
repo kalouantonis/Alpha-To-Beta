@@ -11,3 +11,4 @@ build
 # QtCreator files
 *.user
 *.user.*
+*.autosave

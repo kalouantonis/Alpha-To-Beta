@@ -26,6 +26,9 @@ Game::Game()
 
 Game::~Game()
 {
+    // Destroy all screens, initiate destructors, avoiding nullptr assertion
+    // fails on event manager because it was deallocated before screen
+    ScreenManager::getInstance().clear();
 }
 
 void Game::init(const char* title, int width, int height, bool fullscreen)

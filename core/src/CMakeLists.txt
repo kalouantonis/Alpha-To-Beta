@@ -38,7 +38,9 @@ set(
 set(
 	COMPONENTS_SRC
 	"Components/ParsedComponent.h"
-	"Components/Renderable.cpp"
+    "Components/CameraFollower.cpp"
+    "Components/CameraFollower.h"
+    "Components/Renderable.cpp"
 	"Components/Renderable.h"
 	"Components/Transform.cpp"
 	"Components/Transform.h"
@@ -148,6 +150,8 @@ set(
 	"Systems/RenderSystem.h"
 	"Systems/PhysicsSystem.cpp"
 	"Systems/PhysicsSystem.h"
+    "Systems/CameraFollowingSystem.cpp"
+    "Systems/CameraFollowingSystem.h"
 )
 
 set(

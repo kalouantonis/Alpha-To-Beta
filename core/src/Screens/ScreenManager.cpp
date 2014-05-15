@@ -39,6 +39,11 @@ void ScreenManager::pop()
     }
 }
 
+void ScreenManager::clear()
+{
+    m_screenStack.clear();
+}
+
 void ScreenManager::update(float deltaTime)
 {
     if(!m_screenStack.empty())

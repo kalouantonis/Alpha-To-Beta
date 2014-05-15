@@ -5,7 +5,7 @@
 #include <assert.h>
 
 // Tag to log under
-const char* LOG_TAG = "Events";
+const char* LOG_TAG = "EVENT";
 
 EventManager::EventManager(const char *pName, bool setAsGlobal)
     : IEventManager(pName, setAsGlobal)

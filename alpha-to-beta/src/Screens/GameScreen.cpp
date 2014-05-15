@@ -8,9 +8,12 @@
 
 #include <Memory/loose_ptr.h>
 
+#include <Events/JumpListener.h>
+
 #include <Systems/RenderSystem.h>
 #include <Systems/PhysicsSystem.h>
 #include <Systems/PlayerInputSystem.h>
+#include <Systems/CameraFollowingSystem.h>
 
 #include <Physics/Box2DRenderer.h>
 #include <Physics/PhysicsLocator.h>
@@ -28,6 +31,7 @@ GameScreen::GameScreen(sf::RenderTargetPtr window)
     , m_pRenderSystem(nullptr)
     , m_pPhysicsSystem(nullptr)
     , m_pInputSystem(nullptr)
+    , m_pJumpListener(nullptr)
     , m_pB2Renderer(new Box2DRenderer(window))
     , m_level(m_world)
 {
@@ -62,12 +66,19 @@ bool GameScreen::init()
             systemManager->setSystem(new PlayerInputSystem())
         );
 
+        m_pCameraSystem = static_cast<CameraFollowingSystem*>(
+            systemManager->setSystem(new CameraFollowingSystem(m_camera))
+        );
+
         // Set input processor
         InputLocator::provide(loose_ptr(m_pInputSystem));
 
         CORE_DEBUG("Initializing physics renderer...");
         PhysicsLocator::getObject()->SetDebugDraw(m_pB2Renderer.get());
         m_pB2Renderer->SetFlags(Box2DRenderer::e_shapeBit);
+
+        CORE_DEBUG("Adding listeners...");
+        m_pJumpListener.reset(new JumpListener());
 
         CORE_DEBUG("Initializing all systems...");
         systemManager->initializeAll();
@@ -166,6 +177,7 @@ void GameScreen::update(float deltaTime)
 
 void GameScreen::render()
 {
+    m_pCameraSystem->process();
     m_pRenderSystem->process();
     // Draw debug over other data
     PhysicsLocator::getObject()->DrawDebugData();

@@ -31,7 +31,9 @@ private:
     // Used to create entities for map
     EntityFactory m_entityFactory;
 
-    std::unordered_map<int, TextureRegion> m_tileTextures;
+    typedef std::unordered_map<int, TextureRegion> TileSetContainer;
+
+    std::unordered_map<int, TileSetContainer> m_tileTextures;
 
     void loadTileSet(const std::string& assetDir, const Tmx::Tileset* tileset);
 
