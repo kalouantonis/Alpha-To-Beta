@@ -13,6 +13,7 @@
 #include <Systems/RenderSystem.h>
 #include <Systems/PhysicsSystem.h>
 #include <Systems/PlayerInputSystem.h>
+#include <Systems/CameraFollowingSystem.h>
 
 #include <Physics/Box2DRenderer.h>
 #include <Physics/PhysicsLocator.h>
@@ -63,6 +64,10 @@ bool GameScreen::init()
         CORE_DEBUG("Creating input system...");
         m_pInputSystem = static_cast<PlayerInputSystem*>(
             systemManager->setSystem(new PlayerInputSystem())
+        );
+
+        m_pCameraSystem = static_cast<CameraFollowingSystem*>(
+            systemManager->setSystem(new CameraFollowingSystem(m_camera))
         );
 
         // Set input processor
@@ -172,6 +177,7 @@ void GameScreen::update(float deltaTime)
 
 void GameScreen::render()
 {
+    m_pCameraSystem->process();
     m_pRenderSystem->process();
     // Draw debug over other data
     PhysicsLocator::getObject()->DrawDebugData();
