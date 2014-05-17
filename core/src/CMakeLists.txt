@@ -197,12 +197,20 @@ add_library(
 target_link_libraries(
 	core; 
 
-    #${Boost_LIBRARIES};
 	ArtemisCpp; 	# Artemis EC System
 	tinyxml2static; # TinyXML
 	Box2D;			# Physics Engine
     tmxparser;		# TMX parser
 )
+
+if(${UNIX})
+    # Statically link boost with core for Unix Systems
+    target_link_libraries(
+        core;
+
+        ${Boost_LIBRARIES};
+    )
+endif(${UNIX})
 
 install(TARGETS core
     RUNTIME DESTINATION ${core_BINARY_DIR}
