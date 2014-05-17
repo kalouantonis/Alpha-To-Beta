@@ -68,14 +68,21 @@ set(
 # Create executable
 add_executable(alphatobeta ${SOURCE_FILE_LIST})
 
+set(
+	LIBRARIES;
+	
+	#${Boost_LIBRARIES};
+	core; # Core library
+	${SFML_LIBRARIES}; # SFML
+)
+
 
 # Link dependant libraries
 target_link_libraries(
     alphatobeta;
 
-    #${Boost_LIBRARIES};     # Only used components that were requested
-    core; 	            	# Core Lib
-    ${SFML_LIBRARIES};
+	#${Boost_LIBRARIES};     # Only used components that were requested
+	${LIBRARIES}
 )
 
 install(TARGETS alphatobeta DESTINATION alphatobeta)

@@ -21,7 +21,6 @@ public:
     
     explicit Camera2D(sf::RenderTargetPtr renderTarget,
                       float frustrumWidth, float frustrumHeight);
-    explicit Camera2D(sf::RenderTargetPtr renderTarget, const sf::Vector2f& frustrum);
 
     explicit Camera2D(sf::RenderTargetPtr renderTarget,
                       const sf::View& view);

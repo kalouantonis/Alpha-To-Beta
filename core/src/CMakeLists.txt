@@ -197,7 +197,7 @@ add_library(
 target_link_libraries(
 	core; 
 
-    ${Boost_LIBRARIES};
+    #${Boost_LIBRARIES};
 	ArtemisCpp; 	# Artemis EC System
 	tinyxml2static; # TinyXML
 	Box2D;			# Physics Engine
