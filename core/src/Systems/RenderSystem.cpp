@@ -16,7 +16,7 @@ RenderSystem::RenderSystem(SpriteBatch& spriteBatch)
 
 RenderSystem::~RenderSystem()
 {
-	dispose();
+    m_drawables.clear();
 }
 
 void RenderSystem::begin()
@@ -28,26 +28,26 @@ void RenderSystem::begin()
 
 void RenderSystem::processEntity(artemis::Entity &e)
 {
-	// !TODO: Dont do this you idiot...
-	DrawableMap::iterator findIt = m_drawables.find(e.getUniqueId());
+    // !TODO: Dont do this you idiot...
+    DrawableMap::iterator findIt = m_drawables.find(e.getUniqueId());
 
-	// Check that entity under given id exists in drawables
-	if(findIt != m_drawables.end())
-	{
-		// Get pair
-		DrawablePair& pair = (*findIt).second;
+    // Check that entity under given id exists in drawables
+    if(findIt != m_drawables.end())
+    {
+        // Get pair
+        DrawablePair& pair = (*findIt).second;
 
-		Renderable* renderable = pair.first;
-		Transform* transform = pair.second;
+        Renderable* renderable = pair.first;
+        Transform* transform = pair.second;
 
-		// Draw renderable
+        // Draw renderable
         m_spriteBatch.draw(renderable->getTextureRegion(),
-			transform->position.x, transform->position.y, 
-			renderable->width, renderable->height,
-			transform->origin.x, transform->origin.y,
-			//transform->scale.x, transform->scale.y,
-			transform->rotation);
-	}
+            transform->position.x, transform->position.y,
+            renderable->width, renderable->height,
+            transform->origin.x, transform->origin.y,
+            //transform->scale.x, transform->scale.y,
+            transform->rotation);
+    }
 }
 
 void RenderSystem::end()
@@ -63,7 +63,7 @@ void RenderSystem::added(artemis::Entity& e)
 
 	if((transform != NULL) && (renderable != NULL))
 	{
-		m_drawables[e.getUniqueId()] = DrawablePair(
+        m_drawables[e.getId()] = DrawablePair(
 			// Static casting is safe, as the type is guaranteed
 			static_cast<Renderable*>(renderable),
 			static_cast<Transform*>(transform)
@@ -86,8 +86,3 @@ void RenderSystem::removed(artemis::Entity& e)
 	}
 }
 
-void RenderSystem::dispose()
-{
-	if(!m_drawables.empty())
-		m_drawables.clear();
-}

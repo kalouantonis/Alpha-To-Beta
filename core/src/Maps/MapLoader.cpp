@@ -61,7 +61,6 @@ void MapLoader::load(const std::string &mapFile, const std::string &assetDir)
         // Only load if layer is visible
         if(tileLayer->IsVisible())
         {
-            // TODO: Account for spacing and margins
             loadTileEntities(
                 tileLayer, 
                 map.GetTileWidth() / PhysicsLocator::PixelsPerMeter.x, 

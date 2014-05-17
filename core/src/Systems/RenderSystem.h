@@ -10,7 +10,7 @@
 #include <Components/Transform.h>
 #include <Components/Renderable.h>
 
-#include <map>
+#include <unordered_map>
 
 //#include <list>
 
@@ -37,9 +37,6 @@ public:
 
 	virtual void processEntity(artemis::Entity& e) override;
 
-	void dispose();
-
-
 	// TODO: Include receivers for component<Renderable> added and removed 
 	// and fill map of orders
 
@@ -55,11 +52,8 @@ private:
 	artemis::ComponentMapper<Transform> m_transformMapper;
 	artemis::ComponentMapper<Renderable> m_renderableMapper;
 
-	//std::list<std::pair<Transform, Renderable> > m_drawedComponents;
-	// Check if renderable entity has a transform component too, if so, add to render system
-	// void receive(const ComponentAddedEvent<Renderable>& renderable);
 	typedef std::pair<Renderable*, Transform*> DrawablePair;
-	typedef std::map<long, DrawablePair> DrawableMap;
+    typedef std::unordered_map<int, DrawablePair> DrawableMap;
 
 	DrawableMap m_drawables;
 };
