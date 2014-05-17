@@ -25,8 +25,9 @@ void _setToDefaults(b2FixtureDef& fixtureDef)
 }
 
 DynamicBody::DynamicBody()
-	: DynamicBody(0.f, 0.f)
+	: Physics(0.f, 0.f)
 {
+	body = PhysicsLocator::createDynamicBody();
 }
 
 DynamicBody::DynamicBody(float width, float height)

@@ -4,6 +4,8 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
+const float Box2DRenderer::OUTLINE_THICKNESS = 0.02f;
+
 Box2DRenderer::Box2DRenderer(sf::RenderTargetPtr pRenderTarget) 
 	: m_pRenderTarget(pRenderTarget)
 {
