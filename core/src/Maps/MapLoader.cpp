@@ -107,7 +107,7 @@ void MapLoader::loadTileSet(const std::string &assetDir, const Tmx::Tileset* til
 
     // Get tile set image. Should be preloaded from assets folder
     // Use path relative to asset directory
-    sf::TexturePtr pTexture = TextureLocator::getObject()->get(assetDir + fs::nativeSeparator() + image->GetSource());
+    sf::TexturePtr pTexture = TextureLocator::getObject()->get(assetDir + '/' + image->GetSource());
 
     if(!pTexture)
     {
