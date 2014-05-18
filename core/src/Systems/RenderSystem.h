@@ -23,7 +23,7 @@ TODO:
 
 */
 
-class RenderSystem: public artemis::EntityProcessingSystem
+class RenderSystem: public artemis::EntitySystem
 {
 public:
 	RenderSystem(SpriteBatch& spriteBatch);
@@ -35,7 +35,6 @@ public:
 	// 	entityx::ptr<entityx::EventManager> event, float dt) override;
 
 
-	virtual void processEntity(artemis::Entity& e) override;
 
 	// TODO: Include receivers for component<Renderable> added and removed 
 	// and fill map of orders
@@ -46,6 +45,8 @@ private:
 	virtual void removed(artemis::Entity& e) override;
 	virtual void begin() final;
 	virtual void end() final;
+    virtual void processEntities(artemis::ImmutableBag<artemis::Entity*> &entities) override;
+    virtual bool checkProcessing() final;
 
 	SpriteBatch m_spriteBatch;
 
@@ -55,7 +56,8 @@ private:
 	typedef std::pair<Renderable*, Transform*> DrawablePair;
     typedef std::unordered_map<int, DrawablePair> DrawableMap;
 
-	DrawableMap m_drawables;
+    // Ordered map
+    std::map<int, DrawableMap> m_drawables;
 };
 
 #endif // RENDER_SYSTEM_H
