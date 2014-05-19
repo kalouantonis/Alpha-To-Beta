@@ -258,6 +258,9 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
                     transformComp->position.y, 
                     transformComp->rotation
                 );
+
+                // Set user data to entity
+                physicsComp->body->SetUserData(&entity);
             }
        }
 

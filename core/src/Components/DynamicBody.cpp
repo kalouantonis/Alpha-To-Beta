@@ -65,7 +65,7 @@ void DynamicBody::initialize(float x, float y, float rotation)
 	{
 		// Create polygon shape by default
 		b2PolygonShape polygonShape;
-        initializePolyVertices(polygonShape);
+        initializePolyVertices(polygonShape, 0.f, 0.f, m_dimensions.x, m_dimensions.y);
 
         b2FixtureDef fixtureDef;
 		fixtureDef.shape = &polygonShape;
@@ -105,21 +105,28 @@ bool DynamicBody::load(const tinyxml2::XMLElement* pElement)
     {
         // TODO: Change to loading dimensions using each fixure independently
         b2PolygonShape polyShape;
-        initializePolyVertices(polyShape, xOffset, yOffset);
+        initializePolyVertices(polyShape, xOffset, yOffset, m_dimensions.x, m_dimensions.y);
 
         b2FixtureDef fixtureDef;
         fixtureDef.shape = &polyShape;
         // Set to defaults
         _setToDefaults(fixtureDef);
 
-        const tinyxml2::XMLElement* propertyElement =
+        const tinyxml2::XMLElement* childElement =
                 pChildElement->FirstChildElement("Properties");
 
-        if(propertyElement)
+        if(childElement)
         {
-            propertyElement->QueryFloatAttribute("density", &fixtureDef.density);
-            propertyElement->QueryFloatAttribute("friction", &fixtureDef.friction);
-            propertyElement->QueryFloatAttribute("res", &fixtureDef.restitution);
+            childElement->QueryFloatAttribute("density", &fixtureDef.density);
+            childElement->QueryFloatAttribute("friction", &fixtureDef.friction);
+            childElement->QueryFloatAttribute("res", &fixtureDef.restitution);
+        }
+
+        childElement = pChildElement->FirstChildElement("Sensor");
+
+        if(childElement)
+        {
+            childElement->QueryBoolText(&fixtureDef.isSensor);
         }
 
         body->CreateFixture(&fixtureDef);
@@ -139,17 +146,20 @@ bool DynamicBody::load(const tinyxml2::XMLElement* pElement)
     return true;
 }
 
-void DynamicBody::initializePolyVertices(b2PolygonShape &polyShape, float xOffset, float yOffset)
+void DynamicBody::initializePolyVertices(b2PolygonShape &polyShape, float xOffset, float yOffset, float width, float height)
 {
+    float halfWidth = width / 2.f;
+    float halfHeight = height / 2.f;
+
     b2Vec2 polyVertices[4];
     // Bottom left
-    polyVertices[0] = b2Vec2(-m_halfWidth + xOffset, -m_halfHeight + yOffset);
+    polyVertices[0] = b2Vec2(-halfWidth + xOffset, -halfHeight + yOffset);
     // Bottom right
-    polyVertices[1] = b2Vec2(m_halfWidth, -m_halfHeight + yOffset);
+    polyVertices[1] = b2Vec2(halfWidth, -halfHeight + yOffset);
     // Top Right
-    polyVertices[2] = b2Vec2(m_halfWidth, m_halfHeight);
+    polyVertices[2] = b2Vec2(halfWidth, halfHeight);
     // Top left
-    polyVertices[3] = b2Vec2(-m_halfWidth + xOffset, m_halfHeight);
+    polyVertices[3] = b2Vec2(-halfWidth + xOffset, halfHeight);
 
     polyShape.Set(polyVertices, 4);
 }

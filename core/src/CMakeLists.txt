@@ -79,6 +79,8 @@ set(
     "Events/EventManager.h"
     "Events/EventManagerImpl.cpp"
     "Events/EventManagerImpl.h"
+    "Events/CollisionEvents.cpp"
+    "Events/CollisionEvents.h"
 )
 
 # Graphics/*.{h|cpp}
@@ -121,6 +123,8 @@ set(
 	PHYSICS_SRC
 	"Physics/Box2DRenderer.cpp"
 	"Physics/Box2DRenderer.h"
+    "Physics/CollisionDispatcher.cpp"
+    "Physics/CollisionDispatcher.h"
 	"Physics/PhysicsLocator.cpp"
 	"Physics/PhysicsLocator.h"
 )

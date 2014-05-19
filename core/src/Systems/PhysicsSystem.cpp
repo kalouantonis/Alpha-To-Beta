@@ -4,6 +4,7 @@
 
 #include <Artemis/Entity.h>
 
+#include <Box2D/Dynamics/b2Body.h>
 
 PhysicsSystem::PhysicsSystem()
 {
@@ -22,6 +23,8 @@ void PhysicsSystem::initialize()
 
 void PhysicsSystem::added(artemis::Entity& e)
 {
+    // Static cast is safe, as the constructor ensures that
+    // we only receive entities that contain a Transform component
 	Transform* transformComp = static_cast<Transform*>(
 		e.getComponent<Transform>()
 	);
@@ -49,6 +52,9 @@ void PhysicsSystem::added(artemis::Entity& e)
 
         // Set transform origiin
 		transformComp->origin = body->getOrigin();
+
+        // Set user data of body to the entity
+        body->body->SetUserData(&e);
 	}
 }
 

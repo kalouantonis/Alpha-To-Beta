@@ -22,7 +22,8 @@ public:
 
 private:
     void initializePolyVertices(b2PolygonShape& polyShape,
-                                float xOffset = 0.f, float yOffset = 0.f);
+                                float xOffset, float yOffset,
+                                float width, float height);
 };
 
 #endif // DYNAMIC_BODY_H
