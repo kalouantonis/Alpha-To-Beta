@@ -12,17 +12,18 @@ class JumpEvent: public BaseEventData
 public:
     static const EventType sEventType;
 
-    JumpEvent(DynamicBody* body, const JumpBehaviour* jumpBehaviour);
+    JumpEvent(DynamicBody* body, JumpBehaviour *jumpBehaviour);
 
     virtual EventType getEventType() const final { return sEventType; }
     virtual const char* getName() const final;
 
     DynamicBody* getBody() { return m_pBody; }
     const JumpBehaviour* getJumpBehaviour() const { return m_pJumpBehaviour; }
+    JumpBehaviour* getJumpBehaviour() { return m_pJumpBehaviour; }
 
 private:
     DynamicBody* m_pBody;
-    const JumpBehaviour* m_pJumpBehaviour;
+    JumpBehaviour* m_pJumpBehaviour;
 };
 
 typedef std::shared_ptr<JumpEvent> JumpEventPtr;

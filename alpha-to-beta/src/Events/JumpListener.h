@@ -9,6 +9,12 @@
 //class IEventData;
 //typedef std::shared_ptr<IEventData> EventDataPtr;
 
+//struct JumpProperties
+//{
+//    const JumpBehaviourPtr jumpBehaviour;
+//    JumpState jumpState;
+//};
+
 class JumpListener
 {
 public:
@@ -16,7 +22,8 @@ public:
     ~JumpListener();
 
 private:
-    void receive(EventDataPtr pEvent);
+    void receiveJumpEvt(EventDataPtr pEvent);
+    void receiveBeginCollisionEvt(EventDataPtr pEvent);
 };
 
 #endif // JUMP_LISTENER_H_

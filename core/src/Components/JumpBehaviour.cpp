@@ -6,8 +6,10 @@
 
 const char* JumpBehaviour::g_name = "JumpBehaviour";
 
-JumpBehaviour::JumpBehaviour(float yImpulse)
+JumpBehaviour::JumpBehaviour(float yImpulse, unsigned int maxJumps)
 	: impulse(0.f, yImpulse)
+    , numJumps(0)
+    , m_maxJumps(maxJumps)
 {
 }
 
@@ -27,7 +29,14 @@ bool JumpBehaviour::load(const tinyxml2::XMLElement *pElement)
 	}
 
 	// No X value, always use Y for jumping
-	pChildElement->QueryFloatText(&impulse.y);
+    pChildElement->QueryFloatText(&impulse.y);
+
+    pChildElement = pElement->FirstChildElement("MaxJumps");
+
+    if(pChildElement)
+    {
+        pChildElement->QueryUnsignedText(&m_maxJumps);
+    }
 
 	return true;
 }

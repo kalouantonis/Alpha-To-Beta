@@ -5,6 +5,11 @@
 
 class b2Contact;
 
+namespace artemis
+{
+class Entity;
+}
+
 class BaseCollisionEvent: public BaseEventData
 {
 public:
@@ -13,9 +18,20 @@ public:
     const b2Contact* getContact() const { return m_pContact; }
     b2Contact* getContact() { return m_pContact; }
 
+    artemis::Entity *getEntityA() const { return m_pEntityA; }
+    artemis::Entity *getEntityB() const { return m_pEntityB; }
+
 private:
     b2Contact* m_pContact;
+
+    /**
+     * Extracted entities from body user data
+     */
+    artemis::Entity* m_pEntityA;
+    artemis::Entity* m_pEntityB;
 };
+
+typedef std::shared_ptr<BaseCollisionEvent> BaseCollisionEventPtr;
 
 class CollisonBeginEvent: public BaseCollisionEvent
 {
