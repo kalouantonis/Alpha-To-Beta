@@ -13,6 +13,8 @@
 // Needed for base class info
 #include <SFML/Graphics/RenderWindow.hpp>
 
+class IEventManager;
+typedef std::shared_ptr<IEventManager> EventManagerPtr;
 
 class Game
 {
@@ -38,6 +40,8 @@ private:
 	/** True if window is currently focused */
 	bool m_bInFocus;
     sf::RenderWindowPtr m_pWindow;
+
+    EventManagerPtr m_pEventManager;
 };
 
 #endif /* GAME_H_ */

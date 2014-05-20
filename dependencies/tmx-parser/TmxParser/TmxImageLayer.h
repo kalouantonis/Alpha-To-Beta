@@ -79,7 +79,7 @@ namespace Tmx
 		void SetZOrder( int z ) { zOrder = z; }
 
 	private:
-		const Tmx::Map *map;
+        const Tmx::Map *map;
 
 		std::string name;
 		

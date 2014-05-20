@@ -136,8 +136,8 @@ bool Level::loadAssets(const std::string& assetDir)
 			{
 				// TODO: Support more extensions
 				if(filesystem::is_regular_file(file) && 
-					(file.extension().generic_string() == ".png"))
-				{
+                    (file.extension().generic_string() == ".png"))
+                {
 					TextureLocator::getObject()->load(
 							// use generic file name for compatibility
 							file.generic_string(), 

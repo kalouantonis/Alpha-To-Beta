@@ -8,7 +8,9 @@ project(ALPHA_TO_BETA)
 option("CMAKE_BUILD_TYPE" "Project build type" "Release")
 
 # Find SFML before proceeding
-find_package(SFML COMPONENTS system window graphics REQUIRED)
+if(${UNIX})
+	find_package(SFML COMPONENTS system window graphics REQUIRED)
+endif(${UNIX})
 
 # Boost vars
 if(${WIN32})
@@ -55,6 +57,9 @@ add_subdirectory("dependencies/tinyxml2")
 
 message(STATUS "Configuring tmx-parser...")
 add_subdirectory("dependencies/tmx-parser")
+
+message(STATUS "Configuring FastDelegate")
+add_subdirectory("dependencies/FastDelegate")
 
 #Add artemis dependency
 message(STATUS "Configuring Artemis-Cpp...")

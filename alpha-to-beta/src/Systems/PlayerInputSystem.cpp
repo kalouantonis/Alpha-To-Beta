@@ -14,6 +14,9 @@
 #include <Artemis/Entity.h>
 #include <Artemis/World.h>
 
+#include <Events/JumpEvent.h>
+#include <Events/EventManager.h>
+
 const int INVALID_ID = -69;
 
 PlayerInputSystem::PlayerInputSystem()
@@ -34,24 +37,19 @@ bool PlayerInputSystem::containsValidEntity()
     return (m_pPlayerBody != nullptr) || (m_eid != INVALID_ID);
 }
 
+
+
 void PlayerInputSystem::keyPressed(sf::Event::KeyEvent key)
 {
-// TODO: This is continuous input, we can't have that for jumping
-    if(key.code == sf::Keyboard::Space)
+    if(m_eid != INVALID_ID)
     {
-        //m_pPlayerBody->body->ApplyLinearI
-        const JumpBehaviour* pJumpBehaviour = dynamic_cast<const JumpBehaviour*>(
-            // Get from world using ID
-            world->getEntity(m_eid).getComponent<JumpBehaviour>()
-        );
-
-        if(pJumpBehaviour != nullptr)
+        if(key.code == sf::Keyboard::Space)
         {
-            m_pPlayerBody->body->ApplyLinearImpulse(
-                toB2Vec(pJumpBehaviour->impulse),
-                m_pPlayerBody->body->GetPosition(),
-                true
-            );
+            IEventManager::get()->queueEvent(EventDataPtr(new JumpEvent(
+                  m_pPlayerBody,
+                  dynamic_cast<JumpBehaviour*>(
+                         world->getEntity(m_eid).getComponent<JumpBehaviour>())
+            )));
         }
     }
 }
@@ -85,7 +83,7 @@ void PlayerInputSystem::removed(artemis::Entity &e)
 
 bool PlayerInputSystem::checkProcessing()
 {
-	return true;
+    return true;
 }
 
 void PlayerInputSystem::processEntities(artemis::ImmutableBag<artemis::Entity*>& bag)
@@ -96,13 +94,13 @@ void PlayerInputSystem::processEntities(artemis::ImmutableBag<artemis::Entity*>&
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		m_pPlayerBody->body->ApplyLinearImpulse(b2Vec2(0.2f, 0.f), 
-			m_pPlayerBody->body->GetPosition(), true
+            m_pPlayerBody->body->GetWorldCenter(), true
 		);
 	}
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		m_pPlayerBody->body->ApplyLinearImpulse(b2Vec2(-0.2f, 0.f), 
-			m_pPlayerBody->body->GetPosition(), true
+            m_pPlayerBody->body->GetWorldCenter(), true
 		);
 	}
 }

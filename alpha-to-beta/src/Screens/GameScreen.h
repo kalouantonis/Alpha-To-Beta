@@ -15,6 +15,8 @@ class RenderSystem;
 class PhysicsSystem;
 class PlayerInputSystem;
 class Box2DRenderer;
+class JumpListener;
+class CameraFollowingSystem;
 
 class GameScreen: public IScreen
 {
@@ -40,6 +42,9 @@ private:
     RenderSystem* m_pRenderSystem;
     PhysicsSystem* m_pPhysicsSystem;
     PlayerInputSystem* m_pInputSystem;
+    CameraFollowingSystem* m_pCameraSystem;
+
+    std::unique_ptr<JumpListener> m_pJumpListener;
 
     std::shared_ptr<Box2DRenderer> m_pB2Renderer;
 

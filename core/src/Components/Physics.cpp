@@ -61,9 +61,13 @@ bool Physics::load(const tinyxml2::XMLElement* pElement)
 
 		m_halfWidth = m_dimensions.x / 2.f;
 		m_halfHeight = m_dimensions.y / 2.f;
-	}
 
-	return true;
+        return true;
+    }
+
+    CORE_ERROR("No Dimensions element defined in DynamicBody");
+
+    return false;
 }
 
 sf::Vector2f Physics::getPosition() 

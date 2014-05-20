@@ -28,6 +28,8 @@ public:
     void change(UScreenPtr pScreen);
     void pop();
 
+    void clear();
+
     void update(float deltaTime);
     void render();
     void pollInput(const sf::Event& event);

@@ -13,12 +13,12 @@ JumpBehaviour::JumpBehaviour(float yImpulse)
 
 JumpBehaviour::~JumpBehaviour()
 {
-	
 }
 
 bool JumpBehaviour::load(const tinyxml2::XMLElement *pElement)
 {
-	const tinyxml2::XMLElement* pChildElement = pElement->FirstChildElement("Impulse");
+    const tinyxml2::XMLElement* pChildElement =
+            pElement->FirstChildElement("Impulse");
 
 	if(!pChildElement)
 	{

@@ -47,7 +47,7 @@ void PhysicsSystem::added(artemis::Entity& e)
 			transformComp->rotation
 		);
 
-		// Set transform origin
+        // Set transform origiin
 		transformComp->origin = body->getOrigin();
 	}
 }
