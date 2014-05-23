@@ -84,21 +84,23 @@ bool DynamicBody::load(const tinyxml2::XMLElement* pElement)
     // Override physics impl
     const tinyxml2::XMLElement* pChildElement = pElement->FirstChildElement("Dimensions");
 
-    if(pChildElement == NULL)
-    {
-        CORE_ERROR("No Dimensions element defined in DynamicBody");
-        return false;
-    }
-
     float xOffset = 0.f, yOffset = 0.f;
 
-    pChildElement->QueryFloatAttribute("x", &xOffset);
-    pChildElement->QueryFloatAttribute("y", &yOffset);
-    pChildElement->QueryFloatAttribute("width", &m_dimensions.x);
-    pChildElement->QueryFloatAttribute("height", &m_dimensions.y);
+    if(pChildElement == NULL)
+    {
+        setDimensions(0.f, 0.f);
+    }
+    else
+    {
 
-    m_halfWidth = m_dimensions.x / 2.f;
-    m_halfHeight = m_dimensions.y / 2.f;
+        pChildElement->QueryFloatAttribute("x", &xOffset);
+        pChildElement->QueryFloatAttribute("y", &yOffset);
+        pChildElement->QueryFloatAttribute("width", &m_dimensions.x);
+        pChildElement->QueryFloatAttribute("height", &m_dimensions.y);
+
+        m_halfWidth = m_dimensions.x / 2.f;
+        m_halfHeight = m_dimensions.y / 2.f;
+    }
 
     for(const tinyxml2::XMLElement* pChildElement = pElement->FirstChildElement("Fixture");
         pChildElement != NULL; pChildElement = pElement->NextSiblingElement("Fixture"))

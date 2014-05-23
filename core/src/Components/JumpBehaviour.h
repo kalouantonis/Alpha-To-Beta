@@ -17,12 +17,14 @@ public:
     virtual const char* getName() const override { return g_name; }
 	
 	sf::Vector2f impulse;
-    unsigned int numJumps;
 
     unsigned int getMaxJumps() const { return m_maxJumps; }
-    void resetJumps() { numJumps = 0; }
+
+    unsigned int jump() { return ++m_numJumps; }
+    void resetJumps() { m_numJumps = 0; }
 
 private:
+    unsigned int m_numJumps;
     unsigned int m_maxJumps;
 };
 

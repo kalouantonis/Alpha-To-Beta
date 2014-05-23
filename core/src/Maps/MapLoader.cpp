@@ -8,6 +8,7 @@
 #include <Components/DynamicBody.h>
 
 #include <Resources/ResourceDef.h>
+#include <Math/Vector.h>
 
 #include <Physics/PhysicsLocator.h>
 
@@ -63,7 +64,7 @@ void MapLoader::load(const std::string &mapFile, const std::string &assetDir)
         {
             loadTileEntities(
                 tileLayer, 
-                map.GetTileWidth() / PhysicsLocator::PixelsPerMeter.x, 
+                map.GetTileWidth() / PhysicsLocator::PixelsPerMeter.x,
                 map.GetTileHeight() / PhysicsLocator::PixelsPerMeter.y
             );
         }
@@ -237,11 +238,21 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
             renderableComp->order = order;
        }
 
+       Physics* physicsComp = static_cast<Physics*>(entity.getComponent<DynamicBody>());
+
+       if(physicsComp && isZero(physicsComp->getDimensions()))
+       {
+           physicsComp->setDimensions(
+               object->GetWidth() / PhysicsLocator::PixelsPerMeter.x,
+               object->GetHeight() / PhysicsLocator::PixelsPerMeter.y
+           );
+       }
+
        if(bCollidable) // Is entity collidable?
        {
-            Physics* physicsComp = static_cast<Physics*>(entity.getComponent<StaticBody>());
+            physicsComp = static_cast<Physics*>(entity.getComponent<StaticBody>());
 
-            if(physicsComp == NULL && entity.getComponent<DynamicBody>() == NULL)
+            if(physicsComp == nullptr && entity.getComponent<DynamicBody>() == nullptr)
             {
                 // Create new physics component
                 physicsComp = new StaticBody(

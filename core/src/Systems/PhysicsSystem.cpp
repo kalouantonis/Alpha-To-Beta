@@ -34,7 +34,7 @@ void PhysicsSystem::added(artemis::Entity& e)
 	);
 
 	// No static body
-	if(body == NULL)
+    if(body == nullptr)
 	{
 		// Try and receive dynamic body
 		body = dynamic_cast<Physics*>(
@@ -42,7 +42,7 @@ void PhysicsSystem::added(artemis::Entity& e)
 		);
 	}
 
-    if((body != NULL && !body->isInitialized()))
+    if((body != nullptr && !body->isInitialized()))
 	{
 		body->initialize(
 			transformComp->position.x, 

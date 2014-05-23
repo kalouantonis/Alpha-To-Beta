@@ -22,7 +22,8 @@ public:
 	 * @param ppp Pixels per meter
 	 */
     static void provide(Ptr object, const sf::Vector2f& ppp);
-	static void provide(const sf::Vector2f& gravity, const sf::Vector2f& ppp = sf::Vector2f(1, 1));
+    static void provide(const sf::Vector2f& gravity,
+                        const sf::Vector2f& ppp = sf::Vector2f(1, 1));
 
     static void remove();
 

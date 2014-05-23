@@ -57,7 +57,7 @@ void JumpListener::receiveJumpEvt(EventDataPtr pEvent)
 
     if(pDynamicBody != nullptr && pJumpBehaviour != nullptr)
     {
-        if(++pJumpBehaviour->numJumps <= pJumpBehaviour->getMaxJumps())
+        if(pJumpBehaviour->jump() <= pJumpBehaviour->getMaxJumps())
         {
             pDynamicBody->body->ApplyLinearImpulse(
                 toB2Vec(pJumpBehaviour->impulse),
@@ -77,20 +77,20 @@ void JumpListener::receiveBeginCollisionEvt(EventDataPtr pEvent)
     // FIXME: Check whether collision occurs at the top
 
     // Entity that initiated collision. I think, check this!
+    // I should only be interested in that entity
     Entity* entityA = pCollisionEvent->getEntityA();
     Entity* entityB = pCollisionEvent->getEntityB();
 
-    Entity* usedEntity = nullptr;
+    Entity* colliderEntity = nullptr;
 
     if(!entityA && !entityB) // No usable entities
         return;
-
-    if(entityA)
-        usedEntity = entityA;
+    else if(entityA)
+        colliderEntity = entityA;
     else
-        usedEntity = entityB;
+        colliderEntity = entityB;
 
-    Component* pJumpBehaviour = usedEntity->getComponent<JumpBehaviour>();
+    Component* pJumpBehaviour = colliderEntity->getComponent<JumpBehaviour>();
 
     if(pJumpBehaviour == nullptr)
         return;

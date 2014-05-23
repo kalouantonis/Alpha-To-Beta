@@ -8,7 +8,7 @@ const char* JumpBehaviour::g_name = "JumpBehaviour";
 
 JumpBehaviour::JumpBehaviour(float yImpulse, unsigned int maxJumps)
 	: impulse(0.f, yImpulse)
-    , numJumps(0)
+    , m_numJumps(0)
     , m_maxJumps(maxJumps)
 {
 }
