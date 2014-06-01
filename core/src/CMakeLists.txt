@@ -70,6 +70,7 @@ set(
 	"Entities/EntityFactory.h"
     "Entities/Level.cpp"
 	"Entities/Level.h"
+    "Entities/Utils.h"
 )
 
 set(

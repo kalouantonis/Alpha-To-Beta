@@ -8,6 +8,8 @@
 #include <Components/DynamicBody.h>
 #include <Components/JumpBehaviour.h>
 
+#include <Entities/Utils.h>
+
 #include <Utils/Logger.h>
 #include <Math/Vector.h>
 
@@ -76,25 +78,22 @@ void JumpListener::receiveBeginCollisionEvt(EventDataPtr pEvent)
 
     // FIXME: Check whether collision occurs at the top
 
-    // Entity that initiated collision. I think, check this!
-    // I should only be interested in that entity
-    Entity* entityA = pCollisionEvent->getEntityA();
-    Entity* entityB = pCollisionEvent->getEntityB();
+    JumpBehaviour* jumpComponents[2] {
+        safeGetComponent<JumpBehaviour>(pCollisionEvent->getEntityA()),
+        safeGetComponent<JumpBehaviour>(pCollisionEvent->getEntityB())
+    };
 
-    Entity* colliderEntity = nullptr;
+    JumpBehaviour* currentJumpComponent = nullptr;
 
-    if(!entityA && !entityB) // No usable entities
+    if((!jumpComponents[0] && !jumpComponents[1]) ||
+            (jumpComponents[0] && jumpComponents[1]))
         return;
-    else if(entityA)
-        colliderEntity = entityA;
+    else if(jumpComponents[0])
+        currentJumpComponent = jumpComponents[0];
     else
-        colliderEntity = entityB;
+        currentJumpComponent = jumpComponents[1];
 
-    Component* pJumpBehaviour = colliderEntity->getComponent<JumpBehaviour>();
-
-    if(pJumpBehaviour == nullptr)
-        return;
 
     CORE_DEBUG("RESETTING JUMPS!!!!");
-    static_cast<JumpBehaviour*>(pJumpBehaviour)->resetJumps();
+    currentJumpComponent->resetJumps();
 }
