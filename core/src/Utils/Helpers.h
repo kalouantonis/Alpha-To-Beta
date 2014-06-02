@@ -1,12 +1,9 @@
-#ifndef HANDY_HEADERS_H
-#define HANDY_HEADERS_H
+#ifndef HELPERS_H_
+#define HELPERS_H_
 
 #include <stdio.h> // Includes NULL
 #include <stdlib.h> // Includes malloc, realloc, free..
 #include <string.h> // Includes memset
-
-// Obtain the number of elements in the given C array
-#define GET_ARRAY_LEN(arrayName) (sizeof(arrayName) / sizeof((arrayName)[0]))
 
 /**
  * @brief Delete pointer safely
@@ -14,6 +11,9 @@
  * to null.
  */
 #define SAFE_DELETE(ptr) if(ptr) delete ptr; ptr = nullptr;
+
+// Obtain the number of elements in the given C array
+#define GET_ARRAY_LEN(arrayName) (sizeof(arrayName) / sizeof((arrayName)[0]))
 
 // Return the min of two numbers
 #define MIN(n1, n2) ((n1) > (n2) ? (n2) : (n1))
@@ -112,4 +112,4 @@
 
 #define END_BLOCK }
 
-#endif // HANDY_HEADERS_H
+#endif // HELPERS_H_

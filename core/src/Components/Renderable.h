@@ -7,6 +7,9 @@
 
 class Renderable: public ParsedComponent
 {
+private:
+    TextureRegion m_textureRegion;
+
 public:
     /**
      * @brief Will create an empty renderable with a null texture
@@ -42,9 +45,6 @@ public:
     // Draw order
     int order;
     float width, height;
-
-private:
-    TextureRegion m_textureRegion;
 };
 
 typedef std::shared_ptr<Renderable> RenderablePtr;

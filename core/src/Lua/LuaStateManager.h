@@ -32,7 +32,6 @@ private:
      * Last error to occur to lua interpretter
      */
     std::string m_lastError;
-
 };
 
 #endif // LUA_STATE_MANAGER_H
