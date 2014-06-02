@@ -13,6 +13,10 @@ include_directories(
 	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/Artemis-Cpp/include;
 	# Box2D
 	${Box2D_SOURCE_DIR};
+    # Lua
+    ${LUA_INCLUDE_DIR};
+    # LuaBind
+    ${LUABIND_INCLUDE_DIR};
 	# Boost library
 	${Boost_INCLUDE_DIR};
 )
@@ -105,6 +109,12 @@ set(
 )
 
 set(
+    LUA_SRC
+    "Lua/LuaStateManager.cpp"
+    "Lua/LuaStateManager.h"
+)
+
+set(
 	MAPS_SRC
 	"Maps/MapLoader.cpp"
 	"Maps/MapLoader.h"
@@ -180,6 +190,7 @@ set(
     ${EVENTS_SRC};
 	${GRAPHICS_SRC};
 	${INPUT_SRC};
+    ${LUA_SRC};
 	${MAPS_SRC};
 	${MATH_SRC};
     ${MEMORY_SRC};
@@ -196,7 +207,6 @@ add_library(
 	STATIC 				# Dynamic library build
   	${SOURCE_FILE_LIST}	# List of files
 )
-
 
 # Link static libraries
 target_link_libraries(

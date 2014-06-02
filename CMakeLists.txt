@@ -11,8 +11,6 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/Modules/")
 
 # Find SFML before proceeding
 find_package(SFML COMPONENTS system window graphics REQUIRED)
-# Lua library
-find_package(Luabind REQUIRED)
 # Math library
 find_package(GLM REQUIRED)
 
@@ -23,12 +21,18 @@ if(${WIN32})
     set(Boost_USE_MULTITHREADED ON)
     set(Boost_USE_STATIC_RUNTIME ON)
 endif(${WIN32})
-
+# Find boost
 find_package(Boost COMPONENTS system filesystem REQUIRED)
+# Lua 5.2
+find_package(Lua52 REQUIRED)
+# Luabind library
+find_package(Luabind REQUIRED)
 
 # C++11 support and warnings 
 if(${UNIX})
-	add_definitions(-std=c++11 -Wall)
+    add_definitions(-Wall)
+    # C++ specific compiler options
+    list(APPEND CMAKE_CXX_FLAGS "-std=c++11")
 elseif(${WIN32})
 	# Wall is too much
 	add_definitions(/W3)
@@ -40,11 +44,11 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	# Debug mode
     add_definitions(-D_DEBUG)
 	
-	if(${UNIX})
-          #add_definitions(-ggdb)
-	elseif(${WIN32})
-		add_definitions(/g3)
-	endif(${UNIX})
+	# if(${UNIX})
+ #          #add_definitions(-ggdb)
+	# elseif(${WIN32})
+	# 	add_definitions(/g3)
+	# endif(${UNIX})
 elseif(${CMAKE_BUILD_TYPE} STREQUAL "Release")
 	MESSAGE(STATUS "Building in release mode...")
 	# Release mode
@@ -52,7 +56,6 @@ elseif(${CMAKE_BUILD_TYPE} STREQUAL "Release")
 endif(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 
 # Set executable output directory
-# TODO: Change to INSTALL script
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 # Add tinyxml2 dependency

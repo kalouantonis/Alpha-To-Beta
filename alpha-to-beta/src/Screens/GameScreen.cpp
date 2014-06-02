@@ -10,6 +10,8 @@
 
 #include <Events/JumpListener.h>
 
+#include <Lua/LuaStateManager.h>
+
 #include <Systems/RenderSystem.h>
 #include <Systems/PhysicsSystem.h>
 #include <Systems/PlayerInputSystem.h>
@@ -42,8 +44,9 @@ bool GameScreen::init()
     try
     {
         TextureLocator::provide(TextureLocator::Ptr(new TextureHolder()));
-        // Initialize manager
-        // m_manager.initialize();
+
+        CORE_DEBUG("Creating lua state...");
+        LuaStateManager::create();
 
         PhysicsLocator::provide(sf::Vector2f(0, 9.81f), sf::Vector2f(70, 70));
 
@@ -127,6 +130,9 @@ GameScreen::~GameScreen()
 
     CORE_DEBUG("Disposing the physics world...");
     PhysicsLocator::remove();
+
+    CORE_DEBUG("Destroying lua state...");
+    LuaStateManager::destroy();
 
     CORE_DEBUG("GameScreen disposed...");
 }

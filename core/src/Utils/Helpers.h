@@ -8,6 +8,13 @@
 // Obtain the number of elements in the given C array
 #define GET_ARRAY_LEN(arrayName) (sizeof(arrayName) / sizeof((arrayName)[0]))
 
+/**
+ * @brief Delete pointer safely
+ * @details Will ensure that a pointer is not deleted twice and sets it
+ * to null.
+ */
+#define SAFE_DELETE(ptr) if(ptr) delete ptr; ptr = nullptr;
+
 // Return the min of two numbers
 #define MIN(n1, n2) ((n1) > (n2) ? (n2) : (n1))
 
