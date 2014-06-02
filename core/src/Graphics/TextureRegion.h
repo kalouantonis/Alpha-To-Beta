@@ -28,6 +28,9 @@ public:
     sf::ConstTexturePtr getTexture() const { return m_pTexture; }
     void setTexture(sf::TexturePtr pTexture);
 
+    float getWidth() const { return u2 - u1; }
+    float getHeight() const { return v2 - v1; }
+
 private:
 	// TODO: Type and find a way to keep constants
     //sf::TexturePtr m_pTexture;

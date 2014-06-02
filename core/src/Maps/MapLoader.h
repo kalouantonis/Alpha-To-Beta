@@ -38,7 +38,7 @@ private:
     void loadTileSet(const std::string& assetDir, const Tmx::Tileset* tileset);
 
     void loadTileEntities(const Tmx::Layer* layer,
-		int tileWidth, int tileHeight, bool collidable);
+		int tileWidth, int tileHeight);
 
     /**
      * @brief Load object groups. Need tile height for y offset

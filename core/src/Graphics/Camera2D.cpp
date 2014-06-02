@@ -26,11 +26,6 @@ Camera2D::Camera2D(sf::RenderTargetPtr renderTarget, float frustrumWidth, float 
     resize(m_pRenderTarget->getSize());
 }
 
-Camera2D::Camera2D(sf::RenderTargetPtr renderTarget, const sf::Vector2f& frustrum)
-    : Camera2D(renderTarget, frustrum.x, frustrum.y)
-{
-
-}
 
 Camera2D::Camera2D(sf::RenderTargetPtr renderTarget, const sf::View &view)
     : m_pRenderTarget(renderTarget)

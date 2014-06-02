@@ -45,8 +45,8 @@ void Physics::setDimensions(float width, float height)
 	m_dimensions.y = height;
 
 	// set half height
-    m_halfWidth = width / 2.f;
-    m_halfHeight = height / 2.f;
+    m_halfWidth = width != 0.f ? width / 2.f : 0.f;
+    m_halfHeight = height != 0.f ? height / 2.f : 0.f;
 }
 
 bool Physics::load(const tinyxml2::XMLElement* pElement) 
@@ -61,13 +61,15 @@ bool Physics::load(const tinyxml2::XMLElement* pElement)
 
 		m_halfWidth = m_dimensions.x / 2.f;
 		m_halfHeight = m_dimensions.y / 2.f;
-
-        return true;
+    }
+    else
+    {
+        setDimensions(0.f, 0.f);
     }
 
-    CORE_ERROR("No Dimensions element defined in DynamicBody");
+//    CORE_ERROR("No Dimensions element defined in DynamicBody");
 
-    return false;
+    return true;
 }
 
 sf::Vector2f Physics::getPosition() 

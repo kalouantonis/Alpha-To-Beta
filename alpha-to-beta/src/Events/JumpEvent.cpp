@@ -5,7 +5,7 @@
 
 const EventType JumpEvent::sEventType = 0x8a2620ec;
 
-JumpEvent::JumpEvent(DynamicBody* body, const JumpBehaviour* jumpBehaviour)
+JumpEvent::JumpEvent(DynamicBody* body, JumpBehaviour* jumpBehaviour)
     : BaseEventData()
     , m_pBody(body)
     , m_pJumpBehaviour(jumpBehaviour)

@@ -116,6 +116,7 @@ void Game::pollInput()
             ScreenManager::getInstance().pollInput(event);
             // Polling for event receivers
             InputLocator::dispatchEvent(event);
+            break;
 		}
 	}
 }

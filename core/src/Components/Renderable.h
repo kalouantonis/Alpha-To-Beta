@@ -33,6 +33,10 @@ public:
         height = m_textureRegion.v2 - m_textureRegion.v1;
     }
 
+    const TextureRegion& getTextureRegion() const { return m_textureRegion; }
+    /**
+     * @brief non-const overload
+     */
     TextureRegion& getTextureRegion() { return m_textureRegion; }
 
     // Draw order

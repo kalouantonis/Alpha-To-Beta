@@ -10,7 +10,7 @@
 #include <Components/Transform.h>
 #include <Components/Renderable.h>
 
-#include <map>
+#include <unordered_map>
 
 //#include <list>
 
@@ -23,7 +23,7 @@ TODO:
 
 */
 
-class RenderSystem: public artemis::EntityProcessingSystem
+class RenderSystem: public artemis::EntitySystem
 {
 public:
 	RenderSystem(SpriteBatch& spriteBatch);
@@ -35,10 +35,6 @@ public:
 	// 	entityx::ptr<entityx::EventManager> event, float dt) override;
 
 
-	virtual void processEntity(artemis::Entity& e) override;
-
-	void dispose();
-
 
 	// TODO: Include receivers for component<Renderable> added and removed 
 	// and fill map of orders
@@ -49,19 +45,19 @@ private:
 	virtual void removed(artemis::Entity& e) override;
 	virtual void begin() final;
 	virtual void end() final;
+    virtual void processEntities(artemis::ImmutableBag<artemis::Entity*> &entities) override;
+    virtual bool checkProcessing() final;
 
 	SpriteBatch m_spriteBatch;
 
 	artemis::ComponentMapper<Transform> m_transformMapper;
 	artemis::ComponentMapper<Renderable> m_renderableMapper;
 
-	//std::list<std::pair<Transform, Renderable> > m_drawedComponents;
-	// Check if renderable entity has a transform component too, if so, add to render system
-	// void receive(const ComponentAddedEvent<Renderable>& renderable);
 	typedef std::pair<Renderable*, Transform*> DrawablePair;
-	typedef std::map<long, DrawablePair> DrawableMap;
+    typedef std::unordered_map<int, DrawablePair> DrawableMap;
 
-	DrawableMap m_drawables;
+    // Ordered map
+    std::map<int, DrawableMap> m_drawables;
 };
 
 #endif // RENDER_SYSTEM_H

@@ -28,7 +28,6 @@ int main()
 
     game.init("Alpha To Beta", 1024, 667);
 
-
     ScreenManager::getInstance().push(
         UScreenPtr(new GameScreen(game.getWindow()))
     );
@@ -38,7 +37,7 @@ int main()
     sf::Clock timer;
 
 	while(game.isRunning())
-	{
+    {
         timeSinceLastUpdate += timer.restart().asSeconds();
         while(timeSinceLastUpdate > FRAME_TIME)
         {
@@ -53,8 +52,8 @@ int main()
         }
 
         // Only render once game logic is finished updating
-		game.render();
-	}
+        game.render();
+    }
 
 
     return EXIT_SUCCESS;

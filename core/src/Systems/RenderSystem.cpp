@@ -16,7 +16,7 @@ RenderSystem::RenderSystem(SpriteBatch& spriteBatch)
 
 RenderSystem::~RenderSystem()
 {
-	dispose();
+    m_drawables.clear();
 }
 
 void RenderSystem::begin()
@@ -26,28 +26,58 @@ void RenderSystem::begin()
 	m_spriteBatch.begin();
 }
 
-void RenderSystem::processEntity(artemis::Entity &e)
+void RenderSystem::processEntities(artemis::ImmutableBag<artemis::Entity*> &entities)
 {
-	// !TODO: Dont do this you idiot...
-	DrawableMap::iterator findIt = m_drawables.find(e.getUniqueId());
+//    // !TODO: Dont do this you idiot...
+//    for(int i = 0; i < entities.getCount(); ++i)
+//    {
+//        DrawableMap::iterator findIt = m_drawables.find(entities.get(i)->getId());
 
-	// Check that entity under given id exists in drawables
-	if(findIt != m_drawables.end())
-	{
-		// Get pair
-		DrawablePair& pair = (*findIt).second;
+//        // Check that entity under given id exists in drawables
+//        if(findIt != m_drawables.end())
+//        {
+//            // Get pair
+//            DrawablePair& pair = (*findIt).second;
 
-		Renderable* renderable = pair.first;
-		Transform* transform = pair.second;
+//            Renderable* renderable = pair.first;
+//            Transform* transform = pair.second;
 
-		// Draw renderable
-        m_spriteBatch.draw(renderable->getTextureRegion(),
-			transform->position.x, transform->position.y, 
-			renderable->width, renderable->height,
-			transform->origin.x, transform->origin.y,
-			//transform->scale.x, transform->scale.y,
-			transform->rotation);
-	}
+//            // Draw renderable
+//            m_spriteBatch.draw(renderable->getTextureRegion(),
+//                transform->position.x, transform->position.y,
+//                renderable->width, renderable->height,
+//                transform->origin.x, transform->origin.y,
+//                //transform->scale.x, transform->scale.y,
+//                transform->rotation);
+//        }
+//    }
+
+
+    for(const auto& orderPair : m_drawables)
+    {
+        const DrawableMap& drawableMap = orderPair.second;
+
+        for(const auto& drawable : drawableMap)
+        {
+            const DrawablePair& pair = drawable.second;
+
+            const Renderable* renderable = pair.first;
+            const Transform* transform = pair.second;
+
+            m_spriteBatch.draw(renderable->getTextureRegion(),
+                    transform->position.x, transform->position.y,
+                    renderable->width, renderable->height,
+                    transform->origin.x, transform->origin.y,
+                    transform->rotation
+            );
+        }
+    }
+}
+
+bool RenderSystem::checkProcessing()
+{
+    // No checking to be done yet
+    return true;
 }
 
 void RenderSystem::end()
@@ -59,35 +89,45 @@ void RenderSystem::added(artemis::Entity& e)
 {
 	// Handle adding to map
 	artemis::Component* transform = e.getComponent<Transform>();
-	artemis::Component* renderable = e.getComponent<Renderable>();
+    Renderable* renderable = static_cast<Renderable*>(
+                e.getComponent<Renderable>()
+    );
 
-	if((transform != NULL) && (renderable != NULL))
-	{
-		m_drawables[e.getUniqueId()] = DrawablePair(
-			// Static casting is safe, as the type is guaranteed
-			static_cast<Renderable*>(renderable),
-			static_cast<Transform*>(transform)
-		);
+    m_drawables[renderable->order][e.getId()] = DrawablePair(
+        // Static casting is safe, as the type is guaranteed
+        renderable,
+        static_cast<Transform*>(transform)
+    );
 
-	} 
 
 	// map[e.getId()] = std::make_pair(transform, renderable)
 }
 
 void RenderSystem::removed(artemis::Entity& e)
 {
+    int zOrder = static_cast<Renderable*>(e.getComponent<Renderable>())->order;
+
 	// Attempt to find drawable
-	auto findIt = m_drawables.find(e.getUniqueId());
+    std::map<int, DrawableMap>::iterator orderFindIt = m_drawables.find(zOrder);
 
-	if(findIt != m_drawables.end()) // exists
-	{
-		// Remove from map
-		m_drawables.erase(findIt);
-	}
+    if(orderFindIt != m_drawables.end())
+    {
+        DrawableMap& drawableMap = (*orderFindIt).second;
+        DrawableMap::iterator drawableFindIt = drawableMap.find(e.getId());
+
+        if(drawableFindIt != drawableMap.end()) // exists
+        {
+            // Remove from map
+            drawableMap.erase(drawableFindIt);
+        }
+
+        // Check if whole order map is empty
+        if(drawableMap.empty())
+        {
+            // Erase from map
+            m_drawables.erase(orderFindIt);
+        }
+    }
+
 }
 
-void RenderSystem::dispose()
-{
-	if(!m_drawables.empty())
-		m_drawables.clear();
-}
