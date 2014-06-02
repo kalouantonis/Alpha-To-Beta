@@ -3,7 +3,12 @@
 
 #include <SFML/Window/Event.hpp>
 
-// Purely virtual interface because it may be used in multiple inheritance
+/**
+ * @brief Classes that want to receive input events
+ * @details Purelly virtual, because it may be used in multiple inheritance
+ * 
+ * @param key [description]
+ */
 class InputProcessor
 {
 public:

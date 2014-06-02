@@ -29,17 +29,6 @@ public:
 	RenderSystem(SpriteBatch& spriteBatch);
 	virtual ~RenderSystem();
 
-	// void configure(entityx::ptr<entityx::EventManager> events);
-
-	// void update(entityx::ptr<entityx::EntityManager> es,
-	// 	entityx::ptr<entityx::EventManager> event, float dt) override;
-
-
-
-	// TODO: Include receivers for component<Renderable> added and removed 
-	// and fill map of orders
-
-
 private:
 	virtual void added(artemis::Entity& e) override;
 	virtual void removed(artemis::Entity& e) override;

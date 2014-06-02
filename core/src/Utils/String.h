@@ -8,8 +8,8 @@
  * @details Will return an empty string if a NULL char* is provided
  * ensuring C++ style safety
  * 
- * @param str [description]
- * @return [description]
+ * @param str C-Style string to convert
+ * @return Created string, may be empty
  */
 std::string make_string(const char* str);
 

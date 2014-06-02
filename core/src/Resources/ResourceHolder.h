@@ -5,12 +5,24 @@
 #include <memory>
 #include <cassert>
 
+/**
+ * @brief Holder of various long lived resources
+ * 
+ * @tparam Identifier Identifier type to use
+ * @tparam Resource Resource type used
+ */
 template <class Identifier, class Resource>
 class ResourceHolder
 {
 public:
     virtual ~ResourceHolder() { clear(); }
 
+    /**
+     * @brief Load item from file and give it an ID
+     * 
+     * @param id ID to assign to object
+     * @param filename File to load from
+     */
 	void load(Identifier id, const std::string& filename)
 	{
 		// Create and load resource
@@ -22,6 +34,15 @@ public:
         insertResource(id, resource);
 	}
 
+    /**
+     * @brief Load item from file and give it an ID, along with passing it 
+     * an extra parameter
+     * 
+     * @param id ID to assign to object
+     * @param filename File to load from
+     * @param secondParam Second parameter to use
+     * @tparam Parameter Extra parameter type
+     */
 	template <typename Parameter>
 	void load(Identifier id, const std::string& filename, const Parameter& secondParam)
 	{
@@ -34,6 +55,12 @@ public:
 		insertResource(id, resource);
 	}
 
+    /**
+     * @brief Get resource under given ID
+     * 
+     * @param id ID of resource 
+     * @return Constant reference to resource
+     */
     const Resource&	get(Identifier id) const
 	{
 		auto found = m_resourceMap.find(id);
@@ -43,6 +70,12 @@ public:
 		return *(found->second);
 	}
 
+    /**
+     * @brief Get resource under given ID
+     * 
+     * @param id ID of resource
+     * @return reference to resource
+     */
     Resource& get(Identifier id)
     {
         // Calling the const version of get reduces duplication.
@@ -55,7 +88,11 @@ public:
         );
     }
 
-
+    /**
+     * @brief Remove resource from holder under the given ID
+     * 
+     * @param id ID of resource
+     */
 	void remove(Identifier id)
 	{
 		auto found = m_resourceMap.find(id);
@@ -63,14 +100,23 @@ public:
 
 		m_resourceMap.erase(found);
 	}
-
+    /**
+     * @brief Clear all resource
+     */
 	void clear() { m_resourceMap.clear(); }
 
+    /**
+     * @brief Is resource holder empty
+     */
 	bool empty() const { return m_resourceMap.empty(); }
 
 private:
 	typedef std::unique_ptr<Resource> ResourcePtr;
 
+    /**
+     * @brief Insert a new resource in to the map
+     * @details Transfers ownership to this holder
+     */
     void insertResource(Identifier id, const ResourcePtr& resource)
 	{
 		// Insert and check success

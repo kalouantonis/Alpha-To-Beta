@@ -5,6 +5,10 @@
 #include <memory>
 #include <cassert>
 
+/**
+ * @brief Works like ResourceHolder, apart from all items are stored as 
+ * shared_ptr's rather than unique_ptr's
+ */
 template <class Identifier, class Resource>
 class SharedResourceHolder
 {

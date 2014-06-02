@@ -51,9 +51,10 @@ public:
 private:
     void flush();
     void switchTexture(const sf::Texture* const pTexture);
-    // Check the current state of the sprite batch.
-    // Is in charge of swithing textures or flushing the buffer
-    // if required
+    /** @brief Check the current state of the sprite batch.
+     * Is in charge of swithing textures or flushing the buffer
+     * if required
+     */
     void checkBatchState(const sf::Texture* const pTexture);
 
     /**

@@ -4,12 +4,21 @@
 #include <assert.h>
 #include <memory>
 
+/**
+ * @brief Locator pattern. 
+ * @details See http://gameprogrammingpatterns.com/service-locator.html for more details
+ * 
+ * @tparam T Type stored in locator
+ */
 template <class T>
 class Locator
 {
 public:
 	typedef std::shared_ptr<T> Ptr;
 
+	/**
+	 * @brief Get object reference
+	 */
 	static Ptr getObject()
 	{
 		return m_sObject;
