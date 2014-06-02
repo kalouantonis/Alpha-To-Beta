@@ -7,3 +7,8 @@
 	path = dependencies/Artemis-Cpp
 	url = https://github.com/vinova/Artemis-Cpp.git
 	ignore = dirty
+
+[submodule "dependencies/FastDelegate"]
+    path = dependencies/FastDelegate
+    url = https://github
+    ignore = dirty
