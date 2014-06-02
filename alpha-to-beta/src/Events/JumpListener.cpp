@@ -83,18 +83,18 @@ void JumpListener::receiveBeginCollisionEvt(EventDataPtr pEvent)
         safeGetComponent<JumpBehaviour>(pCollisionEvent->getEntityB())
     };
 
-    JumpBehaviour* currentJumpComponent = nullptr;
+    JumpBehaviour* pCurrentJumpComponent = nullptr;
 
     // Exit if no or 2 jump components are found
     if((!jumpComponents[0] && !jumpComponents[1]) ||
             (jumpComponents[0] && jumpComponents[1]))
         return;
     else if(jumpComponents[0])
-        currentJumpComponent = jumpComponents[0];
+        pCurrentJumpComponent = jumpComponents[0];
     else
-        currentJumpComponent = jumpComponents[1];
+        pCurrentJumpComponent = jumpComponents[1];
 
 
     CORE_DEBUG("RESETTING JUMPS!!!!");
-    currentJumpComponent->resetJumps();
+    pCurrentJumpComponent->resetJumps();
 }

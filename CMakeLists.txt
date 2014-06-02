@@ -4,13 +4,14 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 # Project name, used later
 project(ALPHA_TO_BETA)
 	
-
 option("CMAKE_BUILD_TYPE" "Project build type" "Release")
 
+# Set module path for extra find modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/Modules/")
+
 # Find SFML before proceeding
-#if(${UNIX})
-	find_package(SFML COMPONENTS system window graphics REQUIRED)
-#endif(${UNIX})
+find_package(SFML COMPONENTS system window graphics REQUIRED)
+find_package(Luabind REQUIRED)
 
 # Boost vars
 if(${WIN32})

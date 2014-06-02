@@ -12,3 +12,6 @@ build
 *.user
 *.user.*
 *.autosave
+
+# Doxygen conf
+doxy.conf
