@@ -5,16 +5,6 @@
 
 #include <Events/EventManager.h>
 
-//fwd defs
-//class IEventData;
-//typedef std::shared_ptr<IEventData> EventDataPtr;
-
-//struct JumpProperties
-//{
-//    const JumpBehaviourPtr jumpBehaviour;
-//    JumpState jumpState;
-//};
-
 class JumpListener
 {
 public:

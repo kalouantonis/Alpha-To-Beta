@@ -85,6 +85,7 @@ void JumpListener::receiveBeginCollisionEvt(EventDataPtr pEvent)
 
     JumpBehaviour* currentJumpComponent = nullptr;
 
+    // Exit if no or 2 jump components are found
     if((!jumpComponents[0] && !jumpComponents[1]) ||
             (jumpComponents[0] && jumpComponents[1]))
         return;
