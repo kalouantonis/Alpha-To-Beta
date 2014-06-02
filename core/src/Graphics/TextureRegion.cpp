@@ -13,9 +13,8 @@
 #include <assert.h>
 
 TextureRegion::TextureRegion()
-    : TextureRegion(nullptr)
 {
-
+	setTexture(nullptr);
 }
 
 TextureRegion::TextureRegion(sf::TexturePtr pTexture)

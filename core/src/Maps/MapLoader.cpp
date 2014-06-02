@@ -8,6 +8,7 @@
 #include <Components/DynamicBody.h>
 
 #include <Resources/ResourceDef.h>
+#include <Math/Vector.h>
 
 #include <Physics/PhysicsLocator.h>
 
@@ -20,6 +21,7 @@
 #include <Artemis/Entity.h>
 
 #include <boost/algorithm/string.hpp>
+#include <glm/glm.hpp>
 
 MapLoader::MapLoader(artemis::World &world)
     : m_worldManager(world)
@@ -60,15 +62,10 @@ void MapLoader::load(const std::string &mapFile, const std::string &assetDir)
         // Only load if layer is visible
         if(tileLayer->IsVisible())
         {
-            // if collidable, generate box2d static bodies
-            bool collidable = tileLayer->GetProperties().HasProperty("collidable");
-
-            // TODO: Account for spacing and margins
             loadTileEntities(
                 tileLayer, 
-                map.GetTileWidth() / PhysicsLocator::PixelsPerMeter.x, 
-                map.GetTileHeight() / PhysicsLocator::PixelsPerMeter.y, 
-                collidable
+                map.GetTileWidth() / PhysicsLocator::PixelsPerMeter.x,
+                map.GetTileHeight() / PhysicsLocator::PixelsPerMeter.y
             );
         }
 	}
@@ -107,7 +104,7 @@ void MapLoader::loadTileSet(const std::string &assetDir, const Tmx::Tileset* til
 
     // Get tile set image. Should be preloaded from assets folder
     // Use path relative to asset directory
-    sf::TexturePtr pTexture = TextureLocator::getObject()->get(assetDir + fs::nativeSeparator() + image->GetSource());
+    sf::TexturePtr pTexture = TextureLocator::getObject()->get(assetDir + '/' + image->GetSource());
 
     if(!pTexture)
     {
@@ -118,7 +115,6 @@ void MapLoader::loadTileSet(const std::string &assetDir, const Tmx::Tileset* til
     int tilesetWidth = image->GetWidth();
     int tilesetHeight = image->GetHeight();
 
-    // Tile ID's are fucked up and index from gid - 1
     int gid = 0;
 
     TileSetContainer& tileSetContainer = m_tileTextures[m_tileTextures.size()];
@@ -131,7 +127,6 @@ void MapLoader::loadTileSet(const std::string &assetDir, const Tmx::Tileset* til
         {
             // set texture in to map using ID
             // Tilesets have constantly incrementing ID'S
-            // Its good to make sure that im setting ID's correctly and parsing images correctly
             tileSetContainer[gid++] = TextureRegion(pTexture, x, y, tileWidth, tileHeight);
         }
     }
@@ -139,13 +134,23 @@ void MapLoader::loadTileSet(const std::string &assetDir, const Tmx::Tileset* til
     CORE_DEBUG("Loaded tileset: " + image->GetSource());
 }
 
-void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int tileHeight, bool collidable)
+void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int tileHeight)
 {
     // NOTE: The parser automagically multiplies by tile width & height
-    int layerHeight = layer->GetHeight();
-    int layerWidth = layer->GetWidth();
-    float yOffset = (layerHeight / 2.f) + tileHeight;
+    const int layerHeight = layer->GetHeight();
+    const int layerWidth = layer->GetWidth();
+    const float yOffset = (layerHeight / 2.f) + tileHeight;
 
+    // So I found a fix to tearing, and that's just manipulating the
+    // float values slightly so that they round up, causing the tiles
+    // to align just nicely. The values are so small that it isn't visible
+    // to the naked eye.
+    // Yes, I am aware that it's a horrible hack, if you have any better
+    // solutions, feel free to change this
+    const sf::Vector2f tileOffsetHack = sf::Vector2f(
+                0.075f / PhysicsLocator::PixelsPerMeter.x,
+                0.075f / PhysicsLocator::PixelsPerMeter.y
+    );
 
     for(int x = 0; x < layerWidth; ++x)
     {
@@ -162,9 +167,15 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
 
                 // Convert tile layer to inverse cartesian coordinates
                 e.addComponent(new Transform(x * tileWidth, (y - yOffset) * tileHeight));
+
                 // Insert new renderable using tileset id
-                e.addComponent(new Renderable(m_tileTextures[tile.tilesetId][tile.id],
-                        layer->GetZOrder(), tileWidth, tileHeight));
+                e.addComponent(new Renderable(
+                        m_tileTextures[tile.tilesetId][tile.id],
+                        layer->GetZOrder(),
+                        // Only offset width and height
+                        tileWidth + tileOffsetHack.x,
+                        tileHeight + tileOffsetHack.y)
+                );
 
                 // Commit entity changes
                 e.refresh();
@@ -227,11 +238,21 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
             renderableComp->order = order;
        }
 
+       Physics* physicsComp = static_cast<Physics*>(entity.getComponent<DynamicBody>());
+
+       if(physicsComp && isZero(physicsComp->getDimensions()))
+       {
+           physicsComp->setDimensions(
+               object->GetWidth() / PhysicsLocator::PixelsPerMeter.x,
+               object->GetHeight() / PhysicsLocator::PixelsPerMeter.y
+           );
+       }
+
        if(bCollidable) // Is entity collidable?
        {
-            Physics* physicsComp = static_cast<Physics*>(entity.getComponent<StaticBody>());
+            physicsComp = static_cast<Physics*>(entity.getComponent<StaticBody>());
 
-            if(physicsComp == NULL && entity.getComponent<DynamicBody>() == NULL)
+            if(physicsComp == nullptr && entity.getComponent<DynamicBody>() == nullptr)
             {
                 // Create new physics component
                 physicsComp = new StaticBody(
@@ -248,6 +269,9 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
                     transformComp->position.y, 
                     transformComp->rotation
                 );
+
+                // Set user data to entity
+                physicsComp->body->SetUserData(&entity);
             }
        }
 

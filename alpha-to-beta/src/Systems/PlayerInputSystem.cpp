@@ -101,6 +101,6 @@ void PlayerInputSystem::processEntities(artemis::ImmutableBag<artemis::Entity*>&
 	{
 		m_pPlayerBody->body->ApplyLinearImpulse(b2Vec2(-0.2f, 0.f), 
             m_pPlayerBody->body->GetWorldCenter(), true
-		);
+        );
 	}
 }

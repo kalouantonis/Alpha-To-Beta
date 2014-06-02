@@ -85,6 +85,7 @@ bool GameScreen::init()
 
         CORE_DEBUG("Loading entities...");
         m_level.load("assets/levels/level1.xml");
+		//m_level.load("assets\\levels\\level1.xml");
 
         CORE_DEBUG("Resizing camera to work with physics system");
         m_camera.resize(sf::Vector2u(

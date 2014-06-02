@@ -33,7 +33,7 @@ private:
 
 	sf::RenderTargetPtr m_pRenderTarget;
 
-	static constexpr float OUTLINE_THICKNESS = 0.02f;
+	static const float OUTLINE_THICKNESS;
 };
 
 #endif // BOX2D_RENDERER_H

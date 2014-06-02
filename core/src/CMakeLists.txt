@@ -70,6 +70,7 @@ set(
 	"Entities/EntityFactory.h"
     "Entities/Level.cpp"
 	"Entities/Level.h"
+    "Entities/Utils.h"
 )
 
 set(
@@ -79,6 +80,8 @@ set(
     "Events/EventManager.h"
     "Events/EventManagerImpl.cpp"
     "Events/EventManagerImpl.h"
+    "Events/CollisionEvents.cpp"
+    "Events/CollisionEvents.h"
 )
 
 # Graphics/*.{h|cpp}
@@ -121,6 +124,8 @@ set(
 	PHYSICS_SRC
 	"Physics/Box2DRenderer.cpp"
 	"Physics/Box2DRenderer.h"
+    "Physics/CollisionDispatcher.cpp"
+    "Physics/CollisionDispatcher.h"
 	"Physics/PhysicsLocator.cpp"
 	"Physics/PhysicsLocator.h"
 )
@@ -197,12 +202,20 @@ add_library(
 target_link_libraries(
 	core; 
 
-    ${Boost_LIBRARIES};
 	ArtemisCpp; 	# Artemis EC System
 	tinyxml2static; # TinyXML
 	Box2D;			# Physics Engine
     tmxparser;		# TMX parser
 )
+
+if(${UNIX})
+    # Statically link boost with core for Unix Systems
+    target_link_libraries(
+        core;
+
+        ${Boost_LIBRARIES};
+    )
+endif(${UNIX})
 
 install(TARGETS core
     RUNTIME DESTINATION ${core_BINARY_DIR}
