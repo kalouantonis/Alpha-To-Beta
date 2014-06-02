@@ -11,7 +11,10 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/Modules/")
 
 # Find SFML before proceeding
 find_package(SFML COMPONENTS system window graphics REQUIRED)
+# Lua library
 find_package(Luabind REQUIRED)
+# Math library
+find_package(GLM REQUIRED)
 
 # Boost vars
 if(${WIN32})
