@@ -112,6 +112,8 @@ set(
     LUA_SRC
     "Lua/LuaStateManager.cpp"
     "Lua/LuaStateManager.h"
+    "Lua/ScriptEvent.cpp"
+    "Lua/ScriptEvent.h"
 )
 
 set(

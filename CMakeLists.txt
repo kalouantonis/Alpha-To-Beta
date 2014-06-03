@@ -43,12 +43,6 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	MESSAGE(STATUS "Building in debug mode...")
 	# Debug mode
     add_definitions(-D_DEBUG)
-	
-	# if(${UNIX})
- #          #add_definitions(-ggdb)
-	# elseif(${WIN32})
-	# 	add_definitions(/g3)
-	# endif(${UNIX})
 elseif(${CMAKE_BUILD_TYPE} STREQUAL "Release")
 	MESSAGE(STATUS "Building in release mode...")
 	# Release mode

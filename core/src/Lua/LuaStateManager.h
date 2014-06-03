@@ -2,8 +2,12 @@
 #define LUA_STATE_MANAGER_H
 
 #include <string>
+#include <luabind/object.hpp>
 
+// FWD Defs
 struct lua_State;
+
+/////////////////////////////////////////////////////////////////
 
 class LuaStateManager
 {
@@ -11,10 +15,13 @@ public:
     static bool create();
     static void destroy();
 
+    static LuaStateManager* get();
+
     bool init();
     void executeFile(const char* filename);
     void executeString(const char* str);
 
+    const luabind::object& getGlobalVars() const;
     lua_State* getLuaState() const { return m_pLuaState; }
 
 private:
