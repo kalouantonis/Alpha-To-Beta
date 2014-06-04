@@ -13,6 +13,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/Modules/")
 find_package(SFML COMPONENTS system window graphics REQUIRED)
 # Math library
 find_package(GLM REQUIRED)
+# ZLib compression
+find_package(ZLIB REQUIRED)
 
 # Boost vars
 if(${WIN32})
