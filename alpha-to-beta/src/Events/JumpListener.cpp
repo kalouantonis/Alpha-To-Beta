@@ -78,7 +78,7 @@ void JumpListener::receiveBeginCollisionEvt(EventDataPtr pEvent)
 
     // FIXME: Check whether collision occurs at the top
 
-    JumpBehaviour* jumpComponents[2] {
+    JumpBehaviour* jumpComponents[2] = {
         safeGetComponent<JumpBehaviour>(pCollisionEvent->getEntityA()),
         safeGetComponent<JumpBehaviour>(pCollisionEvent->getEntityB())
     };

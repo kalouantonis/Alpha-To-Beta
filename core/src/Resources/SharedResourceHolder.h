@@ -23,7 +23,7 @@ public:
 		// Create and load resource
 		Ptr resource(new Resource());
 		if(!resource->loadFromFile(filename))
-			throw std::runtime_error("ResourceHolder::load - Failed to load: " + filename);
+			throw std::runtime_error("Failed to load: " + filename);
 
 		// If loading successful, insert resource to map
 		// Transfer ownership to map, as it will have a longer lifetime than all others 
@@ -36,7 +36,7 @@ public:
 		// Create and load resource
 		Ptr resource(new Resource());
 		if(!resource->loadFromFile(filename, secondParam))
-			throw std::runtime_error("ResourceHolder::load - Failed to load: " + filename);
+			throw std::runtime_error("Failed to load: " + filename);
 
 		// Insert to resource map
 		insertResource(id, std::move(resource));

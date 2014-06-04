@@ -41,71 +41,67 @@ GameScreen::GameScreen(sf::RenderTargetPtr window)
 
 bool GameScreen::init()
 {
-    try
-    {
-        TextureLocator::provide(TextureLocator::Ptr(new TextureHolder()));
+	TextureLocator::provide(TextureLocator::Ptr(new TextureHolder()));
 
-        CORE_DEBUG("Creating lua state...");
-        LuaStateManager::create();
+	CORE_DEBUG("Creating lua state...");
+	if(!LuaStateManager::create())
+	{
+		return false;
+	}
 
-        PhysicsLocator::provide(sf::Vector2f(0, 9.81f), sf::Vector2f(70, 70));
+//        LuaStateManager::get()->executeString("print('Hello World!')");
 
-        artemis::SystemManager* systemManager = m_world.getSystemManager();
+	PhysicsLocator::provide(sf::Vector2f(0, 9.81f), sf::Vector2f(70, 70));
 
-        CORE_DEBUG("Creating render system...");
-        m_pRenderSystem = static_cast<RenderSystem*>(
-             systemManager->setSystem(new RenderSystem(m_spriteBatch))
-        );
+	artemis::SystemManager* systemManager = m_world.getSystemManager();
 
-        m_pRenderSystem->setWorld(&m_world);
+	CORE_DEBUG("Creating render system...");
+	m_pRenderSystem = static_cast<RenderSystem*>(
+		 systemManager->setSystem(new RenderSystem(m_spriteBatch))
+	);
 
-        CORE_DEBUG("Creating physics system...");
-        m_pPhysicsSystem = static_cast<PhysicsSystem*>(
-            systemManager->setSystem(new PhysicsSystem())
-        );
+	m_pRenderSystem->setWorld(&m_world);
 
-        CORE_DEBUG("Creating input system...");
-        m_pInputSystem = static_cast<PlayerInputSystem*>(
-            systemManager->setSystem(new PlayerInputSystem())
-        );
+	CORE_DEBUG("Creating physics system...");
+	m_pPhysicsSystem = static_cast<PhysicsSystem*>(
+		systemManager->setSystem(new PhysicsSystem())
+	);
 
-        m_pCameraSystem = static_cast<CameraFollowingSystem*>(
-            systemManager->setSystem(new CameraFollowingSystem(m_camera))
-        );
+	CORE_DEBUG("Creating input system...");
+	m_pInputSystem = static_cast<PlayerInputSystem*>(
+		systemManager->setSystem(new PlayerInputSystem())
+	);
 
-        // Set input processor
-        InputLocator::provide(loose_ptr(m_pInputSystem));
+	m_pCameraSystem = static_cast<CameraFollowingSystem*>(
+		systemManager->setSystem(new CameraFollowingSystem(m_camera))
+	);
 
-        CORE_DEBUG("Initializing physics renderer...");
-        PhysicsLocator::getObject()->SetDebugDraw(m_pB2Renderer.get());
-        m_pB2Renderer->SetFlags(Box2DRenderer::e_shapeBit);
+	// Set input processor
+	InputLocator::provide(loose_ptr(m_pInputSystem));
 
-        CORE_DEBUG("Adding listeners...");
-        m_pJumpListener.reset(new JumpListener());
+	CORE_DEBUG("Initializing physics renderer...");
+	PhysicsLocator::getObject()->SetDebugDraw(m_pB2Renderer.get());
+	m_pB2Renderer->SetFlags(Box2DRenderer::e_shapeBit);
 
-        CORE_DEBUG("Initializing all systems...");
-        systemManager->initializeAll();
+	CORE_DEBUG("Adding listeners...");
+	m_pJumpListener.reset(new JumpListener());
 
-        CORE_DEBUG("Loading entities...");
-        m_level.load("assets/levels/level1.xml");
-		//m_level.load("assets\\levels\\level1.xml");
+	CORE_DEBUG("Initializing all systems...");
+	systemManager->initializeAll();
 
-        CORE_DEBUG("Resizing camera to work with physics system");
-        m_camera.resize(sf::Vector2u(
-            m_camera.getSize().x / PhysicsLocator::PixelsPerMeter.x,
-            m_camera.getSize().y / PhysicsLocator::PixelsPerMeter.y
-        ));
+	CORE_DEBUG("Loading entities...");
+	m_level.load("assets/levels/level1.xml");
+	//m_level.load("assets\\levels\\level1.xml");
 
-        CORE_DEBUG("Initialization complete.");
+	CORE_DEBUG("Resizing camera to work with physics system");
+	m_camera.resize(sf::Vector2u(
+		m_camera.getSize().x / PhysicsLocator::PixelsPerMeter.x,
+		m_camera.getSize().y / PhysicsLocator::PixelsPerMeter.y
+	));
 
-        return true;
-    }
-    catch(std::runtime_error& e)
-    {
-       CORE_ERROR(e.what());
+	CORE_DEBUG("Initialization complete.");
 
-       return false;
-    }
+	return true;
 }
 
 GameScreen::~GameScreen()

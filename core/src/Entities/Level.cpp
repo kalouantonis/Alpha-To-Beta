@@ -119,7 +119,16 @@ bool Level::loadAssets(const std::string& assetDir)
 		if(filesystem::is_regular_file(filePath))
 		{
 			// Load single asset
-			TextureLocator::getObject()->load(assetDir, assetDir);
+			try 
+			{
+				// Use Asset Directory as ID. Also, since its a regular file,
+				// load it
+				loadTexture(assetDir, assetDir);
+			}
+			catch(const std::runtime_error& e)
+			{
+				CORE_ERROR(e.what());
+			}
 		}
 		else if(filesystem::is_directory(filePath))
 		{
@@ -138,13 +147,13 @@ bool Level::loadAssets(const std::string& assetDir)
 				if(filesystem::is_regular_file(file) && 
                     (file.extension().generic_string() == ".png"))
                 {
-					TextureLocator::getObject()->load(
-							// use generic file name for compatibility
-							file.generic_string(), 
-							file.string()			// Use native file name
+					loadTexture(
+						// use generic file name for compatibility
+						file.generic_string(), 
+						// Use native file name
+						file.string()
 					);
 
-					CORE_DEBUG("Loaded texture: " + file.string());
 				}
 			}
 		}
@@ -161,5 +170,19 @@ bool Level::loadAssets(const std::string& assetDir)
 	}
 
 	return true;
+}
+
+void Level::loadTexture(const std::string& id, const std::string& file)
+{
+	try
+	{
+		TextureLocator::getObject()->load(id, file);
+		
+		CORE_DEBUG("Loaded texture: " + file);
+	}
+	catch(const std::runtime_error& e)
+	{
+		CORE_ERROR(e.what());
+	}
 }
 

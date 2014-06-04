@@ -46,6 +46,7 @@ private:
 	 */
     // TODO: Load assets using relative asset dir filename. Same goes for maps
 	bool loadAssets(const std::string& assetDir);
+	void loadTexture(const std::string& id, const std::string& file);
 
 	/**
 	 * Location of game object definitions
