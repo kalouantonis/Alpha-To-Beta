@@ -26,18 +26,45 @@ public:
 
     static LuaStateManager* get();
 
+	/**
+	 * Initialise lua state and register exports
+	 * 
+     * @return false if registering failed
+     */
     bool init();
-    void executeFile(const char* filename);
+	/**
+	 * Execute a given lua script file.
+	 * 
+     * @param filename Lua script to execute
+     * @return false if loading failed 
+     */
+    bool executeFile(const char* filename);
+	/**
+	 * Execute a string with the lua interpreter
+     * @param str String to execute
+     */
     void executeString(const char* str);
 
+	/**
+	 * Get lua state global variables
+     */
     luabind::object getGlobalVars() const;
+	/**
+	 * Get the lua interpreter state 
+     */
     lua_State* getLuaState() const { return m_pLuaState; }
 
 private:
     // State manager pointer for use by singleton
     static LuaStateManager* s_pSingleton;
 
+	/**
+	 * Log lua error
+     */
     void setError(int errorNum);
+	/**
+	 * Clear lua state stack
+     */
     void clearStack();
 
     LuaStateManager();

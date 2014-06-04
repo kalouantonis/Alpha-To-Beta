@@ -113,7 +113,24 @@ void ScriptEventListenerManager::destroyListener(ScriptEventListener *pListener)
 
 // Internal Script Exports //////////////////////////////////////////////////////////////////////////////
 
+namespace InternalScriptExports
+{
 
+void luaLog(const luabind::object& text)
+{
+	try
+	{
+		const std::string& luaText = luabind::object_cast<std::string>(text);
+		CORE_LOG("LUA", luaText);		
+	}
+	catch(const luabind::cast_failed&) // Casting of object to string failed
+	{
+		// FIXME: Print data type string instead
+		CORE_LOG("LUA", "Can not log unrecognised object");
+	}
+}
+
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -137,6 +154,22 @@ void registerExport(const char* luaFuncName, RetType (*func)())
 	[
 		luabind::def(luaFuncName, func)
 	];
+}
+
+void registerAll()
+{
+	// Keep lua state reference for micro-optimization purposes.
+	lua_State* pLuaState = LuaStateManager::get()->getLuaState();
+
+	luabind::module(pLuaState)
+	[
+		luabind::def("log", &InternalScriptExports::luaLog)
+	];
+}
+
+void unregisterAll()
+{
+	
 }
 
 }

@@ -28,31 +28,6 @@ void RenderSystem::begin()
 
 void RenderSystem::processEntities(artemis::ImmutableBag<artemis::Entity*> &entities)
 {
-//    // !TODO: Dont do this you idiot...
-//    for(int i = 0; i < entities.getCount(); ++i)
-//    {
-//        DrawableMap::iterator findIt = m_drawables.find(entities.get(i)->getId());
-
-//        // Check that entity under given id exists in drawables
-//        if(findIt != m_drawables.end())
-//        {
-//            // Get pair
-//            DrawablePair& pair = (*findIt).second;
-
-//            Renderable* renderable = pair.first;
-//            Transform* transform = pair.second;
-
-//            // Draw renderable
-//            m_spriteBatch.draw(renderable->getTextureRegion(),
-//                transform->position.x, transform->position.y,
-//                renderable->width, renderable->height,
-//                transform->origin.x, transform->origin.y,
-//                //transform->scale.x, transform->scale.y,
-//                transform->rotation);
-//        }
-//    }
-
-
     for(const auto& orderPair : m_drawables)
     {
         const DrawableMap& drawableMap = orderPair.second;

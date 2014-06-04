@@ -44,7 +44,6 @@ private:
 	 * @param assetDir Asset directory to load from
 	 * @return false if loading failed
 	 */
-    // TODO: Load assets using relative asset dir filename. Same goes for maps
 	bool loadAssets(const std::string& assetDir);
 	void loadTexture(const std::string& id, const std::string& file);
 

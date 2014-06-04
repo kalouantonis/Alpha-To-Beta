@@ -144,7 +144,7 @@ void EntityFactory::load(const std::string &path, bool recurse)
                 }
                 else
                 {
-                    // FIXME: Recurse if broken
+                    // FIXME: Recurse is broken
                     // Ignore folders
                     std::copy(
                         filesystem::directory_iterator(fsPath),

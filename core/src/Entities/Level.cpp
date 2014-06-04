@@ -111,7 +111,6 @@ void Level::reload(bool reloadResources, bool reloadEntities)
 
 bool Level::loadAssets(const std::string& assetDir)
 {
-	// TODO: Move out of here, make generic file directory recurser
 	filesystem::path filePath(assetDir);
 
 	if(filesystem::exists(filePath))

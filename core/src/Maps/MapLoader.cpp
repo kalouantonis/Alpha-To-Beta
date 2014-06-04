@@ -158,7 +158,7 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
         {
             const Tmx::MapTile& tile = layer->GetTile(x, y);
 
-            if(tile.id != -1 && tile.tilesetId != -1) // Valid tile ID
+            if((int)tile.id != -1 && (int)tile.tilesetId != -1) // Valid tile ID
             {
                 // Create new entity
                 artemis::Entity& e = m_worldManager.createEntity();

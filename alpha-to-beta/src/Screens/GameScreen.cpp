@@ -49,7 +49,7 @@ bool GameScreen::init()
 		return false;
 	}
 
-//	LuaStateManager::get()->executeString("execute_string('nothing')");
+	LuaStateManager::get()->executeString("log('Hello C++!')");
 
 	PhysicsLocator::provide(sf::Vector2f(0, 9.81f), sf::Vector2f(70, 70));
 

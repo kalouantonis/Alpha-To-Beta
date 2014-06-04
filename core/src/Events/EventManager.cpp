@@ -12,7 +12,7 @@ static GenericObjectFactory<EventType, IEventData> g_eventFactory;
 template <class EventClass>
 bool RegisterEvent()
 {
-    g_eventFactory.declare<EventClass>(EventClass::sEventType);
+    return g_eventFactory.declare<EventClass>(EventClass::sEventType);
 }
 
 EventDataPtr CreateEvent(EventType eventType)
