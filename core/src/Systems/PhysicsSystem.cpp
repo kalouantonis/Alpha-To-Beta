@@ -18,7 +18,6 @@ PhysicsSystem::~PhysicsSystem()
 void PhysicsSystem::initialize()
 {
 	m_transformMapper.init(*world);
-	m_physicsMapper.init(*world);
 }
 
 void PhysicsSystem::added(artemis::Entity& e)
@@ -61,9 +60,14 @@ void PhysicsSystem::added(artemis::Entity& e)
 void PhysicsSystem::processEntity(artemis::Entity &e)
 {
 	Transform* transform = m_transformMapper.get(e);
-	DynamicBody* dynamicBody = m_physicsMapper.get(e);
+	// Get component straight from entity here, due to better performance.
+	// If i used a mapper, the lookup time would be worse, due to the system
+	// not specifying that all passed components must have a DynamicBody component.
+	DynamicBody* dynamicBody = static_cast<DynamicBody*>(
+		e.getComponent<DynamicBody>()
+	);
 	
-    if(dynamicBody != NULL)
+    if(dynamicBody != nullptr)
 	{
 		transform->position = dynamicBody->getPosition();
 		transform->rotation = dynamicBody->getRotation();

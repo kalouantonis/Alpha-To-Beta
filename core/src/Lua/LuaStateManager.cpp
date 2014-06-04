@@ -61,7 +61,7 @@ bool LuaStateManager::init()
 
     if(m_pLuaState == nullptr)
     {
-		// lua_atpanic will be called, priting an error to stderr
+		// lua_atpanic will be called, printing an error to stderr
         CORE_ERROR("Lua failed to initialize");
         return false;
     }
