@@ -49,7 +49,18 @@ private:
 #ifndef NDEBUG // If in debug mode
 
 // Note, the do-while removes the ; at the end of the call
-// TODO: Create assert
+#define CORE_ASSERT(expr) \
+	do \
+	{ \
+		if(!(expr)) \
+		{ \
+			Logger::instance().log("ASSERT", #expr, __FUNCTION__, __FILE__, __LINE__); \\
+			Logger::instance().flush(); \
+			std::terminate(); \
+		} \
+	} \
+	while(0)\
+
 #define CORE_FATAL(str) \
     do \
     { \
@@ -135,6 +146,7 @@ private:
 #define CORE_DEBUG(str) do { (void)sizeof(str); } while(0)
 #define CORE_VERBOSE(str) do { (void)sizeof(str); } while(0)
 #define CORE_LOG(tag, str) do { (void)sizeof(str); } while(0)
+#define CORE_ASSERT(expr) do { (void)sizeof(str); } while(0)
 
 #endif
 
