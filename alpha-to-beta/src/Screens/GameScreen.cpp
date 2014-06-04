@@ -49,7 +49,7 @@ bool GameScreen::init()
 		return false;
 	}
 
-//        LuaStateManager::get()->executeString("print('Hello World!')");
+//	LuaStateManager::get()->executeString("execute_string('nothing')");
 
 	PhysicsLocator::provide(sf::Vector2f(0, 9.81f), sf::Vector2f(70, 70));
 

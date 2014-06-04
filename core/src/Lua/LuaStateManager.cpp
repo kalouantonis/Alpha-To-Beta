@@ -58,7 +58,7 @@ bool LuaStateManager::init()
 
     if(m_pLuaState == nullptr)
     {
-        CORE_FATAL("Lua failed to initialize");
+        CORE_ERROR("Lua failed to initialize");
         return false;
     }
 
@@ -129,7 +129,7 @@ void LuaStateManager::setError(int errorNo)
     else
         m_lastError = "Unknown Lua parse error";
 
-    CORE_ERROR(m_lastError);
+    CORE_LOG("LUA", m_lastError);
 }
 
 void LuaStateManager::clearStack()

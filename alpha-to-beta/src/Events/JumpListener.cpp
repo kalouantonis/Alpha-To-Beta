@@ -76,7 +76,7 @@ void JumpListener::receiveBeginCollisionEvt(EventDataPtr pEvent)
     BaseCollisionEventPtr pCollisionEvent =
             std::static_pointer_cast<BaseCollisionEvent>(pEvent);
 
-    // FIXME: Check whether collision occurs at the top
+    // FIXME: Check whether collision occurs at the top of the object
 
     JumpBehaviour* jumpComponents[2] = {
         safeGetComponent<JumpBehaviour>(pCollisionEvent->getEntityA()),
@@ -94,7 +94,5 @@ void JumpListener::receiveBeginCollisionEvt(EventDataPtr pEvent)
     else
         pCurrentJumpComponent = jumpComponents[1];
 
-
-    CORE_DEBUG("RESETTING JUMPS!!!!");
     pCurrentJumpComponent->resetJumps();
 }
