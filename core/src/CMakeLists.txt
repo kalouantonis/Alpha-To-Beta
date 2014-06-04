@@ -1,24 +1,24 @@
 project(core)
 
 include_directories(
-	# Subdirectory include
-	.;
-	# TinyXML include
-	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinyxml2;
-	# TMX Parser
-	${tmxparser_SOURCE_DIR};
+    # Subdirectory include
+    .;
+    # TinyXML include
+    ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinyxml2;
+    # TMX Parser
+    ${tmxparser_SOURCE_DIR};
     # FastDelegate
     ${FastDelegate_SOURCE_DIR};
-	# Artemis
-	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/Artemis-Cpp/include;
-	# Box2D
-	${Box2D_SOURCE_DIR};
+    # Artemis
+    ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/Artemis-Cpp/include;
+    # Box2D
+    ${Box2D_SOURCE_DIR};
     # Lua
     ${LUA_INCLUDE_DIR};
     # LuaBind
     ${LUABIND_INCLUDE_DIR};
-	# Boost library
-	${Boost_INCLUDE_DIR};
+    # Boost library
+    ${Boost_INCLUDE_DIR};
 )
 
 link_directories(
@@ -69,12 +69,13 @@ set(
 )
 
 set(
-	ENTITIES_SRC
-	"Entities/EntityFactory.cpp"
-	"Entities/EntityFactory.h"
+    ENTITIES_SRC
+    "Entities/EntityFactory.cpp"
+    "Entities/EntityFactory.h"
     "Entities/Level.cpp"
-	"Entities/Level.h"
+    "Entities/Level.h"
     "Entities/Utils.h"
+    "Entities/WorldLocator.h"
 )
 
 set(
@@ -185,24 +186,24 @@ set(
 
 # Add all current *.cpp files in to build
 set(
-	SOURCE_FILE_LIST;
+    SOURCE_FILE_LIST;
 
-	${MAIN_SRC};
-	${COMPONENTS_SRC};
-	${DATA_STRUCTURES_SRC};
+    ${MAIN_SRC};
+    ${COMPONENTS_SRC};
+    ${DATA_STRUCTURES_SRC};
     ${ENTITIES_SRC};
     ${EVENTS_SRC};
-	${GRAPHICS_SRC};
-	${INPUT_SRC};
+    ${GRAPHICS_SRC};
+    ${INPUT_SRC};
     ${LUA_SRC};
-	${MAPS_SRC};
-	${MATH_SRC};
+    ${MAPS_SRC};
+    ${MATH_SRC};
     ${MEMORY_SRC};
-	${PHYSICS_SRC};
-	${RESOURCES_SRC};
-	${SCREENS_SRC};
-	${SYSTEMS_SRC};
-	${UTILS_SRC};
+    ${PHYSICS_SRC};
+    ${RESOURCES_SRC};
+    ${SCREENS_SRC};
+    ${SYSTEMS_SRC};
+    ${UTILS_SRC};
 )
 
 # Create library

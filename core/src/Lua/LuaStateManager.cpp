@@ -19,8 +19,8 @@ LuaStateManager::~LuaStateManager()
 {
     if(m_pLuaState)
     {
-		// Unregister exports
-		ScriptExports::unregisterAll();
+        // Unregister exports
+        ScriptExports::unregisterAll();
         // Close lua state
         lua_close(m_pLuaState);
         m_pLuaState = nullptr;
@@ -61,7 +61,7 @@ bool LuaStateManager::init()
 
     if(m_pLuaState == nullptr)
     {
-		// lua_atpanic will be called, printing an error to stderr
+        // lua_atpanic will be called, printing an error to stderr
         CORE_ERROR("Lua failed to initialize");
         return false;
     }
@@ -76,8 +76,8 @@ bool LuaStateManager::init()
         luabind::def("execute_string", &LuaStateManager::executeString)
     ];
 
-	// register other exports
-	ScriptExports::registerAll();
+    // register other exports
+    ScriptExports::registerAll();
 
     return true;
 }
@@ -87,13 +87,13 @@ bool LuaStateManager::executeFile(const char* filename)
     int result = luaL_dofile(m_pLuaState, filename);
 
     if(result != 0)
-	{
+    {
         // Call error
         setError(result);
-		return false;
-	}
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
 void LuaStateManager::executeString(const char* str)
@@ -139,7 +139,9 @@ void LuaStateManager::setError(int errorNo)
         clearStack();
     }
     else
+    {
         m_lastError = "Unknown Lua parse error";
+    }
 
     CORE_LOG("LUA", m_lastError);
 }

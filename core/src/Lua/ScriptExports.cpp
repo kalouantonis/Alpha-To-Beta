@@ -118,16 +118,16 @@ namespace InternalScriptExports
 
 void luaLog(const luabind::object& text)
 {
-	try
-	{
-		const std::string& luaText = luabind::object_cast<std::string>(text);
-		CORE_LOG("LUA", luaText);		
-	}
-	catch(const luabind::cast_failed&) // Casting of object to string failed
-	{
-		// FIXME: Print data type string instead
-		CORE_LOG("LUA", "Can not log unrecognised object");
-	}
+    try
+    {
+        const std::string& luaText = luabind::object_cast<std::string>(text);
+        CORE_LOG("LUA", luaText);
+    }
+    catch(const luabind::cast_failed&) // Casting of object to string failed
+    {
+        // FIXME: Print data type string instead
+        CORE_LOG("LUA", "Can not log unrecognised object");
+    }
 }
 
 }
@@ -140,31 +140,31 @@ namespace ScriptExports
 template<class CallerType, class RetType>
 void registerExport(const char* luaFuncName, RetType (CallerType::*func)())
 {
-	// Bind to global lua state
-	luabind::module(LuaStateManager::get()->getLuaState())
-	[
-		luabind::def(luaFuncName, func)		
-	];
+    // Bind to global lua state
+    luabind::module(LuaStateManager::get()->getLuaState())
+    [
+        luabind::def(luaFuncName, func)
+    ];
 }
 
 template<class RetType>
 void registerExport(const char* luaFuncName, RetType (*func)())
 {
-	luabind::module(LuaStateManager::get()->getLuaState())
-	[
-		luabind::def(luaFuncName, func)
-	];
+    luabind::module(LuaStateManager::get()->getLuaState())
+    [
+        luabind::def(luaFuncName, func)
+    ];
 }
 
 void registerAll()
 {
-	// Keep lua state reference for micro-optimization purposes.
-	lua_State* pLuaState = LuaStateManager::get()->getLuaState();
+    // Keep lua state reference for micro-optimization purposes.
+    lua_State* pLuaState = LuaStateManager::get()->getLuaState();
 
-	luabind::module(pLuaState)
-	[
-		luabind::def("log", &InternalScriptExports::luaLog)
-	];
+    luabind::module(pLuaState)
+    [
+        luabind::def("log", &InternalScriptExports::luaLog)
+    ];
 }
 
 void unregisterAll()

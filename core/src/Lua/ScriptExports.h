@@ -40,6 +40,6 @@ void registerAll();
  */
 void unregisterAll();
 
-};
+}
 
 #endif // SCRIPT_EXPORTS_H
