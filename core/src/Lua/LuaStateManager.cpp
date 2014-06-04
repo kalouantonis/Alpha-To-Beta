@@ -88,7 +88,7 @@ void LuaStateManager::executeString(const char* str)
 {
     int result = 0;
 
-    // Most strings are passed straight through the lua interpretter
+    // Most strings are passed straight through the lua interpreter
     if(strlen(str) <= 1 || str[0] != '=')
     {
         // Execute string
@@ -97,10 +97,10 @@ void LuaStateManager::executeString(const char* str)
         if(result != 0)
             setError(result);
     }
-    else // If the string starts with '=', wrap the statement in the print function
+    else // If the string starts with '=', wrap the statement in the log function
     {
         // Populate buffer
-        std::string buffer("print(");
+        std::string buffer("log(");
         buffer += (str + 1);
         buffer += ')';
 
