@@ -1,8 +1,16 @@
+#include <Lua/ScriptExports.h>
+#include <Lua/ScriptEvent.h>
+#include <Lua/LuaStateManager.h>
+
 #include <Events/EventManager.h>
 
-#include <Lua/ScriptEvent.h>
+#include <Utils/Logger.h>
 
 #include <set>
+
+#include <luabind/scope.hpp>
+#include <luabind/function.hpp>
+
 
 // Script Event Listener ////////////////////////////////////////////////////////////////////////////////
 
@@ -21,8 +29,8 @@ public:
 private:
     void scriptEventDelegate(EventDataPtr pEvent);        
 
-    EventType m_eventType;
     luabind::object m_scriptCallbackFunction;
+    EventType m_eventType;
 };
 
 ScriptEventListener::ScriptEventListener(EventType eventType, const luabind::object& scriptCallbackFunction)
@@ -38,7 +46,7 @@ ScriptEventListener::~ScriptEventListener()
     if(pEventManager)
     {
         // Remove event listener from manager
-        pEventManager->removeListener(getDelegate, m_eventType);
+        pEventManager->removeListener(getDelegate(), m_eventType);
     }
 }
 
@@ -81,12 +89,12 @@ ScriptEventListenerManager::~ScriptEventListenerManager()
     m_listeners.clear();
 }
 
-ScriptEventListenerManager::addListener(ScriptEventListener *pListener)
+void ScriptEventListenerManager::addListener(ScriptEventListener *pListener)
 {
     m_listeners.insert(pListener);
 }
 
-ScriptEventListenerManager::destroyListener(ScriptEventListener *pListener)
+void ScriptEventListenerManager::destroyListener(ScriptEventListener *pListener)
 {
     auto findIt = m_listeners.find(pListener);
     if(findIt != m_listeners.end())
@@ -108,3 +116,27 @@ ScriptEventListenerManager::destroyListener(ScriptEventListener *pListener)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace ScriptExports
+{
+
+template<class CallerType, class RetType>
+void registerExport(const char* luaFuncName, RetType (CallerType::*func)())
+{
+	// Bind to global lua state
+	luabind::module(LuaStateManager::get()->getLuaState())
+	[
+		luabind::def(luaFuncName, func)		
+	];
+}
+
+template<class RetType>
+void registerExport(const char* luaFuncName, RetType (*func)())
+{
+	luabind::module(LuaStateManager::get()->getLuaState())
+	[
+		luabind::def(luaFuncName, func)
+	];
+}
+
+}

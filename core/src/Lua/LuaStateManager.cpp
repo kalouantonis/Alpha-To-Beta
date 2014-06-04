@@ -110,7 +110,7 @@ void LuaStateManager::executeString(const char* str)
     }
 }
 
-const luabind::object& LuaStateManager::getGlobalVars() const
+luabind::object LuaStateManager::getGlobalVars() const
 {
     assert(m_pLuaState);
     return luabind::globals(m_pLuaState);
@@ -118,8 +118,6 @@ const luabind::object& LuaStateManager::getGlobalVars() const
 
 void LuaStateManager::setError(int errorNo)
 {
-    // Luabind usually throws exceptions. If this area is hit... well, we're screwed
-
     // Get last line of code executed
     const char* errMsg = lua_tostring(m_pLuaState, -1);
 

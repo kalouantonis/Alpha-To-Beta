@@ -114,6 +114,8 @@ set(
     "Lua/LuaStateManager.h"
     "Lua/ScriptEvent.cpp"
     "Lua/ScriptEvent.h"
+	"Lua/ScriptExports.cpp"
+	"Lua/ScriptExports.h"
 )
 
 set(

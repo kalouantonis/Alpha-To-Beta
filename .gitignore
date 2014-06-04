@@ -15,3 +15,6 @@ build
 
 # Doxygen conf
 doxy.conf
+
+# Netbeans files
+nbproject

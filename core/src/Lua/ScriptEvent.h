@@ -10,7 +10,7 @@
 class ScriptEvent;
 typedef std::function<ScriptEvent*(void)> CreateEventForScriptFunctionType;
 
-class ScriptEvent
+class ScriptEvent: public BaseEventData
 {
 public:
     ScriptEvent();

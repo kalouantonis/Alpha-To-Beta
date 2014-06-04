@@ -7,12 +7,21 @@
 // FWD Defs
 struct lua_State;
 
-/////////////////////////////////////////////////////////////////
-
+/**
+ * Singleton class tasked with managing the lua state
+ */
 class LuaStateManager
 {
 public:
+	/**
+	 * Create state manager singleton, initialize lua state
+	 * 
+	 * @return true if creation success
+	 */
     static bool create();
+	/**
+	 * Destroy state manager singleton, destroy lua state
+	 */
     static void destroy();
 
     static LuaStateManager* get();
@@ -21,7 +30,7 @@ public:
     void executeFile(const char* filename);
     void executeString(const char* str);
 
-    const luabind::object& getGlobalVars() const;
+    luabind::object getGlobalVars() const;
     lua_State* getLuaState() const { return m_pLuaState; }
 
 private:

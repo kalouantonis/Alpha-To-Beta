@@ -72,6 +72,6 @@ ScriptEvent* ScriptEvent::createEventFromScript(EventType type)
 void ScriptEvent::buildEventData()
 {
     // set event data to null
-    // TODO: Check correctness. May not
+    // TODO: Check correctness. May not actually do what I said it does
     m_eventData.push(nullptr);
 }
