@@ -45,7 +45,7 @@ bool LuaStateManager::create()
 void LuaStateManager::destroy()
 {
    assert(s_pSingleton != nullptr);
-   SAFE_DELETE(s_pSingleton); 
+   SAFE_DELETE(s_pSingleton);
 }
 
 LuaStateManager* LuaStateManager::get()
@@ -70,7 +70,7 @@ bool LuaStateManager::init()
     luabind::open(m_pLuaState);
 
     // bind functions. Add to global scope
-    luabind::module(m_pLuaState) 
+    luabind::module(m_pLuaState)
     [
         luabind::def("execute_file", &LuaStateManager::executeFile),
         luabind::def("execute_string", &LuaStateManager::executeString)
