@@ -26,7 +26,6 @@
 
 GameScreen::GameScreen(sf::RenderTargetPtr window)
     : IScreen(window)
-    // , m_manager(window)
     , m_world()
     , m_spriteBatch(window)
     , m_camera(window)
@@ -106,11 +105,6 @@ bool GameScreen::init()
 
 GameScreen::~GameScreen()
 {
-    // CORE_DEBUG("Disposing GameManager...");
-    // m_manager.dispose();
-    // CORE_DEBUG("Destroying physics system...");
-    // PhysicsLocator::remove();
-
     CORE_DEBUG("Removing all entities...");
     // Clear out all entities
     m_world.getEntityManager()->removeAllEntities();

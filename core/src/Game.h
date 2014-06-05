@@ -16,6 +16,9 @@
 class IEventManager;
 typedef std::shared_ptr<IEventManager> EventManagerPtr;
 
+/**
+ * Main game class
+ */
 class Game
 {
 public:

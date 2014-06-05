@@ -11,7 +11,6 @@
 #include <luabind/scope.hpp>
 #include <luabind/function.hpp>
 
-
 // Script Event Listener ////////////////////////////////////////////////////////////////////////////////
 
 class ScriptEventListener
@@ -73,20 +72,19 @@ public:
     void addListener(ScriptEventListener* pListener);
     void destroyListener(ScriptEventListener* pListener);
 
+    /**
+     * Destroy all listeners
+     */
+    void destroyAll();
+
 private:
     std::set<ScriptEventListener*> m_listeners;
 };
 
 ScriptEventListenerManager::~ScriptEventListenerManager()
 {
-    // De-allocate all listeners
-    for(auto pListener : m_listeners)
-    {
-        delete pListener;
-    }
-
-    // Clear the set
-    m_listeners.clear();
+    if(!m_listeners.empty())
+        destroyAll();
 }
 
 void ScriptEventListenerManager::addListener(ScriptEventListener *pListener)
@@ -107,6 +105,18 @@ void ScriptEventListenerManager::destroyListener(ScriptEventListener *pListener)
     {
         CORE_ERROR("Couldn't find script listener. This will likely cause a memory leak");
     }
+}
+
+void ScriptEventListenerManager::destroyAll()
+{
+    // De-allocate all listeners
+    for(auto pListener : m_listeners)
+    {
+        delete pListener;
+    }
+
+    // Clear the set
+    m_listeners.clear();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -169,7 +179,6 @@ void registerAll()
 
 void unregisterAll()
 {
-	
 }
 
 }

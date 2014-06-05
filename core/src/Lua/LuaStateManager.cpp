@@ -12,7 +12,7 @@ LuaStateManager* LuaStateManager::s_pSingleton = nullptr;
 LuaStateManager::LuaStateManager()
     : m_pLuaState(nullptr)
 {
-
+    
 }
 
 LuaStateManager::~LuaStateManager()
@@ -39,13 +39,13 @@ bool LuaStateManager::create()
     if(s_pSingleton)
         return s_pSingleton->init();
 
-    return false;
+	return false;
 }
 
 void LuaStateManager::destroy()
 {
-   assert(s_pSingleton != nullptr);
-   SAFE_DELETE(s_pSingleton);
+    assert(s_pSingleton != nullptr);
+    SAFE_DELETE(s_pSingleton);
 }
 
 LuaStateManager* LuaStateManager::get()
