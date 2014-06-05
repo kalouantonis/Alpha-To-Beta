@@ -1,6 +1,8 @@
 #ifndef LUA_STATE_MANAGER_H
 #define LUA_STATE_MANAGER_H
 
+#include <SFML/System/NonCopyable.hpp>
+
 #include <string>
 #include <luabind/object.hpp>
 
@@ -10,7 +12,7 @@ struct lua_State;
 /**
  * Singleton class tasked with managing the lua state
  */
-class LuaStateManager
+class LuaStateManager: private sf::NonCopyable
 {
 public:
 	/**

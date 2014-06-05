@@ -1,6 +1,7 @@
 #ifndef  LOGGER_EXPORTS_H_
 #define  LOGGER_EXPORTS_H_
 
+// Forward define luabind object
 namespace luabind
 {
     namespace adl

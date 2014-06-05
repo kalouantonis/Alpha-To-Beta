@@ -12,6 +12,9 @@
 
 #include <Utils/Logger.h>
 
+// Disable copying
+#include <SFML/System/NonCopyable.hpp>
+
 namespace InternalScriptExports 
 {
 
@@ -70,7 +73,7 @@ void ScriptEventListener::scriptEventDelegate(EventDataPtr pEvent)
 //ScriptEventListenerManager////////////////////////////////////////////////////
 
 // NOTE: Probably don't need this
-class ScriptEventListenerManager 
+class ScriptEventListenerManager: private sf::NonCopyable // Dis-allow copying
 {
 public:
     ~ScriptEventListenerManager();
