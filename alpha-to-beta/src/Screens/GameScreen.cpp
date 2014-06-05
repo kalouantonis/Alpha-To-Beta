@@ -9,6 +9,7 @@
 #include <Memory/loose_ptr.h>
 
 #include <Events/JumpListener.h>
+#include <Entities/WorldLocator.h>
 
 #include <Lua/LuaStateManager.h>
 
@@ -52,6 +53,8 @@ bool GameScreen::init()
 
 	PhysicsLocator::provide(sf::Vector2f(0, 9.81f), sf::Vector2f(70, 70));
 
+//    WorldLocator::provide(WorldLocator::Ptr(new artemis::World()));
+
 	artemis::SystemManager* systemManager = m_world.getSystemManager();
 
 	CORE_DEBUG("Creating render system...");
@@ -59,7 +62,7 @@ bool GameScreen::init()
 		 systemManager->setSystem(new RenderSystem(m_spriteBatch))
 	);
 
-	m_pRenderSystem->setWorld(&m_world);
+	//m_pRenderSystem->setWorld(&m_world);
 
 	CORE_DEBUG("Creating physics system...");
 	m_pPhysicsSystem = static_cast<PhysicsSystem*>(
@@ -90,7 +93,6 @@ bool GameScreen::init()
 
 	CORE_DEBUG("Loading entities...");
 	m_level.load("assets/levels/level1.xml");
-	//m_level.load("assets\\levels\\level1.xml");
 
 	CORE_DEBUG("Resizing camera to work with physics system");
 	m_camera.resize(sf::Vector2u(

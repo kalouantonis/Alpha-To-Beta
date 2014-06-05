@@ -10,6 +10,18 @@
 class ScriptEvent;
 typedef std::function<ScriptEvent*(void)> CreateEventForScriptFunctionType;
 
+// Register script using class type as event name
+#define REGISTER_SCRIPT_EVENT(eventClass, eventType) \
+    ScriptEvent::registerEventTypeWithScript(#eventClass, eventType) \
+    ScriptEvent::addCreationFunction(eventType, &eventClass::createEventFromScript)
+
+#define EXPORT_FOR_SCRIPT_EVENT(eventClass) \
+    public: \
+        static ScriptEvent* createEventFromScript() \
+        { \
+            return new eventClass; \
+        }
+
 class ScriptEvent: public BaseEventData
 {
 public:

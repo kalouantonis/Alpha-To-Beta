@@ -117,6 +117,11 @@ set(
     "Lua/ScriptEvent.h"
 	"Lua/ScriptExports.cpp"
 	"Lua/ScriptExports.h"
+    # Internal exports
+    "Lua/exports/LoggerExports.cpp"
+    "Lua/exports/LoggerExports.h"
+    "Lua/exports/EventExports.cpp"
+    "Lua/exports/EventExports.h"
 )
 
 set(
