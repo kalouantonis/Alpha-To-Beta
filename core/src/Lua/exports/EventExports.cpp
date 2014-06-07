@@ -147,7 +147,7 @@ bool initEventExports()
 void destroyEventExports()
 {
     assert(g_pScriptEventListenerManager != nullptr);
-    // De-alloc
+    // De-alloc, desturctor should be called automatically, freeing listeners
     g_pScriptEventListenerManager = nullptr;
 }
 
@@ -202,7 +202,10 @@ std::shared_ptr<ScriptEvent> buildEvent(EventType eventType, const luabind::adl:
 
 bool queueEvent(EventType eventType, const luabind::adl::object& eventData)
 {
-    std::shared_ptr<ScriptEvent> pEvent(buildEvent(eventType, eventData));
+    std::shared_ptr<ScriptEvent> pEvent(
+            buildEvent(eventType, eventData)
+    );
+
     if(pEvent)
     {
         return IEventManager::get()->queueEvent(pEvent);
@@ -213,7 +216,10 @@ bool queueEvent(EventType eventType, const luabind::adl::object& eventData)
 
 bool triggerEvent(EventType eventType, const luabind::adl::object& eventData)
 {
-    std::shared_ptr<ScriptEvent> pEvent(buildEvent(eventType, eventData));
+    std::shared_ptr<ScriptEvent> pEvent(
+            buildEvent(eventType, eventData)
+    );
+
     if(pEvent)
     {
         return IEventManager::get()->triggerEvent(pEvent);
@@ -221,7 +227,5 @@ bool triggerEvent(EventType eventType, const luabind::adl::object& eventData)
 
     return false;
 }
-
-
 
 }
