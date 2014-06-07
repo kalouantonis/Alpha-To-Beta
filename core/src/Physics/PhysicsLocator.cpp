@@ -49,3 +49,9 @@ b2Body* PhysicsLocator::createDynamicBody()
 
 	return getObject()->CreateBody(&bodyDef);
 }
+
+void PhysicsLocator::convertToWorldCoords(sf::Vector2f& pos)
+{
+    pos.x /= PhysicsLocator::PixelsPerMeter.x;
+    pos.y /= PhysicsLocator::PixelsPerMeter.y;
+}

@@ -6,16 +6,16 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
 
+#include <Entities/WorldLocator.h>
+
 #include <Resources/ResourceDef.h>
 #include <Utils/Logger.h>
 #include <Utils/String.h>
 
 using namespace boost;
 
-Level::Level(artemis::World& worldManager)
-	: m_entityFactory(worldManager)
-    , m_mapLoader(worldManager)
-    , m_entityManager(worldManager.getEntityManager())
+Level::Level()
+    : m_mapLoader()
 {
 }
 
@@ -94,7 +94,7 @@ void Level::reload(bool reloadResources, bool reloadEntities)
 	if(reloadEntities)
 	{
 		CORE_LOG("LEVEL", "Removing all entities from manager...");
-		m_entityManager->removeAllEntities();
+        WorldLocator::getObject()->getEntityManager()->removeAllEntities();
 		// TODO: Reload all systems
 	}
 

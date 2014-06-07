@@ -122,6 +122,8 @@ set(
     "Lua/exports/LoggerExports.h"
     "Lua/exports/EventExports.cpp"
     "Lua/exports/EventExports.h"
+    "Lua/exports/EntityExports.cpp"
+    "Lua/exports/EntityExports.h"
 )
 
 set(

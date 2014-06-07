@@ -13,15 +13,15 @@
 
 #include <Artemis/Entity.h>
 #include <Artemis/TagManager.h>
-#include <Artemis/World.h>
+
+#include <Entities/WorldLocator.h>
 
 #include <boost/filesystem.hpp>
 
 using namespace boost;
 
 
-EntityFactory::EntityFactory(artemis::World& worldManager)
-    : m_worldManager(worldManager)
+EntityFactory::EntityFactory()
 {
     m_componentFactory.declare<Transform>(Transform::g_name);
     m_componentFactory.declare<Renderable>(Renderable::g_name);
@@ -36,10 +36,16 @@ EntityFactory::~EntityFactory()
     m_componentFactory.clear();
 }
 
+EntityFactory& EntityFactory::get()
+{
+    static EntityFactory instance;
+    return instance;
+}
+
 bool EntityFactory::loadFromFile(const std::string &filename)
 {
     // Create new entity
-    return loadFromFile(filename, m_worldManager.createEntity());
+    return loadFromFile(filename, WorldLocator::getObject()->createEntity());
 }
 
 bool EntityFactory::loadFromFile(const std::string& filename, artemis::Entity& entity)
@@ -69,15 +75,15 @@ bool EntityFactory::loadFromFile(const std::string& filename, artemis::Entity& e
         return false;
     }
 
-    // Try and get tag attribute from xml entity
-    const char* tag = pRoot->Attribute("tag");
-
-
-    if(tag != NULL)
-    {
-        if(!m_worldManager.getTagManager()->isSubscribed(tag))
-            m_worldManager.getTagManager()->subscribe(tag, entity);
-    }
+//    // Try and get tag attribute from xml entity
+//    const char* tag = pRoot->Attribute("tag");
+//
+//
+//    if(tag != NULL)
+//    {
+//        if(!m_worldManager.getTagManager()->isSubscribed(tag))
+//            m_worldManager.getTagManager()->subscribe(tag, entity);
+//    }
 
 
 

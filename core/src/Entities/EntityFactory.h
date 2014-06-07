@@ -5,6 +5,8 @@
 #include <Resources/XMLoader.h>
 
 #include <Components/ParsedComponent.h>
+
+#include <SFML/System/NonCopyable.hpp>
 // #include <Systems/WorldManager.h>
 
 // fwd def
@@ -22,10 +24,11 @@ typedef GenericObjectFactory<std::string, ParsedComponent> ComponentFactory;
  * @details Loads components from entity XML files
  * 
  */
-class EntityFactory
+class EntityFactory: private sf::NonCopyable // Dis-allow copying
 {
 public:
-    EntityFactory(artemis::World& world);
+    static EntityFactory& get();
+
     ~EntityFactory();
 
     /**
@@ -71,8 +74,11 @@ protected:
 
 private:
     // Store world reference
-    artemis::World& m_worldManager;
+//    artemis::World& m_worldManager;
     XMLoader m_xmlLoader;
+
+    // Hide constructor and destructor
+    EntityFactory();
 };
 
 #endif // ENTITYFACTORY_H

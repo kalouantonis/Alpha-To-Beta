@@ -46,6 +46,8 @@ public:
      */
 	static b2Body* createDynamicBody();
 
+    static void convertToWorldCoords(sf::Vector2f& pos);
+
 private:
     /**
      * Reference to collision dispatcher. Called when by world when collision events occur

@@ -22,7 +22,7 @@ class World;
 class MapLoader
 {
 public:
-    MapLoader(artemis::World& m_worldManager);
+    MapLoader();
 
     /**
      * @brief Load map from file
@@ -39,10 +39,6 @@ public:
      */
 	void reload();
 private:
-    artemis::World& m_worldManager;
-    // Used to create entities for map
-    EntityFactory m_entityFactory;
-
     typedef std::unordered_map<int, TextureRegion> TileSetContainer;
 
     std::unordered_map<int, TileSetContainer> m_tileTextures;

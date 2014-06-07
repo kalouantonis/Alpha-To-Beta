@@ -27,7 +27,7 @@
 
 GameScreen::GameScreen(sf::RenderTargetPtr window)
     : IScreen(window)
-    , m_world()
+    , m_world(new artemis::World())
     , m_spriteBatch(window)
     , m_camera(window)
     , m_pRenderSystem(nullptr)
@@ -35,7 +35,6 @@ GameScreen::GameScreen(sf::RenderTargetPtr window)
     , m_pInputSystem(nullptr)
     , m_pJumpListener(nullptr)
     , m_pB2Renderer(new Box2DRenderer(window))
-    , m_level(m_world)
 {
 }
 
@@ -53,9 +52,14 @@ bool GameScreen::init()
 
 	PhysicsLocator::provide(sf::Vector2f(0, 9.81f), sf::Vector2f(70, 70));
 
-//    WorldLocator::provide(WorldLocator::Ptr(new artemis::World()));
+    // TODO: Don't use temporary reference
 
-	artemis::SystemManager* systemManager = m_world.getSystemManager();
+    WorldLocator::provide(m_world);
+
+    // Execute test file
+//    LuaStateManager::get()->executeFile("test.lua");
+
+	artemis::SystemManager* systemManager = m_world->getSystemManager();
 
 	CORE_DEBUG("Creating render system...");
 	m_pRenderSystem = static_cast<RenderSystem*>(
@@ -109,7 +113,7 @@ GameScreen::~GameScreen()
 {
     CORE_DEBUG("Removing all entities...");
     // Clear out all entities
-    m_world.getEntityManager()->removeAllEntities();
+    m_world->getEntityManager()->removeAllEntities();
     
     CORE_DEBUG("Removing input processor...");
     InputLocator::remove();
@@ -125,6 +129,9 @@ GameScreen::~GameScreen()
 
     CORE_DEBUG("Destroying lua state...");
     LuaStateManager::destroy();
+
+    CORE_DEBUG("Destroying entity world...");
+    WorldLocator::remove();
 
     CORE_DEBUG("GameScreen disposed...");
 }
@@ -163,8 +170,8 @@ void GameScreen::update(float deltaTime)
         m_camera.move(0, 0.05f);
     }
 
-    m_world.loopStart();
-    m_world.setDelta(deltaTime);
+    m_world->loopStart();
+    m_world->setDelta(deltaTime);
 
     // Update input
     m_pInputSystem->process();

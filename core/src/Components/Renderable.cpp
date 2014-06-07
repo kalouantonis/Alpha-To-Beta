@@ -9,6 +9,8 @@
 // String trimming
 #include <boost/algorithm/string.hpp>
 
+#include <Physics/PhysicsLocator.h>
+
 const char* Renderable::g_name = "Renderable";
 
 Renderable::Renderable(int order, float width, float height)
@@ -95,12 +97,12 @@ bool Renderable::load(const tinyxml2::XMLElement *pElement)
 	{
 		pElement->QueryFloatAttribute("width", &width);
 		pElement->QueryFloatAttribute("height", &height);
-		m_textureRegion = tmpRegion;
+
+        width = width != 0 ? width / PhysicsLocator::PixelsPerMeter.x : 0;
+        height = height != 0 ? height / PhysicsLocator::PixelsPerMeter.y : 0;
 	}
-	else
-	{
-        m_textureRegion = tmpRegion;
-	}
+
+    m_textureRegion = tmpRegion;
 
     return true;
 }

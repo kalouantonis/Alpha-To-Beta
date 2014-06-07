@@ -1,7 +1,6 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include <Entities/EntityFactory.h>
 #include <Maps/MapLoader.h>
 
 // fwd defs
@@ -13,25 +12,13 @@ class EntityManager;
 class Level
 {
 public:
-	Level(artemis::World& worldManager);
+	Level();
 
 	void load(const std::string& filename);
 	void reload(bool reloadResources = true, bool reloadEntities = true);
 
-	EntityFactory& getEntityFactory() { return m_entityFactory; }
-
 private:
-	/**
-	 * Entity factory instance
-	 */
-	EntityFactory m_entityFactory;
-
     MapLoader m_mapLoader;
-
-	/**
-	 * @brief The manager of world entities
-	 */
-	artemis::EntityManager* m_entityManager;
 
 	/**
 	 * Used for loading level data

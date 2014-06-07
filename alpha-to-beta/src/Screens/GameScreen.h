@@ -34,7 +34,7 @@ public:
 
 private:
     // GameManager m_manager;
-	artemis::World m_world;
+    std::shared_ptr<artemis::World> m_world;
 
     SpriteBatch m_spriteBatch;
     Camera2D m_camera;
