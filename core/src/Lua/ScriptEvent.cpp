@@ -3,6 +3,8 @@
 
 #include <Utils/Logger.h>
 
+const EventType ScriptEvent::sEventType = 0x82a1d091;
+
 ScriptEvent::CreationFunctionsMap ScriptEvent::s_creationFunctions;
 
 ScriptEvent::ScriptEvent()

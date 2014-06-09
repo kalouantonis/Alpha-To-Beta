@@ -18,7 +18,7 @@
 namespace InternalScriptExports 
 {
 
-long createEntity(const char* entityResource, const luabind::adl::object& luaPosition)
+int createEntity(const char* entityResource, const luabind::adl::object& luaPosition)
 {
     if(luabind::type(luaPosition) != LUA_TTABLE)
     {
@@ -59,9 +59,21 @@ long createEntity(const char* entityResource, const luabind::adl::object& luaPos
         entity.addComponent(new Transform(position.x, position.y));
     }
 
+    // Commit entity changes
+    entity.refresh();
+
     CORE_LOG("LUA", "Created entity from: " + std::string(entityResource));
 
     return entity.getId();
+}
+
+void removeEntity(int entityId)
+{
+    // Receive entity
+    artemis::Entity& entity = WorldLocator::getObject()->getEntity(entityId); 
+    CORE_LOG("LUA", "Removing entity: " + entity.toString());
+    // Remove entity from world
+    entity.remove();
 }
 
 }

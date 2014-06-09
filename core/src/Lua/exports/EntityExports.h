@@ -15,10 +15,10 @@ namespace InternalScriptExports
 {
 
 // Because I can, thats why
-const long INVALID_ENTITY_ID = -69;
+const int INVALID_ENTITY_ID = -69;
 
-long createEntity(const char* entityResource, const luabind::adl::object& luaPosition);
-void removeEntity(long entityId);
+int createEntity(const char* entityResource, const luabind::adl::object& luaPosition);
+void removeEntity(int entityId);
 
 }
 

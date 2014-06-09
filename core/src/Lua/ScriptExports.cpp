@@ -7,6 +7,7 @@
 #include <Lua/exports/LoggerExports.h>
 #include <Lua/exports/EventExports.h>
 #include <Lua/exports/EntityExports.h>
+#include <Lua/exports/MathExports.h>
 
 #include <luabind/function.hpp>
 
@@ -50,7 +51,10 @@ void registerAll()
         luabind::def("queue_event", &InternalScriptExports::queueEvent),
         luabind::def("trigger_event", &InternalScriptExports::triggerEvent),
         // Entities
-        luabind::def("create_entity", &InternalScriptExports::createEntity)
+        luabind::def("create_entity", &InternalScriptExports::createEntity),
+        luabind::def("remove_entity", &InternalScriptExports::removeEntity)
+        // Math
+//        luabind::def("convert_to_world_coords", &InternalScriptExports::convertToWorldCoords)
     ];
 }
 

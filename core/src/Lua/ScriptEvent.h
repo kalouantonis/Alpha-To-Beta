@@ -46,6 +46,11 @@ public:
     static void addCreationFunction(EventType type, CreateEventForScriptFunctionType& creationFunction);
     static ScriptEvent* createEventFromScript(EventType event);
 
+    // BaseEventData implementation
+    virtual EventType getEventType() const final { return sEventType; }
+    virtual const char* getName() const final { return "ScriptEvent"; }
+
+    static const EventType sEventType;
     
 protected:
     virtual void buildEventData();
