@@ -62,7 +62,7 @@ void JumpListener::receiveJumpEvt(EventDataPtr pEvent)
         if(pJumpBehaviour->jump() <= pJumpBehaviour->getMaxJumps())
         {
             pDynamicBody->body->ApplyLinearImpulse(
-                toB2Vec(pJumpBehaviour->impulse),
+                toVec2<b2Vec2>(pJumpBehaviour->impulse),
                 // Get object center
                 pDynamicBody->body->GetWorldCenter(),
                 true

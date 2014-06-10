@@ -52,9 +52,9 @@ void registerAll()
         luabind::def("trigger_event", &InternalScriptExports::triggerEvent),
         // Entities
         luabind::def("create_entity", &InternalScriptExports::createEntity),
-        luabind::def("remove_entity", &InternalScriptExports::removeEntity)
+        luabind::def("remove_entity", &InternalScriptExports::removeEntity),
         // Math
-//        luabind::def("convert_to_world_coords", &InternalScriptExports::convertToWorldCoords)
+        luabind::def("convert_to_world_coords", &InternalScriptExports::convertToWorldCoords)
     ];
 }
 

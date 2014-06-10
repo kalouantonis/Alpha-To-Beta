@@ -4,26 +4,19 @@
 #include <Box2D/Common/b2Math.h>
 #include <SFML/System/Vector2.hpp>
 
+// FromVec is usually deduced. Set ToVec first because that is
+// usually undeducable
 /**
- * @brief Convert SFML vector to Box2D vector
-
- * @param vector SFML vector to convert
- * @return Converted box2d vector
+ * @brief Convert any 2D vector type to any other 2D vector type
+ *
+ * @param vector Vector to convert from
+ * @tparam ToVec The vector type to convert to
+ * @tparam FromVec The vector type to convert from. This is usually deduced by the compiler
  */
-inline b2Vec2 toB2Vec(const sf::Vector2f& vector)
+template <class ToVec, class FromVec>
+inline ToVec toVec2(const FromVec& vector)
 {
-	return b2Vec2(vector.x, vector.y);
-}
-
-/**
- * @brief Convert box2d vector to SFML vector
- * 
- * @param vector box2d vector to convert
- * @return Converted SFML vector
- */
-inline sf::Vector2f toSFVec(const b2Vec2& vector)
-{
-	return sf::Vector2f(vector.x, vector.y);
+    return ToVec(vector.x, vector.y);
 }
 
 template <typename T>
@@ -33,7 +26,7 @@ template <typename T>
  * @param vec vector to check
  * @return true if zero
  */
-inline bool isZero(const sf::Vector2<T>& vec)
+inline bool isZero(const T& vec)
 {
     return ((vec.x == 0) && (vec.y == 0));
 }

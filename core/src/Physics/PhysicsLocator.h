@@ -46,7 +46,8 @@ public:
      */
 	static b2Body* createDynamicBody();
 
-    static void convertToWorldCoords(sf::Vector2f& pos);
+    template <class VecT>
+    static void convertToWorldCoords(VecT& pos) { convertToWorldCoords(pos.x, pos.y); }
     static void convertToWorldCoords(float& x, float& y);
 
 private:
