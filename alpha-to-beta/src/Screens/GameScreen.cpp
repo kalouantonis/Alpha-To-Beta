@@ -85,9 +85,14 @@ bool GameScreen::init()
 	// Set input processor
 	InputLocator::provide(loose_ptr(m_pInputSystem));
 
+// Don't allow in release for testing
+#ifdef _DEBUG
+
 	CORE_DEBUG("Initializing physics renderer...");
 	PhysicsLocator::getObject()->SetDebugDraw(m_pB2Renderer.get());
 	m_pB2Renderer->SetFlags(Box2DRenderer::e_shapeBit);
+
+#endif
 
 	CORE_DEBUG("Adding listeners...");
 	m_pJumpListener.reset(new JumpListener());
