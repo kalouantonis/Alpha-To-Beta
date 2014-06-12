@@ -3,10 +3,10 @@
 
 #include <assert.h>
 #include <bitset>
-#include "TypeInfoComparator.h"
 #include "ComponentType.h"
 #include "Component.h"
 #include <unordered_map>
+#include <typeinfo>
 
 namespace artemis {
 	/**

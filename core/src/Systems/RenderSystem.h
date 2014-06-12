@@ -11,14 +11,12 @@
 #include <Components/Renderable.h>
 
 #include <unordered_map>
-
-//#include <list>
+#include <map>
 
 /*
 TODO: 
 
 - Group textures
-- Layering using a map
 - Quad tree
 
 */

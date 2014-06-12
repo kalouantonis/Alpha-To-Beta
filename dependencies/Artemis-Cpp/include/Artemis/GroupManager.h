@@ -2,7 +2,7 @@
 #define GROUP_MANAGER_H
 
 #include "ImmutableBag.h"
-#include <map>
+#include <unordered_map>
 #include <string>
 
 namespace artemis {
@@ -18,7 +18,7 @@ namespace artemis {
 		Bag<Entity*> empty_bag;
 		std::string empty_string;
 		Bag<std::string*> groupByEntity;
-		std::map<std::string, Bag<Entity*>*> entitiesByGroup;
+		std::unordered_map<std::string, Bag<Entity*>*> entitiesByGroup;
 	public:
 		GroupManager();
 		~GroupManager();
