@@ -2,6 +2,7 @@
 #define STRING_H
 
 #include <string>
+#include <vector>
 
 /**
  * @brief Safely create a string from a c style string
@@ -12,5 +13,9 @@
  * @return Created string, may be empty
  */
 std::string make_string(const char* str);
+
+typedef std::vector<std::string> StringVector;
+
+void split(const std::string& str, StringVector& vec, char delimiter);
 
 #endif // STRING_H

@@ -1,4 +1,3 @@
-    //
 #include <Lua/ScriptExports.h>
 #include <Lua/ScriptEvent.h>
 #include <Lua/LuaStateManager.h>

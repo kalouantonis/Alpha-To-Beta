@@ -6,7 +6,7 @@
 #include "TypeInfoComparator.h"
 #include "ComponentType.h"
 #include "Component.h"
-#include <map>
+#include <unordered_map>
 
 namespace artemis {
 	/**
@@ -16,8 +16,7 @@ namespace artemis {
     
   private:
     ComponentTypeManager();
-    static std::map<const std::type_info*,ComponentType*,
-                    type_info_comparator> componentTypes;
+    static std::unordered_map<const std::type_info*,ComponentType*> componentTypes;
         
   public:
     

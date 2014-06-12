@@ -57,7 +57,7 @@ bool GameScreen::init()
     WorldLocator::provide(m_world);
 
     // Execute test file
-//    LuaStateManager::get()->executeFile("test.lua");
+    LuaStateManager::get()->executeFile("test.lua");
 
 	artemis::SystemManager* systemManager = m_world->getSystemManager();
 

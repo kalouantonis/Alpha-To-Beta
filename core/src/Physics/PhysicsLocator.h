@@ -47,7 +47,7 @@ public:
 	static b2Body* createDynamicBody();
 
     template <class VecT>
-    static void convertToWorldCoords(VecT& pos) { convertToWorldCoords(pos.x, pos.y); }
+    static void convertToWorldCoords(VecT& pos) { convertToWorldCoords((float&)pos.x, (float&)pos.y); }
     static void convertToWorldCoords(float& x, float& y);
 
 private:

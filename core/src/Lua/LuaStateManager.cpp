@@ -3,6 +3,7 @@
 
 #include <Utils/Helpers.h>
 #include <Utils/Logger.h>
+#include <Utils/String.h>
 
 // TODO: Include specific headers
 #include <luabind/luabind.hpp>
@@ -127,6 +128,50 @@ luabind::object LuaStateManager::getGlobalVars() const
 {
     assert(m_pLuaState);
     return luabind::globals(m_pLuaState);
+}
+
+luabind::object LuaStateManager::createPath(const char* pathString, bool ignoreLastElement)
+{
+    StringVector splitPath;
+    // Split using '.'
+    split(pathString, splitPath, '.');
+    if(ignoreLastElement)
+        // Remove last element
+        splitPath.pop_back();
+
+    luabind::object context = getGlobalVars();
+
+    // Iterate over all element values
+    for(const auto& element : splitPath)
+    {
+        // make sure global context is still valid
+        if(luabind::type(context) == LUA_TNIL)
+        {
+            CORE_ERROR("Something went wrong in createPath(). Bailing on (element == " + element + ")");
+            break;
+        }
+
+        // grab whatever exists for this element
+        luabind::object curr = context[element.c_str()];
+        
+        if(luabind::type(curr) != LUA_TTABLE)
+        {
+            // If the element is not a table and not null, we overwrite it
+            if(luabind::type(curr) != LUA_TNIL)
+            {
+                CORE_WARNING("Ovewriting element '" + element + "' in table");
+                context[element.c_str()] = luabind::nil;
+            }
+
+            // element was either nil or was overwritten, so add the new table
+            context[element.c_str()] = luabind::newtable(m_pLuaState);
+        }
+
+        // Assign new context
+        context = context[element.c_str()];
+    }
+
+    return context;
 }
 
 void LuaStateManager::setError(int errorNo)

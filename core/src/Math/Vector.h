@@ -12,6 +12,7 @@
  * @param vector Vector to convert from
  * @tparam ToVec The vector type to convert to
  * @tparam FromVec The vector type to convert from. This is usually deduced by the compiler
+ * @return the newly converted vector
  */
 template <class ToVec, class FromVec>
 inline ToVec toVec2(const FromVec& vector)
@@ -19,13 +20,14 @@ inline ToVec toVec2(const FromVec& vector)
     return ToVec(vector.x, vector.y);
 }
 
-template <typename T>
 /**
  * @brief Check if SFML vector is zero
  * 
  * @param vec vector to check
+ * @tparam T The type of the vector. Usually deduced by compiler
  * @return true if zero
  */
+template <typename T>
 inline bool isZero(const T& vec)
 {
     return ((vec.x == 0) && (vec.y == 0));

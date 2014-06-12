@@ -97,7 +97,7 @@ namespace artemis {
     
     virtual E get(int index) {
       if (index >= size) return NULL;
-      return (E)data[index];
+      return data[index];
     };
     
     virtual int getCapacity() {return size;};

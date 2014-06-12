@@ -56,6 +56,14 @@ public:
      */
     lua_State* getLuaState() const { return m_pLuaState; }
 
+    /**
+     * Takes a string and creates a table path to it. 
+     *
+     * E.g. If you pass in A.B.C, it will create a table called A with a single element called
+     * B which has a single element called C
+     */
+    luabind::object createPath(const char* pathString, bool ignoreLastElement = false);
+
 private:
     // State manager pointer for use by singleton
     static LuaStateManager* s_pSingleton;
