@@ -17,15 +17,23 @@ void convertToWorldCoords(const luabind::adl::object& luaVec)
         return;
     }
 
-    // FIXME: Handle cast fail exception
-    float x = luabind::object_cast<float>(luaVec["x"]);
-    float y = luabind::object_cast<float>(luaVec["y"]);
+    try 
+    {
+        float x = luabind::object_cast<float>(luaVec["x"]);
+        float y = luabind::object_cast<float>(luaVec["y"]);
 
-    PhysicsLocator::convertToWorldCoords(x, y);
+        PhysicsLocator::convertToWorldCoords(x, y);
 
-    // Set lua object
-    luaVec["x"] = x;
-    luaVec["y"] = y;
+        // Set lua object
+        luaVec["x"] = x;
+        luaVec["y"] = y;
+
+    }
+    catch(const luabind::cast_failed& e)
+    {
+        CORE_LOG("LUA", "Failed to cast x and y co-ordinates in to vector."
+                "\nThis could be because of an invalid type provided.");
+    }
 }
 
 }

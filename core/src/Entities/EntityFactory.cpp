@@ -10,6 +10,7 @@
 #include <Components/JumpBehaviour.h>
 #include <Components/PlayerInput.h>
 #include <Components/CameraFollower.h>
+#include <Components/BaseScriptComponent.h>
 
 #include <Artemis/Entity.h>
 #include <Artemis/TagManager.h>
@@ -29,6 +30,7 @@ EntityFactory::EntityFactory()
     m_componentFactory.declare<JumpBehaviour>(JumpBehaviour::g_name);
     m_componentFactory.declare<PlayerInput>(PlayerInput::g_name);
     m_componentFactory.declare<CameraFollower>(CameraFollower::g_name);
+    m_componentFactory.declare<BaseScriptComponent>(BaseScriptComponent::g_name);
 }
 
 EntityFactory::~EntityFactory()

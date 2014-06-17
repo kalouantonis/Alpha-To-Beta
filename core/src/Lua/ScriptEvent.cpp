@@ -13,7 +13,7 @@ ScriptEvent::ScriptEvent()
 
 }
 
-const luabind::object& ScriptEvent::getEventData()
+const luabind::object& ScriptEvent::getEventData() 
 {
     if(!m_bEventDataIsValid)
     {
@@ -35,20 +35,28 @@ bool ScriptEvent::setEventData(const luabind::object &eventData)
 
 void ScriptEvent::registerEventTypeWithScript(const char *key, EventType type)
 {
+    LuaStateManager* pStateManager = LuaStateManager::get();
+
     // get or create event table
-    luabind::object eventTypeTable = LuaStateManager::get()->getGlobalVars()["EventType"];
+    luabind::object eventTypeTable = pStateManager->getGlobalVars()["EventType"];
     // Check if object has been initialized
     if(luabind::type(eventTypeTable) == LUA_TNIL)
     {
-        luabind::settable(eventTypeTable, key, (double)type);
+        // Create new table
+        eventTypeTable = luabind::newtable(pStateManager->getLuaState());
+        // bind to global vars
+        pStateManager->getGlobalVars()["EventType"] = eventTypeTable;
     }
     
     // Error checking
     assert(luabind::type(eventTypeTable) == LUA_TTABLE);
-    assert(luabind::type(eventTypeTable[key]) == LUA_TNUMBER);
+    assert(luabind::type(eventTypeTable[key]) == LUA_TNIL);
+
+    // add entry
+    luabind::settable(eventTypeTable, key, (double)type);
 }
 
-void ScriptEvent::addCreationFunction(EventType type, CreateEventForScriptFunctionType& creationFunction)
+void ScriptEvent::addCreationFunction(EventType type, CreateEventForScriptFunctionType creationFunction)
 {
     // Verify that creation function does not already exist
     assert(s_creationFunctions.find(type) == s_creationFunctions.end());
@@ -73,7 +81,7 @@ ScriptEvent* ScriptEvent::createEventFromScript(EventType type)
 
 void ScriptEvent::buildEventData()
 {
-    // set event data to null
-    // TODO: Check correctness. May not actually do what I said it does
-    m_eventData.push(nullptr);
+    // Set interpretter if it does not exist
+    if(m_eventData.interpreter() == nullptr)
+        m_eventData.push(LuaStateManager::get()->getLuaState());
 }

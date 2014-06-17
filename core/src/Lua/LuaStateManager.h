@@ -15,6 +15,8 @@ struct lua_State;
 class LuaStateManager: private sf::NonCopyable
 {
 public:
+    ~LuaStateManager();
+
 	/**
 	 * Create state manager singleton, initialize lua state
 	 * 
@@ -78,7 +80,6 @@ private:
     void clearStack();
 
     LuaStateManager();
-    ~LuaStateManager();
     
     lua_State* m_pLuaState;
     /**

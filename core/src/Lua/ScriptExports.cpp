@@ -45,7 +45,7 @@ void registerAll()
         // Logger
         luabind::def("log", &InternalScriptExports::luaLog),
         // Events
-        luabind::def("register_event_listener", &InternalScriptExports::removeEventListener),
+        luabind::def("register_event_listener", &InternalScriptExports::registerEventListener),
         luabind::def("remove_event_listener", &InternalScriptExports::removeEventListener),
         luabind::def("queue_event", &InternalScriptExports::queueEvent),
         luabind::def("trigger_event", &InternalScriptExports::triggerEvent),

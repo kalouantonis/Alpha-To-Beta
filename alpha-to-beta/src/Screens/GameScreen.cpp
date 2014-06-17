@@ -9,9 +9,12 @@
 #include <Memory/loose_ptr.h>
 
 #include <Events/JumpListener.h>
+#include <Events/Script.h>
+
 #include <Entities/WorldLocator.h>
 
 #include <Lua/LuaStateManager.h>
+#include <Lua/ScriptSystem.h>
 
 #include <Systems/RenderSystem.h>
 #include <Systems/PhysicsSystem.h>
@@ -78,9 +81,18 @@ bool GameScreen::init()
 		systemManager->setSystem(new PlayerInputSystem())
 	);
 
+    CORE_DEBUG("Creating camera system...");
 	m_pCameraSystem = static_cast<CameraFollowingSystem*>(
 		systemManager->setSystem(new CameraFollowingSystem(m_camera))
 	);
+
+    CORE_DEBUG("Creating script system...");
+    m_pScriptSystem = static_cast<ScriptSystem*>(
+            systemManager->setSystem(new ScriptSystem())
+    );
+
+    CORE_DEBUG("Registering script events...");
+    registerScriptEvents();
 
 	// Set input processor
 	InputLocator::provide(loose_ptr(m_pInputSystem));
@@ -184,11 +196,15 @@ void GameScreen::update(float deltaTime)
     // Step physics world
     PhysicsLocator::getObject()->Step(deltaTime, 6, 2);
     m_pPhysicsSystem->process();
+
+    // Update script system
+    m_pScriptSystem->process();
 }
 
 void GameScreen::render()
 {
     m_pCameraSystem->process();
+
     m_pRenderSystem->process();
     // Draw debug over other data
     PhysicsLocator::getObject()->DrawDebugData();

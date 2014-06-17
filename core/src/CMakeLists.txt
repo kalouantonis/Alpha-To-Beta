@@ -41,6 +41,8 @@ set(
 
 set(
 	COMPONENTS_SRC
+    "Components/BaseScriptComponent.cpp"
+    "Components/BaseScriptComponent.h"
 	"Components/ParsedComponent.h"
     "Components/CameraFollower.cpp"
     "Components/CameraFollower.h"
@@ -117,6 +119,8 @@ set(
     "Lua/ScriptEvent.h"
 	"Lua/ScriptExports.cpp"
 	"Lua/ScriptExports.h"
+    "Lua/ScriptSystem.cpp"
+    "Lua/ScriptSystem.h"
     # Internal exports
     "Lua/exports/LoggerExports.cpp"
     "Lua/exports/LoggerExports.h"

@@ -1,5 +1,6 @@
 #include <Systems/PhysicsSystem.h>
 #include <Components/StaticBody.h>
+
 #include <Utils/Logger.h>
 
 #include <Artemis/Entity.h>
@@ -48,6 +49,18 @@ void PhysicsSystem::added(artemis::Entity& e)
 			transformComp->position.y,
 			transformComp->rotation
 		);
+
+        // If initialization went wrong again, must be caused by errors with dimensions
+        if(!body->isInitialized())
+        {
+            CORE_WARNING("Initializing physics body failed, component will be removed"); 
+            // Remove component from entity
+            e.removeComponent(
+                    // Use a form of run-time reflection to get the correct component type.
+                    artemis::ComponentTypeManager::getTypeFor(typeid(*body))
+            );
+            return;
+        }
 
         // Set transform origiin
 		transformComp->origin = body->getOrigin();

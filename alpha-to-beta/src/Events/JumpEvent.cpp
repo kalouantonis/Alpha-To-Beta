@@ -5,8 +5,16 @@
 
 const EventType JumpEvent::sEventType = 0x8a2620ec;
 
+JumpEvent::JumpEvent()
+    : ScriptEvent()
+    , m_pBody(nullptr)
+    , m_pJumpBehaviour(nullptr)
+{
+
+}
+
 JumpEvent::JumpEvent(DynamicBody* body, JumpBehaviour* jumpBehaviour)
-    : BaseEventData()
+    : ScriptEvent()
     , m_pBody(body)
     , m_pJumpBehaviour(jumpBehaviour)
 {

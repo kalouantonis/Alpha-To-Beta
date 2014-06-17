@@ -45,7 +45,6 @@ public:
     float getZoom() const { return m_zoom; }
 
 private:
-    // Update camera. Called when variables change
     void updateTarget();
 
     sf::RenderTargetPtr m_pRenderTarget;

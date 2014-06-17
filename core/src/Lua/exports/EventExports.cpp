@@ -15,6 +15,9 @@
 // Disable copying
 #include <SFML/System/NonCopyable.hpp>
 
+// Register core engine events
+#include <Events/CollisionEvents.h>
+
 namespace InternalScriptExports 
 {
 
@@ -140,7 +143,6 @@ bool initEventExports()
     g_pScriptEventListenerManager = std::move(std::unique_ptr<ScriptEventListenerManager>(
             new ScriptEventListenerManager()
     ));
-
     return true;
 }
 

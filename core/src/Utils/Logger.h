@@ -56,7 +56,7 @@ private:
 		{ \
 			Logger::instance().log("ASSERT", #expr, __FUNCTION__, __FILE__, __LINE__); \\
 			Logger::instance().flush(); \
-			std::terminate(); \
+			std::abort(); \
 		} \
 	} \
 	while(0)\

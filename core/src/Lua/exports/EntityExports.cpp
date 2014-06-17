@@ -33,8 +33,6 @@ int createEntity(const char* entityResource, const luabind::adl::object& luaPosi
         // Attempt to receive position from lua
         position.x = luabind::object_cast<float>(luaPosition["x"]);
         position.y = luabind::object_cast<float>(luaPosition["y"]);
-
-//        PhysicsLocator::convertToWorldCoords(position);
     }
     catch(const luabind::cast_failed& e)
     {

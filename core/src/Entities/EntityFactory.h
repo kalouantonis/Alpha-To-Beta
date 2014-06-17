@@ -31,6 +31,12 @@ public:
 
     ~EntityFactory();
 
+    template <class CompType>
+    void registerComponent()
+    {
+        m_componentFactory.declare<CompType>(CompType::g_name);
+    }
+
     /**
      * @brief load XML resources from directory
      *

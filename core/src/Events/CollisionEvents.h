@@ -2,6 +2,7 @@
 #define COLLISION_EVENTS_H_
 
 #include <Events/EventData.h>
+#include <Lua/ScriptEvent.h>
 
 class b2Contact;
 
@@ -63,6 +64,8 @@ public:
 
     virtual EventType getEventType() const final { return sEventType; }
     virtual const char* getName() const final;
+
+    //EXPORT_FOR_SCRIPT_EVENT(CollisonEndEvent);
 };
 
 

@@ -17,6 +17,8 @@ include_directories(
 	${Boost_INCLUDE_DIR};
 	# Lua 5.2
 	${LUA_INCLUDE_DIR};
+    # Luabind
+    ${LUABIND_INCLUDE_DIR};
 	# Core LIB
 	${ALPHA_TO_BETA_SOURCE_DIR}/core/src;
 	# SFML
@@ -28,6 +30,8 @@ link_directories(
 	${ALPHA_TO_BETA_BINARY_DIR}/dependencies/tinyxml2;
 	# Boost
 	${Boost_LIBRARY_DIRS};
+    # Luabind
+    ${LUABIND_LIBRARY_DIR};
 	# Core	
 	${ALPHA_TO_BETA_BINARY_DIR}/core/src;
 )
@@ -38,6 +42,8 @@ set(
     "Events/JumpEvent.h"
     "Events/JumpListener.cpp"
     "Events/JumpListener.h"
+    "Events/Script.cpp"
+    "Events/Script.h"
 )
 
 set(
