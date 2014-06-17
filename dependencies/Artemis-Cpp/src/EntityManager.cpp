@@ -140,10 +140,13 @@ namespace artemis {
   void EntityManager::removeComponent(Entity &e, ComponentType & type) {
     Bag<Component* > * components = componentsByType.get(type.getId());
     
-    delete components->get(e.getId());
-    components->set(e.getId(), NULL);
-    e.removeTypeBit(type.getBit());
-    components = NULL;
+    if(components != NULL)
+    {
+        delete components->get(e.getId());
+        components->set(e.getId(), NULL);
+        e.removeTypeBit(type.getBit());
+        components = NULL;
+    }
   };
   
   void EntityManager::removeComponentsOfEntity(Entity& e) {
