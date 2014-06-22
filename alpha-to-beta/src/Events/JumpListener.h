@@ -16,4 +16,7 @@ private:
     void receiveBeginCollisionEvt(EventDataPtr pEvent);
 };
 
+typedef std::shared_ptr<JumpListener> JumpListenerPtr;
+typedef std::unique_ptr<JumpListener> UJumpListenerPtr;
+
 #endif // JUMP_LISTENER_H_

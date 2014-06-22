@@ -19,17 +19,25 @@ ScriptSystem::ScriptSystem()
 
 ScriptSystem::~ScriptSystem()
 {
-
+    CORE_DEBUG("Unregistering script functions");
+    BaseScriptComponent::unregisterScriptFunctions();
 }
 
 void ScriptSystem::initialize()
 {
     m_baseScriptMapper.init(*world);
+
+    CORE_DEBUG("Registering script functions...");
+    BaseScriptComponent::registerScriptFunctions();
 }
 
 void ScriptSystem::added(artemis::Entity& e)
 {
     BaseScriptComponent* pBaseScriptComp = safeGetComponent<BaseScriptComponent>(&e);
+
+    // Initialize base script
+    if(!pBaseScriptComp->isInitialized())
+        pBaseScriptComp->initialize(&e);
 
     if(pBaseScriptComp->hasConstructor())
     {

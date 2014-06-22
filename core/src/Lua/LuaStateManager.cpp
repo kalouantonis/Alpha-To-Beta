@@ -7,6 +7,7 @@
 
 // TODO: Include specific headers
 #include <luabind/luabind.hpp>
+#include <luabind/lua_include.hpp>
 
 // Initialize state as null
 LuaStateManager* LuaStateManager::s_pSingleton = nullptr;
@@ -70,6 +71,9 @@ bool LuaStateManager::init()
 
     // Connect LuaBind to lua state
     luabind::open(m_pLuaState);
+
+    // Load stdlib
+    //luaL_openlibs(m_pLuaState);
 
     // bind functions. Add to global scope
     luabind::module(m_pLuaState)

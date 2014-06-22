@@ -36,6 +36,8 @@ set(
 	MAIN_SRC
 	"Game.cpp"
 	"Game.h"
+    "BaseGameManager.cpp"
+    "BaseGameManager.h"
 	"SFMLPtrDef.h"
 )
 
@@ -56,8 +58,8 @@ set(
 	"Components/DynamicBody.h"
 	"Components/StaticBody.cpp"
 	"Components/StaticBody.h"
-	"Components/JumpBehaviour.cpp"
-	"Components/JumpBehaviour.h"
+    #"Components/JumpBehaviour.cpp"
+    #"Components/JumpBehaviour.h"
 	"Components/PlayerInput.cpp"
 	"Components/PlayerInput.h"
 )

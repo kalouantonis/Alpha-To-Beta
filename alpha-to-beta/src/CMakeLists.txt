@@ -37,13 +37,17 @@ link_directories(
 )
 
 set(
+    COMPONENTS_SRC
+    "Components/JumpBehaviour.cpp"
+    "Components/JumpBehaviour.h"
+)
+
+set(
     EVENTS_SRC
     "Events/JumpEvent.cpp"
     "Events/JumpEvent.h"
     "Events/JumpListener.cpp"
     "Events/JumpListener.h"
-    "Events/Script.cpp"
-    "Events/Script.h"
 )
 
 set(
@@ -56,6 +60,8 @@ set(
 	SCREENS_SRC
 	"Screens/GameScreen.cpp"
 	"Screens/GameScreen.h"
+    "Screens/GameManager.cpp"
+    "Screens/GameManager.h"
 )
 
 set(
@@ -67,6 +73,7 @@ set(
 set(
 	SOURCE_FILE_LIST;
 
+    ${COMPONENTS_SRC};
     ${EVENTS_SRC};
 	${MAIN_SRC};
 	${SCREENS_SRC};

@@ -1,9 +1,15 @@
 #include <Components/BaseScriptComponent.h>
 
+#include <Components/Transform.h>
+#include <Components/DynamicBody.h>
+
 #include <Lua/LuaStateManager.h>
 
 #include <Utils/Logger.h>
 #include <Utils/String.h>
+
+#include <Artemis/Entity.h>
+#include <Artemis/Component.h>
 
 #include <tinyxml2.h>
 
@@ -15,28 +21,19 @@ static const char* METATABLE_NAME = "BaseScriptComponentMetaTable";
 const char* BaseScriptComponent::g_name = "BaseScriptComponent";
 
 BaseScriptComponent::BaseScriptComponent()
-    //: m_scriptObject(luabind::nil)
-    //, m_scriptDestructor(luabind::nil)
-    : m_bConstructorCalled(false)
+    : m_pParentEntity(nullptr)
+    , m_bConstructorCalled(false)
     , m_bDestructorCalled(false)
     , m_updateFrequency(0.f)
     , m_currTime(0.f)
+
 {
 }
 
 BaseScriptComponent::~BaseScriptComponent()
 {
-//    // Call the script destruction if it exists
-//    if(luabind::type(m_scriptDestructor) == LUA_TFUNCTION)
-//    {
-//        // TODO: Ensure that destructor is actually called
-//        luabind::call_function<void> destructorFunc(m_scriptDestructor, m_scriptObject);
-//    }
     if(hasDestructor())
         callDestructor();
-
-    // Clear out script object
-    //m_scriptObject = luabind::nil;
 
     // If we are given the path for this script object, set it to nil
     if(!m_scriptObjectName.empty())
@@ -46,7 +43,7 @@ BaseScriptComponent::~BaseScriptComponent()
     }
 }
 
-void BaseScriptComponent::callConstructor()
+void BaseScriptComponent::callConstructor() 
 {
     // Ensure that we havent already called the constructor and that the 
     // object is a function
@@ -133,7 +130,7 @@ bool BaseScriptComponent::load(const tinyxml2::XMLElement* pElement)
         m_scriptObject = pStateManager->createPath(m_scriptObjectName.c_str());
 
         //if(luabind::type(m_scriptObject) != LUA_TNIL)
-        if(!m_scriptObject.is_valid())
+        if(m_scriptObject.is_valid())
         {
             createScriptObject();
         }
@@ -146,7 +143,7 @@ bool BaseScriptComponent::load(const tinyxml2::XMLElement* pElement)
         m_scriptConstructor = pStateManager->getGlobalVars()[m_scriptConstructorName.c_str()];
         if(luabind::type(m_scriptConstructor) == LUA_TFUNCTION &&
            //luabind::type(m_scriptObject) == LUA_TNIL)
-           m_scriptObject.is_valid())
+           !m_scriptObject.is_valid())
         {
             // The script object could be nil if there was not scriptObject attribute. 
             // The lua object will be created here
@@ -187,6 +184,12 @@ bool BaseScriptComponent::load(const tinyxml2::XMLElement* pElement)
     return true;
 }
 
+void BaseScriptComponent::initialize(artemis::Entity* pParentEntity)
+{
+    // Initialize parent entity
+    m_pParentEntity = pParentEntity;
+}
+
 void BaseScriptComponent::createScriptObject()
 {
     LuaStateManager* pStateManager = LuaStateManager::get();
@@ -199,7 +202,63 @@ void BaseScriptComponent::createScriptObject()
 
     // Set __object to reference this class instance
     // TODO: Make this shit work
-    //metaTableObject["__object"] = this;
+    //metaTableObject["__object"] = luabind::touserdata<BaseScriptComponent&>(*this);
     // Set meta table
     luabind::setmetatable(m_scriptObject, metaTableObject);
+}
+
+void BaseScriptComponent::registerScriptFunctions()
+{
+    LuaStateManager* pLuaStateManager = LuaStateManager::get();
+
+    // Register new meta-table 
+    luabind::object metaTableObject = 
+        pLuaStateManager->getGlobalVars()[METATABLE_NAME] = 
+        luabind::newtable(pLuaStateManager->getLuaState());
+
+    metaTableObject["__index"] = metaTableObject;
+
+    // Bind functions to meta-table
+    luabind::module(pLuaStateManager->getLuaState(), METATABLE_NAME)
+    [
+        luabind::def("get_entity_id", &BaseScriptComponent::getEntityId),
+        luabind::def("set_position", &BaseScriptComponent::setPosition)
+    ];
+}
+
+void BaseScriptComponent::unregisterScriptFunctions()
+{
+
+}
+
+int BaseScriptComponent::getEntityId() const
+{
+    if(isInitialized())
+        return m_pParentEntity->getId();
+
+    return -1;
+}
+
+void BaseScriptComponent::setPosition(const luabind::object& newPos)
+{
+    artemis::Component* dynamicBody = m_pParentEntity->getComponent<DynamicBody>();
+
+    if(dynamicBody != nullptr)
+    {
+        //static_cast<DynamicBody*>(dynamicBody)->body->SetPosition
+
+    }
+    else
+    {
+        artemis::Component* transform = m_pParentEntity->getComponent<Transform>();
+
+        if(transform != nullptr)
+        {
+            //static_cast<Transform*>(transform)->position = pos;
+        }
+        else
+        {
+            CORE_LOG("LUA", "No components to set the position of");
+        }
+    }
 }

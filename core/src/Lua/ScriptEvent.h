@@ -11,7 +11,7 @@ class ScriptEvent;
 //typedef std::function<ScriptEvent*(void)> CreateEventForScriptFunctionType;
 typedef ScriptEvent* (*CreateEventForScriptFunctionType)(void);
 
-// Register script using class type as event name
+/** Register script using class type as event name */
 #define REGISTER_SCRIPT_EVENT(eventClass, eventType) \
     ScriptEvent::registerEventTypeWithScript(#eventClass, eventType); \
     ScriptEvent::addCreationFunction(eventType, &eventClass::createEventFromScript);
@@ -44,19 +44,24 @@ public:
 
     /**
      * @brief Do not call this function directly. Use helpers instead
-     * @details Static helper functions for registering events with to the script
+     * @details Static helper function for registering events to the script
      */
     static void registerEventTypeWithScript(const char* key, EventType type);
     static void addCreationFunction(EventType type, CreateEventForScriptFunctionType creationFunction);
     static ScriptEvent* createEventFromScript(EventType event);
 
-    // BaseEventData implementation
+    /**
+     * Get the event type 
+     */
     virtual EventType getEventType() const override { return sEventType; }
     virtual const char* getName() const override { return "ScriptEvent"; }
 
     static const EventType sEventType;
     
 protected:
+    /**
+     * Prepare event data for use in script
+     */
     virtual void buildEventData();
     virtual bool buildEventFromScript() { return false; }
 

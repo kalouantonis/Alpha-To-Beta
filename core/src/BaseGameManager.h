@@ -86,11 +86,14 @@ public:
 
     void destroyPhysics();
     void destroyPhysicsRenderer();
-    void destroyLuaState();
+    void destroyLua();
     /** 
      * Destroy all items initialized by manager and clear world
      */
     virtual void destroy();
+
+protected:
+    artemis::SystemManager* getSystemManager() const;
 
 private:
     std::shared_ptr<artemis::World> m_pWorld;

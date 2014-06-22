@@ -17,6 +17,9 @@ public:
 
     virtual void processEntity(artemis::Entity& e) final;
 
+    Camera2D& getCamera() const { return m_camera; }
+    //const Camera2D& getCamera() const { return m_camera; }
+
 private:
     virtual void initialize() final;
     artemis::ComponentMapper<Transform> m_transformMapper;

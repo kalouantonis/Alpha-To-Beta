@@ -32,9 +32,14 @@ public:
     ~EntityFactory();
 
     template <class CompType>
-    void registerComponent()
+    void registerComponent(const std::string& id)
     {
-        m_componentFactory.declare<CompType>(CompType::g_name);
+        m_componentFactory.declare<CompType>(id);
+    }
+
+    void unregisterComponent(const std::string& id)
+    {
+        m_componentFactory.remove(id);
     }
 
     /**
@@ -66,6 +71,7 @@ public:
      */
     const ComponentFactory& getComponentFactory() { return m_componentFactory; }
 
+
 protected:
     /**
      * @brief Create a component from XML element
@@ -86,5 +92,12 @@ private:
     // Hide constructor and destructor
     EntityFactory();
 };
+
+#define REGISTER_COMPONENT(TYPE, NAME) \
+    EntityFactory::get().registerComponent<TYPE>(NAME);
+
+#define UNREGISTER_COMPONENT(NAME) \
+    EntityFactory::get().unregisterComponent(NAME);
+
 
 #endif // ENTITYFACTORY_H

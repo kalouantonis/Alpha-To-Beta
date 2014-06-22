@@ -46,9 +46,12 @@ BaseGameManager::~BaseGameManager()
         destroyPhysicsRenderer();
 
     if(m_pPhysicsSystem)
-        destroyLuaState();
+        destroyLua();
 
     if(m_pWorld)
+        // I know calling virtual methods from destructors is a bad idea,
+        // but the user is tasked with destroying things manually. 
+        // this is more like damage control
         destroy();
 }
 
@@ -101,10 +104,8 @@ void BaseGameManager::render()
 
 void BaseGameManager::start()
 {
-    assert(m_pWorld != nullptr);
-
     CORE_DEBUG("Initializing all systems...");
-    m_pWorld->getSystemManager()->initializeAll();
+    getSystemManager()->initializeAll();
 
     if(m_pPhysicsSystem)
     {
@@ -124,7 +125,7 @@ void BaseGameManager::initRenderer(SpriteBatch& spriteBatch, Camera2D& camera)
 {
     assert(m_pWorld != nullptr);
 
-    artemis::SystemManager* systemManager = m_pWorld->getSystemManager();
+    artemis::SystemManager* systemManager = getSystemManager();
 
     CORE_DEBUG("Creating render system...");
     m_pRenderSystem = static_cast<RenderSystem*>(
@@ -139,8 +140,6 @@ void BaseGameManager::initRenderer(SpriteBatch& spriteBatch, Camera2D& camera)
 
 void BaseGameManager::initPhysics(const sf::Vector2f& gravity, const sf::Vector2f& ppp)
 {
-    assert(m_pWorld != nullptr);
-
     CORE_DEBUG("Providing physics locator...");
     PhysicsLocator::provide(gravity, ppp);
 
@@ -148,7 +147,7 @@ void BaseGameManager::initPhysics(const sf::Vector2f& gravity, const sf::Vector2
 
     CORE_DEBUG("Creating physics system...");
     m_pPhysicsSystem = static_cast<PhysicsSystem*>(
-            m_pWorld->getSystemManager()->setSystem(new PhysicsSystem())
+            getSystemManager()->setSystem(new PhysicsSystem())
     );
 }
 
@@ -171,8 +170,6 @@ void BaseGameManager::initPhysicsRenderer(sf::RenderTargetPtr pRenderTarget)
 
 bool BaseGameManager::initLua()
 {
-    assert(m_pWorld != nullptr);
-
     CORE_DEBUG("Initializing lua state...");
     if(!LuaStateManager::create())
     {
@@ -181,18 +178,15 @@ bool BaseGameManager::initLua()
 
     CORE_DEBUG("Creating script system...");
     m_pScriptSystem = static_cast<ScriptSystem*>(
-        m_pWorld->getSystemManager()->setSystem(new ScriptSystem())
+        getSystemManager()->setSystem(new ScriptSystem())
     );
-
-    CORE_DEBUG("Registering script events");
-    registerScriptEvents();
 
     return true;
 }
 
 void BaseGameManager::destroyPhysics()
 {
-    CORE_DEBUG("Destroyin physics world...");
+    CORE_DEBUG("Destroying physics world...");
     PhysicsLocator::remove();
     m_pPhysicsWorld = nullptr;
 
@@ -203,13 +197,14 @@ void BaseGameManager::destroyPhysicsRenderer()
 {
     if(m_pPhysicsWorld)
     {
+        CORE_DEBUG("Destroying physics renderer...");
         // Remove debug draw
         m_pPhysicsWorld->SetDebugDraw(NULL);
         m_pBox2DRenderer = nullptr;
     }
 }
 
-void BaseGameManager::destroyLuaState()
+void BaseGameManager::destroyLua()
 {
     CORE_DEBUG("Destroying lua state...");
     LuaStateManager::destroy();
@@ -231,4 +226,11 @@ void BaseGameManager::destroy()
 
     CORE_DEBUG("Destroying textures...");
     TextureLocator::remove();
+}
+
+artemis::SystemManager* BaseGameManager::getSystemManager() const 
+{
+    assert(m_pWorld);
+
+    return m_pWorld->getSystemManager();
 }

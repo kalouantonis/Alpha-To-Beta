@@ -65,11 +65,13 @@ void ScriptEvent::addCreationFunction(EventType type, CreateEventForScriptFuncti
 
 ScriptEvent* ScriptEvent::createEventFromScript(EventType type)
 {
+    // Get creation function for this event type
     const auto findIt = s_creationFunctions.find(type);
 
     if(findIt != s_creationFunctions.end())
     {
         const CreateEventForScriptFunctionType& func = findIt->second;
+        // Create event
         return func();
     }
     else
