@@ -85,7 +85,9 @@ void BaseGameManager::update(float delta)
     
     // Update script system
     if(m_pScriptSystem)
+    {
         m_pScriptSystem->process();
+    }
 }
 
 void BaseGameManager::render()

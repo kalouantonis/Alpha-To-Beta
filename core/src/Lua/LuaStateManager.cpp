@@ -5,9 +5,39 @@
 #include <Utils/Logger.h>
 #include <Utils/String.h>
 
-// TODO: Include specific headers
-#include <luabind/luabind.hpp>
-#include <luabind/lua_include.hpp>
+extern "C" 
+{
+    #include <lua.h>
+    #include <lualib.h>
+}
+
+#include <luabind/open.hpp>
+#include <luabind/function.hpp>
+
+#include <sstream>
+
+int _addFileAndLine(lua_State* pL)
+{
+    lua_Debug d;
+    // Get top of stack
+    lua_getstack(pL, 1, &d);
+    lua_getinfo(pL, "Sln", &d);
+    // Last call
+    std::string err = lua_tostring(pL, -1);
+    // Pop first item
+    lua_pop(pL, 1);
+
+    std::stringstream msg;
+    msg << d.short_src << ":" << d.currentline;
+
+    if(d.name != 0)
+    {
+        msg << "(" << d.namewhat << " " << d.name << ")";
+    }
+    msg << " " << err;
+    lua_pushstring(pL, msg.str().c_str());
+    return 1;
+}
 
 // Initialize state as null
 LuaStateManager* LuaStateManager::s_pSingleton = nullptr;
@@ -15,7 +45,8 @@ LuaStateManager* LuaStateManager::s_pSingleton = nullptr;
 LuaStateManager::LuaStateManager()
     : m_pLuaState(nullptr)
 {
-    
+    // Register error callback
+    luabind::set_pcall_callback(&_addFileAndLine);
 }
 
 LuaStateManager::~LuaStateManager()
@@ -73,7 +104,23 @@ bool LuaStateManager::init()
     luabind::open(m_pLuaState);
 
     // Load stdlib
-    //luaL_openlibs(m_pLuaState);
+    CORE_DEBUG("Loading lua base library");
+    luaopen_base(m_pLuaState);
+    CORE_DEBUG("Loading lua table library");
+    luaopen_table(m_pLuaState);
+    CORE_DEBUG("Loading lua math library");
+    luaopen_math(m_pLuaState);
+    CORE_DEBUG("Loading lua string library");
+    luaopen_string(m_pLuaState);
+    CORE_DEBUG("Loading lua io library");
+    luaopen_io(m_pLuaState);
+    CORE_DEBUG("Loading lua package library");
+    luaopen_package(m_pLuaState);
+
+#ifdef _DEBUG
+    CORE_DEBUG("Loading lua debug library");
+    luaopen_debug(m_pLuaState);
+#endif
 
     // bind functions. Add to global scope
     luabind::module(m_pLuaState)
@@ -195,6 +242,8 @@ void LuaStateManager::setError(int errorNo)
 
     CORE_LOG("LUA", m_lastError);
 }
+
+
 
 void LuaStateManager::clearStack()
 {

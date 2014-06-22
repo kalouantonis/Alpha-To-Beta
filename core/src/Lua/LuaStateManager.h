@@ -4,6 +4,7 @@
 #include <SFML/System/NonCopyable.hpp>
 
 #include <string>
+
 #include <luabind/object.hpp>
 
 // FWD Defs
@@ -74,6 +75,7 @@ private:
 	 * Log lua error
      */
     void setError(int errorNum);
+
 	/**
 	 * Clear lua state stack
      */

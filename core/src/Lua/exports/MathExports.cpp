@@ -32,7 +32,7 @@ void convertToWorldCoords(const luabind::adl::object& luaVec)
     catch(const luabind::cast_failed& e)
     {
         CORE_LOG("LUA", "Failed to cast x and y co-ordinates in to vector."
-                "\nThis could be because of an invalid type provided.");
+                "\nInvalid type: " + std::string(e.info().name()));
     }
 }
 
