@@ -89,7 +89,7 @@ void Level::load(const std::string& filename)
 
 void Level::reload(bool reloadResources, bool reloadEntities)
 {
-	assert(!m_prevLevelFile.empty());
+	CORE_ASSERT(!m_prevLevelFile.empty());
 
 	if(reloadEntities)
 	{

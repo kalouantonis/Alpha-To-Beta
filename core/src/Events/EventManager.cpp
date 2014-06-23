@@ -3,8 +3,6 @@
 #include <Resources/GenericObjectFactory.h>
 #include <Utils/Logger.h>
 
-#include <assert.h>
-
 // Store a global event manager instance
 static IEventManager* g_pEventManager = nullptr;
 static GenericObjectFactory<EventType, IEventData> g_eventFactory;
@@ -52,7 +50,7 @@ IEventManager::~IEventManager()
 
 IEventManager* IEventManager::get()
 {
-    assert(g_pEventManager != nullptr);
+    CORE_ASSERT(g_pEventManager != nullptr);
     return g_pEventManager;
 }
 

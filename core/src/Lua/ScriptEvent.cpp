@@ -49,8 +49,8 @@ void ScriptEvent::registerEventTypeWithScript(const char *key, EventType type)
     }
     
     // Error checking
-    assert(luabind::type(eventTypeTable) == LUA_TTABLE);
-    assert(luabind::type(eventTypeTable[key]) == LUA_TNIL);
+    CORE_ASSERT(luabind::type(eventTypeTable) == LUA_TTABLE);
+    CORE_ASSERT(luabind::type(eventTypeTable[key]) == LUA_TNIL);
 
     // add entry
     luabind::settable(eventTypeTable, key, (double)type);
@@ -59,7 +59,7 @@ void ScriptEvent::registerEventTypeWithScript(const char *key, EventType type)
 void ScriptEvent::addCreationFunction(EventType type, CreateEventForScriptFunctionType creationFunction)
 {
     // Verify that creation function does not already exist
-    assert(s_creationFunctions.find(type) == s_creationFunctions.end());
+    CORE_ASSERT(s_creationFunctions.find(type) == s_creationFunctions.end());
     s_creationFunctions.insert(std::make_pair(type, creationFunction));
 }
 

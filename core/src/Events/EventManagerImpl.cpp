@@ -2,8 +2,6 @@
 
 #include <Utils/Logger.h>
 
-#include <assert.h>
-
 // Tag to log under
 const char* LOG_TAG = "EVENT";
 
@@ -89,8 +87,8 @@ bool EventManager::triggerEvent(const EventDataPtr &pEvent) const
 
 bool EventManager::queueEvent(const EventDataPtr &pEvent)
 {
-    assert(m_activeQueue >= 0);
-    assert(m_activeQueue < NUM_QUEUES);
+    CORE_ASSERT(m_activeQueue >= 0);
+    CORE_ASSERT(m_activeQueue < NUM_QUEUES);
 
     if(!pEvent)
     {
@@ -121,8 +119,8 @@ bool EventManager::threadSafeQueueEvent(const EventDataPtr &pEvent)
 
 bool EventManager::abortEvent(EventType eventType, bool allOfType)
 {
-    assert(m_activeQueue >= 0);
-    assert(m_activeQueue < NUM_QUEUES);
+    CORE_ASSERT(m_activeQueue >= 0);
+    CORE_ASSERT(m_activeQueue < NUM_QUEUES);
 
     bool bSuccess = false;
 

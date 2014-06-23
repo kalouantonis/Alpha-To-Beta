@@ -19,7 +19,7 @@ void luaLog(const luabind::adl::object& text)
    catch(const luabind::cast_failed& e)
    {
      // Print exception if failed
-       CORE_LOG("LUA", "Invalid type provided for logging...");
+     CORE_LOG("LUA", "Invalid type provided for logging...");
    }
 }
 

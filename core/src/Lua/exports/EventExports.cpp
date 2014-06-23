@@ -62,7 +62,7 @@ ScriptEventListener::~ScriptEventListener()
 void ScriptEventListener::scriptEventDelegate(EventDataPtr pEvent)
 {
     // Confirm that we are working with a function
-    assert(luabind::type(m_scriptCallbackFunction) == LUA_TFUNCTION);
+    CORE_ASSERT(luabind::type(m_scriptCallbackFunction) == LUA_TFUNCTION);
 
     // call the lua function
     std::shared_ptr<ScriptEvent> pScriptEvent = std::static_pointer_cast<ScriptEvent>(pEvent);
@@ -139,7 +139,7 @@ static std::unique_ptr<ScriptEventListenerManager> g_pScriptEventListenerManager
 bool initEventExports()
 {
     // Make sure we're not overwriting
-    assert(g_pScriptEventListenerManager == nullptr);
+    CORE_ASSERT(g_pScriptEventListenerManager == nullptr);
     g_pScriptEventListenerManager = std::move(std::unique_ptr<ScriptEventListenerManager>(
             new ScriptEventListenerManager()
     ));
@@ -148,14 +148,14 @@ bool initEventExports()
 
 void destroyEventExports()
 {
-    assert(g_pScriptEventListenerManager != nullptr);
+    CORE_ASSERT(g_pScriptEventListenerManager != nullptr);
     // De-alloc, desturctor should be called automatically, freeing listeners
     g_pScriptEventListenerManager = nullptr;
 }
 
 ListenerID registerEventListener(EventType eventType, const luabind::adl::object& luaCallbackFunc)
 {
-    assert(g_pScriptEventListenerManager != nullptr);
+    CORE_ASSERT(g_pScriptEventListenerManager != nullptr);
 
     // Validate that we're registering a function
     if(luabind::type(luaCallbackFunc) == LUA_TFUNCTION)
@@ -176,9 +176,9 @@ ListenerID registerEventListener(EventType eventType, const luabind::adl::object
 
 void removeEventListener(ListenerID listenerId)
 {
-    assert(g_pScriptEventListenerManager != nullptr);
+    CORE_ASSERT(g_pScriptEventListenerManager != nullptr);
     // If 0, we're doing something wrong :)
-    assert(listenerId != 0);
+    CORE_ASSERT(listenerId != 0);
 
     // convert the listenerId in to a pointer
     ScriptEventListener* pListener = reinterpret_cast<ScriptEventListener*>(listenerId);

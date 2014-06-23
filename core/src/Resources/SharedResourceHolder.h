@@ -3,7 +3,7 @@
 
 #include <unordered_map>
 #include <memory>
-#include <cassert>
+#include <Utils/Logger.h>
 
 /**
  * @brief Works like ResourceHolder, apart from all items are stored as 
@@ -72,7 +72,7 @@ public:
 	void remove(Identifier id)
 	{
 		auto found = m_resourceMap.find(id);
-		assert(found != m_resourceMap.end());
+		CORE_ASSERT(found != m_resourceMap.end());
 
 		m_resourceMap.erase(found);
 	}

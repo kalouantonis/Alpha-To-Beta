@@ -50,7 +50,6 @@ void BaseScriptComponent::callConstructor()
     if(!m_bConstructorCalled && luabind::type(m_scriptConstructor) == LUA_TFUNCTION)
     {
         luabind::call_function<void>(m_scriptConstructor, m_scriptObject);
-
         m_bConstructorCalled = true;
     }
 }
@@ -82,7 +81,7 @@ void BaseScriptComponent::callUpdate(float deltaTime)
 bool BaseScriptComponent::load(const tinyxml2::XMLElement* pElement) 
 {
     LuaStateManager* pStateManager = LuaStateManager::get();
-    assert(pStateManager != nullptr);
+    CORE_ASSERT(pStateManager != nullptr);
     
     // TODO: May not need to load file
     const tinyxml2::XMLElement* pChildElement = pElement->FirstChildElement("File");
@@ -141,9 +140,7 @@ bool BaseScriptComponent::load(const tinyxml2::XMLElement* pElement)
     if(!m_scriptConstructorName.empty())
     {
         m_scriptConstructor = pStateManager->getGlobalVars()[m_scriptConstructorName.c_str()];
-        if(luabind::type(m_scriptConstructor) == LUA_TFUNCTION &&
-           //luabind::type(m_scriptObject) == LUA_TNIL)
-           !m_scriptObject.is_valid())
+        if(luabind::type(m_scriptConstructor) == LUA_TFUNCTION && !m_scriptObject.is_valid())
         {
             // The script object could be nil if there was not scriptObject attribute. 
             // The lua object will be created here
@@ -193,12 +190,12 @@ void BaseScriptComponent::initialize(artemis::Entity* pParentEntity)
 void BaseScriptComponent::createScriptObject()
 {
     LuaStateManager* pStateManager = LuaStateManager::get();
-    assert(pStateManager != nullptr);
-    assert(m_scriptObject.is_valid());
+    CORE_ASSERT(pStateManager != nullptr);
+    CORE_ASSERT(m_scriptObject.is_valid());
 
     // Get meta table
     luabind::object metaTableObject = pStateManager->getGlobalVars()[METATABLE_NAME];
-    assert(luabind::type(metaTableObject) != LUA_TNIL);
+    CORE_ASSERT(luabind::type(metaTableObject) != LUA_TNIL);
 
     // Set __object to reference this class instance
     // TODO: Make this shit work

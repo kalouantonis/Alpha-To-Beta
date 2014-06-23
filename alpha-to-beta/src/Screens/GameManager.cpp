@@ -45,6 +45,8 @@ void GameManager::init()
 
 void GameManager::update(float delta) 
 {
+    CORE_ASSERT(m_pPlayerInputSystem != nullptr);
+
     // Super
     BaseGameManager::update(delta);
 

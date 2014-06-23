@@ -2,8 +2,6 @@
 #include <Screens/IScreen.h>
 
 #include <Utils/Logger.h>
-#include <assert.h>
-
 
 void ScreenManager::push(UScreenPtr pScreen)
 {
@@ -12,7 +10,7 @@ void ScreenManager::push(UScreenPtr pScreen)
 
     if(!m_screenStack.back()->init())
     {
-        assert("Screen initialization failed");
+        CORE_FATAL("Screen initialization failed");
     }
 }
 

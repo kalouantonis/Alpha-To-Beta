@@ -10,8 +10,6 @@
 // Dereferencing, gonna need this
 #include <SFML/Graphics/Texture.hpp>
 
-#include <assert.h>
-
 TextureRegion::TextureRegion()
 {
 	setTexture(nullptr);

@@ -24,8 +24,6 @@
 
 #include <Box2D/Dynamics/b2World.h>
 
-#include <assert.h>
-
 BaseGameManager::BaseGameManager()
     : m_pWorld(new artemis::World())
     , m_pRenderSystem(nullptr)
@@ -66,7 +64,7 @@ void BaseGameManager::init()
 
 void BaseGameManager::update(float delta)
 {
-    assert(m_pWorld != nullptr);
+    CORE_ASSERT(m_pWorld != nullptr);
 
     m_pWorld->loopStart();
     m_pWorld->setDelta(delta);
@@ -92,8 +90,8 @@ void BaseGameManager::update(float delta)
 
 void BaseGameManager::render()
 {
-    assert(m_pCameraFollowingSystem != nullptr);
-    assert(m_pRenderSystem != nullptr);
+    CORE_ASSERT(m_pCameraFollowingSystem != nullptr);
+    CORE_ASSERT(m_pRenderSystem != nullptr);
 
     m_pCameraFollowingSystem->process();
     
@@ -125,7 +123,7 @@ void BaseGameManager::start()
 
 void BaseGameManager::initRenderer(SpriteBatch& spriteBatch, Camera2D& camera)
 {
-    assert(m_pWorld != nullptr);
+    CORE_ASSERT(m_pWorld != nullptr);
 
     artemis::SystemManager* systemManager = getSystemManager();
 
@@ -155,7 +153,7 @@ void BaseGameManager::initPhysics(const sf::Vector2f& gravity, const sf::Vector2
 
 void BaseGameManager::initPhysicsRenderer(sf::RenderTargetPtr pRenderTarget)
 {
-    assert(m_pWorld != nullptr);
+    CORE_ASSERT(m_pWorld != nullptr);
 
     if(!m_pPhysicsWorld)
     {
@@ -217,7 +215,7 @@ void BaseGameManager::destroyLua()
 
 void BaseGameManager::destroy()
 {
-    assert(m_pWorld != nullptr);
+    CORE_ASSERT(m_pWorld != nullptr);
 
     CORE_DEBUG("Removing all entities...");
     m_pWorld->getEntityManager()->removeAllEntities();
@@ -232,7 +230,7 @@ void BaseGameManager::destroy()
 
 artemis::SystemManager* BaseGameManager::getSystemManager() const 
 {
-    assert(m_pWorld);
+    CORE_ASSERT(m_pWorld);
 
     return m_pWorld->getSystemManager();
 }

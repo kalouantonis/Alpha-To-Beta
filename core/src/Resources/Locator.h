@@ -1,7 +1,7 @@
 #ifndef LOCATOR_H
 #define LOCATOR_H
 
-#include <assert.h>
+#include <Utils/Logger.h>
 #include <memory>
 
 /**
@@ -21,7 +21,7 @@ public:
 	 */
 	static Ptr getObject() 
 	{
-		assert(s_pObject != nullptr);
+		CORE_ASSERT(s_pObject != nullptr);
 		return s_pObject;
 	}
 

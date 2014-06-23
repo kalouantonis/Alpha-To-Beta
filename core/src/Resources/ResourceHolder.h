@@ -3,7 +3,7 @@
 
 #include <unordered_map>
 #include <memory>
-#include <cassert>
+#include <Utils/Logger.h>
 
 /**
  * @brief Holder of various long lived resources
@@ -65,7 +65,7 @@ public:
 	{
 		auto found = m_resourceMap.find(id);
 		// If at end, then not found
-		assert(found != m_resourceMap.end());
+		CORE_ASSERT(found != m_resourceMap.end());
 
 		return *(found->second);
 	}
@@ -96,7 +96,7 @@ public:
 	void remove(Identifier id)
 	{
 		auto found = m_resourceMap.find(id);
-		assert(found != m_resourceMap.end());
+		CORE_ASSERT(found != m_resourceMap.end());
 
 		m_resourceMap.erase(found);
 	}
@@ -121,7 +121,7 @@ private:
 	{
 		// Insert and check success
 		auto inserted = m_resourceMap.insert(std::make_pair(id, std::move(resource)));
-		assert(inserted.second);
+		CORE_ASSERT(inserted.second);
 	}
 
 	std::unordered_map<Identifier, ResourcePtr>	m_resourceMap;

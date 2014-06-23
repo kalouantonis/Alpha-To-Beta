@@ -1,7 +1,5 @@
 #include <Maps/MapLoader.h>
 
-#include <assert.h>
-
 #include <Components/Renderable.h>
 #include <Components/Transform.h>
 #include <Components/StaticBody.h>
@@ -86,7 +84,7 @@ void MapLoader::load(const std::string &mapFile, const std::string &assetDir)
 void MapLoader::reload()
 {
 	// check that the map was already loaded once
-    assert(!m_prevMapFile.empty() && !m_prevAssetDir.empty());
+    CORE_ASSERT(!m_prevMapFile.empty() && !m_prevAssetDir.empty());
 
     load(m_prevMapFile, m_prevAssetDir);
 }

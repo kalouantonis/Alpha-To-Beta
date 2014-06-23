@@ -13,9 +13,11 @@ extern "C"
 
 #include <luabind/open.hpp>
 #include <luabind/function.hpp>
+#include <luabind/error.hpp>
 
 #include <sstream>
 
+//Error handlers////////////////////////////////////////////////////////////////
 int _addFileAndLine(lua_State* pL)
 {
     lua_Debug d;
@@ -39,13 +41,15 @@ int _addFileAndLine(lua_State* pL)
     return 1;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 // Initialize state as null
 LuaStateManager* LuaStateManager::s_pSingleton = nullptr;
 
 LuaStateManager::LuaStateManager()
     : m_pLuaState(nullptr)
 {
-    // Register error callback
+    // Register perror callback
     luabind::set_pcall_callback(&_addFileAndLine);
 }
 
@@ -78,13 +82,13 @@ bool LuaStateManager::create()
 
 void LuaStateManager::destroy()
 {
-    assert(s_pSingleton != nullptr);
+    CORE_ASSERT(s_pSingleton != nullptr);
     SAFE_DELETE(s_pSingleton);
 }
 
 LuaStateManager* LuaStateManager::get()
 {
-    assert(s_pSingleton);
+    CORE_ASSERT(s_pSingleton);
     return s_pSingleton;
 }
 
@@ -177,7 +181,7 @@ void LuaStateManager::executeString(const char* str)
 
 luabind::object LuaStateManager::getGlobalVars() const
 {
-    assert(m_pLuaState);
+    CORE_ASSERT(m_pLuaState);
     return luabind::globals(m_pLuaState);
 }
 
