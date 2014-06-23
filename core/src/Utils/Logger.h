@@ -48,15 +48,36 @@ private:
 
 #ifndef NDEBUG // If in debug mode
 
+// Define debugger break symbols
+#ifdef __unix__ // Linux & BSD
+
+// For SIGTRAP signal
+#include <signal.h>
+
+#define DEBUG_BREAK raise(SIGTRAP)
+
+#elif WIN32 // Windows 
+
+#define DEBUG_BREAK __debugbreak()
+
+#else
+
+#warn "Unknown Operating System, debug break support will not be included"
+
+// Remove support for debug break on other platforms
+#define DEBUG_BREAK 0
+
+#endif
+
 // Note, the do-while removes the ; at the end of the call
 #define CORE_ASSERT(expr) \
 	do \
 	{ \
 		if(!(expr)) \
 		{ \
-			Logger::instance().log("ASSERT", #expr, __FUNCTION__, __FILE__, __LINE__); \\
+			Logger::instance().log("ASSERT", #expr, __FUNCTION__, __FILE__, __LINE__); \
 			Logger::instance().flush(); \
-			std::abort(); \
+            DEBUG_BREAK; \
 		} \
 	} \
 	while(0)\
@@ -66,6 +87,7 @@ private:
     { \
         Logger::instance().log("FATAL", str, __FUNCTION__, __FILE__, __LINE__);\
         Logger::instance().flush(); \
+        DEBUG_BREAK; \
         std::terminate(); \
     } \
     while(0)\
