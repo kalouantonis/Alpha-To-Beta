@@ -8,6 +8,8 @@
 
 #include <Entities/WorldLocator.h>
 
+#include <Lua/exports/EventExports.h>
+
 #include <Resources/ResourceDef.h>
 #include <Utils/Logger.h>
 #include <Utils/String.h>
@@ -104,6 +106,13 @@ void Level::reload(bool reloadResources, bool reloadEntities)
 		// Clear texture locator
 		TextureLocator::getObject()->clear();
 	}
+	
+	// Re-register script events.
+	// We're doing this so that old registered events are not
+	// persisted after reload, causing lua to crash because it can not locate
+	// the registered function
+	InternalScriptExports::destroyEventExports();
+	InternalScriptExports::initEventExports();
 
 	CORE_LOG("LEVEL", "Reloading level...");
 	load(m_prevLevelFile);
