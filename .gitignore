@@ -12,3 +12,17 @@ build
 *.user
 *.user.*
 *.autosave
+
+# Doxygen conf
+doxy.conf
+
+# Netbeans files
+nbproject
+
+# Vim config
+.ycm_extra_conf.py
+.ycm_extra_conf.pyc
+.vimrc
+
+# Vim swap
+*.swp

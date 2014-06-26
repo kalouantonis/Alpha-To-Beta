@@ -19,13 +19,11 @@ public:
     ~SpriteBatch();
 
     /**
-     * @brief Begin sprite batch rendering. TODO: May lock renderer
+     * @brief Begin sprite batch rendering. 
      */
     void begin();
     void end();
 
-    // TODO: Check if I should use references of pointers
-    // Also, fix it, because it doesnt work
     //void setShader(const sf::Shader* shader);
 
     void draw(sf::ConstTexturePtr pTexture, const sf::Vector2f& position,
@@ -51,9 +49,10 @@ public:
 private:
     void flush();
     void switchTexture(const sf::Texture* const pTexture);
-    // Check the current state of the sprite batch.
-    // Is in charge of swithing textures or flushing the buffer
-    // if required
+    /** @brief Check the current state of the sprite batch.
+     * Is in charge of swithing textures or flushing the buffer
+     * if required
+     */
     void checkBatchState(const sf::Texture* const pTexture);
 
     /**

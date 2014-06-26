@@ -1,11 +1,11 @@
 #include <Maps/MapLoader.h>
 
-#include <assert.h>
-
 #include <Components/Renderable.h>
 #include <Components/Transform.h>
 #include <Components/StaticBody.h>
 #include <Components/DynamicBody.h>
+
+#include <Entities/WorldLocator.h>
 
 #include <Resources/ResourceDef.h>
 #include <Math/Vector.h>
@@ -23,9 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include <glm/glm.hpp>
 
-MapLoader::MapLoader(artemis::World &world)
-    : m_worldManager(world)
-    , m_entityFactory(world)
+MapLoader::MapLoader()
 {
 
 }
@@ -86,7 +84,7 @@ void MapLoader::load(const std::string &mapFile, const std::string &assetDir)
 void MapLoader::reload()
 {
 	// check that the map was already loaded once
-    assert(!m_prevMapFile.empty() && !m_prevAssetDir.empty());
+    CORE_ASSERT(!m_prevMapFile.empty() && !m_prevAssetDir.empty());
 
     load(m_prevMapFile, m_prevAssetDir);
 }
@@ -147,10 +145,11 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
     // to the naked eye.
     // Yes, I am aware that it's a horrible hack, if you have any better
     // solutions, feel free to change this
-    const sf::Vector2f tileOffsetHack = sf::Vector2f(
-                0.075f / PhysicsLocator::PixelsPerMeter.x,
-                0.075f / PhysicsLocator::PixelsPerMeter.y
+    sf::Vector2f tileOffsetHack = sf::Vector2f(
+                0.075f, // / PhysicsLocator::PixelsPerMeter.x,
+                0.075f // / PhysicsLocator::PixelsPerMeter.y
     );
+    PhysicsLocator::convertToWorldCoords(tileOffsetHack);
 
     for(int x = 0; x < layerWidth; ++x)
     {
@@ -158,10 +157,10 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
         {
             const Tmx::MapTile& tile = layer->GetTile(x, y);
 
-            if(tile.id != -1 && tile.tilesetId != -1) // Valid tile ID
+            if((int)tile.id != -1 && (int)tile.tilesetId != -1) // Valid tile ID
             {
                 // Create new entity
-                artemis::Entity& e = m_worldManager.createEntity();
+                artemis::Entity& e = WorldLocator::getObject()->createEntity();
 
                 // TODO: Load from file if 'file' property exists
 
@@ -202,11 +201,11 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
 
         const std::string& fileName = object->GetProperties().GetLiteralProperty("file");
 
-        artemis::Entity& entity = m_worldManager.createEntity();
+        artemis::Entity& entity = WorldLocator::getObject()->createEntity();
 
         if(!fileName.empty())
         {
-            if(!m_entityFactory.loadFromFile(fileName, entity))
+            if(!EntityFactory::get().loadFromFile(fileName, entity))
             {
                 CORE_ERROR("Failed to load entity for: " + object->GetName());
                 // Ignore entity, it failed to load

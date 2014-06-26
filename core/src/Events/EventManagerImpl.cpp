@@ -2,8 +2,6 @@
 
 #include <Utils/Logger.h>
 
-#include <assert.h>
-
 // Tag to log under
 const char* LOG_TAG = "EVENT";
 
@@ -68,6 +66,13 @@ bool EventManager::removeListener(const EventListenerDelegate &eventDelegate, Ev
     return bSuccess;
 }
 
+void EventManager::removeAllListeners()
+{
+	CORE_DEBUG("Removing all event listeners");
+	// Clear all listeners
+	m_eventListeners.clear();	
+}
+
 bool EventManager::triggerEvent(const EventDataPtr &pEvent) const
 {
     CORE_LOG(LOG_TAG, "Triggering event " + std::string(pEvent->getName()));
@@ -89,8 +94,8 @@ bool EventManager::triggerEvent(const EventDataPtr &pEvent) const
 
 bool EventManager::queueEvent(const EventDataPtr &pEvent)
 {
-    assert(m_activeQueue >= 0);
-    assert(m_activeQueue < NUM_QUEUES);
+    CORE_ASSERT(m_activeQueue >= 0);
+    CORE_ASSERT(m_activeQueue < NUM_QUEUES);
 
     if(!pEvent)
     {
@@ -121,8 +126,8 @@ bool EventManager::threadSafeQueueEvent(const EventDataPtr &pEvent)
 
 bool EventManager::abortEvent(EventType eventType, bool allOfType)
 {
-    assert(m_activeQueue >= 0);
-    assert(m_activeQueue < NUM_QUEUES);
+    CORE_ASSERT(m_activeQueue >= 0);
+    CORE_ASSERT(m_activeQueue < NUM_QUEUES);
 
     bool bSuccess = false;
 
@@ -153,6 +158,22 @@ bool EventManager::abortEvent(EventType eventType, bool allOfType)
     }
 
     return bSuccess;
+}
+
+void EventManager::clearEventQueues(bool dispatch)
+{
+	// Dispatch events before clearing
+	if(dispatch)
+		update();
+
+	// Clear normal queues
+	for(int i = 0; i < NUM_QUEUES; ++i)
+	{
+		m_queues[i].clear();
+	}
+
+	// Clear realtime event queue
+	m_realtimeEventQueue.clear();
 }
 
 bool EventManager::update()

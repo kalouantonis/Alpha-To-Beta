@@ -5,6 +5,8 @@
 #include <Resources/XMLoader.h>
 
 #include <Components/ParsedComponent.h>
+
+#include <SFML/System/NonCopyable.hpp>
 // #include <Systems/WorldManager.h>
 
 // fwd def
@@ -22,29 +24,80 @@ typedef GenericObjectFactory<std::string, ParsedComponent> ComponentFactory;
  * @details Loads components from entity XML files
  * 
  */
-class EntityFactory
+class EntityFactory: private sf::NonCopyable // Dis-allow copying
 {
 public:
-    EntityFactory(artemis::World& world);
+    static EntityFactory& get();
+
     ~EntityFactory();
 
+    template <class CompType>
+    void registerComponent(const std::string& id)
+    {
+        m_componentFactory.declare<CompType>(id);
+    }
+
+    void unregisterComponent(const std::string& id)
+    {
+        m_componentFactory.remove(id);
+    }
+
+    /**
+     * @brief load XML resources from directory
+     *
+     * @param path path of directory
+     * @param recurse True if file directories are to be recursed
+     */
     void load(const std::string& path, bool recurse = true);
+    /**
+     * @brief Load using XML file in to entity 
+     * 
+     * @param filename filename of XML resource
+     * @param entity entity to load into
+     * 
+     * @return true if succeeded, false if failed
+     */
     bool loadFromFile(const std::string& filename, artemis::Entity& entity);
+    /**
+     * @brief Load entity from XML and add to world
+     * 
+     * @param filename entity XML resource to load from
+     * @return true if succeeded
+     */
     bool loadFromFile(const std::string& filename);
 
+    /**
+     * @brief Get component factory
+     */
     const ComponentFactory& getComponentFactory() { return m_componentFactory; }
 
+
 protected:
+    /**
+     * @brief Create a component from XML element
+     *
+     * @param pElement Element to load from
+     * @return New component. Null if failed
+     */
     ParsedComponent* createComponent(const tinyxml2::XMLElement* pElement);
 
     // Use component family ID
     ComponentFactory m_componentFactory;
 
-
 private:
     // Store world reference
-    artemis::World& m_worldManager;
+//    artemis::World& m_worldManager;
     XMLoader m_xmlLoader;
+
+    // Hide constructor and destructor
+    EntityFactory();
 };
+
+#define REGISTER_COMPONENT(TYPE, NAME) \
+    EntityFactory::get().registerComponent<TYPE>(NAME);
+
+#define UNREGISTER_COMPONENT(NAME) \
+    EntityFactory::get().unregisterComponent(NAME);
+
 
 #endif // ENTITYFACTORY_H

@@ -4,129 +4,53 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 
-#include <Input/InputLocator.h>
-
-#include <Memory/loose_ptr.h>
-
-#include <Events/JumpListener.h>
-
-#include <Systems/RenderSystem.h>
-#include <Systems/PhysicsSystem.h>
-#include <Systems/PlayerInputSystem.h>
-#include <Systems/CameraFollowingSystem.h>
-
-#include <Physics/Box2DRenderer.h>
-#include <Physics/PhysicsLocator.h>
-
-#include <Resources/ResourceDef.h>
-
 #include <Artemis/SystemManager.h>
 
-GameScreen::GameScreen(sf::RenderTargetPtr window)
-    : IScreen(window)
-    // , m_manager(window)
-    , m_world()
-    , m_spriteBatch(window)
-    , m_camera(window)
-    , m_pRenderSystem(nullptr)
-    , m_pPhysicsSystem(nullptr)
-    , m_pInputSystem(nullptr)
-    , m_pJumpListener(nullptr)
-    , m_pB2Renderer(new Box2DRenderer(window))
-    , m_level(m_world)
+GameScreen::GameScreen(sf::RenderTargetPtr pWindow)
+    : IScreen(pWindow)
+    , m_pRenderTarget(pWindow)
+    , m_spriteBatch(pWindow)
+    , m_camera(pWindow)
 {
 }
 
 bool GameScreen::init()
 {
-    try
-    {
-        TextureLocator::provide(TextureLocator::Ptr(new TextureHolder()));
-        // Initialize manager
-        // m_manager.initialize();
+    m_gameManager.init();
+    m_gameManager.initPhysics(sf::Vector2f(0, 9.81f), sf::Vector2f(70, 70));
 
-        PhysicsLocator::provide(sf::Vector2f(0, 9.81f), sf::Vector2f(70, 70));
+#ifdef _DEBUG
+    m_gameManager.initPhysicsRenderer(m_pRenderTarget);
+#endif
+    m_gameManager.initRenderer(m_spriteBatch, m_camera);
+    if(!m_gameManager.initLua())
+        return false;
 
-        artemis::SystemManager* systemManager = m_world.getSystemManager();
+    m_gameManager.registerComponents();
+    m_gameManager.registerScriptEvents();
 
-        CORE_DEBUG("Creating render system...");
-        m_pRenderSystem = static_cast<RenderSystem*>(
-             systemManager->setSystem(new RenderSystem(m_spriteBatch))
-        );
+    m_gameManager.start();
 
-        m_pRenderSystem->setWorld(&m_world);
+	CORE_DEBUG("Loading entities...");
+	m_level.load("assets/levels/level1.xml");
 
-        CORE_DEBUG("Creating physics system...");
-        m_pPhysicsSystem = static_cast<PhysicsSystem*>(
-            systemManager->setSystem(new PhysicsSystem())
-        );
+	CORE_DEBUG("Initialization complete.");
 
-        CORE_DEBUG("Creating input system...");
-        m_pInputSystem = static_cast<PlayerInputSystem*>(
-            systemManager->setSystem(new PlayerInputSystem())
-        );
-
-        m_pCameraSystem = static_cast<CameraFollowingSystem*>(
-            systemManager->setSystem(new CameraFollowingSystem(m_camera))
-        );
-
-        // Set input processor
-        InputLocator::provide(loose_ptr(m_pInputSystem));
-
-        CORE_DEBUG("Initializing physics renderer...");
-        PhysicsLocator::getObject()->SetDebugDraw(m_pB2Renderer.get());
-        m_pB2Renderer->SetFlags(Box2DRenderer::e_shapeBit);
-
-        CORE_DEBUG("Adding listeners...");
-        m_pJumpListener.reset(new JumpListener());
-
-        CORE_DEBUG("Initializing all systems...");
-        systemManager->initializeAll();
-
-        CORE_DEBUG("Loading entities...");
-        m_level.load("assets/levels/level1.xml");
-		//m_level.load("assets\\levels\\level1.xml");
-
-        CORE_DEBUG("Resizing camera to work with physics system");
-        m_camera.resize(sf::Vector2u(
-            m_camera.getSize().x / PhysicsLocator::PixelsPerMeter.x,
-            m_camera.getSize().y / PhysicsLocator::PixelsPerMeter.y
-        ));
-
-        CORE_DEBUG("Initialization complete.");
-
-        return true;
-    }
-    catch(std::runtime_error& e)
-    {
-       CORE_ERROR(e.what());
-
-       return false;
-    }
+	return true;
 }
 
 GameScreen::~GameScreen()
 {
-    // CORE_DEBUG("Disposing GameManager...");
-    // m_manager.dispose();
-    // CORE_DEBUG("Destroying physics system...");
-    // PhysicsLocator::remove();
+    m_gameManager.unregisterComponents();
+    m_gameManager.unregisterScriptEvents();
 
-    CORE_DEBUG("Removing all entities...");
-    // Clear out all entities
-    m_world.getEntityManager()->removeAllEntities();
-    
-    CORE_DEBUG("Removing input processor...");
-    InputLocator::remove();
+    m_gameManager.destroy();
 
-    CORE_DEBUG("Disposing textures...");
-    TextureLocator::getObject()->clear();
-
-    CORE_DEBUG("Disposing TextureLocator...");
-    TextureLocator::remove();
-
-    CORE_DEBUG("Disposing the physics world...");
-    PhysicsLocator::remove();
+    m_gameManager.destroyLua();
+#ifdef _DEBUG
+    m_gameManager.destroyPhysicsRenderer();
+#endif
+    m_gameManager.destroyPhysics();
 
     CORE_DEBUG("GameScreen disposed...");
 }
@@ -165,23 +89,12 @@ void GameScreen::update(float deltaTime)
         m_camera.move(0, 0.05f);
     }
 
-    m_world.loopStart();
-    m_world.setDelta(deltaTime);
-
-    // Update input
-    m_pInputSystem->process();
-
-    // Step physics world
-    PhysicsLocator::getObject()->Step(deltaTime, 6, 2);
-    m_pPhysicsSystem->process();
+    m_gameManager.update(deltaTime);
 }
 
 void GameScreen::render()
 {
-    m_pCameraSystem->process();
-    m_pRenderSystem->process();
-    // Draw debug over other data
-    PhysicsLocator::getObject()->DrawDebugData();
+    m_gameManager.render();
 }
 
 void GameScreen::resize(const sf::Vector2u &size)

@@ -15,6 +15,8 @@ Camera2D::Camera2D(sf::RenderTargetPtr renderTarget)
     , m_zoom(1.f)
 {
     m_view = m_pRenderTarget->getView();
+
+    updateTarget();
 }
 
 Camera2D::Camera2D(sf::RenderTargetPtr renderTarget, float frustrumWidth, float frustrumHeight)
@@ -24,6 +26,8 @@ Camera2D::Camera2D(sf::RenderTargetPtr renderTarget, float frustrumWidth, float 
     m_view.setViewport(sf::FloatRect(0, 0, frustrumWidth, frustrumHeight));
 
     resize(m_pRenderTarget->getSize());
+
+    updateTarget();
 }
 
 

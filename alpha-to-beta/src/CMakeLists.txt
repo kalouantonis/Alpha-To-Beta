@@ -15,6 +15,8 @@ include_directories(
 	${Box2D_SOURCE_DIR};
 	# Boost
 	${Boost_INCLUDE_DIR};
+    # LuaPlus
+    ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/luaplus;
 	# Core LIB
 	${ALPHA_TO_BETA_SOURCE_DIR}/core/src;
 	# SFML
@@ -26,8 +28,16 @@ link_directories(
 	${ALPHA_TO_BETA_BINARY_DIR}/dependencies/tinyxml2;
 	# Boost
 	${Boost_LIBRARY_DIRS};
+    # Luabind
+    ${LUABIND_LIBRARY_DIR};
 	# Core	
 	${ALPHA_TO_BETA_BINARY_DIR}/core/src;
+)
+
+set(
+    COMPONENTS_SRC
+    "Components/JumpBehaviour.cpp"
+    "Components/JumpBehaviour.h"
 )
 
 set(
@@ -48,6 +58,8 @@ set(
 	SCREENS_SRC
 	"Screens/GameScreen.cpp"
 	"Screens/GameScreen.h"
+    "Screens/GameManager.cpp"
+    "Screens/GameManager.h"
 )
 
 set(
@@ -59,6 +71,7 @@ set(
 set(
 	SOURCE_FILE_LIST;
 
+    ${COMPONENTS_SRC};
     ${EVENTS_SRC};
 	${MAIN_SRC};
 	${SCREENS_SRC};
@@ -68,21 +81,15 @@ set(
 # Create executable
 add_executable(alphatobeta ${SOURCE_FILE_LIST})
 
-set(
-	LIBRARIES;
-	
-	#${Boost_LIBRARIES};
-	core; # Core library
-	${SFML_LIBRARIES}; # SFML
-)
-
-
 # Link dependant libraries
 target_link_libraries(
     alphatobeta;
 
 	#${Boost_LIBRARIES};     # Only used components that were requested
-	${LIBRARIES}
+	core; # Core library
+	${SFML_LIBRARIES}; # SFML
+	${LUA_LIBRARIES};
+	${LUABIND_LIBRARIES};
 )
 
 install(TARGETS alphatobeta DESTINATION alphatobeta)

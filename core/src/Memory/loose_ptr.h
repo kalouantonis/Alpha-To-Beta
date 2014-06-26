@@ -7,8 +7,8 @@
 template <class T>
 /**
  * @brief Create object that will not be deleted automagically
- * @param p
- * @return
+ * @param p Pointer to create loose_ptr for
+ * @return New shared_ptr with empty deleter
  */
 inline std::shared_ptr<T> loose_ptr(T* p)
 {

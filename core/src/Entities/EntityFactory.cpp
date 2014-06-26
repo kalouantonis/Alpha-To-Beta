@@ -7,28 +7,27 @@
 #include <Components/Transform.h>
 #include <Components/Renderable.h>
 #include <Components/DynamicBody.h>
-#include <Components/JumpBehaviour.h>
 #include <Components/PlayerInput.h>
 #include <Components/CameraFollower.h>
+#include <Components/BaseScriptComponent.h>
 
 #include <Artemis/Entity.h>
 #include <Artemis/TagManager.h>
-#include <Artemis/World.h>
+
+#include <Entities/WorldLocator.h>
 
 #include <boost/filesystem.hpp>
 
 using namespace boost;
 
-
-EntityFactory::EntityFactory(artemis::World& worldManager)
-    : m_worldManager(worldManager)
+EntityFactory::EntityFactory()
 {
     m_componentFactory.declare<Transform>(Transform::g_name);
     m_componentFactory.declare<Renderable>(Renderable::g_name);
     m_componentFactory.declare<DynamicBody>(DynamicBody::g_name);
-    m_componentFactory.declare<JumpBehaviour>(JumpBehaviour::g_name);
     m_componentFactory.declare<PlayerInput>(PlayerInput::g_name);
     m_componentFactory.declare<CameraFollower>(CameraFollower::g_name);
+    m_componentFactory.declare<BaseScriptComponent>(BaseScriptComponent::g_name);
 }
 
 EntityFactory::~EntityFactory()
@@ -36,10 +35,16 @@ EntityFactory::~EntityFactory()
     m_componentFactory.clear();
 }
 
+EntityFactory& EntityFactory::get()
+{
+    static EntityFactory instance;
+    return instance;
+}
+
 bool EntityFactory::loadFromFile(const std::string &filename)
 {
     // Create new entity
-    return loadFromFile(filename, m_worldManager.createEntity());
+    return loadFromFile(filename, WorldLocator::getObject()->createEntity());
 }
 
 bool EntityFactory::loadFromFile(const std::string& filename, artemis::Entity& entity)
@@ -69,15 +74,15 @@ bool EntityFactory::loadFromFile(const std::string& filename, artemis::Entity& e
         return false;
     }
 
-    // Try and get tag attribute from xml entity
-    const char* tag = pRoot->Attribute("tag");
-
-
-    if(tag != NULL)
-    {
-        if(!m_worldManager.getTagManager()->isSubscribed(tag))
-            m_worldManager.getTagManager()->subscribe(tag, entity);
-    }
+//    // Try and get tag attribute from xml entity
+//    const char* tag = pRoot->Attribute("tag");
+//
+//
+//    if(tag != NULL)
+//    {
+//        if(!m_worldManager.getTagManager()->isSubscribed(tag))
+//            m_worldManager.getTagManager()->subscribe(tag, entity);
+//    }
 
 
 
@@ -144,7 +149,7 @@ void EntityFactory::load(const std::string &path, bool recurse)
                 }
                 else
                 {
-                    // FIXME: Recurse if broken
+                    // FIXME: Recurse is broken
                     // Ignore folders
                     std::copy(
                         filesystem::directory_iterator(fsPath),

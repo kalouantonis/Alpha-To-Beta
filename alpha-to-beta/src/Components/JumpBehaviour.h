@@ -24,6 +24,8 @@ public:
     void resetJumps() { m_numJumps = 0; }
 
 private:
+    virtual void buildEventData() final;
+
     unsigned int m_numJumps;
     unsigned int m_maxJumps;
 };

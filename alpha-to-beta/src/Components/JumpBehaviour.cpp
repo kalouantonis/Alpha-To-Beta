@@ -40,3 +40,8 @@ bool JumpBehaviour::load(const tinyxml2::XMLElement *pElement)
 
 	return true;
 }
+
+void JumpBehaviour::buildEventData()
+{
+    //m_eventData["max_jumps"] = 
+}

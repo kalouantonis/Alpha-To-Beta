@@ -6,16 +6,18 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
 
+#include <Entities/WorldLocator.h>
+
+#include <Lua/exports/EventExports.h>
+
 #include <Resources/ResourceDef.h>
 #include <Utils/Logger.h>
 #include <Utils/String.h>
 
 using namespace boost;
 
-Level::Level(artemis::World& worldManager)
-	: m_entityFactory(worldManager)
-    , m_mapLoader(worldManager)
-    , m_entityManager(worldManager.getEntityManager())
+Level::Level()
+    : m_mapLoader()
 {
 }
 
@@ -89,12 +91,12 @@ void Level::load(const std::string& filename)
 
 void Level::reload(bool reloadResources, bool reloadEntities)
 {
-	assert(!m_prevLevelFile.empty());
+	CORE_ASSERT(!m_prevLevelFile.empty());
 
 	if(reloadEntities)
 	{
 		CORE_LOG("LEVEL", "Removing all entities from manager...");
-		m_entityManager->removeAllEntities();
+        WorldLocator::getObject()->getEntityManager()->removeAllEntities();
 		// TODO: Reload all systems
 	}
 
@@ -104,6 +106,13 @@ void Level::reload(bool reloadResources, bool reloadEntities)
 		// Clear texture locator
 		TextureLocator::getObject()->clear();
 	}
+	
+	// Re-register script events.
+	// We're doing this so that old registered events are not
+	// persisted after reload, causing lua to crash because it can not locate
+	// the registered function
+	InternalScriptExports::destroyEventExports();
+	InternalScriptExports::initEventExports();
 
 	CORE_LOG("LEVEL", "Reloading level...");
 	load(m_prevLevelFile);
@@ -111,7 +120,6 @@ void Level::reload(bool reloadResources, bool reloadEntities)
 
 bool Level::loadAssets(const std::string& assetDir)
 {
-	// TODO: Move out of here, make generic file directory recurser
 	filesystem::path filePath(assetDir);
 
 	if(filesystem::exists(filePath))
@@ -119,7 +127,16 @@ bool Level::loadAssets(const std::string& assetDir)
 		if(filesystem::is_regular_file(filePath))
 		{
 			// Load single asset
-			TextureLocator::getObject()->load(assetDir, assetDir);
+			try 
+			{
+				// Use Asset Directory as ID. Also, since its a regular file,
+				// load it
+				loadTexture(assetDir, assetDir);
+			}
+			catch(const std::runtime_error& e)
+			{
+				CORE_ERROR(e.what());
+			}
 		}
 		else if(filesystem::is_directory(filePath))
 		{
@@ -138,13 +155,13 @@ bool Level::loadAssets(const std::string& assetDir)
 				if(filesystem::is_regular_file(file) && 
                     (file.extension().generic_string() == ".png"))
                 {
-					TextureLocator::getObject()->load(
-							// use generic file name for compatibility
-							file.generic_string(), 
-							file.string()			// Use native file name
+					loadTexture(
+						// use generic file name for compatibility
+						file.generic_string(), 
+						// Use native file name
+						file.string()
 					);
 
-					CORE_DEBUG("Loaded texture: " + file.string());
 				}
 			}
 		}
@@ -161,5 +178,19 @@ bool Level::loadAssets(const std::string& assetDir)
 	}
 
 	return true;
+}
+
+void Level::loadTexture(const std::string& id, const std::string& file)
+{
+	try
+	{
+		TextureLocator::getObject()->load(id, file);
+		
+		CORE_DEBUG("Loaded texture: " + file);
+	}
+	catch(const std::runtime_error& e)
+	{
+		CORE_ERROR(e.what());
+	}
 }
 

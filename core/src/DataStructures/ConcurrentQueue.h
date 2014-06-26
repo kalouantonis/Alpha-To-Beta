@@ -32,6 +32,9 @@ public:
         return item;
     }
 
+    /**
+     * @brief Check if queue is empty
+     */
     bool empty()
     {
         std::unique_lock<std::mutex> lock(m_mutex);
@@ -39,6 +42,11 @@ public:
         return m_queue.empty();
     }
 
+    /**
+     * @brief Push new item on to queue
+
+     * @param item constant reference to item to push
+     */
     void push(const T& item)
     {
         std::unique_lock<std::mutex> lock(m_mutex);
@@ -59,6 +67,13 @@ public:
         lock.unlock();
         m_conditionVar.notify_one();
     }
+
+	void clear()
+	{
+		// While the queue is not empty, pop items off it
+		while(!empty())
+			pop();
+	}
 
 private:
     std::queue<T> m_queue;

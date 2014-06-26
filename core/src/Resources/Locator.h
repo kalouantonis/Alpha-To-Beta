@@ -1,36 +1,53 @@
 #ifndef LOCATOR_H
 #define LOCATOR_H
 
-#include <assert.h>
+#include <Utils/Logger.h>
 #include <memory>
 
+/**
+ * @brief Locator pattern. 
+ * @details See http://gameprogrammingpatterns.com/service-locator.html for more details
+ * 
+ * @tparam T Type stored in locator
+ */
 template <class T>
 class Locator
 {
 public:
 	typedef std::shared_ptr<T> Ptr;
 
-	static Ptr getObject()
+	/**
+	 * @brief Get object reference
+	 */
+	static Ptr getObject() 
 	{
-		return m_sObject;
+		CORE_ASSERT(s_pObject != nullptr);
+		return s_pObject;
 	}
 
+	/**
+	 * Provide new object to locator. Will overwrite the previous one
+     */
 	static void provide(Ptr object)
 	{
-		m_sObject = object;
+		s_pObject = object;
 	}
 
+	/**
+	 * Remove object from locator, will be de-allocated once all references 
+	 * are deleted
+     */
 	static void remove()
 	{
-		m_sObject = nullptr;
+		s_pObject = nullptr;
 	}
 
 private:
-	static Ptr m_sObject;	
+	static Ptr s_pObject;	
 };
 
 // Initialize object
 template <class T>
-std::shared_ptr<T> Locator<T>::m_sObject = nullptr;
+std::shared_ptr<T> Locator<T>::s_pObject = nullptr;
 
 #endif // LOCATOR_H

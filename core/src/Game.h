@@ -16,20 +16,49 @@
 class IEventManager;
 typedef std::shared_ptr<IEventManager> EventManagerPtr;
 
+/**
+ * Main game class
+ */
 class Game
 {
 public:
 	Game();
 	virtual ~Game();
 
+    /**
+     * @brief Initialize game engine
+     * 
+     * @param title Window title of game
+     * @param width Window width
+     * @param height Window height
+     * @param fullscreen Set window to fullscreen. Set to false by default
+     */
 	void init(const char* title, int width, int height, bool fullscreen = false);
 
+    /**
+     * @brief Poll and dispatch input events
+     */
     void pollInput();
+    /**
+     * @brief Update engine
+     * 
+     * @param dt Time since last update
+     */
     void update(float dt);
+    /**
+     * @brief Render engine contents
+     */
     void render();
 
+    /**
+     * @brief Get current window pointer
+     */
     sf::RenderTargetPtr getWindow() const { return m_pWindow; }
 
+    /**
+     * @brief Is game engine running?
+     * @return true if running
+     */
 	bool isRunning() const
 	{
 		return m_bRunning;

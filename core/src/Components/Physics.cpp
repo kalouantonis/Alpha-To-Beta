@@ -74,7 +74,7 @@ bool Physics::load(const tinyxml2::XMLElement* pElement)
 
 sf::Vector2f Physics::getPosition() 
 {
-    assert(body != nullptr);
+    CORE_ASSERT(body != nullptr);
 
 	return sf::Vector2f(
 		// This should be center of mass, so we are trying to

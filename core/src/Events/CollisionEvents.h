@@ -2,6 +2,7 @@
 #define COLLISION_EVENTS_H_
 
 #include <Events/EventData.h>
+#include <Lua/ScriptEvent.h>
 
 class b2Contact;
 
@@ -15,7 +16,17 @@ class BaseCollisionEvent: public BaseEventData
 public:
     BaseCollisionEvent(b2Contact* pContact);
 
+    /**
+     * @brief Get box2d contact from collision
+     * 
+     * @return Constant reference to contact
+     */
     const b2Contact* getContact() const { return m_pContact; }
+    /**
+     * @brief Get box2d contact from collision
+     *
+     * @return reference to contact
+     */
     b2Contact* getContact() { return m_pContact; }
 
     artemis::Entity *getEntityA() const { return m_pEntityA; }
@@ -53,6 +64,8 @@ public:
 
     virtual EventType getEventType() const final { return sEventType; }
     virtual const char* getName() const final;
+
+    //EXPORT_FOR_SCRIPT_EVENT(CollisonEndEvent);
 };
 
 
