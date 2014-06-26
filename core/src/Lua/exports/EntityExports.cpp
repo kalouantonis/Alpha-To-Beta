@@ -9,8 +9,6 @@
 
 #include <Utils/Logger.h>
 
-#include <luabind/object.hpp>
-
 #include <Artemis/Entity.h>
 
 #include <SFML/System/Vector2.hpp>
@@ -18,27 +16,18 @@
 namespace InternalScriptExports 
 {
 
-int createEntity(const char* entityResource, const luabind::adl::object& luaPosition)
+int createEntity(const char* entityResource, LuaPlus::LuaObject luaPosition)
 {
-    if(luabind::type(luaPosition) != LUA_TTABLE)
+    if(!luaPosition.IsTable())
     {
         CORE_LOG("LUA", "Invalid position object passed to create_entity function. Must be a table");
         return INVALID_ENTITY_ID;
     }
 
-    sf::Vector2f position(0.f, 0.f);
-
-    try 
-    {
-      // Attempt to receive position from lua
-        position.x = luabind::object_cast<float>(luaPosition["x"]);
-        position.y = luabind::object_cast<float>(luaPosition["y"]);
-    }
-    catch(const luabind::cast_failed& e)
-    {
-        CORE_LOG("LUA", "Failed to cast position object vector to decimal."
-                        "Attempting to load from resource, or set to (0,0)");
-    }
+    sf::Vector2f position(
+        luaPosition["x"].GetFloat(),
+        luaPosition["y"].GetFloat()
+    );
 
     artemis::Entity& entity = WorldLocator::getObject()->createEntity();
 
@@ -64,6 +53,7 @@ int createEntity(const char* entityResource, const luabind::adl::object& luaPosi
 
     return entity.getId();
 }
+
 
 void removeEntity(int entityId)
 {

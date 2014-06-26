@@ -1,39 +1,31 @@
 #include <Lua/exports/MathExports.h>
+#include <Lua/LuaStateManager.h>
 
 #include <Physics/PhysicsLocator.h>
 #include <Utils/Logger.h>
 
-#include <luabind/object.hpp>
-
 namespace InternalScriptExports 
 {
 
-void convertToWorldCoords(const luabind::adl::object& luaVec)
+void convertToWorldCoords(LuaPlus::LuaObject luaVec)
 {
-    if(luabind::type(luaVec) != LUA_TTABLE)
+    if(!luaVec.IsTable())
     {
         CORE_LOG("LUA", "Invalid lua object provided to convert_to_world_coords.\n"
                 "Must be of type table.");
         return;
     }
 
-    try 
-    {
-        float x = luabind::object_cast<float>(luaVec["x"]);
-        float y = luabind::object_cast<float>(luaVec["y"]);
+    float x = luaVec["x"].GetFloat();
+    float y = luaVec["y"].GetFloat();
 
-        PhysicsLocator::convertToWorldCoords(x, y);
+    PhysicsLocator::convertToWorldCoords(x, y);
 
-        // Set lua object
-        luaVec["x"] = x;
-        luaVec["y"] = y;
+    LuaPlus::LuaState* pLState = LuaStateManager::get()->getLuaState();
 
-    }
-    catch(const luabind::cast_failed& e)
-    {
-        CORE_LOG("LUA", "Failed to cast x and y co-ordinates in to vector."
-                "\nInvalid type: " + std::string(e.info().name()));
-    }
+    // Set lua object
+    luaVec["x"].AssignNumber(pLState, x);
+    luaVec["y"].AssignNumber(pLState, y);
 }
 
 }

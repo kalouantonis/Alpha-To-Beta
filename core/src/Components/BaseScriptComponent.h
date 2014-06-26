@@ -3,8 +3,9 @@
 
 #include <Components/ParsedComponent.h>
 
-#include <luabind/object.hpp>
 #include <string>
+
+#include <LuaPlus.h>
 
 namespace artemis
 {
@@ -32,9 +33,9 @@ public:
 
     bool isInitialized() const { return (m_pParentEntity != nullptr); }
 
-    bool hasConstructor() const { return !m_scriptConstructorName.empty(); }
-    bool hasDestructor() const { return !m_scriptDestructorName.empty(); }
-    bool hasUpdateFunction() const { return !m_scriptUpdateFunctionName.empty(); }
+    bool hasConstructor() const { return m_scriptConstructor.IsFunction(); }
+    bool hasDestructor() const { return m_scriptDestructor.IsFunction(); }
+    bool hasUpdateFunction() const { return m_scriptUpdateFunction.IsFunction(); }
 
     void callConstructor();
     void callDestructor();
@@ -55,10 +56,10 @@ private:
     std::string m_scriptDestructorName;
     std::string m_scriptUpdateFunctionName;
 
-    luabind::object m_scriptObject;
-    luabind::object m_scriptConstructor;
-    luabind::object m_scriptDestructor;
-    luabind::object m_scriptUpdateFunction;
+    LuaPlus::LuaObject m_scriptObject;
+    LuaPlus::LuaObject m_scriptConstructor;
+    LuaPlus::LuaObject m_scriptDestructor;
+    LuaPlus::LuaObject m_scriptUpdateFunction;
 
     artemis::Entity* m_pParentEntity;
 
@@ -83,8 +84,8 @@ private:
     // Functions for entity access through lua
     int getEntityId() const;
 
-    void setPosition(const luabind::object& newPos);
-    luabind::object getPosition() const;
+    void setPosition(const LuaPlus::LuaObject& newPos);
+    LuaPlus::LuaObject getPosition() const;
 
     void stopPhysics();
 };

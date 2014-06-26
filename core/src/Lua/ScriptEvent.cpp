@@ -13,7 +13,7 @@ ScriptEvent::ScriptEvent()
 
 }
 
-const luabind::object& ScriptEvent::getEventData() 
+LuaPlus::LuaObject ScriptEvent::getEventData() 
 {
     if(!m_bEventDataIsValid)
     {
@@ -25,7 +25,7 @@ const luabind::object& ScriptEvent::getEventData()
     return m_eventData;
 }
 
-bool ScriptEvent::setEventData(const luabind::object &eventData)
+bool ScriptEvent::setEventData(LuaPlus::LuaObject eventData)
 {
     m_eventData = eventData;
     // Build the event and check validity
@@ -38,22 +38,20 @@ void ScriptEvent::registerEventTypeWithScript(const char *key, EventType type)
     LuaStateManager* pStateManager = LuaStateManager::get();
 
     // get or create event table
-    luabind::object eventTypeTable = pStateManager->getGlobalVars()["EventType"];
+    LuaPlus::LuaObject eventTypeTable = pStateManager->getGlobalVars().GetByName("EventType");
     // Check if object has been initialized
-    if(luabind::type(eventTypeTable) == LUA_TNIL)
+    if(eventTypeTable.IsNil())
     {
         // Create new table
-        eventTypeTable = luabind::newtable(pStateManager->getLuaState());
-        // bind to global vars
-        pStateManager->getGlobalVars()["EventType"] = eventTypeTable;
+        eventTypeTable = pStateManager->getGlobalVars().CreateTable("EventType");
     }
     
     // Error checking
-    CORE_ASSERT(luabind::type(eventTypeTable) == LUA_TTABLE);
-    CORE_ASSERT(luabind::type(eventTypeTable[key]) == LUA_TNIL);
+    CORE_ASSERT(eventTypeTable.IsTable());
+    CORE_ASSERT(eventTypeTable[key].IsNil());
 
     // add entry
-    luabind::settable(eventTypeTable, key, (double)type);
+    eventTypeTable.SetNumber(key, (double)type);
 }
 
 void ScriptEvent::addCreationFunction(EventType type, CreateEventForScriptFunctionType creationFunction)
@@ -84,6 +82,5 @@ ScriptEvent* ScriptEvent::createEventFromScript(EventType type)
 void ScriptEvent::buildEventData()
 {
     // Set interpretter if it does not exist
-    if(m_eventData.interpreter() == nullptr)
-        m_eventData.push(LuaStateManager::get()->getLuaState());
+    m_eventData.AssignNil(LuaStateManager::get()->getLuaState());
 }

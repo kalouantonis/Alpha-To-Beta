@@ -1,9 +1,6 @@
 #include <Lua/exports/EventExports.h>
 #include <Lua/ScriptEvent.h>
 
-#include <luabind/object.hpp>
-#include <luabind/function.hpp>
-
 #include <FastDelegate.h>
 
 #include <set>
@@ -11,6 +8,8 @@
 #include <Events/EventManager.h>
 
 #include <Utils/Logger.h>
+
+#include <LuaPlus.h>
 
 // Disable copying
 #include <SFML/System/NonCopyable.hpp>
@@ -26,7 +25,7 @@ namespace InternalScriptExports
 class ScriptEventListener
 {
 public:
-    explicit ScriptEventListener(EventType eventType, const luabind::adl::object& scriptCallbackFunction);
+    explicit ScriptEventListener(EventType eventType, LuaPlus::LuaObject scriptCallbackFunction);
     ~ScriptEventListener();
 
     EventListenerDelegate getDelegate()
@@ -37,11 +36,11 @@ public:
 private:
     void scriptEventDelegate(EventDataPtr pEvent);
 
-    luabind::adl::object m_scriptCallbackFunction;
+    LuaPlus::LuaObject m_scriptCallbackFunction;
     EventType m_eventType;
 };
 
-ScriptEventListener::ScriptEventListener(EventType eventType, const luabind::adl::object& scriptCallbackFunction)
+ScriptEventListener::ScriptEventListener(EventType eventType, LuaPlus::LuaObject scriptCallbackFunction)
     : m_scriptCallbackFunction(scriptCallbackFunction)
     , m_eventType(eventType)
 {
@@ -62,13 +61,13 @@ ScriptEventListener::~ScriptEventListener()
 void ScriptEventListener::scriptEventDelegate(EventDataPtr pEvent)
 {
     // Confirm that we are working with a function
-    CORE_ASSERT(luabind::type(m_scriptCallbackFunction) == LUA_TFUNCTION);
+    CORE_ASSERT(m_scriptCallbackFunction.IsFunction());
 
     // call the lua function
     std::shared_ptr<ScriptEvent> pScriptEvent = std::static_pointer_cast<ScriptEvent>(pEvent);
     // receive and call lua function, sending the event data as an argument
-    // TODO: Ensure that callback is actually called
-    luabind::call_function<void>(m_scriptCallbackFunction, pScriptEvent->getEventData());
+    LuaPlus::LuaFunction<void> callback = m_scriptCallbackFunction;
+    callback(pScriptEvent->getEventData());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -153,12 +152,12 @@ void destroyEventExports()
     g_pScriptEventListenerManager = nullptr;
 }
 
-ListenerID registerEventListener(EventType eventType, const luabind::adl::object& luaCallbackFunc)
+ListenerID registerEventListener(EventType eventType, LuaPlus::LuaObject luaCallbackFunc)
 {
     CORE_ASSERT(g_pScriptEventListenerManager != nullptr);
 
     // Validate that we're registering a function
-    if(luabind::type(luaCallbackFunc) == LUA_TFUNCTION)
+    if(luaCallbackFunc.IsFunction())
     {
         // Create c++ listener proxy and set it to listen for the event
         ScriptEventListener* pListener = new ScriptEventListener(eventType, luaCallbackFunc);
@@ -185,7 +184,7 @@ void removeEventListener(ListenerID listenerId)
     g_pScriptEventListenerManager->destroyListener(pListener);
 }
 
-std::shared_ptr<ScriptEvent> buildEvent(EventType eventType, const luabind::adl::object& eventData)
+std::shared_ptr<ScriptEvent> buildEvent(EventType eventType, LuaPlus::LuaObject eventData)
 {
     std::shared_ptr<ScriptEvent> pEvent(ScriptEvent::createEventFromScript(eventType));
     if(!pEvent)
@@ -202,7 +201,7 @@ std::shared_ptr<ScriptEvent> buildEvent(EventType eventType, const luabind::adl:
     return pEvent;
 }
 
-bool queueEvent(EventType eventType, const luabind::adl::object& eventData)
+bool queueEvent(EventType eventType, LuaPlus::LuaObject eventData)
 {
     std::shared_ptr<ScriptEvent> pEvent(
             buildEvent(eventType, eventData)
@@ -216,7 +215,7 @@ bool queueEvent(EventType eventType, const luabind::adl::object& eventData)
     return false;
 }
 
-bool triggerEvent(EventType eventType, const luabind::adl::object& eventData)
+bool triggerEvent(EventType eventType, LuaPlus::LuaObject eventData)
 {
     std::shared_ptr<ScriptEvent> pEvent(
             buildEvent(eventType, eventData)

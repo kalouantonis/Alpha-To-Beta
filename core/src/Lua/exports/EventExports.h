@@ -3,15 +3,7 @@
 
 #include <Events/EventData.h>
 
-// FDW Defs ////////////////////////////////////////////////////////////////////
-namespace luabind 
-{
-    namespace adl
-    {
-    class object;
-    }
-}
-////////////////////////////////////////////////////////////////////////////////
+#include <LuaObject.h>
 
 namespace InternalScriptExports
 {
@@ -22,10 +14,10 @@ typedef unsigned long ListenerID;
 bool initEventExports();
 void destroyEventExports();
 
-ListenerID registerEventListener(EventType eventType, const luabind::adl::object& luaCallbackFunc);
+ListenerID registerEventListener(EventType eventType, LuaPlus::LuaObject luaCallbackFunc);
 void removeEventListener(ListenerID listenerId);
-bool queueEvent(EventType eventType, const luabind::adl::object& eventData);
-bool triggerEvent(EventType eventType, const luabind::adl::object& eventData);
+bool queueEvent(EventType eventType, LuaPlus::LuaObject eventData);
+bool triggerEvent(EventType eventType, LuaPlus::LuaObject eventData);
 
 }
 

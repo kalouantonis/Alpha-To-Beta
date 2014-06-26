@@ -15,10 +15,8 @@ include_directories(
 	${Box2D_SOURCE_DIR};
 	# Boost
 	${Boost_INCLUDE_DIR};
-	# Lua 5.2
-	${LUA_INCLUDE_DIR};
-    # Luabind
-    ${LUABIND_INCLUDE_DIR};
+    # LuaPlus
+    ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/luaplus;
 	# Core LIB
 	${ALPHA_TO_BETA_SOURCE_DIR}/core/src;
 	# SFML

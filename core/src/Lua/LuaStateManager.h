@@ -5,10 +5,12 @@
 
 #include <string>
 
-#include <luabind/object.hpp>
+#include <LuaObject.h>
 
-// FWD Defs
-struct lua_State;
+namespace LuaPlus 
+{
+class LuaState;
+}
 
 /**
  * Singleton class tasked with managing the lua state
@@ -53,11 +55,11 @@ public:
 	/**
 	 * Get lua state global variables
      */
-    luabind::object getGlobalVars() const;
+    LuaPlus::LuaObject getGlobalVars() const;
 	/**
 	 * Get the lua interpreter state 
      */
-    lua_State* getLuaState() const { return m_pLuaState; }
+    LuaPlus::LuaState* getLuaState() const { return m_pLuaState; }
 
     /**
      * Takes a string and creates a table path to it. 
@@ -65,7 +67,7 @@ public:
      * E.g. If you pass in A.B.C, it will create a table called A with a single element called
      * B which has a single element called C
      */
-    luabind::object createPath(const char* pathString, bool ignoreLastElement = false);
+    LuaPlus::LuaObject createPath(const char* pathString, bool ignoreLastElement = false);
 
 private:
     // State manager pointer for use by singleton
@@ -83,7 +85,7 @@ private:
 
     LuaStateManager();
     
-    lua_State* m_pLuaState;
+    LuaPlus::LuaState* m_pLuaState;
     /**
      * Last error to occur to lua interpretter
      */

@@ -5,43 +5,9 @@
 #include <Utils/Logger.h>
 #include <Utils/String.h>
 
-extern "C" 
-{
-    #include <lua.h>
-    #include <lualib.h>
-}
-
-#include <luabind/open.hpp>
-#include <luabind/function.hpp>
-#include <luabind/error.hpp>
-
 #include <sstream>
 
-//Error handlers////////////////////////////////////////////////////////////////
-int _addFileAndLine(lua_State* pL)
-{
-    lua_Debug d;
-    // Get top of stack
-    lua_getstack(pL, 1, &d);
-    lua_getinfo(pL, "Sln", &d);
-    // Last call
-    std::string err = lua_tostring(pL, -1);
-    // Pop first item
-    lua_pop(pL, 1);
-
-    std::stringstream msg;
-    msg << d.short_src << ":" << d.currentline;
-
-    if(d.name != 0)
-    {
-        msg << "(" << d.namewhat << " " << d.name << ")";
-    }
-    msg << " " << err;
-    lua_pushstring(pL, msg.str().c_str());
-    return 1;
-}
-
-////////////////////////////////////////////////////////////////////////////////
+#include <LuaPlus.h>
 
 // Initialize state as null
 LuaStateManager* LuaStateManager::s_pSingleton = nullptr;
@@ -49,18 +15,17 @@ LuaStateManager* LuaStateManager::s_pSingleton = nullptr;
 LuaStateManager::LuaStateManager()
     : m_pLuaState(nullptr)
 {
-    // Register perror callback
-    luabind::set_pcall_callback(&_addFileAndLine);
 }
 
 LuaStateManager::~LuaStateManager()
 {
     if(m_pLuaState)
     {
-        // Unregister exports
+        // Unregister Luexports
         ScriptExports::unregisterAll();
         // Close lua state
-        lua_close(m_pLuaState);
+        //lua_close(m_pLuaState);
+        LuaPlus::LuaState::Destroy(m_pLuaState);
         m_pLuaState = nullptr;
     }
 }
@@ -94,8 +59,8 @@ LuaStateManager* LuaStateManager::get()
 
 bool LuaStateManager::init()
 {
-    // Create new lua state
-    m_pLuaState = luaL_newstate();
+    // Create new lua state and initialize with stdlib
+    m_pLuaState = LuaPlus::LuaState::Create(true);
 
     if(m_pLuaState == nullptr)
     {
@@ -104,35 +69,10 @@ bool LuaStateManager::init()
         return false;
     }
 
-    // Connect LuaBind to lua state
-    luabind::open(m_pLuaState);
-
-    // Load stdlib
-    CORE_DEBUG("Loading lua base library");
-    luaopen_base(m_pLuaState);
-    CORE_DEBUG("Loading lua table library");
-    luaopen_table(m_pLuaState);
-    CORE_DEBUG("Loading lua math library");
-    luaopen_math(m_pLuaState);
-    CORE_DEBUG("Loading lua string library");
-    luaopen_string(m_pLuaState);
-    CORE_DEBUG("Loading lua io library");
-    luaopen_io(m_pLuaState);
-    CORE_DEBUG("Loading lua package library");
-    luaopen_package(m_pLuaState);
-
-#ifdef _DEBUG
-    CORE_DEBUG("Loading lua debug library");
-    luaopen_debug(m_pLuaState);
-#endif
-
-    // bind functions. Add to global scope
-    luabind::module(m_pLuaState)
-    [
-        luabind::def("execute_file", &LuaStateManager::executeFile),
-        luabind::def("execute_string", &LuaStateManager::executeString)
-    ];
-
+    // Register functions to global scope
+    m_pLuaState->GetGlobals().RegisterDirect("execute_file", (*this), &LuaStateManager::executeFile);
+    m_pLuaState->GetGlobals().RegisterDirect("execute_string", (*this), &LuaStateManager::executeString);
+    
     // register other exports
     ScriptExports::registerAll();
 
@@ -141,7 +81,7 @@ bool LuaStateManager::init()
 
 bool LuaStateManager::executeFile(const char* filename)
 {
-    int result = luaL_dofile(m_pLuaState, filename);
+    int result = m_pLuaState->DoFile(filename);
 
     if(result != 0)
     {
@@ -161,7 +101,7 @@ void LuaStateManager::executeString(const char* str)
     if(strlen(str) <= 1 || str[0] != '=')
     {
         // Execute string
-        result = luaL_dostring(m_pLuaState, str);
+        result = m_pLuaState->DoString(str);
 
         if(result != 0)
             setError(result);
@@ -173,19 +113,19 @@ void LuaStateManager::executeString(const char* str)
         buffer += (str + 1);
         buffer += ')';
 
-        result = luaL_dostring(m_pLuaState, buffer.c_str());
+        result = m_pLuaState->DoString(str);
         if(result != 0)
             setError(result);
     }
 }
 
-luabind::object LuaStateManager::getGlobalVars() const
+LuaPlus::LuaObject LuaStateManager::getGlobalVars() const
 {
     CORE_ASSERT(m_pLuaState);
-    return luabind::globals(m_pLuaState);
+    return m_pLuaState->GetGlobals();
 }
 
-luabind::object LuaStateManager::createPath(const char* pathString, bool ignoreLastElement)
+LuaPlus::LuaObject LuaStateManager::createPath(const char* pathString, bool ignoreLastElement)
 {
     StringVector splitPath;
     // Split using '.'
@@ -194,36 +134,37 @@ luabind::object LuaStateManager::createPath(const char* pathString, bool ignoreL
         // Remove last element
         splitPath.pop_back();
 
-    luabind::object context = getGlobalVars();
+    LuaPlus::LuaObject context = getGlobalVars();
 
     // Iterate over all element values
     for(const auto& element : splitPath)
     {
         // make sure global context is still valid
-        if(luabind::type(context) == LUA_TNIL)
+        if(context.IsNil())
         {
             CORE_ERROR("Something went wrong in createPath(). Bailing on (element == " + element + ")");
             break;
         }
 
         // grab whatever exists for this element
-        luabind::object curr = context[element.c_str()];
+        LuaPlus::LuaObject curr = context.GetByName(element.c_str());
         
-        if(luabind::type(curr) != LUA_TTABLE)
+        if(!curr.IsTable())
         {
             // If the element is not a table and not null, we overwrite it
-            if(luabind::type(curr) != LUA_TNIL)
+            if(!curr.IsNil())
             {
                 CORE_WARNING("Ovewriting element '" + element + "' in table");
-                context[element.c_str()] = luabind::nil;
+                //context[element.c_str()] = luabind::nil;
+                context.SetNil(element.c_str());
             }
 
             // element was either nil or was overwritten, so add the new table
-            context[element.c_str()] = luabind::newtable(m_pLuaState);
+            context.CreateTable(element.c_str());
         }
 
         // Assign new context
-        context = context[element.c_str()];
+        context = context.GetByName(element.c_str());
     }
 
     return context;
@@ -231,8 +172,11 @@ luabind::object LuaStateManager::createPath(const char* pathString, bool ignoreL
 
 void LuaStateManager::setError(int errorNo)
 {
+    // Note LuaPlus usually throws exceptions, so we shouldn't be hitting this point
+
     // Get last line of code executed
-    const char* errMsg = lua_tostring(m_pLuaState, -1);
+    LuaPlus::LuaStackObject stackObj(m_pLuaState, -1);
+    const char* errMsg = stackObj.GetString();
 
     if(errMsg)
     {
@@ -241,7 +185,7 @@ void LuaStateManager::setError(int errorNo)
     }
     else
     {
-        m_lastError = "Unknown Lua parse error";
+        m_lastError = "Unknown lua parse error";
     }
 
     CORE_LOG("LUA", m_lastError);
@@ -252,5 +196,5 @@ void LuaStateManager::setError(int errorNo)
 void LuaStateManager::clearStack()
 {
     // All stack elements are removed
-    lua_settop(m_pLuaState, 0);
+    m_pLuaState->SetTop(0);
 }

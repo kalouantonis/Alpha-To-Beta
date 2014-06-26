@@ -3,12 +3,10 @@
 
 #include <Events/EventManager.h>
 
-#include <luabind/object.hpp>
-
-#include <functional>
+#include <LuaObject.h>
+#include <unordered_map>
 
 class ScriptEvent;
-//typedef std::function<ScriptEvent*(void)> CreateEventForScriptFunctionType;
 typedef ScriptEvent* (*CreateEventForScriptFunctionType)(void);
 
 /** Register script using class type as event name */
@@ -33,14 +31,14 @@ public:
     /**
      * @brief Called when event is sent from C++ to script
      */
-    const luabind::object& getEventData();
+    LuaPlus::LuaObject getEventData();
     /**
      * @brief Called when event is sent from script to C++
      * 
      * @param eventData Event data from script event
      * @return false if setting failed
      */
-    bool setEventData(const luabind::object& eventData);
+    bool setEventData(LuaPlus::LuaObject eventData);
 
     /**
      * @brief Do not call this function directly. Use helpers instead
@@ -65,10 +63,10 @@ protected:
     virtual void buildEventData();
     virtual bool buildEventFromScript() { return false; }
 
-    luabind::object m_eventData;
+    LuaPlus::LuaObject m_eventData;
 
 private:
-    typedef std::map<EventType, CreateEventForScriptFunctionType> CreationFunctionsMap;
+    typedef std::unordered_map<EventType, CreateEventForScriptFunctionType> CreationFunctionsMap;
     static CreationFunctionsMap s_creationFunctions;
 
     bool m_bEventDataIsValid;

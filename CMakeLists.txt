@@ -26,9 +26,9 @@ endif(${WIN32})
 # Find boost
 find_package(Boost COMPONENTS system filesystem REQUIRED)
 # Lua 5.2
-find_package(Lua52 REQUIRED)
+#find_package(Lua52 REQUIRED)
 # Luabind library
-find_package(Luabind REQUIRED)
+#find_package(Luabind REQUIRED)
 
 # C++11 support and warnings 
 if(${UNIX})
@@ -70,6 +70,9 @@ add_subdirectory("dependencies/Artemis-Cpp")
 
 message(STATUS "Configuring Box2D...")
 add_subdirectory("dependencies/Box2D")
+
+message(STATUS "Configuring luaplus")
+add_subdirectory("dependencies/luaplus")
 
 # Core framework
 message(STATUS "Configuring Core...")

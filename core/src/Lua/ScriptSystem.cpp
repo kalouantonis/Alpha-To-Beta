@@ -9,9 +9,6 @@
 #include <Artemis/ComponentMapper.h>
 #include <Artemis/Entity.h>
 
-#include <luabind/nil.hpp>
-#include <luabind/function.hpp>
-
 ScriptSystem::ScriptSystem()
 {
     addComponentType<BaseScriptComponent>();
@@ -39,28 +36,19 @@ void ScriptSystem::added(artemis::Entity& e)
     if(!pBaseScriptComp->isInitialized())
         pBaseScriptComp->initialize(&e);
 
-    if(pBaseScriptComp->hasConstructor())
-    {
-        pBaseScriptComp->callConstructor();
-    }
+    pBaseScriptComp->callConstructor();
 }
 
 void ScriptSystem::processEntity(artemis::Entity& e)
 {
     BaseScriptComponent* pBaseScriptComp = m_baseScriptMapper.get(e);
 
-    if(pBaseScriptComp->hasUpdateFunction())
-    {
-        pBaseScriptComp->callUpdate(world->getDelta());
-    }
+    pBaseScriptComp->callUpdate(world->getDelta());
 }
 
 void ScriptSystem::removed(artemis::Entity& e)
 {
     BaseScriptComponent* pBaseScriptComp = safeGetComponent<BaseScriptComponent>(&e);
 
-    if(pBaseScriptComp->hasDestructor())
-    {
-        pBaseScriptComp->callDestructor();
-    }
+    pBaseScriptComp->callDestructor();
 }

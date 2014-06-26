@@ -4,8 +4,6 @@
 #include <Artemis/EntityProcessingSystem.h>
 #include <Artemis/ComponentMapper.h>
 
-#include <luabind/object.hpp>
-
 #include <Components/BaseScriptComponent.h>
 
 class ScriptSystem: public artemis::EntityProcessingSystem

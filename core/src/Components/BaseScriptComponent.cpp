@@ -13,9 +13,9 @@
 
 #include <tinyxml2.h>
 
-#include <luabind/function.hpp>
-
 #include <boost/algorithm/string.hpp>
+
+#include <LuaFunction.h>
 
 static const char* METATABLE_NAME = "BaseScriptComponentMetaTable";
 const char* BaseScriptComponent::g_name = "BaseScriptComponent";
@@ -28,12 +28,19 @@ BaseScriptComponent::BaseScriptComponent()
     , m_currTime(0.f)
 
 {
+    LuaPlus::LuaState* pLuaState = LuaStateManager::get()->getLuaState();
+    // Assign items as nil
+    m_scriptConstructor.AssignNil(pLuaState);
+    m_scriptDestructor.AssignNil(pLuaState);
+    m_scriptUpdateFunction.AssignNil(pLuaState);
 }
 
 BaseScriptComponent::~BaseScriptComponent()
 {
-    if(hasDestructor())
-        callDestructor();
+    callDestructor();
+
+    // Clear out script object
+    m_scriptObject.AssignNil(LuaStateManager::get()->getLuaState());
 
     // If we are given the path for this script object, set it to nil
     if(!m_scriptObjectName.empty())
@@ -47,18 +54,21 @@ void BaseScriptComponent::callConstructor()
 {
     // Ensure that we havent already called the constructor and that the 
     // object is a function
-    if(!m_bConstructorCalled && luabind::type(m_scriptConstructor) == LUA_TFUNCTION)
+    if(!m_bConstructorCalled && hasConstructor())
     {
-        luabind::call_function<void>(m_scriptConstructor, m_scriptObject);
+        LuaPlus::LuaFunction<void> func(m_scriptConstructor);
+        func(m_scriptObject);
+
         m_bConstructorCalled = true;
     }
 }
 
 void BaseScriptComponent::callDestructor()
 {
-    if(!m_bDestructorCalled && luabind::type(m_scriptDestructor) == LUA_TFUNCTION)
+    if(!m_bDestructorCalled && hasDestructor())
     {
-        luabind::call_function<void>(m_scriptDestructor, m_scriptObject);
+        LuaPlus::LuaFunction<void> func(m_scriptDestructor);
+        func(m_scriptObject);
 
         m_bDestructorCalled = true;
     }
@@ -69,9 +79,11 @@ void BaseScriptComponent::callUpdate(float deltaTime)
     m_currTime += deltaTime;
 
     // Assure that we are calling the item at the correct frequency
-    if(m_currTime >= m_updateFrequency)
+    if(m_currTime >= m_updateFrequency && hasUpdateFunction())
     {
-        luabind::call_function<void>(m_scriptUpdateFunction, m_scriptObject);
+        LuaPlus::LuaFunction<void> func(m_scriptUpdateFunction);
+        // Send actual delta
+        func(m_currTime);
 
         // Reset time
         m_currTime = 0;
@@ -102,7 +114,7 @@ bool BaseScriptComponent::load(const tinyxml2::XMLElement* pElement)
     // Trim whitespace
     boost::algorithm::trim(file);
 
-    if(!LuaStateManager::get()->executeFile(file.c_str()))
+    if(!pStateManager->executeFile(file.c_str()))
     {
         CORE_ERROR("Failed to execute lua file: " + file);
         return false;
@@ -129,7 +141,7 @@ bool BaseScriptComponent::load(const tinyxml2::XMLElement* pElement)
         m_scriptObject = pStateManager->createPath(m_scriptObjectName.c_str());
 
         //if(luabind::type(m_scriptObject) != LUA_TNIL)
-        if(m_scriptObject.is_valid())
+        if(!m_scriptObject.IsNil())
         {
             createScriptObject();
         }
@@ -139,12 +151,12 @@ bool BaseScriptComponent::load(const tinyxml2::XMLElement* pElement)
     // previous step. The string is treated as a function
     if(!m_scriptConstructorName.empty())
     {
-        m_scriptConstructor = pStateManager->getGlobalVars()[m_scriptConstructorName.c_str()];
-        if(luabind::type(m_scriptConstructor) == LUA_TFUNCTION && !m_scriptObject.is_valid())
+        m_scriptConstructor = pStateManager->getGlobalVars().Lookup(m_scriptConstructorName.c_str());
+        if(m_scriptConstructor.IsFunction() && m_scriptObject.IsNil())
         {
             // The script object could be nil if there was not scriptObject attribute. 
             // The lua object will be created here
-            m_scriptObject = luabind::newtable(pStateManager->getLuaState());
+            m_scriptObject.AssignNewTable(pStateManager->getLuaState());
             createScriptObject();
         }
     }
@@ -152,19 +164,19 @@ bool BaseScriptComponent::load(const tinyxml2::XMLElement* pElement)
     // The scriptDestructor is called when the C++ scriptObject instance is destroyed
     if(!m_scriptDestructorName.empty())
     {
-        m_scriptDestructor = pStateManager->getGlobalVars()[m_scriptDestructorName.c_str()];
+        m_scriptDestructor = pStateManager->getGlobalVars().Lookup(m_scriptDestructorName.c_str());
     }
 
     if(!m_scriptUpdateFunctionName.empty())
     {
-        m_scriptUpdateFunction = pStateManager->getGlobalVars()[m_scriptUpdateFunctionName.c_str()];
+        m_scriptUpdateFunction = pStateManager->getGlobalVars().Lookup(m_scriptUpdateFunctionName.c_str());
     }
 
     // ScriptData element
     pChildElement = pElement->FirstChildElement("ScriptData");
     if(pChildElement)
     {
-        if(luabind::type(m_scriptObject) == LUA_TNIL)
+        if(m_scriptObject.IsNil())
         {
             CORE_ERROR("ScriptObject can not be nil when ScriptData has been defined");
             return false;
@@ -174,7 +186,8 @@ bool BaseScriptComponent::load(const tinyxml2::XMLElement* pElement)
                 pAttribute != NULL; pAttribute = pAttribute->Next())
         {
             // Set string
-            m_scriptObject[pAttribute->Name()] = pAttribute->Value(); 
+            //m_scriptObject[pAttribute->Name()] = pAttribute->Value(); 
+            m_scriptObject.SetString(pAttribute->Name(), pAttribute->Value());
         }
     }
 
@@ -191,36 +204,28 @@ void BaseScriptComponent::createScriptObject()
 {
     LuaStateManager* pStateManager = LuaStateManager::get();
     CORE_ASSERT(pStateManager != nullptr);
-    CORE_ASSERT(m_scriptObject.is_valid());
+    CORE_ASSERT(!m_scriptObject.IsNil());
 
     // Get meta table
-    luabind::object metaTableObject = pStateManager->getGlobalVars()[METATABLE_NAME];
-    CORE_ASSERT(luabind::type(metaTableObject) != LUA_TNIL);
+    LuaPlus::LuaObject metaTableObject = pStateManager->getGlobalVars().Lookup(METATABLE_NAME);
+    CORE_ASSERT(!metaTableObject.IsNil());
 
-    // Set __object to reference this class instance
-    // TODO: Make this shit work
-    //metaTableObject["__object"] = luabind::touserdata<BaseScriptComponent&>(*this);
+    LuaPlus::LuaObject boxedPtr = pStateManager->getLuaState()->BoxPointer(this);
+    boxedPtr.SetMetaTable(metaTableObject);
+    // Give lua a reference to the C++ object
+    m_scriptObject.SetLightUserData("__object", this);
     // Set meta table
-    luabind::setmetatable(m_scriptObject, metaTableObject);
+    m_scriptObject.SetMetaTable(metaTableObject);
 }
 
 void BaseScriptComponent::registerScriptFunctions()
-{
-    LuaStateManager* pLuaStateManager = LuaStateManager::get();
-
-    // Register new meta-table 
-    luabind::object metaTableObject = 
-        pLuaStateManager->getGlobalVars()[METATABLE_NAME] = 
-        luabind::newtable(pLuaStateManager->getLuaState());
-
-    metaTableObject["__index"] = metaTableObject;
+{   
+    LuaPlus::LuaObject metaTableObject = LuaStateManager::get()
+        ->getGlobalVars().CreateTable(METATABLE_NAME);
+    metaTableObject.SetObject("__index", metaTableObject);
 
     // Bind functions to meta-table
-    luabind::module(pLuaStateManager->getLuaState(), METATABLE_NAME)
-    [
-        luabind::def("get_entity_id", &BaseScriptComponent::getEntityId),
-        luabind::def("set_position", &BaseScriptComponent::setPosition)
-    ];
+    metaTableObject.RegisterObjectDirect("get_entity_id", (BaseScriptComponent*)0, &BaseScriptComponent::getEntityId); 
 }
 
 void BaseScriptComponent::unregisterScriptFunctions()
@@ -236,7 +241,7 @@ int BaseScriptComponent::getEntityId() const
     return -1;
 }
 
-void BaseScriptComponent::setPosition(const luabind::object& newPos)
+void BaseScriptComponent::setPosition(const LuaPlus::LuaObject& newPos)
 {
     artemis::Component* dynamicBody = m_pParentEntity->getComponent<DynamicBody>();
 

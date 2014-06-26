@@ -1,5 +1,10 @@
 project(luaplus)
 
+include_directories(
+    ${luaplus_SOURCE_DIR};
+    ${luaplus_SOURCE_DIR}/src;
+)
+
 set(
     MAIN_SRC
     "LuaObject.cpp"
@@ -113,15 +118,15 @@ set(
     ${INNER_HDR}
 )
 
-include_directories(
-    ${luaplus_SOURCE_DIR};
-    ${luaplus_SOURCE_DIR}/src;
-)
+set(luaplus_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/luaplus)
 
-add_library(luaplus STATIC ${ALL_SRC})
+add_library(luaplus STATIC 
+    ${ALL_SRC}
+    ${ALL_HDR}
+)
 
 # Install headers
 install(FILES ${ALL_HDR}
-    DESTINATION ${luaplus_BINARY_DIR})
+    DESTINATION ${luaplus_BINARY_DIR}/include/luaplus)
 
 

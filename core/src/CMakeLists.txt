@@ -13,10 +13,8 @@ include_directories(
     ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/Artemis-Cpp/include;
     # Box2D
     ${Box2D_SOURCE_DIR};
-    # Lua
-    ${LUA_INCLUDE_DIR};
-    # LuaBind
-    ${LUABIND_INCLUDE_DIR};
+    # Luaplus
+    ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/luaplus;
     # Boost library
     ${Boost_INCLUDE_DIR};
 )
@@ -30,6 +28,7 @@ link_directories(
     ${Box2D_BINARY_DIR};
 	# TMX Parser
     ${tmxparser_BINARY_DIR};
+    ${luaplus_BINARY_DIR};
 )
 
 set(
@@ -236,6 +235,7 @@ target_link_libraries(
 	tinyxml2static; # TinyXML
 	Box2D;			# Physics Engine
     tmxparser;		# TMX parser
+    luaplus;
 )
 
 if(${UNIX})
