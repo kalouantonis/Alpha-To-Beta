@@ -84,10 +84,14 @@ private:
     // Functions for entity access through lua
     int getEntityId() const;
 
-    void setPosition(const LuaPlus::LuaObject& newPos);
+    void setPosition(LuaPlus::LuaObject newPos);
     LuaPlus::LuaObject getPosition() const;
 
+	// Physics stuff
     void stopPhysics();
+	void startPhysics();
+	void stopCollisions();
+	void startCollisions();
 };
 
 #endif // _BASE_SCRIPT_COMPONENT_H_

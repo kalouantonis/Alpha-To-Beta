@@ -25,7 +25,7 @@ LuaPlus::LuaObject ScriptEvent::getEventData()
     return m_eventData;
 }
 
-bool ScriptEvent::setEventData(LuaPlus::LuaObject eventData)
+bool ScriptEvent::setEventData(const LuaPlus::LuaObject& eventData)
 {
     m_eventData = eventData;
     // Build the event and check validity

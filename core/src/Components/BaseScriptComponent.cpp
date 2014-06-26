@@ -2,14 +2,20 @@
 
 #include <Components/Transform.h>
 #include <Components/DynamicBody.h>
+#include <Entities/Utils.h>
 
 #include <Lua/LuaStateManager.h>
+#include <Lua/Utils.h>
 
 #include <Utils/Logger.h>
 #include <Utils/String.h>
 
+#include <Physics/CollisionMasks.h>
+
 #include <Artemis/Entity.h>
 #include <Artemis/Component.h>
+
+#include <Box2D/Dynamics/b2Body.h>
 
 #include <tinyxml2.h>
 
@@ -220,17 +226,34 @@ void BaseScriptComponent::createScriptObject()
 
 void BaseScriptComponent::registerScriptFunctions()
 {   
+	CORE_DEBUG("Registering script functions");
+
     LuaPlus::LuaObject metaTableObject = LuaStateManager::get()
         ->getGlobalVars().CreateTable(METATABLE_NAME);
     metaTableObject.SetObject("__index", metaTableObject);
 
-    // Bind functions to meta-table
+    // Bind functions to meta-table ////////////////////////////////////////////////////////////////////////////////////
+	// Entity operations
     metaTableObject.RegisterObjectDirect("get_entity_id", (BaseScriptComponent*)0, &BaseScriptComponent::getEntityId); 
+	// Positions
+	metaTableObject.RegisterObjectDirect("get_position", (BaseScriptComponent*)0, &BaseScriptComponent::getPosition);
+	metaTableObject.RegisterObjectDirect("set_position", (BaseScriptComponent*)0, &BaseScriptComponent::setPosition);
+	// Physics
+	metaTableObject.RegisterObjectDirect("start_physics", (BaseScriptComponent*)0, &BaseScriptComponent::startPhysics);
+	metaTableObject.RegisterObjectDirect("stop_physics", (BaseScriptComponent*)0, &BaseScriptComponent::stopPhysics);
+	metaTableObject.RegisterObjectDirect("start_collisions", (BaseScriptComponent*)0, &BaseScriptComponent::startCollisions);
+	metaTableObject.RegisterObjectDirect("stop_collisions", (BaseScriptComponent*)0, &BaseScriptComponent::stopCollisions);
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 void BaseScriptComponent::unregisterScriptFunctions()
 {
+	CORE_DEBUG("Unregistering script functions");
 
+	LuaPlus::LuaObject metaTableObject = LuaStateManager::get()->getGlobalVars().Lookup(METATABLE_NAME);
+	if(!metaTableObject.IsNil())
+		// Leave nil for gc to clean up
+		metaTableObject.AssignNil(LuaStateManager::get()->getLuaState());
 }
 
 int BaseScriptComponent::getEntityId() const
@@ -241,7 +264,7 @@ int BaseScriptComponent::getEntityId() const
     return -1;
 }
 
-void BaseScriptComponent::setPosition(const LuaPlus::LuaObject& newPos)
+void BaseScriptComponent::setPosition(LuaPlus::LuaObject newPos)
 {
     artemis::Component* dynamicBody = m_pParentEntity->getComponent<DynamicBody>();
 
@@ -263,4 +286,66 @@ void BaseScriptComponent::setPosition(const LuaPlus::LuaObject& newPos)
             CORE_LOG("LUA", "No components to set the position of");
         }
     }
+}
+
+LuaPlus::LuaObject BaseScriptComponent::getPosition() const
+{
+	CORE_ASSERT(isInitialized());
+
+	LuaPlus::LuaObject ret;
+
+	// Get transform component
+	//Transform* pTransform = static_cast<Transform*>(m_pParentEntity->getComponent<Transform>());
+	Transform* pTransform = safeGetComponent<Transform>(m_pParentEntity);
+
+	if(pTransform)
+		ret = vec2ToTable(pTransform->position);
+	else 
+		ret.AssignNil(LuaStateManager::get()->getLuaState());
+
+	return ret;
+}
+
+void BaseScriptComponent::startPhysics()
+{
+	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(m_pParentEntity);
+
+	if(pDynamicBody)
+		pDynamicBody->body->SetActive(true);
+	else
+		CORE_ERROR("Attempted to call start_physics on entity with no dynamic body");
+}
+
+void BaseScriptComponent::stopPhysics()
+{
+	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(m_pParentEntity);
+
+	if(pDynamicBody)
+		pDynamicBody->body->SetActive(false);
+	else 
+		CORE_ERROR("Attempted to call stop_physics on entity with no dynamic body");
+}
+
+void BaseScriptComponent::startCollisions()
+{
+	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(m_pParentEntity);
+
+	if(pDynamicBody)
+		changeFixtureFilterMaskFlags(pDynamicBody->body, COLLIDE);
+	else
+		CORE_ERROR("Attempted to call start_collisions on entity with no dynamic body");
+}
+
+void BaseScriptComponent::stopCollisions()
+{
+	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(m_pParentEntity);
+	
+	if(pDynamicBody)
+	{
+		changeFixtureFilterMaskFlags(pDynamicBody->body, NO_COLLIDE);
+	}
+	else
+	{
+		CORE_ERROR("Attempted to call stop_collisions on entity with no dynamic body");
+	}
 }

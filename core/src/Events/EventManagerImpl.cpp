@@ -66,6 +66,13 @@ bool EventManager::removeListener(const EventListenerDelegate &eventDelegate, Ev
     return bSuccess;
 }
 
+void EventManager::removeAllListeners()
+{
+	CORE_DEBUG("Removing all event listeners");
+	// Clear all listeners
+	m_eventListeners.clear();	
+}
+
 bool EventManager::triggerEvent(const EventDataPtr &pEvent) const
 {
     CORE_LOG(LOG_TAG, "Triggering event " + std::string(pEvent->getName()));
@@ -151,6 +158,22 @@ bool EventManager::abortEvent(EventType eventType, bool allOfType)
     }
 
     return bSuccess;
+}
+
+void EventManager::clearEventQueues(bool dispatch)
+{
+	// Dispatch events before clearing
+	if(dispatch)
+		update();
+
+	// Clear normal queues
+	for(int i = 0; i < NUM_QUEUES; ++i)
+	{
+		m_queues[i].clear();
+	}
+
+	// Clear realtime event queue
+	m_realtimeEventQueue.clear();
 }
 
 bool EventManager::update()

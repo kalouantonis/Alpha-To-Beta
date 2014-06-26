@@ -27,11 +27,13 @@ public:
 
     virtual bool addListener(const EventListenerDelegate &eventDelegate, EventType type) final;
     virtual bool removeListener(const EventListenerDelegate &eventDelegate, EventType type) final;
+	virtual void removeAllListeners() final;
 
     virtual bool triggerEvent(const EventDataPtr &pEvent) const final;
     virtual bool queueEvent(const EventDataPtr &pEvent) final;
     virtual bool threadSafeQueueEvent(const EventDataPtr &pEvent) final;
     virtual bool abortEvent(EventType eventType, bool allOfType = false) final;
+	virtual void clearEventQueues(bool dispatch = false) final;
 
     // TODO: Implement maximum time for event processing.
     // We don't want to waste a load of time on spamming events

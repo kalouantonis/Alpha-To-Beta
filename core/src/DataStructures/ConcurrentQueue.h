@@ -68,6 +68,13 @@ public:
         m_conditionVar.notify_one();
     }
 
+	void clear()
+	{
+		// While the queue is not empty, pop items off it
+		while(!empty())
+			pop();
+	}
+
 private:
     std::queue<T> m_queue;
     std::mutex m_mutex;

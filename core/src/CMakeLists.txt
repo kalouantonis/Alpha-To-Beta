@@ -122,6 +122,7 @@ set(
 	"Lua/ScriptExports.h"
     "Lua/ScriptSystem.cpp"
     "Lua/ScriptSystem.h"
+	"Lua/Utils.h"
     # Internal exports
     "Lua/exports/LoggerExports.cpp"
     "Lua/exports/LoggerExports.h"
@@ -155,6 +156,8 @@ set(
 	"Physics/Box2DRenderer.h"
     "Physics/CollisionDispatcher.cpp"
     "Physics/CollisionDispatcher.h"
+	"Physics/CollisionMasks.cpp"
+	"Physics/CollisionMasks.h"
 	"Physics/PhysicsLocator.cpp"
 	"Physics/PhysicsLocator.h"
 )

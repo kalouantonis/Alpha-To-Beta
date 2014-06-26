@@ -38,7 +38,7 @@ public:
      * @param eventData Event data from script event
      * @return false if setting failed
      */
-    bool setEventData(LuaPlus::LuaObject eventData);
+    bool setEventData(const LuaPlus::LuaObject& eventData);
 
     /**
      * @brief Do not call this function directly. Use helpers instead

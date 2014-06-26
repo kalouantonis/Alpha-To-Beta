@@ -176,7 +176,7 @@ ListenerID registerEventListener(EventType eventType, LuaPlus::LuaObject luaCall
 void removeEventListener(ListenerID listenerId)
 {
     CORE_ASSERT(g_pScriptEventListenerManager != nullptr);
-    // If 0, we're doing something wrong :)
+    // If 0, we're doing something wrong :) NULL pointers bitch!
     CORE_ASSERT(listenerId != 0);
 
     // convert the listenerId in to a pointer

@@ -8,6 +8,8 @@
 #include <Lua/exports/EntityExports.h>
 #include <Lua/exports/MathExports.h>
 
+#include <Utils/Logger.h>
+
 #include <LuaObject.h>
 
 namespace ScriptExports
@@ -27,6 +29,7 @@ void registerExport(const char* luaFuncName, RetType (*func)())
 
 void registerAll()
 {
+	CORE_ASSERT(LuaStateManager::get());
     // Keep lua state reference for micro-optimization purposes.
     LuaPlus::LuaObject globals = LuaStateManager::get()->getGlobalVars();
 
