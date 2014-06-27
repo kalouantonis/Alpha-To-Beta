@@ -19,8 +19,6 @@
 
 #include <tinyxml2.h>
 
-#include <boost/algorithm/string.hpp>
-
 #include <LuaFunction.h>
 
 static const char* METATABLE_NAME = "BaseScriptComponentMetaTable";
@@ -118,7 +116,8 @@ bool BaseScriptComponent::load(const tinyxml2::XMLElement* pElement)
     }
 
     // Trim whitespace
-    boost::algorithm::trim(file);
+    //boost::algorithm::trim(file);
+	trim(file);
 
     if(!pStateManager->executeFile(file.c_str()))
     {

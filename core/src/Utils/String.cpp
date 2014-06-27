@@ -1,5 +1,7 @@
 #include <Utils/String.h>
 
+#include <sstream>
+
 std::string make_string(const char* str)
 {
 	if(str == NULL)
@@ -35,4 +37,15 @@ void split(const std::string& str, StringVector& vec, char delimiter)
     if(startIndex < strLen)
         // Push back the rest of the string
         vec.push_back(str.substr(startIndex));
+}
+
+void trim(std::string& str)
+{
+	std::stringstream ss;
+	// Pass to string stream
+	ss << str;
+	// Clear whitespace
+	ss.clear();
+	// push to string
+	ss >> str;
 }

@@ -6,9 +6,6 @@
 
 #include <Resources/ResourceDef.h>
 
-// String trimming
-#include <boost/algorithm/string.hpp>
-
 #include <Physics/PhysicsLocator.h>
 
 const char* Renderable::g_name = "Renderable";
@@ -79,7 +76,7 @@ bool Renderable::load(const tinyxml2::XMLElement *pElement)
 	}
 
 	// Trim whitespace
-	boost::algorithm::trim(textureFile);
+	trim(textureFile);
 
 	sf::TexturePtr pTexture = TextureLocator::getObject()->get(textureFile);
 

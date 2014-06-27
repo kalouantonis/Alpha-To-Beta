@@ -3,7 +3,6 @@
 #include <Artemis/EntityManager.h>
 #include <Artemis/World.h>
 
-#include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
 
 #include <Entities/WorldLocator.h>
@@ -56,7 +55,7 @@ void Level::load(const std::string& filename)
 		return;
 	}
 
-	boost::algorithm::trim(assetFile);
+	trim(assetFile);
 
 	// TODO: Use exceptions or something cleaner
 	if(!loadAssets(assetFile))
@@ -82,7 +81,7 @@ void Level::load(const std::string& filename)
 	}
 
 	// Trim whitespace
-	boost::algorithm::trim(mapFile);
+	trim(mapFile);
 
     m_mapLoader.load(mapFile, assetFile);
 
