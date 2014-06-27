@@ -130,6 +130,8 @@ set(
     "Lua/exports/EventExports.h"
     "Lua/exports/EntityExports.cpp"
     "Lua/exports/EntityExports.h"
+	"Lua/exports/InputExports.cpp"
+	"Lua/exports/InputExports.h"
     "Lua/exports/MathExports.cpp"
     "Lua/exports/MathExports.h"
 )
@@ -199,6 +201,7 @@ set(
 	"Utils/Logger.h"
 	"Utils/String.cpp"
 	"Utils/String.h"
+	"Utils/Helpers.h"
 )
 
 # Add all current *.cpp files in to build

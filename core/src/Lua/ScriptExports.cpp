@@ -7,6 +7,7 @@
 #include <Lua/exports/EventExports.h>
 #include <Lua/exports/EntityExports.h>
 #include <Lua/exports/MathExports.h>
+#include <Lua/exports/InputExports.h>
 
 #include <Utils/Logger.h>
 
@@ -35,6 +36,7 @@ void registerAll()
 
     // Initialize script event listener
     InternalScriptExports::initEventExports();
+	InternalScriptExports::registerKeyTable();
 
     // Logger
     globals.RegisterDirect("log", &InternalScriptExports::luaLog);
@@ -47,12 +49,15 @@ void registerAll()
     globals.RegisterDirect("create_entity", &InternalScriptExports::createEntity);
 	globals.RegisterDirect("create_entity_with_size", &InternalScriptExports::createEntityWithSize);
     globals.RegisterDirect("remove_entity", &InternalScriptExports::removeEntity);
+	// Input
+	globals.RegisterDirect("is_key_pressed", &InternalScriptExports::isKeyPressed);
     // Math
     globals.RegisterDirect("convert_to_world_coords", &InternalScriptExports::convertToWorldCoords);
 }
 
 void unregisterAll()
 {
+	InternalScriptExports::unregisterKeyTable();
     // Destroy script event listener
     InternalScriptExports::destroyEventExports();
 }
