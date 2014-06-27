@@ -2,6 +2,7 @@
 #define LUA_UTILS_H_
 
 #include <LuaObject.h>
+#include <Utils/Logger.h>
 
 template <typename VecT>
 LuaPlus::LuaObject vec2ToTable(const VecT& vec)

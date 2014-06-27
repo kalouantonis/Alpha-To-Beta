@@ -45,6 +45,7 @@ void registerAll()
     globals.RegisterDirect("trigger_event", &InternalScriptExports::triggerEvent);
     // Entities
     globals.RegisterDirect("create_entity", &InternalScriptExports::createEntity);
+	globals.RegisterDirect("create_entity_with_size", &InternalScriptExports::createEntityWithSize);
     globals.RegisterDirect("remove_entity", &InternalScriptExports::removeEntity);
     // Math
     globals.RegisterDirect("convert_to_world_coords", &InternalScriptExports::convertToWorldCoords);
