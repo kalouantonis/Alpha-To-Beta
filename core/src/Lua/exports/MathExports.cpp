@@ -4,6 +4,8 @@
 #include <Physics/PhysicsLocator.h>
 #include <Utils/Logger.h>
 
+#include <glm/glm.hpp>
+
 namespace InternalScriptExports 
 {
 
@@ -27,5 +29,54 @@ void convertToWorldCoords(LuaPlus::LuaObject luaVec)
     luaVec["x"].AssignNumber(pLState, x);
     luaVec["y"].AssignNumber(pLState, y);
 }
+
+float floor(float val)
+{
+	return glm::floor(val);
+}
+
+float sin(float val)
+{
+	return glm::sin(val);
+}
+
+float cos(float val)
+{
+	return glm::cos(val);
+}
+
+float tan(float val)
+{
+	return glm::tan(val);
+}
+
+template <typename T>
+T abs(T val)
+{
+	return glm::abs(val);
+}
+
+float ceil(float val)
+{
+	return glm::ceil(val);
+}
+
+template <typename T>
+T min(T a, T b)
+{
+	return glm::min(a, b);
+}
+
+template <typename T>
+T max(T a, T b)
+{
+	return glm::max(a, b);
+}
+
+float round(float val)
+{
+	return glm::round(val);
+}
+
 
 }

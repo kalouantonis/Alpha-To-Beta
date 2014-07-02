@@ -21,7 +21,7 @@ void registerKeyTable()
 	CORE_ASSERT(pStateManager->getGlobalVars().Lookup(KEYTABLE_NAME).IsNil());
 
 	// Register keys
-	LuaPlus::LuaObject keys = pStateManager->getGlobalVars().CreateTable(KEYTABLE_NAME);
+	LuaPlus::LuaObject& keys = pStateManager->getGlobalVars().CreateTable(KEYTABLE_NAME);
 
 	// Letters
 	keys.SetInteger("a", sf::Keyboard::A);
@@ -90,41 +90,41 @@ void registerKeyTable()
 	keys.SetInteger("f12", sf::Keyboard::F12);
 
 	// Specials
-	keys.SetInteger("escape", sf::Keyboard::Escape);
-	keys.SetInteger("lcontrol", sf::Keyboard::LControl);
-	keys.SetInteger("lshift", sf::Keyboard::LShift);
-	keys.SetInteger("lalt", sf::Keyboard::LAlt);
-	keys.SetInteger("lsystem", sf::Keyboard::LSystem);
-	keys.SetInteger("rcontrol", sf::Keyboard::RControl);
-	keys.SetInteger("rshift", sf::Keyboard::RShift);
-	keys.SetInteger("ralt", sf::Keyboard::RAlt);
-	keys.SetInteger("rsystem", sf::Keyboard::RSystem);
-	keys.SetInteger("menu", sf::Keyboard::Menu);
-	keys.SetInteger("lbracket", sf::Keyboard::LBracket);
-	keys.SetInteger("rbracket", sf::Keyboard::RBracket);
-	keys.SetInteger("semicolon", sf::Keyboard::SemiColon);
-	keys.SetInteger("comma", sf::Keyboard::Comma);
-	keys.SetInteger("period", sf::Keyboard::Period);
-	keys.SetInteger("quote", sf::Keyboard::Quote);
-	keys.SetInteger("slash", sf::Keyboard::Slash);
-	keys.SetInteger("backslash", sf::Keyboard::BackSlash);
-	keys.SetInteger("tilde", sf::Keyboard::Tilde);
-	keys.SetInteger("equal", sf::Keyboard::Equal);
-	keys.SetInteger("dash", sf::Keyboard::Dash);
-	keys.SetInteger("space", sf::Keyboard::Space);
-	keys.SetInteger("return", sf::Keyboard::Return);
-	keys.SetInteger("backspace", sf::Keyboard::BackSpace);
-	keys.SetInteger("tab", sf::Keyboard::Tab);
-	keys.SetInteger("pageup", sf::Keyboard::PageUp);
-	keys.SetInteger("pagedown", sf::Keyboard::PageDown);
-	keys.SetInteger("end", sf::Keyboard::End);
-	keys.SetInteger("home", sf::Keyboard::Home);
-	keys.SetInteger("insert", sf::Keyboard::Insert);
-	keys.SetInteger("delete", sf::Keyboard::Delete);
-	keys.SetInteger("add", sf::Keyboard::Add);
-	keys.SetInteger("subtract", sf::Keyboard::Subtract);
-	keys.SetInteger("multiply", sf::Keyboard::Multiply);
-	keys.SetInteger("divide", sf::Keyboard::Divide);
+	keys.SetInteger("escape",		sf::Keyboard::Escape);
+	keys.SetInteger("lcontrol",		sf::Keyboard::LControl);
+	keys.SetInteger("lshift",		sf::Keyboard::LShift);
+	keys.SetInteger("lalt",			sf::Keyboard::LAlt);
+	keys.SetInteger("lsystem",		sf::Keyboard::LSystem);
+	keys.SetInteger("rcontrol",		sf::Keyboard::RControl);
+	keys.SetInteger("rshift",		sf::Keyboard::RShift);
+	keys.SetInteger("ralt",			sf::Keyboard::RAlt);
+	keys.SetInteger("rsystem",		sf::Keyboard::RSystem);
+	keys.SetInteger("menu",			sf::Keyboard::Menu);
+	keys.SetInteger("lbracket",		sf::Keyboard::LBracket);
+	keys.SetInteger("rbracket",		sf::Keyboard::RBracket);
+	keys.SetInteger("semicolon",	sf::Keyboard::SemiColon);
+	keys.SetInteger("comma",		sf::Keyboard::Comma);
+	keys.SetInteger("period",		sf::Keyboard::Period);
+	keys.SetInteger("quote",		sf::Keyboard::Quote);
+	keys.SetInteger("slash",		sf::Keyboard::Slash);
+	keys.SetInteger("backslash",	sf::Keyboard::BackSlash);
+	keys.SetInteger("tilde",		sf::Keyboard::Tilde);
+	keys.SetInteger("equal",		sf::Keyboard::Equal);
+	keys.SetInteger("dash",			sf::Keyboard::Dash);
+	keys.SetInteger("space",		sf::Keyboard::Space);
+	keys.SetInteger("return",		sf::Keyboard::Return);
+	keys.SetInteger("backspace",	sf::Keyboard::BackSpace);
+	keys.SetInteger("tab",			sf::Keyboard::Tab);
+	keys.SetInteger("pageup",		sf::Keyboard::PageUp);
+	keys.SetInteger("pagedown",		sf::Keyboard::PageDown);
+	keys.SetInteger("end",			sf::Keyboard::End);
+	keys.SetInteger("home",			sf::Keyboard::Home);
+	keys.SetInteger("insert",		sf::Keyboard::Insert);
+	keys.SetInteger("delete",		sf::Keyboard::Delete);
+	keys.SetInteger("add",			sf::Keyboard::Add);
+	keys.SetInteger("subtract",		sf::Keyboard::Subtract);
+	keys.SetInteger("multiply",		sf::Keyboard::Multiply);
+	keys.SetInteger("divide",		sf::Keyboard::Divide);
 
 	// Arrow keys
 	keys.SetInteger("left", sf::Keyboard::Left);
@@ -140,7 +140,7 @@ void unregisterKeyTable()
 {
 	LuaStateManager* pStateManager = LuaStateManager::get();
 
-	LuaPlus::LuaObject keys = pStateManager->getGlobalVars().Lookup(KEYTABLE_NAME);
+	LuaPlus::LuaObject& keys = pStateManager->getGlobalVars().Lookup(KEYTABLE_NAME);
 	CORE_ASSERT(keys.IsTable());
 
 	// Set for collection

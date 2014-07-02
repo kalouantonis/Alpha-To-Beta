@@ -61,10 +61,18 @@ void JumpListener::receiveJumpEvt(EventDataPtr pEvent)
     {
         if(pJumpBehaviour->jump() <= pJumpBehaviour->getMaxJumps())
         {
-            pDynamicBody->body->ApplyLinearImpulse(
+			b2Body* pPhysBody = pDynamicBody->body;
+
+			// Reset Y velocity for a better feeling jump
+			pPhysBody->SetLinearVelocity(b2Vec2(
+				pPhysBody->GetLinearVelocity().x,
+				0
+			));
+
+            pPhysBody->ApplyLinearImpulse(
                 toVec2<b2Vec2>(pJumpBehaviour->impulse),
                 // Get object center
-                pDynamicBody->body->GetWorldCenter(),
+                pPhysBody->GetWorldCenter(),
                 true
             );
         }

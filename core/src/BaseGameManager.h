@@ -3,11 +3,13 @@
 
 #include <SFMLPtrDef.h>
 #include <SFML/System/Vector2.hpp>
+#include <SFML/System/NonCopyable.hpp>
+
+#include <Systems/RenderSystem.h>
 
 #include <Artemis/World.h>
 
 //FWD DEFS /////////////////////////////////////////////////////////////////////
-class RenderSystem;
 class PhysicsSystem;
 class Box2DRenderer;
 class JumpListener;
@@ -25,7 +27,7 @@ class b2World;
 //}
 ////////////////////////////////////////////////////////////////////////////////
 
-class BaseGameManager
+class BaseGameManager: private sf::NonCopyable
 {
 public:
     BaseGameManager();

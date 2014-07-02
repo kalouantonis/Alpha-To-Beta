@@ -1,11 +1,12 @@
 #ifndef RENDERABLE_H
 #define RENDERABLE_H
 
-#include <Components/ParsedComponent.h>
+#include <Components/IRenderable.h>
+
 #include <SFMLPtrDef.h>
 #include <Graphics/TextureRegion.h>
 
-class Renderable: public ParsedComponent
+class Renderable: public IRenderable
 {
 private:
     TextureRegion m_textureRegion;
@@ -31,20 +32,20 @@ public:
     {
         m_textureRegion = textureRegion;
         // Region width
-        width = m_textureRegion.u2 - m_textureRegion.u1;
+        setWidth(m_textureRegion.u2 - m_textureRegion.u1);
         // Region height
-        height = m_textureRegion.v2 - m_textureRegion.v1;
+        setHeight(m_textureRegion.v2 - m_textureRegion.v1);
     }
 
-    const TextureRegion& getTextureRegion() const { return m_textureRegion; }
+    virtual const TextureRegion& getTextureRegion() const final{ return m_textureRegion; }
     /**
      * @brief non-const overload
      */
-    TextureRegion& getTextureRegion() { return m_textureRegion; }
+    //TextureRegion& getTextureRegion() { return m_textureRegion; }
 
     // Draw order
-    int order;
-    float width, height;
+    //int order;
+    //float width, height;
 };
 
 typedef std::shared_ptr<Renderable> RenderablePtr;

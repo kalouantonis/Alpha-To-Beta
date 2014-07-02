@@ -229,12 +229,12 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
 
         Renderable* renderableComp = static_cast<Renderable*>(entity.getComponent<Renderable>());
 
-        if((renderableComp != NULL) && (renderableComp->width == 0.f && renderableComp->height == 0.f))
+        if((renderableComp != NULL) && (renderableComp->getWidth() == 0.f && renderableComp->getHeight() == 0.f))
         {
-            renderableComp->width = object->GetWidth() / PhysicsLocator::PixelsPerMeter.x;
-            renderableComp->height = object->GetHeight() / PhysicsLocator::PixelsPerMeter.y;
+            renderableComp->setWidth(object->GetWidth() / PhysicsLocator::PixelsPerMeter.x);
+            renderableComp->setHeight(object->GetHeight() / PhysicsLocator::PixelsPerMeter.y);
 
-            renderableComp->order = order;
+            renderableComp->setDrawOrder(order);
        }
 
        Physics* physicsComp = static_cast<Physics*>(entity.getComponent<DynamicBody>());

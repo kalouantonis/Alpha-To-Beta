@@ -1,6 +1,7 @@
 #include <Entities/EntityFactory.h>
 
 #include <Utils/Logger.h>
+#include <Utils/String.h>
 #include <Resources/XMLoader.h>
 
 // Component includes
@@ -83,6 +84,13 @@ bool EntityFactory::loadFromFile(const std::string& filename, artemis::Entity& e
 //        if(!m_worldManager.getTagManager()->isSubscribed(tag))
 //            m_worldManager.getTagManager()->subscribe(tag, entity);
 //    }
+
+	std::string group = make_string(pRoot->Attribute("group"));
+
+	if(!group.empty())
+	{
+		entity.setGroup(group);
+	}
 
 
 

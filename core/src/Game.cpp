@@ -111,6 +111,14 @@ void Game::pollInput()
         case sf::Event::Resized:
             ScreenManager::getInstance().resize(sf::Vector2u(event.size.width, event.size.height));
             break;
+#ifdef _DEBUG // Only allow escape to quit in debug mode
+		case sf::Event::KeyReleased:
+			if(event.key.code == sf::Keyboard::Escape)
+			{
+				m_bRunning = false;
+			}
+			break;
+#endif
         default:
             // Polling for screens
             ScreenManager::getInstance().pollInput(event);

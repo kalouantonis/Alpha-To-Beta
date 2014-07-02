@@ -13,7 +13,7 @@
 // Systems
 #include <Systems/CameraFollowingSystem.h>
 #include <Systems/PhysicsSystem.h>
-#include <Systems/RenderSystem.h>
+//#include <Systems/BaseRenderSystem.h>
 #include <Lua/ScriptSystem.h>
 
 #include <Lua/LuaStateManager.h>

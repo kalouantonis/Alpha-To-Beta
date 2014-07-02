@@ -42,11 +42,13 @@ set(
 
 set(
 	COMPONENTS_SRC
+	"Components/BaseAnimation.h"
     "Components/BaseScriptComponent.cpp"
     "Components/BaseScriptComponent.h"
 	"Components/ParsedComponent.h"
     "Components/CameraFollower.cpp"
     "Components/CameraFollower.h"
+	"Components/IRenderable.h"
     "Components/Renderable.cpp"
 	"Components/Renderable.h"
 	"Components/Transform.cpp"
@@ -77,6 +79,7 @@ set(
     "Entities/EntityFactory.h"
     "Entities/Level.cpp"
     "Entities/Level.h"
+    "Entities/Utils.cpp"
     "Entities/Utils.h"
     "Entities/WorldLocator.h"
 )
@@ -95,6 +98,8 @@ set(
 # Graphics/*.{h|cpp}
 set(
 	GRAPHICS_SRC
+	"Graphics/Animation.cpp"
+	"Graphics/Animation.h"
 	"Graphics/Camera2D.cpp"
 	"Graphics/Camera2D.h"
 	"Graphics/SpriteBatch.cpp"
@@ -185,7 +190,8 @@ set(
 
 set(
 	SYSTEMS_SRC
-	"Systems/RenderSystem.cpp"
+	"Systems/BaseRenderSystem.cpp"
+	"Systems/BaseRenderSystem.h"
 	"Systems/RenderSystem.h"
 	"Systems/PhysicsSystem.cpp"
 	"Systems/PhysicsSystem.h"
