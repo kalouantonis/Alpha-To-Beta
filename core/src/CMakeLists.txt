@@ -42,6 +42,7 @@ set(
 
 set(
 	COMPONENTS_SRC
+	"Components/BaseAnimation.cpp"
 	"Components/BaseAnimation.h"
     "Components/BaseScriptComponent.cpp"
     "Components/BaseScriptComponent.h"
