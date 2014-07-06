@@ -26,7 +26,7 @@ public:
     virtual bool load(const tinyxml2::XMLElement *pElement) override;
 
     static const char* g_name;
-    virtual const char* getName() const override { return g_name; }
+    virtual const char* getName() const final { return g_name; }
 
     void setTextureRegion(const TextureRegion& textureRegion)
     {

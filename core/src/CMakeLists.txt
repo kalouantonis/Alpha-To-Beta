@@ -193,6 +193,8 @@ set(
 	SYSTEMS_SRC
 	"Systems/BaseRenderSystem.cpp"
 	"Systems/BaseRenderSystem.h"
+	"Systems/AnimationSystem.cpp"
+	"Systems/AnimationSystem.h"
 	"Systems/RenderSystem.h"
 	"Systems/PhysicsSystem.cpp"
 	"Systems/PhysicsSystem.h"

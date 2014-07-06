@@ -91,7 +91,7 @@ private:
     LuaPlus::LuaObject getPosition() const;
 
 	// Physics stuff
-	bool hasPhysics();
+	bool hasPhysics() const;
     void stopPhysics();
 	void startPhysics();
 	void stopCollisions();
@@ -102,6 +102,12 @@ private:
 	void applyForce(LuaPlus::LuaObject luaForceVec, LuaPlus::LuaObject luaPointVec);
 	LuaPlus::LuaObject getVelocity() const;
 	void setVelocity(LuaPlus::LuaObject luaVec);
+
+	// Animation stuff
+	bool hasAnimation() const;
+	void setAnimationGroup(LuaPlus::LuaObject luaString);
+	LuaPlus::LuaObject getAnimationGroup() const;
+
 };
 
 #endif // _BASE_SCRIPT_COMPONENT_H_

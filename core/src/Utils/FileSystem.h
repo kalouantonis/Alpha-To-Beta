@@ -17,6 +17,8 @@ std::string currentWorkingDir();
  */
 const char nativeSeparator();
 
+std::string loadFileToString(const char* filename);
+
 }
 
 #endif // !FILESYSTEM_H_

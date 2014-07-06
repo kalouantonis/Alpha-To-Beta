@@ -7,6 +7,8 @@
 
 #include <Utils/Logger.h>
 
+#include <Artemis/World.h>
+
 template <class T>
 BaseRenderSystem<T>::BaseRenderSystem(SpriteBatch& spriteBatch)
 	: m_spriteBatch(spriteBatch)
@@ -29,7 +31,7 @@ void BaseRenderSystem<T>::added(artemis::Entity& e)
 	const Transform* pTransform = safeGetComponent<Transform>(&e);
 	CORE_ASSERT(pTransform != nullptr);
 	
-	const T* pRenderable = safeGetComponent<T>(&e);
+	T* pRenderable = safeGetComponent<T>(&e);
 	CORE_ASSERT(pRenderable != nullptr);
 
 	m_drawables[pRenderable->getDrawOrder()][e.getId()] = DrawablePair(
@@ -89,8 +91,11 @@ void BaseRenderSystem<T>::processEntities(artemis::ImmutableBag<artemis::Entity*
 		{
 			const DrawablePair& pair = drawable.second;
 
-			const T* pRenderable = pair.first;
+			T* pRenderable = pair.first;
 			const Transform* pTransform = pair.second;
+
+			// Update renderable before drawing it
+			updateRenderable(pRenderable);
 
 			m_spriteBatch.draw(pRenderable->getTextureRegion(),
 				pTransform->position.x, pTransform->position.y, 
@@ -106,4 +111,10 @@ template <class T>
 void BaseRenderSystem<T>::end()
 {
 	m_spriteBatch.end();
+}
+
+template <class T>
+float BaseRenderSystem<T>::getDelta() const 
+{
+	return world->getDelta();
 }

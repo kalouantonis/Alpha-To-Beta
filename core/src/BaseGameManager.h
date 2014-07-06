@@ -6,6 +6,7 @@
 #include <SFML/System/NonCopyable.hpp>
 
 #include <Systems/RenderSystem.h>
+#include <Systems/AnimationSystem.h>
 
 #include <Artemis/World.h>
 
@@ -72,7 +73,7 @@ public:
     /**
      * Meant to be overriden, call to register all script events
      */
-    virtual void registerScriptEvents() {}
+    virtual void registerScriptEvents();
     /**
      * Meant to be override, call to unregister all registered script events
      */
@@ -101,6 +102,7 @@ private:
     std::shared_ptr<artemis::World> m_pWorld;
 
     RenderSystem* m_pRenderSystem;
+	AnimationSystem* m_pAnimationSystem;
 
     PhysicsSystem* m_pPhysicsSystem;
     std::shared_ptr<b2World> m_pPhysicsWorld;

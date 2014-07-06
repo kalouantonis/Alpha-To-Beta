@@ -4,6 +4,7 @@
 #include <Utils/Helpers.h>
 #include <Utils/Logger.h>
 #include <Utils/String.h>
+#include <Utils/FileSystem.h>
 
 #include <sstream>
 
@@ -81,7 +82,8 @@ bool LuaStateManager::init()
 
 bool LuaStateManager::executeFile(const char* filename)
 {
-    int result = m_pLuaState->DoFile(filename);
+    //int result = m_pLuaState->DoFile(filename);
+	int result = m_pLuaState->DoString(fs::loadFileToString(filename).c_str());
 
     if(result != 0)
     {

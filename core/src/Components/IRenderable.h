@@ -8,7 +8,7 @@ class TextureRegion;
 class IRenderable: public ParsedComponent
 {
 public:
-	IRenderable(int order, float width = 0.f, float height = 0.f)
+	IRenderable(int order = 0, float width = 0.f, float height = 0.f)
 		: m_drawOrder(order)
 		, m_width(width)
 		, m_height(height)

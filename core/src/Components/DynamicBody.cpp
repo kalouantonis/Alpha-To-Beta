@@ -118,7 +118,7 @@ bool DynamicBody::load(const tinyxml2::XMLElement* pElement)
     }
 
     for(const tinyxml2::XMLElement* pChildElement = pElement->FirstChildElement("Fixture");
-        pChildElement != NULL; pChildElement = pElement->NextSiblingElement("Fixture"))
+        pChildElement != NULL; pChildElement = pChildElement->NextSiblingElement("Fixture"))
     {
         // TODO: Change to loading dimensions using each fixure independently
         b2PolygonShape polyShape;

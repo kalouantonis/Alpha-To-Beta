@@ -14,9 +14,12 @@
 #include <Systems/CameraFollowingSystem.h>
 #include <Systems/PhysicsSystem.h>
 //#include <Systems/BaseRenderSystem.h>
-#include <Lua/ScriptSystem.h>
 
+#include <Lua/ScriptSystem.h>
+#include <Lua/ScriptEvent.h>
 #include <Lua/LuaStateManager.h>
+
+#include <Events/CollisionEvents.h>
 
 #include <Utils/Logger.h>
 
@@ -96,6 +99,7 @@ void BaseGameManager::render()
     m_pCameraFollowingSystem->process();
     
     m_pRenderSystem->process();
+	m_pAnimationSystem->process();
 
     // Draw debug data
     if(m_pPhysicsWorld)
@@ -131,6 +135,11 @@ void BaseGameManager::initRenderer(SpriteBatch& spriteBatch, Camera2D& camera)
     m_pRenderSystem = static_cast<RenderSystem*>(
         systemManager->setSystem(new RenderSystem(spriteBatch))
     );
+
+	CORE_DEBUG("Creating animation system...");
+	m_pAnimationSystem = static_cast<AnimationSystem*>(
+		systemManager->setSystem(new AnimationSystem(spriteBatch))	
+	);
 
     CORE_DEBUG("Creating camera following system...");
     m_pCameraFollowingSystem = static_cast<CameraFollowingSystem*>(
@@ -233,4 +242,10 @@ artemis::SystemManager* BaseGameManager::getSystemManager() const
     CORE_ASSERT(m_pWorld);
 
     return m_pWorld->getSystemManager();
+}
+
+void BaseGameManager::registerScriptEvents()
+{
+	REGISTER_SCRIPT_EVENT(CollisonBeginEvent, CollisonBeginEvent::sEventType);
+	REGISTER_SCRIPT_EVENT(CollisonEndEvent, CollisonEndEvent::sEventType);
 }

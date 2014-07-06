@@ -2,6 +2,7 @@
 
 #include <Components/Transform.h>
 #include <Components/DynamicBody.h>
+#include <Components/BaseAnimation.h>
 
 #include <Entities/WorldLocator.h>
 #include <Entities/Utils.h>
@@ -258,6 +259,10 @@ void BaseScriptComponent::registerScriptFunctions()
 	metaTableObject.RegisterObjectDirect("apply_force_to_center", (BaseScriptComponent*)0, &BaseScriptComponent::applyForceToCenter);
 	metaTableObject.RegisterObjectDirect("get_velocity", (BaseScriptComponent*)0, &BaseScriptComponent::getVelocity);
 	metaTableObject.RegisterObjectDirect("set_velocity", (BaseScriptComponent*)0, &BaseScriptComponent::setVelocity);
+	// Animation
+	metaTableObject.RegisterObjectDirect("has_animation", (BaseScriptComponent*)0, &BaseScriptComponent::hasAnimation);
+	metaTableObject.RegisterObjectDirect("set_animation_group", (BaseScriptComponent*)0, &BaseScriptComponent::setAnimationGroup);
+	metaTableObject.RegisterObjectDirect("get_animation_group", (BaseScriptComponent*)0, &BaseScriptComponent::getAnimationGroup);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
@@ -331,7 +336,7 @@ LuaPlus::LuaObject BaseScriptComponent::getPosition() const
 	return ret;
 }
 
-bool BaseScriptComponent::hasPhysics()
+bool BaseScriptComponent::hasPhysics() const
 {
 	return (safeGetComponent<DynamicBody>(getParentEntity()) != nullptr);
 }
@@ -493,4 +498,54 @@ void BaseScriptComponent::setVelocity(LuaPlus::LuaObject luaVec)
 	{
 		CORE_ERROR("Attempting to call set_velocity on object with no dynamic body");
 	}
+}
+
+bool BaseScriptComponent::hasAnimation() const 
+{
+	// Only use BaseAnimation for now
+	return (safeGetComponent<BaseAnimation>(getParentEntity()) != nullptr);
+}
+
+void BaseScriptComponent::setAnimationGroup(LuaPlus::LuaObject luaString)
+{
+	if(luaString.IsConvertibleToString())
+	{
+		BaseAnimation* pBaseAnimation = safeGetComponent<BaseAnimation>(getParentEntity());
+
+		if(pBaseAnimation)
+		{
+			const std::string& groupName = luaString.ToString();
+
+			if(!pBaseAnimation->setAnimationGroup(groupName))
+			{
+				CORE_ERROR("Invalid animation group: " + groupName);
+			}
+		}
+		else
+			CORE_ERROR("Attempting to call set_animation_group when object has no animation component");
+	}
+	else 
+	{
+		CORE_ERROR("Calling set_animation_group with invalid type. Must be string; type = " 
+			+ std::string(luaString.TypeName()));
+	}
+}
+
+LuaPlus::LuaObject BaseScriptComponent::getAnimationGroup() const 
+{
+	BaseAnimation* pBaseAnimation = safeGetComponent<BaseAnimation>(getParentEntity());
+
+	LuaPlus::LuaObject luaString;
+
+	if(pBaseAnimation)
+	{
+		luaString.AssignString(LuaStateManager::get()->getLuaState(), pBaseAnimation->getAnimationGroup().c_str());
+	}
+	else 
+	{
+		CORE_ERROR("Calling get_animation_group when object does not have an animation component");
+		luaString.AssignNil(LuaStateManager::get()->getLuaState());
+	}
+
+	return luaString;
 }

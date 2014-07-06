@@ -7,6 +7,7 @@
 // Component includes
 #include <Components/Transform.h>
 #include <Components/Renderable.h>
+#include <Components/BaseAnimation.h>
 #include <Components/DynamicBody.h>
 #include <Components/PlayerInput.h>
 #include <Components/CameraFollower.h>
@@ -25,6 +26,7 @@ EntityFactory::EntityFactory()
 {
     m_componentFactory.declare<Transform>(Transform::g_name);
     m_componentFactory.declare<Renderable>(Renderable::g_name);
+	m_componentFactory.declare<BaseAnimation>(BaseAnimation::g_name);
     m_componentFactory.declare<DynamicBody>(DynamicBody::g_name);
     m_componentFactory.declare<PlayerInput>(PlayerInput::g_name);
     m_componentFactory.declare<CameraFollower>(CameraFollower::g_name);

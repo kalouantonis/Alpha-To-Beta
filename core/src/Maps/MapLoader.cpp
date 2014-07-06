@@ -1,11 +1,13 @@
 #include <Maps/MapLoader.h>
 
 #include <Components/Renderable.h>
+#include <Components/BaseAnimation.h>
 #include <Components/Transform.h>
 #include <Components/StaticBody.h>
 #include <Components/DynamicBody.h>
 
 #include <Entities/WorldLocator.h>
+#include <Entities/Utils.h>
 
 #include <Resources/ResourceDef.h>
 #include <Math/Vector.h>
@@ -183,6 +185,12 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
     }
 }
 
+void _resizeToWorld(IRenderable* pRenderable, const Tmx::Object* object)
+{
+	pRenderable->setWidth(object->GetWidth() / PhysicsLocator::PixelsPerMeter.x);
+	pRenderable->setHeight(object->GetHeight() / PhysicsLocator::PixelsPerMeter.y);
+}
+
 void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHeight)
 {
     bool bCollidable = pObjectGroup->GetProperties().HasProperty("collidable");
@@ -214,30 +222,44 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
         }
 
         // Safe to cast, we know its of that type anyway
-        Transform* transformComp = static_cast<Transform*>(entity.getComponent<Transform>());
+		Transform* pTransformComp = safeGetComponent<Transform>(&entity);
 
-        if(!transformComp) // Transform does not already exist
+        if(!pTransformComp) // Transform does not already exist
         {
             // Store for later
-            transformComp = new Transform();
-            entity.addComponent(transformComp);
+            pTransformComp = new Transform();
+            entity.addComponent(pTransformComp);
         }
 
         // Override previous positions
-        transformComp->position.x = object->GetX() / PhysicsLocator::PixelsPerMeter.x;
-        transformComp->position.y = (object->GetY()  - yOffset) / PhysicsLocator::PixelsPerMeter.y;
+        pTransformComp->position.x = object->GetX() / PhysicsLocator::PixelsPerMeter.x;
+        pTransformComp->position.y = (object->GetY()  - yOffset) / PhysicsLocator::PixelsPerMeter.y;
 
-        Renderable* renderableComp = static_cast<Renderable*>(entity.getComponent<Renderable>());
+        IRenderable* pRenderableComp = safeGetComponent<Renderable>(&entity);
 
-        if((renderableComp != NULL) && (renderableComp->getWidth() == 0.f && renderableComp->getHeight() == 0.f))
+        if(pRenderableComp != nullptr)
         {
-            renderableComp->setWidth(object->GetWidth() / PhysicsLocator::PixelsPerMeter.x);
-            renderableComp->setHeight(object->GetHeight() / PhysicsLocator::PixelsPerMeter.y);
+			if(pRenderableComp->getWidth() == 0.f && pRenderableComp->getHeight() == 0.f)
+			{
+				_resizeToWorld(pRenderableComp, object);
+			}
 
-            renderableComp->setDrawOrder(order);
+            pRenderableComp->setDrawOrder(order);
        }
 
-       Physics* physicsComp = static_cast<Physics*>(entity.getComponent<DynamicBody>());
+		pRenderableComp = safeGetComponent<BaseAnimation>(&entity);
+
+		if(pRenderableComp != nullptr) 
+		{
+			if(pRenderableComp->getWidth() == 0.f && pRenderableComp->getHeight() == 0.f)
+			{
+				_resizeToWorld(pRenderableComp, object);
+			}
+
+			pRenderableComp->setDrawOrder(order);
+		}
+
+       Physics* physicsComp = safeGetComponent<DynamicBody>(&entity);
 
        if(physicsComp && isZero(physicsComp->getDimensions()))
        {
@@ -249,7 +271,7 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
 
        if(bCollidable) // Is entity collidable?
        {
-            physicsComp = static_cast<Physics*>(entity.getComponent<StaticBody>());
+            physicsComp = safeGetComponent<StaticBody>(&entity);
 
             if(physicsComp == nullptr && entity.getComponent<DynamicBody>() == nullptr)
             {
@@ -264,9 +286,9 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
 
                 // Pre-initialize component
                 physicsComp->initialize(
-                    transformComp->position.x, 
-                    transformComp->position.y, 
-                    transformComp->rotation
+                    pTransformComp->position.x, 
+                    pTransformComp->position.y, 
+                    pTransformComp->rotation
                 );
 
                 // Set user data to entity

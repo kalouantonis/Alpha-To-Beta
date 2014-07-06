@@ -47,4 +47,7 @@ private:
 
 };
 
+typedef std::unique_ptr<Animation> UAnimationPtr;
+typedef std::shared_ptr<Animation> AnimationPtr;
+
 #endif

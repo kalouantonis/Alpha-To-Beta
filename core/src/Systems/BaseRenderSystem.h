@@ -21,6 +21,11 @@ public:
 	BaseRenderSystem(SpriteBatch& spriteBatch);
 	virtual ~BaseRenderSystem();
 
+protected:
+	virtual void updateRenderable(T* pRenderable) {}
+
+	float getDelta() const;
+
 private:
 	virtual void added(artemis::Entity& e) final;
 	virtual void removed(artemis::Entity& e) final;
@@ -31,7 +36,7 @@ private:
 
 	SpriteBatch& m_spriteBatch;
 
-	typedef std::pair<const T*, const Transform*> DrawablePair;
+	typedef std::pair<T*, const Transform*> DrawablePair;
 	typedef std::unordered_map<int, DrawablePair> DrawableMap;
 
 	// Ordered map
