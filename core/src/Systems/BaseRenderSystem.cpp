@@ -51,7 +51,7 @@ void BaseRenderSystem<T>::removed(artemis::Entity& e)
 	if(orderFindIt != m_drawables.end())
 	{
 		DrawableMap& drawableMap = (*orderFindIt).second;
-		DrawableMap::iterator drawableFindIt = drawableMap.find(e.getId());
+		auto drawableFindIt = drawableMap.find(e.getId());
 
 		if(drawableFindIt != drawableMap.end())
 		{

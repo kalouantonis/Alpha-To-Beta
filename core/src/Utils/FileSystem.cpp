@@ -2,8 +2,6 @@
 
 #include <Utils/Logger.h>
 
-#include <fstream>
-
 #ifdef WIN32
 
 #include <direct.h>
@@ -60,21 +58,30 @@ const char nativeSeparator()
 
 std::string loadFileToString(const char* filename)
 {
-	CORE_ASSERT(filename != NULL);
+    CORE_ASSERT(filename != NULL);
 
-	std::ifstream file(filename);
+    std::FILE* pFile = std::fopen(filename, "r");
 
-	if(file.is_open())
-	{
-		// Create iterators
-		std::istream_iterator<char> begin(file), end;
-		return std::string(begin, end);
-	}
+    if(pFile != NULL)
+    {
+        std::string contents;
+        // Set the position indicator
+        std::fseek(pFile, 0, SEEK_END);
+        // Resize string to fit file contents
+        contents.resize(std::ftell(pFile));
+        // Go to begining of file
+        std::rewind(pFile);
+        // Read file in to string
+        std::fread(&contents[0], 1, contents.size(), pFile);
+        // Close file
+        std::fclose(pFile);
+        return contents;
+    }
 
-	CORE_ERROR("Failed to load file in to string: " + std::string(filename));
+    CORE_ERROR("Failed to load file in to string: " + std::string(filename));
 
-	// Empty file
-	return std::string();
+    // Empty string
+    return std::string();
 }
 
 }

@@ -221,10 +221,10 @@ void BaseScriptComponent::createScriptObject()
     CORE_ASSERT(!m_scriptObject.IsNil());
 
     // Get meta table
-    LuaPlus::LuaObject metaTableObject = pStateManager->getGlobalVars().Lookup(METATABLE_NAME);
+    LuaPlus::LuaObject& metaTableObject = pStateManager->getGlobalVars().Lookup(METATABLE_NAME);
     CORE_ASSERT(!metaTableObject.IsNil());
 
-    LuaPlus::LuaObject boxedPtr = pStateManager->getLuaState()->BoxPointer(this);
+    LuaPlus::LuaObject& boxedPtr = pStateManager->getLuaState()->BoxPointer(this);
     boxedPtr.SetMetaTable(metaTableObject);
     // Give lua a reference to the C++ object
     m_scriptObject.SetLightUserData("__object", this);
@@ -236,8 +236,7 @@ void BaseScriptComponent::registerScriptFunctions()
 {   
 	CORE_DEBUG("Registering script functions");
 
-    LuaPlus::LuaObject& metaTableObject = LuaStateManager::get()
-        ->getGlobalVars().CreateTable(METATABLE_NAME);
+    LuaPlus::LuaObject& metaTableObject = LuaStateManager::get()->getGlobalVars().CreateTable(METATABLE_NAME);
     metaTableObject.SetObject("__index", metaTableObject);
 
     // Bind functions to meta-table ////////////////////////////////////////////////////////////////////////////////////
