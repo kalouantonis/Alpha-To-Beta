@@ -6,12 +6,6 @@
  */
 
 #include <SFML/System/Clock.hpp>
-#ifdef _DEBUG
-	#include <SFML/Graphics/Font.hpp>
-	#include <SFML/Graphics/Text.hpp>
-
-	const char* DEBUG_FONT_FILE = "assets/debug/font.ttf";
-#endif
 
 #include <Game.h>
 
@@ -22,7 +16,7 @@
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
 
-const int FPS = 30;
+const int FPS = 45;
 const float FRAME_TIME = 1.f / FPS;
 
 int main()
@@ -39,21 +33,6 @@ int main()
         UScreenPtr(new GameScreen(game.getWindow()))
     );
 
-#ifdef _DEBUG 
-
-	sf::Font debugFont;
-	sf::Text debugText;
-	if(debugFont.loadFromFile(DEBUG_FONT_FILE))
-	{
-		debugText.setFont(debugFont);
-	}
-	else
-	{
-		CORE_ERROR("Failed to load debug font: " + std::string(DEBUG_FONT_FILE));
-	}
-
-#endif
-
     // Timing
     float timeSinceLastUpdate = 0.f;
     sf::Clock timer;
@@ -68,6 +47,7 @@ int main()
 
             // Update game
             game.update(FRAME_TIME);
+
 
             // Decrease in fixed time intervals
             timeSinceLastUpdate -= FRAME_TIME;
