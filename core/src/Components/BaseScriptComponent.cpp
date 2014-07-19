@@ -224,7 +224,7 @@ void BaseScriptComponent::createScriptObject()
     LuaPlus::LuaObject& metaTableObject = pStateManager->getGlobalVars().Lookup(METATABLE_NAME);
     CORE_ASSERT(!metaTableObject.IsNil());
 
-    LuaPlus::LuaObject& boxedPtr = pStateManager->getLuaState()->BoxPointer(this);
+    LuaPlus::LuaObject boxedPtr = pStateManager->getLuaState()->BoxPointer(this);
     boxedPtr.SetMetaTable(metaTableObject);
     // Give lua a reference to the C++ object
     m_scriptObject.SetLightUserData("__object", this);

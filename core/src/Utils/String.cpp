@@ -1,6 +1,7 @@
 #include <Utils/String.h>
 
 #include <sstream>
+#include <algorithm>
 
 std::string make_string(const char* str)
 {
@@ -48,4 +49,9 @@ void trim(std::string& str)
 	ss.clear();
 	// push to string
 	ss >> str;
+}
+
+void to_lower(std::string& str)
+{
+	std::transform(str.begin(), str.end(), str.begin(), ::tolower);
 }

@@ -16,15 +16,6 @@ find_package(GLM REQUIRED)
 # ZLib compression
 find_package(ZLIB REQUIRED)
 
-# Boost vars
-if(${WIN32})
-    # Only link statically for windows
-    set(Boost_USE_STATIC_LIBS ON)
-    set(Boost_USE_MULTITHREADED ON)
-    set(Boost_USE_STATIC_RUNTIME ON)
-endif(${WIN32})
-# Find boost
-find_package(Boost COMPONENTS system filesystem REQUIRED)
 # Lua 5.2
 #find_package(Lua52 REQUIRED)
 # Luabind library
@@ -57,6 +48,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 # Add tinyxml2 dependency
 message(STATUS "Configuring TinyXML2...")
 add_subdirectory("dependencies/tinyxml2")
+
+message(STATUS "Configuring tinydir...")
+add_subdirectory("dependencies/tinydir")
 
 message(STATUS "Configuring tmx-parser...")
 add_subdirectory("dependencies/tmx-parser")

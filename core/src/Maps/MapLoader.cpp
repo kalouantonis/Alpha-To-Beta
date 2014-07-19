@@ -16,13 +16,13 @@
 
 #include <Utils/Logger.h>
 #include <Utils/FileSystem.h>
+#include <Utils/String.h>
 
 #include <TmxParser/Tmx.h>
 
 #include <Artemis/World.h>
 #include <Artemis/Entity.h>
 
-#include <boost/algorithm/string.hpp>
 #include <glm/glm.hpp>
 
 MapLoader::MapLoader()
@@ -205,7 +205,7 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
         // Dont reference, we need to convert
         std::string type = object->GetType();
         // convert to lower case
-        boost::algorithm::to_lower(type);
+        to_lower(type);
 
         const std::string& fileName = object->GetProperties().GetLiteralProperty("file");
 

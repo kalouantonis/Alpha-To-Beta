@@ -15,8 +15,7 @@ include_directories(
     ${Box2D_SOURCE_DIR};
     # Luaplus
     ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/luaplus;
-    # Boost library
-    ${Boost_INCLUDE_DIR};
+    ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinydir;
 )
 
 link_directories(
@@ -252,15 +251,6 @@ target_link_libraries(
     tmxparser;		# TMX parser
     luaplus;
 )
-
-if(${UNIX})
-    # Statically link boost with core for Unix Systems
-    target_link_libraries(
-        core;
-
-        ${Boost_LIBRARIES};
-    )
-endif(${UNIX})
 
 install(TARGETS core
     RUNTIME DESTINATION ${core_BINARY_DIR}
