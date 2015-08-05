@@ -13,8 +13,6 @@ include_directories(
     ${FastDelegate_SOURCE_DIR};
 	# Box2D
 	${Box2D_SOURCE_DIR};
-	# Boost
-	${Boost_INCLUDE_DIR};
     # LuaPlus
     ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/luaplus;
 	# Core LIB
@@ -26,8 +24,6 @@ include_directories(
 link_directories(
 	#Link TinyXML
 	${ALPHA_TO_BETA_BINARY_DIR}/dependencies/tinyxml2;
-	# Boost
-	${Boost_LIBRARY_DIRS};
     # Luabind
     ${LUABIND_LIBRARY_DIR};
 	# Core	
@@ -85,7 +81,6 @@ add_executable(alphatobeta ${SOURCE_FILE_LIST})
 target_link_libraries(
     alphatobeta;
 
-	#${Boost_LIBRARIES};     # Only used components that were requested
 	core; # Core library
 	${SFML_LIBRARIES}; # SFML
 	${LUA_LIBRARIES};

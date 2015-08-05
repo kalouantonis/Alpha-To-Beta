@@ -15,8 +15,7 @@ include_directories(
     ${Box2D_SOURCE_DIR};
     # Luaplus
     ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/luaplus;
-    # Boost library
-    ${Boost_INCLUDE_DIR};
+    ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinydir;
 )
 
 link_directories(
@@ -42,11 +41,14 @@ set(
 
 set(
 	COMPONENTS_SRC
+	"Components/BaseAnimation.cpp"
+	"Components/BaseAnimation.h"
     "Components/BaseScriptComponent.cpp"
     "Components/BaseScriptComponent.h"
 	"Components/ParsedComponent.h"
     "Components/CameraFollower.cpp"
     "Components/CameraFollower.h"
+	"Components/IRenderable.h"
     "Components/Renderable.cpp"
 	"Components/Renderable.h"
 	"Components/Transform.cpp"
@@ -77,6 +79,7 @@ set(
     "Entities/EntityFactory.h"
     "Entities/Level.cpp"
     "Entities/Level.h"
+    "Entities/Utils.cpp"
     "Entities/Utils.h"
     "Entities/WorldLocator.h"
 )
@@ -95,6 +98,8 @@ set(
 # Graphics/*.{h|cpp}
 set(
 	GRAPHICS_SRC
+	"Graphics/Animation.cpp"
+	"Graphics/Animation.h"
 	"Graphics/Camera2D.cpp"
 	"Graphics/Camera2D.h"
 	"Graphics/SpriteBatch.cpp"
@@ -130,6 +135,8 @@ set(
     "Lua/exports/EventExports.h"
     "Lua/exports/EntityExports.cpp"
     "Lua/exports/EntityExports.h"
+	"Lua/exports/InputExports.cpp"
+	"Lua/exports/InputExports.h"
     "Lua/exports/MathExports.cpp"
     "Lua/exports/MathExports.h"
 )
@@ -183,7 +190,10 @@ set(
 
 set(
 	SYSTEMS_SRC
-	"Systems/RenderSystem.cpp"
+	"Systems/BaseRenderSystem.cpp"
+	"Systems/BaseRenderSystem.h"
+	"Systems/AnimationSystem.cpp"
+	"Systems/AnimationSystem.h"
 	"Systems/RenderSystem.h"
 	"Systems/PhysicsSystem.cpp"
 	"Systems/PhysicsSystem.h"
@@ -199,6 +209,7 @@ set(
 	"Utils/Logger.h"
 	"Utils/String.cpp"
 	"Utils/String.h"
+	"Utils/Helpers.h"
 )
 
 # Add all current *.cpp files in to build
@@ -240,15 +251,6 @@ target_link_libraries(
     tmxparser;		# TMX parser
     luaplus;
 )
-
-if(${UNIX})
-    # Statically link boost with core for Unix Systems
-    target_link_libraries(
-        core;
-
-        ${Boost_LIBRARIES};
-    )
-endif(${UNIX})
 
 install(TARGETS core
     RUNTIME DESTINATION ${core_BINARY_DIR}

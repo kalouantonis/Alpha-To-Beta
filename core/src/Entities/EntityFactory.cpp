@@ -1,11 +1,13 @@
 #include <Entities/EntityFactory.h>
 
 #include <Utils/Logger.h>
+#include <Utils/String.h>
 #include <Resources/XMLoader.h>
 
 // Component includes
 #include <Components/Transform.h>
 #include <Components/Renderable.h>
+#include <Components/BaseAnimation.h>
 #include <Components/DynamicBody.h>
 #include <Components/PlayerInput.h>
 #include <Components/CameraFollower.h>
@@ -16,14 +18,16 @@
 
 #include <Entities/WorldLocator.h>
 
-#include <boost/filesystem.hpp>
+//#include <boost/filesystem.hpp>
+#include <tinydir.h>
 
-using namespace boost;
+//using namespace boost;
 
 EntityFactory::EntityFactory()
 {
     m_componentFactory.declare<Transform>(Transform::g_name);
     m_componentFactory.declare<Renderable>(Renderable::g_name);
+	m_componentFactory.declare<BaseAnimation>(BaseAnimation::g_name);
     m_componentFactory.declare<DynamicBody>(DynamicBody::g_name);
     m_componentFactory.declare<PlayerInput>(PlayerInput::g_name);
     m_componentFactory.declare<CameraFollower>(CameraFollower::g_name);
@@ -84,6 +88,13 @@ bool EntityFactory::loadFromFile(const std::string& filename, artemis::Entity& e
 //            m_worldManager.getTagManager()->subscribe(tag, entity);
 //    }
 
+	std::string group = make_string(pRoot->Attribute("group"));
+
+	if(!group.empty())
+	{
+		entity.setGroup(group);
+	}
+
 
 
     // Go through each element (component def in this case)
@@ -119,68 +130,39 @@ bool EntityFactory::loadFromFile(const std::string& filename, artemis::Entity& e
 
 void EntityFactory::load(const std::string &path, bool recurse)
 {
-    // convert to file system path
-    filesystem::path fsPath(path);
+	tinydir_dir dir;
 
-    try
-    {
-        // Check file existance
-        if(filesystem::exists(fsPath))
-        {
-            // Only use xml files
-            if((filesystem::is_regular_file(fsPath)) &&
-                (fsPath.extension().generic_string() == ".xml"))
-            {
-                loadFromFile(path);
-            }
-            else if(filesystem::is_directory(path))
-            {
-                // File containers
-                std::vector<filesystem::path> fileVec;
+	if(tinydir_open(&dir, path.c_str()) == -1)
+	{
+		// Error
+		CORE_ERROR("Failed to open directory: " + path);
 
-                if(recurse)
-                {
-                    // Get recursive
-                    std::copy(
-                        filesystem::recursive_directory_iterator(fsPath),
-                        filesystem::recursive_directory_iterator(),
-                        std::back_inserter(fileVec) // Insert in to new file vector
-                    );
-                }
-                else
-                {
-                    // FIXME: Recurse is broken
-                    // Ignore folders
-                    std::copy(
-                        filesystem::directory_iterator(fsPath),
-                        filesystem::directory_iterator(),
-                        std::back_inserter(fileVec)
-                    );
-                }
+		tinydir_close(&dir);
+		return;
+	}
 
-                for(const auto& file : fileVec)
-                {
-                    if((filesystem::is_regular_file(file)) &&          // Just a normal file
-                        (file.extension().generic_string() == ".xml"))  // Has XML extension
-                    {
-                        loadFromFile(file.string());
-                    }
-                }
-            }
-            else
-            {
-                CORE_WARNING(path + ": No directory or file with \".xml\" extension found");
-            }
-        }
-        else
-        {
-            CORE_WARNING(path + ": Does not exist, ignoring...");
-        }
-    }
-    catch(const filesystem::filesystem_error& ex)
-    {
-        CORE_FATAL("File system error: " + std::string(ex.what()));
-    }
+	while(dir.has_next)
+	{
+		tinydir_file file;
+
+		if(tinydir_readfile(&dir, &file) == -1)
+		{
+			CORE_ERROR("Failed to load file: " + std::string(file.path));
+			continue;
+		}
+
+		if(file.is_dir && recurse)
+		{
+			// TODO: Check if this works
+			load(file.path, true);
+		}
+		else 
+		{
+			loadFromFile(file.path);
+		}
+
+		tinydir_next(&dir);
+	}
 }
 
 ParsedComponent* EntityFactory::createComponent(const tinyxml2::XMLElement *pElement)

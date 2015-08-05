@@ -15,7 +15,9 @@
 std::string make_string(const char* str);
 
 typedef std::vector<std::string> StringVector;
-
 void split(const std::string& str, StringVector& vec, char delimiter);
+
+void trim(std::string& str);
+void to_lower(std::string& str);
 
 #endif // STRING_H

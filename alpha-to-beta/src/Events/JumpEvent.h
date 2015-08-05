@@ -22,9 +22,13 @@ public:
     const JumpBehaviour* getJumpBehaviour() const { return m_pJumpBehaviour; }
     JumpBehaviour* getJumpBehaviour() { return m_pJumpBehaviour; }
 
+
     EXPORT_FOR_SCRIPT_EVENT(JumpEvent)
 
 private:
+	virtual void buildEventData() final;
+	virtual bool buildEventFromScript() final;
+
     DynamicBody* m_pBody;
     JumpBehaviour* m_pJumpBehaviour;
 };

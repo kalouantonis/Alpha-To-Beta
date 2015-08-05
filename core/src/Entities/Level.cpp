@@ -3,18 +3,16 @@
 #include <Artemis/EntityManager.h>
 #include <Artemis/World.h>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/filesystem.hpp>
+#include <tinydir.h>
 
 #include <Entities/WorldLocator.h>
 
 #include <Lua/exports/EventExports.h>
 
 #include <Resources/ResourceDef.h>
+#include <Utils/FileSystem.h>
 #include <Utils/Logger.h>
 #include <Utils/String.h>
-
-using namespace boost;
 
 Level::Level()
     : m_mapLoader()
@@ -56,7 +54,7 @@ void Level::load(const std::string& filename)
 		return;
 	}
 
-	boost::algorithm::trim(assetFile);
+	trim(assetFile);
 
 	// TODO: Use exceptions or something cleaner
 	if(!loadAssets(assetFile))
@@ -82,7 +80,7 @@ void Level::load(const std::string& filename)
 	}
 
 	// Trim whitespace
-	boost::algorithm::trim(mapFile);
+	trim(mapFile);
 
     m_mapLoader.load(mapFile, assetFile);
 
@@ -120,63 +118,35 @@ void Level::reload(bool reloadResources, bool reloadEntities)
 
 bool Level::loadAssets(const std::string& assetDir)
 {
-	filesystem::path filePath(assetDir);
+	tinydir_dir dir;
 
-	if(filesystem::exists(filePath))
+	if(tinydir_open(&dir, assetDir.c_str()) == -1)
 	{
-		if(filesystem::is_regular_file(filePath))
-		{
-			// Load single asset
-			try 
-			{
-				// Use Asset Directory as ID. Also, since its a regular file,
-				// load it
-				loadTexture(assetDir, assetDir);
-			}
-			catch(const std::runtime_error& e)
-			{
-				CORE_ERROR(e.what());
-			}
-		}
-		else if(filesystem::is_directory(filePath))
-		{
-			std::vector<filesystem::path> fileVec;
+		CORE_ERROR("Error opening directory: " + assetDir);
 
-			// Recurse directories
-			std::copy(
-				filesystem::directory_iterator(filePath),
-				filesystem::directory_iterator(),
-				std::back_inserter(fileVec)
-			);
-
-			for(const auto& file : fileVec)
-			{
-				// TODO: Support more extensions
-				if(filesystem::is_regular_file(file) && 
-                    (file.extension().generic_string() == ".png"))
-                {
-					loadTexture(
-						// use generic file name for compatibility
-						file.generic_string(), 
-						// Use native file name
-						file.string()
-					);
-
-				}
-			}
-		}
-		else
-		{
-			CORE_ERROR(assetDir + ": No directories or files found.");
-			return false;
-		}
-	}
-	else
-	{
-		CORE_ERROR(assetDir + ": Asset folder does not exist");
+		tinydir_close(&dir);
 		return false;
 	}
 
+	while(dir.has_next)
+	{
+		tinydir_file file;
+		if(tinydir_readfile(&dir, &file) == -1)
+		{
+			// Error
+			CORE_ERROR("Error opening file: " + std::string(file.path));
+			continue;
+		}
+
+		if(std::string(file.extension) == "png")
+		{
+			loadTexture(file.path, file.path);
+		}
+
+		tinydir_next(&dir);
+	}
+
+	tinydir_close(&dir);
 	return true;
 }
 

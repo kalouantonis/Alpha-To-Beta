@@ -72,6 +72,7 @@ void GameManager::destroy()
 
 void GameManager::registerScriptEvents()
 {
+	BaseGameManager::registerScriptEvents();
     REGISTER_SCRIPT_EVENT(JumpEvent, JumpEvent::sEventType);
 }
 

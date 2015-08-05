@@ -11,9 +11,10 @@ namespace artemis
 class Entity;
 }
 
-class BaseCollisionEvent: public BaseEventData
+class BaseCollisionEvent: public ScriptEvent
 {
 public:
+	BaseCollisionEvent();
     BaseCollisionEvent(b2Contact* pContact);
 
     /**
@@ -33,6 +34,9 @@ public:
     artemis::Entity *getEntityB() const { return m_pEntityB; }
 
 private:
+	virtual void buildEventData() final {}
+	virtual bool buildEventFromScript() final { return false; }
+
     b2Contact* m_pContact;
 
     /**
@@ -49,10 +53,13 @@ class CollisonBeginEvent: public BaseCollisionEvent
 public:
     static const EventType sEventType;
 
+	CollisonBeginEvent();
     CollisonBeginEvent(b2Contact* pContact);
 
     virtual EventType getEventType() const final { return sEventType; }
     virtual const char* getName() const final;
+
+	EXPORT_FOR_SCRIPT_EVENT(CollisonBeginEvent)
 };
 
 class CollisonEndEvent: public BaseCollisionEvent
@@ -60,12 +67,13 @@ class CollisonEndEvent: public BaseCollisionEvent
 public:
     static const EventType sEventType;
 
+	CollisonEndEvent();
     CollisonEndEvent(b2Contact* pContact);
 
     virtual EventType getEventType() const final { return sEventType; }
     virtual const char* getName() const final;
 
-    //EXPORT_FOR_SCRIPT_EVENT(CollisonEndEvent);
+    EXPORT_FOR_SCRIPT_EVENT(CollisonEndEvent)
 };
 
 

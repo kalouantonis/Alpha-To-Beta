@@ -168,7 +168,7 @@ private:
 #define CORE_DEBUG(str) do { (void)sizeof(str); } while(0)
 #define CORE_VERBOSE(str) do { (void)sizeof(str); } while(0)
 #define CORE_LOG(tag, str) do { (void)sizeof(str); } while(0)
-#define CORE_ASSERT(expr) do { (void)sizeof(str); } while(0)
+#define CORE_ASSERT(expr) do { (void)sizeof(expr); } while(0)
 
 #endif
 

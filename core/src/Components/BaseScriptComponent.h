@@ -62,6 +62,8 @@ private:
     LuaPlus::LuaObject m_scriptUpdateFunction;
 
     artemis::Entity* m_pParentEntity;
+	// Will check if exists
+	artemis::Entity* getParentEntity() const;
 
     /**
      * Just a small check as to whether the constructor and destructor have been called.
@@ -83,15 +85,29 @@ private:
 
     // Functions for entity access through lua
     int getEntityId() const;
+	bool inGroup(LuaPlus::LuaObject groupString) const;
 
     void setPosition(LuaPlus::LuaObject newPos);
     LuaPlus::LuaObject getPosition() const;
 
 	// Physics stuff
+	bool hasPhysics() const;
     void stopPhysics();
 	void startPhysics();
 	void stopCollisions();
 	void startCollisions();
+	void applyLinearImpulseToCenter(LuaPlus::LuaObject luaImpulseVec);
+	void applyLinearImpulse(LuaPlus::LuaObject luaImpulseVec, LuaPlus::LuaObject luaPointVec);
+	void applyForceToCenter(LuaPlus::LuaObject luaForceVec);
+	void applyForce(LuaPlus::LuaObject luaForceVec, LuaPlus::LuaObject luaPointVec);
+	LuaPlus::LuaObject getVelocity() const;
+	void setVelocity(LuaPlus::LuaObject luaVec);
+
+	// Animation stuff
+	bool hasAnimation() const;
+	void setAnimationGroup(LuaPlus::LuaObject luaString);
+	LuaPlus::LuaObject getAnimationGroup() const;
+
 };
 
 #endif // _BASE_SCRIPT_COMPONENT_H_

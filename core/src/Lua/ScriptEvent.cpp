@@ -35,15 +35,13 @@ bool ScriptEvent::setEventData(const LuaPlus::LuaObject& eventData)
 
 void ScriptEvent::registerEventTypeWithScript(const char *key, EventType type)
 {
-    LuaStateManager* pStateManager = LuaStateManager::get();
-
     // get or create event table
-    LuaPlus::LuaObject eventTypeTable = pStateManager->getGlobalVars().GetByName("EventType");
+    LuaPlus::LuaObject eventTypeTable = LuaStateManager::get()->getGlobalVars().GetByName("EventType");
     // Check if object has been initialized
     if(eventTypeTable.IsNil())
     {
         // Create new table
-        eventTypeTable = pStateManager->getGlobalVars().CreateTable("EventType");
+        eventTypeTable = LuaStateManager::get()->getGlobalVars().CreateTable("EventType");
     }
     
     // Error checking

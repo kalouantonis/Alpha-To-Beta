@@ -11,7 +11,7 @@ template <class T>
  * @param pEntity pEntity to get component from
  * @return requested component or nullptr if failed to grab it
  */
-T* safeGetComponent(artemis::Entity* pEntity)
+T* safeGetComponent(artemis::Entity* pEntity) 
 {
     if(pEntity)
     {
@@ -23,5 +23,7 @@ T* safeGetComponent(artemis::Entity* pEntity)
 
     return nullptr;
 }
+
+std::string getGroupName(artemis::Entity& e);
 
 #endif // UTILS_H_

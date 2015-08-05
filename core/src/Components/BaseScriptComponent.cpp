@@ -2,6 +2,9 @@
 
 #include <Components/Transform.h>
 #include <Components/DynamicBody.h>
+#include <Components/BaseAnimation.h>
+
+#include <Entities/WorldLocator.h>
 #include <Entities/Utils.h>
 
 #include <Lua/LuaStateManager.h>
@@ -18,8 +21,6 @@
 #include <Box2D/Dynamics/b2Body.h>
 
 #include <tinyxml2.h>
-
-#include <boost/algorithm/string.hpp>
 
 #include <LuaFunction.h>
 
@@ -54,6 +55,12 @@ BaseScriptComponent::~BaseScriptComponent()
         m_scriptObjectName += " = nil";
         LuaStateManager::get()->executeString(m_scriptObjectName.c_str());
     }
+}
+
+artemis::Entity* BaseScriptComponent::getParentEntity() const 
+{
+	CORE_ASSERT(m_pParentEntity != nullptr);
+	return m_pParentEntity;
 }
 
 void BaseScriptComponent::callConstructor() 
@@ -118,7 +125,8 @@ bool BaseScriptComponent::load(const tinyxml2::XMLElement* pElement)
     }
 
     // Trim whitespace
-    boost::algorithm::trim(file);
+    //boost::algorithm::trim(file);
+	trim(file);
 
     if(!pStateManager->executeFile(file.c_str()))
     {
@@ -213,7 +221,7 @@ void BaseScriptComponent::createScriptObject()
     CORE_ASSERT(!m_scriptObject.IsNil());
 
     // Get meta table
-    LuaPlus::LuaObject metaTableObject = pStateManager->getGlobalVars().Lookup(METATABLE_NAME);
+    LuaPlus::LuaObject& metaTableObject = pStateManager->getGlobalVars().Lookup(METATABLE_NAME);
     CORE_ASSERT(!metaTableObject.IsNil());
 
     LuaPlus::LuaObject boxedPtr = pStateManager->getLuaState()->BoxPointer(this);
@@ -228,21 +236,32 @@ void BaseScriptComponent::registerScriptFunctions()
 {   
 	CORE_DEBUG("Registering script functions");
 
-    LuaPlus::LuaObject metaTableObject = LuaStateManager::get()
-        ->getGlobalVars().CreateTable(METATABLE_NAME);
+    LuaPlus::LuaObject& metaTableObject = LuaStateManager::get()->getGlobalVars().CreateTable(METATABLE_NAME);
     metaTableObject.SetObject("__index", metaTableObject);
 
     // Bind functions to meta-table ////////////////////////////////////////////////////////////////////////////////////
 	// Entity operations
     metaTableObject.RegisterObjectDirect("get_entity_id", (BaseScriptComponent*)0, &BaseScriptComponent::getEntityId); 
+	metaTableObject.RegisterObjectDirect("in_group", (BaseScriptComponent*)0, &BaseScriptComponent::inGroup);
 	// Positions
 	metaTableObject.RegisterObjectDirect("get_position", (BaseScriptComponent*)0, &BaseScriptComponent::getPosition);
 	metaTableObject.RegisterObjectDirect("set_position", (BaseScriptComponent*)0, &BaseScriptComponent::setPosition);
 	// Physics
+	metaTableObject.RegisterObjectDirect("has_physics", (BaseScriptComponent*)0, &BaseScriptComponent::hasPhysics);
 	metaTableObject.RegisterObjectDirect("start_physics", (BaseScriptComponent*)0, &BaseScriptComponent::startPhysics);
 	metaTableObject.RegisterObjectDirect("stop_physics", (BaseScriptComponent*)0, &BaseScriptComponent::stopPhysics);
 	metaTableObject.RegisterObjectDirect("start_collisions", (BaseScriptComponent*)0, &BaseScriptComponent::startCollisions);
 	metaTableObject.RegisterObjectDirect("stop_collisions", (BaseScriptComponent*)0, &BaseScriptComponent::stopCollisions);
+	metaTableObject.RegisterObjectDirect("apply_linear_impulse", (BaseScriptComponent*)0, &BaseScriptComponent::applyLinearImpulse);
+	metaTableObject.RegisterObjectDirect("apply_linear_impulse_to_center", (BaseScriptComponent*)0, &BaseScriptComponent::applyLinearImpulseToCenter);
+	metaTableObject.RegisterObjectDirect("apply_force", (BaseScriptComponent*)0, &BaseScriptComponent::applyForce);
+	metaTableObject.RegisterObjectDirect("apply_force_to_center", (BaseScriptComponent*)0, &BaseScriptComponent::applyForceToCenter);
+	metaTableObject.RegisterObjectDirect("get_velocity", (BaseScriptComponent*)0, &BaseScriptComponent::getVelocity);
+	metaTableObject.RegisterObjectDirect("set_velocity", (BaseScriptComponent*)0, &BaseScriptComponent::setVelocity);
+	// Animation
+	metaTableObject.RegisterObjectDirect("has_animation", (BaseScriptComponent*)0, &BaseScriptComponent::hasAnimation);
+	metaTableObject.RegisterObjectDirect("set_animation_group", (BaseScriptComponent*)0, &BaseScriptComponent::setAnimationGroup);
+	metaTableObject.RegisterObjectDirect("get_animation_group", (BaseScriptComponent*)0, &BaseScriptComponent::getAnimationGroup);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
@@ -250,7 +269,7 @@ void BaseScriptComponent::unregisterScriptFunctions()
 {
 	CORE_DEBUG("Unregistering script functions");
 
-	LuaPlus::LuaObject metaTableObject = LuaStateManager::get()->getGlobalVars().Lookup(METATABLE_NAME);
+	LuaPlus::LuaObject& metaTableObject = LuaStateManager::get()->getGlobalVars().Lookup(METATABLE_NAME);
 	if(!metaTableObject.IsNil())
 		// Leave nil for gc to clean up
 		metaTableObject.AssignNil(LuaStateManager::get()->getLuaState());
@@ -264,9 +283,21 @@ int BaseScriptComponent::getEntityId() const
     return -1;
 }
 
+bool BaseScriptComponent::inGroup(LuaPlus::LuaObject groupString) const
+{
+	if(!groupString.IsConvertibleToString())
+	{
+		CORE_LOG("LUA", "entity:in_group must receive a text object");
+		return false;
+	}
+
+	return WorldLocator::getObject()->getGroupManager()
+		->isInGroup(groupString.ToString(), *m_pParentEntity);
+}
+
 void BaseScriptComponent::setPosition(LuaPlus::LuaObject newPos)
 {
-    artemis::Component* dynamicBody = m_pParentEntity->getComponent<DynamicBody>();
+    artemis::Component* dynamicBody = getParentEntity()->getComponent<DynamicBody>();
 
     if(dynamicBody != nullptr)
     {
@@ -290,13 +321,11 @@ void BaseScriptComponent::setPosition(LuaPlus::LuaObject newPos)
 
 LuaPlus::LuaObject BaseScriptComponent::getPosition() const
 {
-	CORE_ASSERT(isInitialized());
-
 	LuaPlus::LuaObject ret;
 
 	// Get transform component
 	//Transform* pTransform = static_cast<Transform*>(m_pParentEntity->getComponent<Transform>());
-	Transform* pTransform = safeGetComponent<Transform>(m_pParentEntity);
+	Transform* pTransform = safeGetComponent<Transform>(getParentEntity());
 
 	if(pTransform)
 		ret = vec2ToTable(pTransform->position);
@@ -306,11 +335,16 @@ LuaPlus::LuaObject BaseScriptComponent::getPosition() const
 	return ret;
 }
 
+bool BaseScriptComponent::hasPhysics() const
+{
+	return (safeGetComponent<DynamicBody>(getParentEntity()) != nullptr);
+}
+
 void BaseScriptComponent::startPhysics()
 {
-	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(m_pParentEntity);
+	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(getParentEntity());
 
-	if(pDynamicBody)
+	if(pDynamicBody && pDynamicBody->isInitialized())
 		pDynamicBody->body->SetActive(true);
 	else
 		CORE_ERROR("Attempted to call start_physics on entity with no dynamic body");
@@ -318,9 +352,9 @@ void BaseScriptComponent::startPhysics()
 
 void BaseScriptComponent::stopPhysics()
 {
-	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(m_pParentEntity);
+	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(getParentEntity());
 
-	if(pDynamicBody)
+	if(pDynamicBody && pDynamicBody->isInitialized())
 		pDynamicBody->body->SetActive(false);
 	else 
 		CORE_ERROR("Attempted to call stop_physics on entity with no dynamic body");
@@ -328,9 +362,9 @@ void BaseScriptComponent::stopPhysics()
 
 void BaseScriptComponent::startCollisions()
 {
-	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(m_pParentEntity);
+	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(getParentEntity());
 
-	if(pDynamicBody)
+	if(pDynamicBody && pDynamicBody->isInitialized())
 		changeFixtureFilterMaskFlags(pDynamicBody->body, COLLIDE);
 	else
 		CORE_ERROR("Attempted to call start_collisions on entity with no dynamic body");
@@ -338,9 +372,9 @@ void BaseScriptComponent::startCollisions()
 
 void BaseScriptComponent::stopCollisions()
 {
-	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(m_pParentEntity);
+	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(getParentEntity());
 	
-	if(pDynamicBody)
+	if(pDynamicBody && pDynamicBody->isInitialized())
 	{
 		changeFixtureFilterMaskFlags(pDynamicBody->body, NO_COLLIDE);
 	}
@@ -348,4 +382,169 @@ void BaseScriptComponent::stopCollisions()
 	{
 		CORE_ERROR("Attempted to call stop_collisions on entity with no dynamic body");
 	}
+}
+
+void BaseScriptComponent::applyLinearImpulseToCenter(LuaPlus::LuaObject luaImpulseVec)
+{
+	if(!luaImpulseVec.IsTable())
+	{
+		CORE_ERROR("Invalid object provided to apply_linear_impulse_to_center. Must be a table.");
+		return;
+	}
+
+	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(getParentEntity());
+
+	if(pDynamicBody && pDynamicBody->isInitialized())
+	{
+		b2Body* body = pDynamicBody->body;
+
+		body->ApplyLinearImpulse(
+			// Convert to b2Vec
+			tableToVec2<b2Vec2>(luaImpulseVec),
+			// Set to center of object in world space
+			body->GetWorldCenter(),
+			true
+		);
+	}
+}
+
+void BaseScriptComponent::applyLinearImpulse(LuaPlus::LuaObject luaImpulseVec, LuaPlus::LuaObject luaPointVec)
+{
+	if(!luaImpulseVec.IsTable() || !luaPointVec.IsTable())
+	{
+		CORE_ERROR("Invalid object(s) provided to apply_linear_impulse. Must be a table.");
+		return;
+	}
+
+	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(getParentEntity());
+
+	if(pDynamicBody && pDynamicBody->isInitialized())
+	{
+		pDynamicBody->body->ApplyLinearImpulse(
+			tableToVec2<b2Vec2>(luaImpulseVec),
+			tableToVec2<b2Vec2>(luaPointVec),
+			true
+		);
+	}
+}
+
+void BaseScriptComponent::applyForceToCenter(LuaPlus::LuaObject luaForceVec)
+{
+	if(!luaForceVec.IsTable())
+	{
+		CORE_ERROR("Invalid object provided to apply_force_to_center. Must be a table");
+		return;
+	}
+
+	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(getParentEntity());
+
+	if(pDynamicBody && pDynamicBody->isInitialized())
+	{
+		pDynamicBody->body->ApplyForceToCenter(
+			tableToVec2<b2Vec2>(luaForceVec),
+			true
+		);
+	}
+}
+
+void BaseScriptComponent::applyForce(LuaPlus::LuaObject luaForceVec, LuaPlus::LuaObject luaPointVec)
+{
+	if(!luaForceVec.IsTable() || !luaPointVec.IsTable())
+	{
+		CORE_ERROR("Invalid object(s) provided to apply_force. Must be a table.");
+		return;
+	}
+
+	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(getParentEntity());
+
+	if(pDynamicBody && pDynamicBody->isInitialized())
+	{
+		pDynamicBody->body->ApplyForce(
+			tableToVec2<b2Vec2>(luaForceVec),
+			tableToVec2<b2Vec2>(luaPointVec),
+			true
+		);
+	}
+}
+
+LuaPlus::LuaObject BaseScriptComponent::getVelocity() const
+{
+	LuaPlus::LuaObject luaVec;
+
+	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(getParentEntity());
+
+	if(pDynamicBody && pDynamicBody->isInitialized())
+	{
+		luaVec.AssignObject(vec2ToTable(pDynamicBody->body->GetLinearVelocity()));
+	}
+	else
+	{
+		luaVec.AssignNil(LuaStateManager::get()->getLuaState());
+	}
+
+	return luaVec;
+}
+
+void BaseScriptComponent::setVelocity(LuaPlus::LuaObject luaVec)
+{
+	DynamicBody* pDynamicBody = safeGetComponent<DynamicBody>(getParentEntity());
+
+	if(pDynamicBody && pDynamicBody->isInitialized())
+	{
+		pDynamicBody->body->SetLinearVelocity(tableToVec2<b2Vec2>(luaVec));
+	}
+	else
+	{
+		CORE_ERROR("Attempting to call set_velocity on object with no dynamic body");
+	}
+}
+
+bool BaseScriptComponent::hasAnimation() const 
+{
+	// Only use BaseAnimation for now
+	return (safeGetComponent<BaseAnimation>(getParentEntity()) != nullptr);
+}
+
+void BaseScriptComponent::setAnimationGroup(LuaPlus::LuaObject luaString)
+{
+	if(luaString.IsConvertibleToString())
+	{
+		BaseAnimation* pBaseAnimation = safeGetComponent<BaseAnimation>(getParentEntity());
+
+		if(pBaseAnimation)
+		{
+			const std::string& groupName = luaString.ToString();
+
+			if(!pBaseAnimation->setAnimationGroup(groupName))
+			{
+				CORE_ERROR("Invalid animation group: " + groupName);
+			}
+		}
+		else
+			CORE_ERROR("Attempting to call set_animation_group when object has no animation component");
+	}
+	else 
+	{
+		CORE_ERROR("Calling set_animation_group with invalid type. Must be string; type = " 
+			+ std::string(luaString.TypeName()));
+	}
+}
+
+LuaPlus::LuaObject BaseScriptComponent::getAnimationGroup() const 
+{
+	BaseAnimation* pBaseAnimation = safeGetComponent<BaseAnimation>(getParentEntity());
+
+	LuaPlus::LuaObject luaString;
+
+	if(pBaseAnimation)
+	{
+		luaString.AssignString(LuaStateManager::get()->getLuaState(), pBaseAnimation->getAnimationGroup().c_str());
+	}
+	else 
+	{
+		CORE_ERROR("Calling get_animation_group when object does not have an animation component");
+		luaString.AssignNil(LuaStateManager::get()->getLuaState());
+	}
+
+	return luaString;
 }

@@ -7,6 +7,7 @@
 #include <Lua/exports/EventExports.h>
 #include <Lua/exports/EntityExports.h>
 #include <Lua/exports/MathExports.h>
+#include <Lua/exports/InputExports.h>
 
 #include <Utils/Logger.h>
 
@@ -31,10 +32,11 @@ void registerAll()
 {
 	CORE_ASSERT(LuaStateManager::get());
     // Keep lua state reference for micro-optimization purposes.
-    LuaPlus::LuaObject globals = LuaStateManager::get()->getGlobalVars();
+    LuaPlus::LuaObject& globals = LuaStateManager::get()->getGlobalVars();
 
     // Initialize script event listener
     InternalScriptExports::initEventExports();
+	InternalScriptExports::registerKeyTable();
 
     // Logger
     globals.RegisterDirect("log", &InternalScriptExports::luaLog);
@@ -45,13 +47,25 @@ void registerAll()
     globals.RegisterDirect("trigger_event", &InternalScriptExports::triggerEvent);
     // Entities
     globals.RegisterDirect("create_entity", &InternalScriptExports::createEntity);
+	globals.RegisterDirect("create_entity_with_size", &InternalScriptExports::createEntityWithSize);
     globals.RegisterDirect("remove_entity", &InternalScriptExports::removeEntity);
+	// Input
+	globals.RegisterDirect("is_key_pressed", &InternalScriptExports::isKeyPressed);
+
     // Math
-    globals.RegisterDirect("convert_to_world_coords", &InternalScriptExports::convertToWorldCoords);
+	LuaPlus::LuaObject& mathTable = globals.CreateTable("math");
+    mathTable.RegisterDirect("convert_to_world_coords", &InternalScriptExports::convertToWorldCoords);
+	mathTable.RegisterDirect("floor", &InternalScriptExports::floor);
+	mathTable.RegisterDirect("sin", &InternalScriptExports::sin);
+	mathTable.RegisterDirect("cos", &InternalScriptExports::cos);
+	mathTable.RegisterDirect("tan", &InternalScriptExports::tan);
+	mathTable.RegisterDirect("ceil", &InternalScriptExports::ceil);
+	mathTable.RegisterDirect("round", &InternalScriptExports::round);
 }
 
 void unregisterAll()
 {
+	InternalScriptExports::unregisterKeyTable();
     // Destroy script event listener
     InternalScriptExports::destroyEventExports();
 }

@@ -12,6 +12,7 @@
 #include <string>
 // Needed for base class info
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/NonCopyable.hpp>
 
 class IEventManager;
 typedef std::shared_ptr<IEventManager> EventManagerPtr;
@@ -19,7 +20,7 @@ typedef std::shared_ptr<IEventManager> EventManagerPtr;
 /**
  * Main game class
  */
-class Game
+class Game: private sf::NonCopyable
 {
 public:
 	Game();

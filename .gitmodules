@@ -7,3 +7,7 @@
 	path = dependencies/Artemis-Cpp
 	url = https://github.com/vinova/Artemis-Cpp.git
 	ignore = dirty
+[submodule "dependencies/tinydir"]
+	path = dependencies/tinydir
+	url = https://github.com/cxong/tinydir.git
+	ignore = dirty
