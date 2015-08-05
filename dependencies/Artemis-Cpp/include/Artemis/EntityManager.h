@@ -39,7 +39,7 @@ namespace artemis {
       ComponentType type = ComponentTypeManager::getTypeFor<c>();
       return getComponent(e,type);
     }
-    
+
     Entity& getEntity(int entityId);
     int getEntityCount();
     long getTotalCreated();

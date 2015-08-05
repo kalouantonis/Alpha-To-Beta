@@ -4,6 +4,8 @@
 #include <functional>
 #include <unordered_map>
 
+#include <Utils/Logger.h>
+
 template <class BaseType, class SubType>
 BaseType* GenericObjectCreator(void) { return new SubType; }
 
@@ -57,6 +59,14 @@ public:
 
         // Null for failed
         return nullptr;
+    }
+
+    void remove(const Identifier& id)
+    {
+        auto findIt = m_creators.find(id);
+        CORE_ASSERT(findIt != m_creators.end());
+
+        m_creators.erase(findIt);
     }
 
     /**

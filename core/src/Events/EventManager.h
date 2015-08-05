@@ -50,6 +50,8 @@ public:
      */
     virtual bool removeListener(const EventListenerDelegate& eventDelegate, EventType type) = 0;
 
+	virtual void removeAllListeners() = 0;
+
     /**
      * @brief Trigger the given event NOW. No queuing is used.
      * Use in time critical events.
@@ -79,6 +81,7 @@ public:
      * @return true if abort is a success.
      */
     virtual bool abortEvent(EventType eventType, bool allOfType = false) = 0;
+	virtual void clearEventQueues(bool dispatch = false) = 0;
 
     /**
      * @brief Update the event queue. All pending events will be processed.

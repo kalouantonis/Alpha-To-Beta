@@ -5,7 +5,6 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-#include <assert.h>
 #include <glm/glm.hpp>
 
 const unsigned short VERTICES_IN_QUAD = 4;
@@ -29,7 +28,7 @@ SpriteBatch::~SpriteBatch()
 void SpriteBatch::begin()
 {
     // Make sure end wasn't called before begin
-    assert(!m_bDrawing && "Must call end before begin");
+    CORE_ASSERT(!m_bDrawing && "Must call end before begin");
 
     m_bDrawing = true;
 }
@@ -37,7 +36,7 @@ void SpriteBatch::begin()
 void SpriteBatch::end()
 {
     // Check that begin was called
-    assert(m_bDrawing && "Must call begin before end");
+    CORE_ASSERT(m_bDrawing && "Must call begin before end");
 
     // flush buffer and render
     flush();
@@ -224,7 +223,7 @@ void SpriteBatch::switchTexture(const sf::Texture *pTexture)
 
 void SpriteBatch::checkBatchState(const sf::Texture* const pTexture)
 {
-    assert(m_bDrawing && "Must call begin before draw");
+    CORE_ASSERT(m_bDrawing && "Must call begin before draw");
 
     if(pTexture != m_states.texture)
         switchTexture(pTexture);

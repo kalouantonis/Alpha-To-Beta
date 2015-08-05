@@ -26,13 +26,16 @@ public:
 	virtual void DrawTransform(const b2Transform& xf);
 
 private:
-		/**
+	/**
 	 * @brief Convert box2d color to sfml color
 	 */
 	sf::Color b2SFColor(const b2Color& color, int alpha = 255);
 
 	sf::RenderTargetPtr m_pRenderTarget;
 
+	/**
+	 * Outline thickness of shapes
+	 */
 	static const float OUTLINE_THICKNESS;
 };
 

@@ -14,8 +14,7 @@ namespace artemis {
 	
 	void ComponentTypeManager::deleteComponentTypes(){
     
-		std::map<const std::type_info*,ComponentType*,
-              type_info_comparator>::iterator it;
+		std::unordered_map<const std::type_info*,ComponentType*>::iterator it;
 		
 		for(it = componentTypes.begin(); it != componentTypes.end(); it++)
 		{
@@ -24,6 +23,5 @@ namespace artemis {
 		componentTypes.clear();
 	}
   
-  std::map<const std::type_info*,ComponentType*,
-           type_info_comparator> ComponentTypeManager::componentTypes;
+  std::unordered_map<const std::type_info*,ComponentType*> ComponentTypeManager::componentTypes;
 }

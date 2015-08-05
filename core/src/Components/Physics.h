@@ -17,9 +17,9 @@ public:
 	explicit Physics(float width, float height);
 	virtual ~Physics();
 
-	// static const char* g_name;
-	// virtual const char* getName() const override { return g_name; }
-
+	/**
+	 * @brief Get component dimensions
+	 */
 	const sf::Vector2f& getDimensions()
 	{
 		return m_dimensions;
@@ -40,13 +40,25 @@ public:
 	 * @param rotation the rotation of the object, defaults to 0
 	 */
 	virtual void initialize(float x, float y, float rotation = 0.f) = 0;
-	bool isInitialized() { return m_bInitialized; }
+	/**
+	 * @brief Check if component is initialized
+	 */
+	bool isInitialized() const { return m_bInitialized; }
 
+	/**
+	 * @brief Get world position
+	 * @details Used to set Transform component position
+	 */
 	sf::Vector2f getPosition();
+	/**
+	 * @brief Get world origin of entity
+	 */
 	sf::Vector2f getOrigin();
 	float getRotation();
 	
-
+	/**
+	 * Box2D body of entity
+	 */
 	b2Body* body;
 
 protected:

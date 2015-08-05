@@ -2,9 +2,11 @@
 #define SYSBITMANAGER_H
 
 #include <bitset>
-#include <map>
-#include "TypeInfoComparator.h"
+#include <unordered_map>
 #include "BitSize.h"
+
+#include <typeinfo>
+
 
 namespace artemis {
 	
@@ -13,7 +15,7 @@ namespace artemis {
 	class SystemBitManager {
   private:
     static int POS;
-    static std::map< const std::type_info*, std::bitset<BITSIZE>*, type_info_comparator > systemBits;
+    static std::unordered_map< const std::type_info*, std::bitset<BITSIZE>*> systemBits;
     
   public:
     

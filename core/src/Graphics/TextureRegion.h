@@ -32,8 +32,6 @@ public:
     float getHeight() const { return v2 - v1; }
 
 private:
-	// TODO: Type and find a way to keep constants
-    //sf::TexturePtr m_pTexture;
     sf::TexturePtr m_pTexture;
 };
 

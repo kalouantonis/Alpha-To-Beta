@@ -24,16 +24,49 @@ public:
         return instance;
     }
 
+    /**
+     * @brief Add new screen to manager and transfer ownership
+     * @param pScreen Screen pointer to add
+     */
     void push(UScreenPtr pScreen);
+    /**
+     * @brief Change current screen.
+     * @details New screen will be pushed to the top of the stack
+     * while the old one remains below, but will not be updated
+     * 
+     * @param pScreen Screen pointer to add
+     */
     void change(UScreenPtr pScreen);
+    /**
+     * @brief Remove item off top of stack
+     */
     void pop();
 
+    /**
+     * @brief Clear all screens
+     */
     void clear();
 
+    /**
+     * @brief Update current screen
+     * 
+     * @param deltaTime Time since last update
+     */
     void update(float deltaTime);
+    /**
+     * @brief Render screen contents
+     */
     void render();
+    /**
+     * @brief Dispatch polled input events
+     * @param event Events
+     */
     void pollInput(const sf::Event& event);
-
+    /**
+     * @brief Resize screen 
+     * 
+     * @param size Screen resize dimensions
+     */
     void resize(const sf::Vector2u& size);
 
 private:

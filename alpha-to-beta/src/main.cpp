@@ -6,6 +6,7 @@
  */
 
 #include <SFML/System/Clock.hpp>
+
 #include <Game.h>
 
 #include <Screens/ScreenManager.h>
@@ -15,7 +16,7 @@
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
 
-const int FPS = 60;
+const int FPS = 45;
 const float FRAME_TIME = 1.f / FPS;
 
 int main()
@@ -46,6 +47,7 @@ int main()
 
             // Update game
             game.update(FRAME_TIME);
+
 
             // Decrease in fixed time intervals
             timeSinceLastUpdate -= FRAME_TIME;

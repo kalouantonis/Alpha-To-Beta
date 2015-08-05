@@ -61,10 +61,18 @@ void JumpListener::receiveJumpEvt(EventDataPtr pEvent)
     {
         if(pJumpBehaviour->jump() <= pJumpBehaviour->getMaxJumps())
         {
-            pDynamicBody->body->ApplyLinearImpulse(
-                toB2Vec(pJumpBehaviour->impulse),
+			b2Body* pPhysBody = pDynamicBody->body;
+
+			// Reset Y velocity for a better feeling jump
+			pPhysBody->SetLinearVelocity(b2Vec2(
+				pPhysBody->GetLinearVelocity().x,
+				0
+			));
+
+            pPhysBody->ApplyLinearImpulse(
+                toVec2<b2Vec2>(pJumpBehaviour->impulse),
                 // Get object center
-                pDynamicBody->body->GetWorldCenter(),
+                pPhysBody->GetWorldCenter(),
                 true
             );
         }
@@ -76,24 +84,23 @@ void JumpListener::receiveBeginCollisionEvt(EventDataPtr pEvent)
     BaseCollisionEventPtr pCollisionEvent =
             std::static_pointer_cast<BaseCollisionEvent>(pEvent);
 
-    // FIXME: Check whether collision occurs at the top
+    // FIXME: Check whether collision occurs at the top of the object
 
-    JumpBehaviour* jumpComponents[2] {
+    JumpBehaviour* jumpComponents[2] = {
         safeGetComponent<JumpBehaviour>(pCollisionEvent->getEntityA()),
         safeGetComponent<JumpBehaviour>(pCollisionEvent->getEntityB())
     };
 
-    JumpBehaviour* currentJumpComponent = nullptr;
+    JumpBehaviour* pCurrentJumpComponent = nullptr;
 
+    // Exit if no or 2 jump components are found
     if((!jumpComponents[0] && !jumpComponents[1]) ||
             (jumpComponents[0] && jumpComponents[1]))
         return;
     else if(jumpComponents[0])
-        currentJumpComponent = jumpComponents[0];
+        pCurrentJumpComponent = jumpComponents[0];
     else
-        currentJumpComponent = jumpComponents[1];
+        pCurrentJumpComponent = jumpComponents[1];
 
-
-    CORE_DEBUG("RESETTING JUMPS!!!!");
-    currentJumpComponent->resetJumps();
+    pCurrentJumpComponent->resetJumps();
 }

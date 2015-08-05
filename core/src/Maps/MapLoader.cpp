@@ -1,11 +1,13 @@
 #include <Maps/MapLoader.h>
 
-#include <assert.h>
-
 #include <Components/Renderable.h>
+#include <Components/BaseAnimation.h>
 #include <Components/Transform.h>
 #include <Components/StaticBody.h>
 #include <Components/DynamicBody.h>
+
+#include <Entities/WorldLocator.h>
+#include <Entities/Utils.h>
 
 #include <Resources/ResourceDef.h>
 #include <Math/Vector.h>
@@ -14,18 +16,16 @@
 
 #include <Utils/Logger.h>
 #include <Utils/FileSystem.h>
+#include <Utils/String.h>
 
 #include <TmxParser/Tmx.h>
 
 #include <Artemis/World.h>
 #include <Artemis/Entity.h>
 
-#include <boost/algorithm/string.hpp>
 #include <glm/glm.hpp>
 
-MapLoader::MapLoader(artemis::World &world)
-    : m_worldManager(world)
-    , m_entityFactory(world)
+MapLoader::MapLoader()
 {
 
 }
@@ -86,7 +86,7 @@ void MapLoader::load(const std::string &mapFile, const std::string &assetDir)
 void MapLoader::reload()
 {
 	// check that the map was already loaded once
-    assert(!m_prevMapFile.empty() && !m_prevAssetDir.empty());
+    CORE_ASSERT(!m_prevMapFile.empty() && !m_prevAssetDir.empty());
 
     load(m_prevMapFile, m_prevAssetDir);
 }
@@ -147,10 +147,11 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
     // to the naked eye.
     // Yes, I am aware that it's a horrible hack, if you have any better
     // solutions, feel free to change this
-    const sf::Vector2f tileOffsetHack = sf::Vector2f(
-                0.075f / PhysicsLocator::PixelsPerMeter.x,
-                0.075f / PhysicsLocator::PixelsPerMeter.y
+    sf::Vector2f tileOffsetHack = sf::Vector2f(
+                0.075f, // / PhysicsLocator::PixelsPerMeter.x,
+                0.075f // / PhysicsLocator::PixelsPerMeter.y
     );
+    PhysicsLocator::convertToWorldCoords(tileOffsetHack);
 
     for(int x = 0; x < layerWidth; ++x)
     {
@@ -158,10 +159,10 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
         {
             const Tmx::MapTile& tile = layer->GetTile(x, y);
 
-            if(tile.id != -1 && tile.tilesetId != -1) // Valid tile ID
+            if((int)tile.id != -1 && (int)tile.tilesetId != -1) // Valid tile ID
             {
                 // Create new entity
-                artemis::Entity& e = m_worldManager.createEntity();
+                artemis::Entity& e = WorldLocator::getObject()->createEntity();
 
                 // TODO: Load from file if 'file' property exists
 
@@ -184,6 +185,12 @@ void MapLoader::loadTileEntities(const Tmx::Layer* layer, int tileWidth, int til
     }
 }
 
+void _resizeToWorld(IRenderable* pRenderable, const Tmx::Object* object)
+{
+	pRenderable->setWidth(object->GetWidth() / PhysicsLocator::PixelsPerMeter.x);
+	pRenderable->setHeight(object->GetHeight() / PhysicsLocator::PixelsPerMeter.y);
+}
+
 void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHeight)
 {
     bool bCollidable = pObjectGroup->GetProperties().HasProperty("collidable");
@@ -198,15 +205,15 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
         // Dont reference, we need to convert
         std::string type = object->GetType();
         // convert to lower case
-        boost::algorithm::to_lower(type);
+        to_lower(type);
 
         const std::string& fileName = object->GetProperties().GetLiteralProperty("file");
 
-        artemis::Entity& entity = m_worldManager.createEntity();
+        artemis::Entity& entity = WorldLocator::getObject()->createEntity();
 
         if(!fileName.empty())
         {
-            if(!m_entityFactory.loadFromFile(fileName, entity))
+            if(!EntityFactory::get().loadFromFile(fileName, entity))
             {
                 CORE_ERROR("Failed to load entity for: " + object->GetName());
                 // Ignore entity, it failed to load
@@ -215,30 +222,44 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
         }
 
         // Safe to cast, we know its of that type anyway
-        Transform* transformComp = static_cast<Transform*>(entity.getComponent<Transform>());
+		Transform* pTransformComp = safeGetComponent<Transform>(&entity);
 
-        if(!transformComp) // Transform does not already exist
+        if(!pTransformComp) // Transform does not already exist
         {
             // Store for later
-            transformComp = new Transform();
-            entity.addComponent(transformComp);
+            pTransformComp = new Transform();
+            entity.addComponent(pTransformComp);
         }
 
         // Override previous positions
-        transformComp->position.x = object->GetX() / PhysicsLocator::PixelsPerMeter.x;
-        transformComp->position.y = (object->GetY()  - yOffset) / PhysicsLocator::PixelsPerMeter.y;
+        pTransformComp->position.x = object->GetX() / PhysicsLocator::PixelsPerMeter.x;
+        pTransformComp->position.y = (object->GetY()  - yOffset) / PhysicsLocator::PixelsPerMeter.y;
 
-        Renderable* renderableComp = static_cast<Renderable*>(entity.getComponent<Renderable>());
+        IRenderable* pRenderableComp = safeGetComponent<Renderable>(&entity);
 
-        if((renderableComp != NULL) && (renderableComp->width == 0.f && renderableComp->height == 0.f))
+        if(pRenderableComp != nullptr)
         {
-            renderableComp->width = object->GetWidth() / PhysicsLocator::PixelsPerMeter.x;
-            renderableComp->height = object->GetHeight() / PhysicsLocator::PixelsPerMeter.y;
+			if(pRenderableComp->getWidth() == 0.f && pRenderableComp->getHeight() == 0.f)
+			{
+				_resizeToWorld(pRenderableComp, object);
+			}
 
-            renderableComp->order = order;
+            pRenderableComp->setDrawOrder(order);
        }
 
-       Physics* physicsComp = static_cast<Physics*>(entity.getComponent<DynamicBody>());
+		pRenderableComp = safeGetComponent<BaseAnimation>(&entity);
+
+		if(pRenderableComp != nullptr) 
+		{
+			if(pRenderableComp->getWidth() == 0.f && pRenderableComp->getHeight() == 0.f)
+			{
+				_resizeToWorld(pRenderableComp, object);
+			}
+
+			pRenderableComp->setDrawOrder(order);
+		}
+
+       Physics* physicsComp = safeGetComponent<DynamicBody>(&entity);
 
        if(physicsComp && isZero(physicsComp->getDimensions()))
        {
@@ -250,7 +271,7 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
 
        if(bCollidable) // Is entity collidable?
        {
-            physicsComp = static_cast<Physics*>(entity.getComponent<StaticBody>());
+            physicsComp = safeGetComponent<StaticBody>(&entity);
 
             if(physicsComp == nullptr && entity.getComponent<DynamicBody>() == nullptr)
             {
@@ -265,9 +286,9 @@ void MapLoader::loadObjectGroup(const Tmx::ObjectGroup* pObjectGroup, int tileHe
 
                 // Pre-initialize component
                 physicsComp->initialize(
-                    transformComp->position.x, 
-                    transformComp->position.y, 
-                    transformComp->rotation
+                    pTransformComp->position.x, 
+                    pTransformComp->position.y, 
+                    pTransformComp->rotation
                 );
 
                 // Set user data to entity

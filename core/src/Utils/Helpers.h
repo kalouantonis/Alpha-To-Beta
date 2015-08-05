@@ -1,9 +1,16 @@
-#ifndef HANDY_HEADERS_H
-#define HANDY_HEADERS_H
+#ifndef HELPERS_H_
+#define HELPERS_H_
 
 #include <stdio.h> // Includes NULL
 #include <stdlib.h> // Includes malloc, realloc, free..
 #include <string.h> // Includes memset
+
+/**
+ * @brief Delete pointer safely
+ * @details Will ensure that a pointer is not deleted twice and sets it
+ * to null.
+ */
+#define SAFE_DELETE(ptr) if(ptr) delete ptr; ptr = nullptr;
 
 // Obtain the number of elements in the given C array
 #define GET_ARRAY_LEN(arrayName) (sizeof(arrayName) / sizeof((arrayName)[0]))
@@ -105,4 +112,4 @@
 
 #define END_BLOCK }
 
-#endif // HANDY_HEADERS_H
+#endif // HELPERS_H_

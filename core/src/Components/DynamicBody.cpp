@@ -2,6 +2,8 @@
 
 #include <Physics/PhysicsLocator.h>
 
+#include <Math/Vector.h>
+
 #include <glm/glm.hpp>
 #include <tinyxml2.h>
 
@@ -50,6 +52,14 @@ DynamicBody::~DynamicBody()
 
 void DynamicBody::initialize(float x, float y, float rotation)
 {
+    if(isZero(m_dimensions))
+    {
+        CORE_WARNING("Failed to initialize DynamicBody, zero dimensions");
+        // Set to failed initialization
+        m_bInitialized = false;
+        return;
+    }
+
 	if(!isInitialized() && body == nullptr)
 	{
 		body = PhysicsLocator::createDynamicBody();
@@ -65,18 +75,23 @@ void DynamicBody::initialize(float x, float y, float rotation)
 	{
 		// Create polygon shape by default
 		b2PolygonShape polygonShape;
-        initializePolyVertices(polygonShape, 0.f, 0.f, m_dimensions.x, m_dimensions.y);
+        //if(!isZero(m_dimensions))
+            initializePolyVertices(polygonShape, 0.f, 0.f, m_dimensions.x, m_dimensions.y);
 
         b2FixtureDef fixtureDef;
 		fixtureDef.shape = &polygonShape;
         // Use default values
         _setToDefaults(fixtureDef);
 
-		// Create fixture and attach it to the body
-		body->CreateFixture(&fixtureDef);
-	}
+        //if(!isZero(m_dimensions))
+        //{
+            // Create fixture and attach it to the body
+            body->CreateFixture(&fixtureDef);
 
-	m_bInitialized = true;
+        //}
+	}
+    m_bInitialized = true;
+
 }
 
 bool DynamicBody::load(const tinyxml2::XMLElement* pElement)
@@ -103,7 +118,7 @@ bool DynamicBody::load(const tinyxml2::XMLElement* pElement)
     }
 
     for(const tinyxml2::XMLElement* pChildElement = pElement->FirstChildElement("Fixture");
-        pChildElement != NULL; pChildElement = pElement->NextSiblingElement("Fixture"))
+        pChildElement != NULL; pChildElement = pChildElement->NextSiblingElement("Fixture"))
     {
         // TODO: Change to loading dimensions using each fixure independently
         b2PolygonShape polyShape;

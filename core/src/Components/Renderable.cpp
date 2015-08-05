@@ -3,45 +3,42 @@
 
 #include <Utils/Logger.h>
 #include <Utils/String.h>
-#include <Utils/Helpers.h>
 
 #include <Resources/ResourceDef.h>
 
-// String trimming
-#include <boost/algorithm/string.hpp>
+#include <Physics/PhysicsLocator.h>
 
 const char* Renderable::g_name = "Renderable";
 
 Renderable::Renderable(int order, float width, float height)
-    : m_textureRegion(nullptr)
-    , order(order)
+	: IRenderable(order, width, height)
+    , m_textureRegion(nullptr)
     // Invalid width and height because no texture was provided
-    , width(width), height(height)
 {
 }
 
 Renderable::Renderable(sf::TexturePtr pTexture, int order, float width, float height)
     // Dont delegate, causes delegation cycle due to ambiguity
-    : m_textureRegion(pTexture)
-    , order(order)
+	: IRenderable(order)
+    , m_textureRegion(pTexture)
 {
 
 	if(width == 0.f && height == 0.f)
 	{
 		// Region width
-		width = m_textureRegion.u2 - m_textureRegion.u1;
+		setWidth(m_textureRegion.u2 - m_textureRegion.u1);
 		// Region height
-		height = m_textureRegion.v2 - m_textureRegion.v1;
+		setHeight(m_textureRegion.v2 - m_textureRegion.v1);
 	}
 	else
 	{
-		this->width = width;
-		this->height = height;
+		setWidth(width);
+		setHeight(height);
 	}
 }
 
 Renderable::Renderable(TextureRegion& region, int order, float width, float height)
-    : order(order)
+	: IRenderable(order)
 {
 	if(width == 0.f && height == 0.f)
 	{
@@ -50,14 +47,14 @@ Renderable::Renderable(TextureRegion& region, int order, float width, float heig
 	else
 	{
 		m_textureRegion = region;
-		this->width = width;
-		this->height = height;
+		setWidth(width);
+		setHeight(height);
 	}
 }
 
 bool Renderable::load(const tinyxml2::XMLElement *pElement)
 {
-	pElement->QueryIntAttribute("order", &order);
+	pElement->QueryIntAttribute("order", &m_drawOrder);
 
 	const tinyxml2::XMLElement* childElement = pElement->FirstChildElement("Texture");
 
@@ -78,7 +75,7 @@ bool Renderable::load(const tinyxml2::XMLElement *pElement)
 	}
 
 	// Trim whitespace
-	boost::algorithm::trim(textureFile);
+	trim(textureFile);
 
 	sf::TexturePtr pTexture = TextureLocator::getObject()->get(textureFile);
 
@@ -94,14 +91,14 @@ bool Renderable::load(const tinyxml2::XMLElement *pElement)
 
 	if(childElement)
 	{
-		pElement->QueryFloatAttribute("width", &width);
-		pElement->QueryFloatAttribute("height", &height);
-		m_textureRegion = tmpRegion;
+		pElement->QueryFloatAttribute("width", &m_width);
+		pElement->QueryFloatAttribute("height", &m_height);
+
+        setWidth(m_width != 0 ? m_width / PhysicsLocator::PixelsPerMeter.x : 0);
+        setHeight(m_height != 0 ? m_height / PhysicsLocator::PixelsPerMeter.y : 0);
 	}
-	else
-	{
-        m_textureRegion = tmpRegion;
-	}
+
+    m_textureRegion = tmpRegion;
 
     return true;
 }

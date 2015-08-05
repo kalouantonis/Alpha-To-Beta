@@ -8,14 +8,14 @@ template <class T>
  * @brief safeGetComponent Attempt to get component from entity. If it does
  * not exist or entity is null, a nullptr will be returned
  *
- * @param entity Entity to get component from
+ * @param pEntity pEntity to get component from
  * @return requested component or nullptr if failed to grab it
  */
-T* safeGetComponent(artemis::Entity* entity)
+T* safeGetComponent(artemis::Entity* pEntity) 
 {
-    if(entity)
+    if(pEntity)
     {
-        artemis::Component* pComp = entity->getComponent<T>();
+        artemis::Component* pComp = pEntity->getComponent<T>();
 
         if(pComp)
             return static_cast<T*>(pComp);
@@ -23,5 +23,7 @@ T* safeGetComponent(artemis::Entity* entity)
 
     return nullptr;
 }
+
+std::string getGroupName(artemis::Entity& e);
 
 #endif // UTILS_H_

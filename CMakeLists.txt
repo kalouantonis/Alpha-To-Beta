@@ -4,27 +4,28 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 # Project name, used later
 project(ALPHA_TO_BETA)
 	
-
 option("CMAKE_BUILD_TYPE" "Project build type" "Release")
 
+# Set module path for extra find modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/Modules/")
+
 # Find SFML before proceeding
-#if(${UNIX})
-	find_package(SFML COMPONENTS system window graphics REQUIRED)
-#endif(${UNIX})
+find_package(SFML COMPONENTS system window graphics REQUIRED)
+# Math library
+find_package(GLM REQUIRED)
+# ZLib compression
+find_package(ZLIB REQUIRED)
 
-# Boost vars
-if(${WIN32})
-    # Only link statically for windows
-    set(Boost_USE_STATIC_LIBS ON)
-    set(Boost_USE_MULTITHREADED ON)
-    set(Boost_USE_STATIC_RUNTIME ON)
-endif(${WIN32})
-
-find_package(Boost COMPONENTS system filesystem REQUIRED)
+# Lua 5.2
+#find_package(Lua52 REQUIRED)
+# Luabind library
+#find_package(Luabind REQUIRED)
 
 # C++11 support and warnings 
 if(${UNIX})
-	add_definitions(-std=c++11 -Wall)
+    add_definitions(-Wall)
+    # C++ specific compiler options
+    list(APPEND CMAKE_CXX_FLAGS "-std=c++11")
 elseif(${WIN32})
 	# Wall is too much
 	add_definitions(/W3)
@@ -35,12 +36,6 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	MESSAGE(STATUS "Building in debug mode...")
 	# Debug mode
     add_definitions(-D_DEBUG)
-	
-	if(${UNIX})
-          #add_definitions(-ggdb)
-	elseif(${WIN32})
-		add_definitions(/g3)
-	endif(${UNIX})
 elseif(${CMAKE_BUILD_TYPE} STREQUAL "Release")
 	MESSAGE(STATUS "Building in release mode...")
 	# Release mode
@@ -48,12 +43,14 @@ elseif(${CMAKE_BUILD_TYPE} STREQUAL "Release")
 endif(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 
 # Set executable output directory
-# TODO: Change to INSTALL script
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 # Add tinyxml2 dependency
 message(STATUS "Configuring TinyXML2...")
 add_subdirectory("dependencies/tinyxml2")
+
+message(STATUS "Configuring tinydir...")
+add_subdirectory("dependencies/tinydir")
 
 message(STATUS "Configuring tmx-parser...")
 add_subdirectory("dependencies/tmx-parser")
@@ -67,6 +64,9 @@ add_subdirectory("dependencies/Artemis-Cpp")
 
 message(STATUS "Configuring Box2D...")
 add_subdirectory("dependencies/Box2D")
+
+message(STATUS "Configuring luaplus")
+add_subdirectory("dependencies/luaplus")
 
 # Core framework
 message(STATUS "Configuring Core...")

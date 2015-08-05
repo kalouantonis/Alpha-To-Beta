@@ -1,20 +1,21 @@
 project(core)
 
 include_directories(
-	# Subdirectory include
-	.;
-	# TinyXML include
-	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinyxml2;
-	# TMX Parser
-	${tmxparser_SOURCE_DIR};
+    # Subdirectory include
+    .;
+    # TinyXML include
+    ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinyxml2;
+    # TMX Parser
+    ${tmxparser_SOURCE_DIR};
     # FastDelegate
     ${FastDelegate_SOURCE_DIR};
-	# Artemis
-	${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/Artemis-Cpp/include;
-	# Box2D
-	${Box2D_SOURCE_DIR};
-	# Boost library
-	${Boost_INCLUDE_DIR};
+    # Artemis
+    ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/Artemis-Cpp/include;
+    # Box2D
+    ${Box2D_SOURCE_DIR};
+    # Luaplus
+    ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/luaplus;
+    ${ALPHA_TO_BETA_SOURCE_DIR}/dependencies/tinydir;
 )
 
 link_directories(
@@ -26,20 +27,28 @@ link_directories(
     ${Box2D_BINARY_DIR};
 	# TMX Parser
     ${tmxparser_BINARY_DIR};
+    ${luaplus_BINARY_DIR};
 )
 
 set(
 	MAIN_SRC
 	"Game.cpp"
 	"Game.h"
+    "BaseGameManager.cpp"
+    "BaseGameManager.h"
 	"SFMLPtrDef.h"
 )
 
 set(
 	COMPONENTS_SRC
+	"Components/BaseAnimation.cpp"
+	"Components/BaseAnimation.h"
+    "Components/BaseScriptComponent.cpp"
+    "Components/BaseScriptComponent.h"
 	"Components/ParsedComponent.h"
     "Components/CameraFollower.cpp"
     "Components/CameraFollower.h"
+	"Components/IRenderable.h"
     "Components/Renderable.cpp"
 	"Components/Renderable.h"
 	"Components/Transform.cpp"
@@ -50,8 +59,8 @@ set(
 	"Components/DynamicBody.h"
 	"Components/StaticBody.cpp"
 	"Components/StaticBody.h"
-	"Components/JumpBehaviour.cpp"
-	"Components/JumpBehaviour.h"
+    #"Components/JumpBehaviour.cpp"
+    #"Components/JumpBehaviour.h"
 	"Components/PlayerInput.cpp"
 	"Components/PlayerInput.h"
 )
@@ -65,12 +74,14 @@ set(
 )
 
 set(
-	ENTITIES_SRC
-	"Entities/EntityFactory.cpp"
-	"Entities/EntityFactory.h"
+    ENTITIES_SRC
+    "Entities/EntityFactory.cpp"
+    "Entities/EntityFactory.h"
     "Entities/Level.cpp"
-	"Entities/Level.h"
+    "Entities/Level.h"
+    "Entities/Utils.cpp"
     "Entities/Utils.h"
+    "Entities/WorldLocator.h"
 )
 
 set(
@@ -87,6 +98,8 @@ set(
 # Graphics/*.{h|cpp}
 set(
 	GRAPHICS_SRC
+	"Graphics/Animation.cpp"
+	"Graphics/Animation.h"
 	"Graphics/Camera2D.cpp"
 	"Graphics/Camera2D.h"
 	"Graphics/SpriteBatch.cpp"
@@ -102,6 +115,30 @@ set(
 	"Input/InputLocator.cpp"
 	"Input/InputLocator.h"
 	"Input/InputProcessor.h"
+)
+
+set(
+    LUA_SRC
+    "Lua/LuaStateManager.cpp"
+    "Lua/LuaStateManager.h"
+    "Lua/ScriptEvent.cpp"
+    "Lua/ScriptEvent.h"
+	"Lua/ScriptExports.cpp"
+	"Lua/ScriptExports.h"
+    "Lua/ScriptSystem.cpp"
+    "Lua/ScriptSystem.h"
+	"Lua/Utils.h"
+    # Internal exports
+    "Lua/exports/LoggerExports.cpp"
+    "Lua/exports/LoggerExports.h"
+    "Lua/exports/EventExports.cpp"
+    "Lua/exports/EventExports.h"
+    "Lua/exports/EntityExports.cpp"
+    "Lua/exports/EntityExports.h"
+	"Lua/exports/InputExports.cpp"
+	"Lua/exports/InputExports.h"
+    "Lua/exports/MathExports.cpp"
+    "Lua/exports/MathExports.h"
 )
 
 set(
@@ -126,6 +163,8 @@ set(
 	"Physics/Box2DRenderer.h"
     "Physics/CollisionDispatcher.cpp"
     "Physics/CollisionDispatcher.h"
+	"Physics/CollisionMasks.cpp"
+	"Physics/CollisionMasks.h"
 	"Physics/PhysicsLocator.cpp"
 	"Physics/PhysicsLocator.h"
 )
@@ -151,7 +190,10 @@ set(
 
 set(
 	SYSTEMS_SRC
-	"Systems/RenderSystem.cpp"
+	"Systems/BaseRenderSystem.cpp"
+	"Systems/BaseRenderSystem.h"
+	"Systems/AnimationSystem.cpp"
+	"Systems/AnimationSystem.h"
 	"Systems/RenderSystem.h"
 	"Systems/PhysicsSystem.cpp"
 	"Systems/PhysicsSystem.h"
@@ -167,27 +209,29 @@ set(
 	"Utils/Logger.h"
 	"Utils/String.cpp"
 	"Utils/String.h"
+	"Utils/Helpers.h"
 )
 
 # Add all current *.cpp files in to build
 set(
-	SOURCE_FILE_LIST;
+    SOURCE_FILE_LIST;
 
-	${MAIN_SRC};
-	${COMPONENTS_SRC};
-	${DATA_STRUCTURES_SRC};
+    ${MAIN_SRC};
+    ${COMPONENTS_SRC};
+    ${DATA_STRUCTURES_SRC};
     ${ENTITIES_SRC};
     ${EVENTS_SRC};
-	${GRAPHICS_SRC};
-	${INPUT_SRC};
-	${MAPS_SRC};
-	${MATH_SRC};
+    ${GRAPHICS_SRC};
+    ${INPUT_SRC};
+    ${LUA_SRC};
+    ${MAPS_SRC};
+    ${MATH_SRC};
     ${MEMORY_SRC};
-	${PHYSICS_SRC};
-	${RESOURCES_SRC};
-	${SCREENS_SRC};
-	${SYSTEMS_SRC};
-	${UTILS_SRC};
+    ${PHYSICS_SRC};
+    ${RESOURCES_SRC};
+    ${SCREENS_SRC};
+    ${SYSTEMS_SRC};
+    ${UTILS_SRC};
 )
 
 # Create library
@@ -197,7 +241,6 @@ add_library(
   	${SOURCE_FILE_LIST}	# List of files
 )
 
-
 # Link static libraries
 target_link_libraries(
 	core; 
@@ -206,16 +249,8 @@ target_link_libraries(
 	tinyxml2static; # TinyXML
 	Box2D;			# Physics Engine
     tmxparser;		# TMX parser
+    luaplus;
 )
-
-if(${UNIX})
-    # Statically link boost with core for Unix Systems
-    target_link_libraries(
-        core;
-
-        ${Boost_LIBRARIES};
-    )
-endif(${UNIX})
 
 install(TARGETS core
     RUNTIME DESTINATION ${core_BINARY_DIR}
